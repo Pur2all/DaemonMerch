@@ -1,0 +1,49 @@
+@media screen and (max-width: 1920px)
+{
+	body
+	{
+		margin:0%;
+	}
+	
+	div#logo
+	{
+		float: left;
+		width: 10%;
+	}
+	
+	div#searchbar
+	{
+		float: right;
+	}
+	
+	div#services_icons
+	{
+		float: right;
+	}
+}
+
+@media screen and (max-width: 1000px)
+{
+	body
+	{
+		margin:0%;
+	}
+	
+	div#header
+	{
+		margin: inherit;
+		background-color: maroon;
+	}
+	
+	div#main
+	{
+		margin: inherit;
+		background-color: blue;
+	}
+	
+	div#footer
+	{
+		maring: inherit;
+		background-color: black;
+	}
+}
