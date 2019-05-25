@@ -14,22 +14,6 @@
 		<title>DaemonMerch</title>
 	</head>
 	<body>
-	
-<<<<<<< HEAD
-	<div>
-		<header>
-	      <%@ include file="../Generic/Header.jsp" %>
-	    </header>
-	    
-	    <div id="main">
-	    	<h2>main</h2>
-	    </div>
-	    
-	    <footer>
-	      <%@ include file="../Generic/Footer.jsp" %>
-	    </footer>
-	</div>
-=======
     <header>
       <%@ include file="../Generic/Header.jsp" %>
     </header>
@@ -41,7 +25,6 @@
     <footer>
       <%@ include file="../Generic/Footer.jsp" %>
     </footer>
->>>>>>> refs/remotes/origin/master
     
 	</body>
 </html>
