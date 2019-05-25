@@ -11,23 +11,21 @@
 	{
 		margin: inherit;
 		background-color: red;
-		height: 100px;
 	}
 	
 	div#main
 	{
-		margin-top: 100px;
 		background-color: blue;
 	}
 	
 	footer
 	{
 		margin: inherit;
-		background-color: black;
+		background-color: maroon;
 	}
 }
 
-@media screen and (max-width: 1000px)
+@media screen and (max-width: 620px)
 {
 	body
 	{
@@ -38,7 +36,6 @@
 	{
 		margin: inherit;
 		background-color: brown;
-		height: 100px;
 	}
 	
 	div#main
