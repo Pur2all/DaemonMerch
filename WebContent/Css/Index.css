@@ -7,7 +7,7 @@
 		margin:0%;
 	}
 	
-	div#header
+	header
 	{
 		margin: inherit;
 		background-color: red;
@@ -16,13 +16,13 @@
 	
 	div#main
 	{
-		margin: inherit;
+		margin-top: 100px;
 		background-color: blue;
 	}
 	
-	div#footer
+	footer
 	{
-		maring: inherit;
+		margin: inherit;
 		background-color: black;
 	}
 }
@@ -34,21 +34,22 @@
 		margin:0%;
 	}
 	
-	div#header
+	header
 	{
 		margin: inherit;
-		background-color: maroon;
+		background-color: brown;
+		height: 100px;
 	}
 	
 	div#main
 	{
-		margin: inherit;
+		margin-top: 100px;
 		background-color: blue;
 	}
 	
-	div#footer
+	footer
 	{
-		maring: inherit;
+		margin: inherit;
 		background-color: black;
 	}
 }

@@ -3,7 +3,7 @@
 
 <head>
 	<base href="./" target="_self">
-	<link rel="stylesheet" type="text/css" href="./Generic/Header.css">
+	<link rel="stylesheet" type="text/css" href="./Css/Header.css">
 </head>
 
 <div id="logo">
@@ -20,23 +20,23 @@
 </div>
 
 <div id="services_icons">
-	<div id="account">
+	<span id="account">
 		<a href="account.jsp"> <img src="../images/account.png"> </a>
-	</div>
+	</span>
 	
-	<div id="wishlist">
+	<span id="wishlist">
 		<a href="wishlist.jsp"> <img src="../images/wishlist.png"> </a>
-	</div>
+	</span>
 	
-	<div id="cart">
+	<span id="cart">
 		<a href="cart.jsp"> <img src="../images/cart.png"> </a>
-	</div>
+	</span>
 	
-	<div id="faq">
+	<span id="faq">
 		<a href="faq.jsp"> <img src="../images/faq.png"> </a>
-	</div>
+	</span>
 	
-	<div id="info">
+	<span id="info">
 		<a href="info.jsp"> <img src="../images/info.png"> </a>
-	</div>
+	</span>
 </div>

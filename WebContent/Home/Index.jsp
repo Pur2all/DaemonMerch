@@ -9,22 +9,22 @@
 		<meta name="keywords" lang="eng" content="Metal, Thrash Metal, Black Metal, Death Metal, Merchandise, Metal Band">
 		<meta charset="utf-8">
 		<link rel="icon" href="../Images/icon.jpg">
-		<link rel="stylesheet" type="text/css" href="./Home/Index.css">
+		<link rel="stylesheet" type="text/css" href="./Css/Index.css">
 		<title>DaemonMerch</title>
 	</head>
 	<body>
 	
-    <div id="header">
+    <header>
       <%@ include file="../Generic/Header.jsp" %>
-    </div>
+    </header>
     
     <div id="main">
     	<h2>mocc a mammt</h2>
     </div>
     
-    <div id="footer">
+    <footer>
       <%@ include file="../Generic/Footer.jsp" %>
-    </div>
+    </footer>
     
 	</body>
 </html>
