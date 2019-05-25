@@ -1,10 +1,5 @@
 @media screen and (max-width: 1920px)
-{
-	body
-	{
-		margin:0%;
-	}
-	
+{	
 	div#logo
 	{
 		float: left;
@@ -24,11 +19,6 @@
 
 @media screen and (max-width: 1000px)
 {
-	body
-	{
-		margin:0%;
-	}
-	
 	div#header
 	{
 		margin: inherit;
