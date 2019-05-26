@@ -11,6 +11,11 @@ public class Cart
 		productList=new ArrayList<Product>();
 	}
 	
+	public int getNumberOfProduct()
+	{
+		return productList.size();
+	}
+	
 	public void addProduct(Product product)
 	{
 		productList.add(product.clone());

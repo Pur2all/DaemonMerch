@@ -52,12 +52,12 @@ public class User implements Cloneable
 	
 	public CreditCard getCreditCard(int index)
 	{
-		return creditCards.get(index);
+		return creditCards.get(index).clone();
 	}
 	
 	public BillingAddress getBillingAddress(int index)
 	{
-		return billingAddresses.get(index);
+		return billingAddresses.get(index).clone();
 	}
 	
 	public void setName(String aName)
@@ -93,6 +93,41 @@ public class User implements Cloneable
 	public void setUserType(UserType aUserType)
 	{
 		type=aUserType;
+	}
+	
+	public int getNumberOfCreditCard()
+	{
+		return creditCards.size();
+	}
+	
+	public void addCreditCard(CreditCard aCreditCard)
+	{
+		creditCards.add(aCreditCard.clone());
+	}
+	
+	public void removeCreditCard(int index)
+	{
+		creditCards.remove(index);
+	}
+	
+	public int getNumberOfBillingAddresses()
+	{
+		return billingAddresses.size();
+	}
+	
+	public void addBillingAddress(BillingAddress aBillingAddress)
+	{
+		billingAddresses.add(aBillingAddress.clone());
+	}
+	
+	public void setBillingAddress(int index, BillingAddress aBillingAddress)
+	{
+		billingAddresses.set(index, aBillingAddress.clone());
+	}
+	
+	public void removeBillingAddress(int index)
+	{
+		billingAddresses.remove(index);
 	}
 	
 	public String toString()

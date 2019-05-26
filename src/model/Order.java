@@ -37,12 +37,12 @@ public class Order implements Cloneable
 	
 	public BillingAddress getBillingAddress()
 	{
-		return billingAddress;
+		return billingAddress.clone();
 	}
 	
 	public Product getProduct(int index)
 	{
-		return products.get(index);
+		return products.get(index).clone();
 	}
 	
 	public void setId(String anId)
@@ -67,12 +67,12 @@ public class Order implements Cloneable
 	
 	public void setBillingAddress(BillingAddress aBillingAddress)
 	{
-		billingAddress=aBillingAddress;
+		billingAddress=aBillingAddress.clone();
 	}
 	
-	public void setProducts(int index, Product product)
+	public void addProducts(Product product)
 	{
-		products.add(product);
+		products.add(product.clone());
 	}
 	
 	public int getProductsQuantity()
