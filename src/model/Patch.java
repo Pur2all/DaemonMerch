@@ -34,4 +34,24 @@ public class Patch extends Product
 	{
 		type=aPatchType;
 	}
+	
+	public String toString()
+	{
+		return super.toString() + "[material= " + material + ", measures= " + measures + ", type= " + type + "]";
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(!super.equals(obj))
+			return false;
+		
+		Patch otherPatch=(Patch) obj;
+		
+		return material.equals(otherPatch.material) && measures.equals(otherPatch.measures) && type==otherPatch.type;
+	}
+	
+	public Patch clone()
+	{
+		return (Patch) super.clone();
+	}
 }

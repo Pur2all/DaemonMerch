@@ -1,6 +1,6 @@
 package model;
 
-public class BillingAddress
+public class BillingAddress implements Cloneable
 {
 	private String state, street, city, district, houseNumber;
 	
@@ -61,5 +61,40 @@ public class BillingAddress
 	public String getInfo()
 	{
 		return state + ", " + district + "\n" + street + " " + houseNumber + ", " + city;
+	}
+	
+	public String toString()
+	{
+		return getClass().getName() + "[state= " + state + ", street=" + street + ", city=" + city + ", district= " 
+				+ district + ", houseNumber= " + houseNumber + "]";
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(obj==null)
+			return false;
+		if(getClass()!=obj.getClass())
+			return false;
+		
+		BillingAddress otherAddress=(BillingAddress) obj;
+		
+		return state.equals(otherAddress.state) && street.equals(otherAddress.street) && city.equals(otherAddress.city) &&
+				district.equals(otherAddress.district) && houseNumber.equals(otherAddress.houseNumber);
+	}
+	
+	public BillingAddress clone()
+	{
+		try
+		{
+			BillingAddress clone=(BillingAddress) super.clone();
+			
+			return clone;
+		}
+		catch(CloneNotSupportedException exception)
+		{
+			exception.printStackTrace();
+		}
+		
+		return null;
 	}
 }

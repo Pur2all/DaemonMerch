@@ -35,4 +35,24 @@ public class Top extends Product
 	{
 		type=aPrintType;
 	}
+	
+	public String toString()
+	{
+		return super.toString() + "[size= " + size + ", category= " + category + ", type= " + type + "]";
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(!super.equals(obj))
+			return false;
+		
+		Top otherTop=(Top) obj;
+		
+		return size==otherTop.size && category==otherTop.category && type==otherTop.type;
+	}
+	
+	public Top clone()
+	{
+		return (Top) super.clone();
+	}
 }

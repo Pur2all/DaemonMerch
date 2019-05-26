@@ -2,7 +2,7 @@ package model;
 
 import java.util.ArrayList;
 
-public class User
+public class User implements Cloneable
 {
 	private String name, surname, username, password, birthday, id;
 	private UserType type;
@@ -92,6 +92,62 @@ public class User
 	
 	public void setUserType(UserType aUserType)
 	{
-		type=aType;
+		type=aUserType;
+	}
+	
+	public String toString()
+	{
+		return getClass().getName() + "[name= " + name + ", surname= " + surname + ", username= " + username + ", password= " + password +
+				", birthday= " + birthday + ", id= " + id + ", type= " + type + ", creditCards= " + creditCards + ", billingAddresses= " + 
+				billingAddresses + "]";
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(obj==null)
+			return false;
+		if(getClass()!=obj.getClass())
+			return false;
+		
+		User otherUser=(User) obj;
+		
+		if(creditCards.size()!=otherUser.creditCards.size() || billingAddresses.size()!=otherUser.billingAddresses.size())
+			return false;
+		else
+		{
+			for(int i=0; i<creditCards.size(); i++)
+				if(creditCards.get(i)!=otherUser.getCreditCard(i))
+					return false;
+			for(int i=0; i<billingAddresses.size(); i++)
+				if(billingAddresses.get(i)!=otherUser.billingAddresses.get(i))
+					return false;
+		}
+		
+		return name.equals(otherUser.name) && surname.equals(otherUser.surname) && username.equals(otherUser.username) && 
+				password.equals(otherUser.password) && birthday.equals(otherUser.birthday) && id.equals(otherUser.id) &&
+				type==otherUser.type;
+	}
+	
+	public User clone()
+	{
+		try
+		{
+			User clone=(User) super.clone();
+			
+			clone.creditCards=new ArrayList<CreditCard>();
+			clone.billingAddresses=new ArrayList<BillingAddress>();
+			for(int i=0; i<creditCards.size(); i++)
+				clone.creditCards.add(i, creditCards.get(i).clone());
+			for(int i=0; i<billingAddresses.size(); i++)
+				clone.billingAddresses.add(i, billingAddresses.get(i).clone());
+			
+			return clone;
+		}
+		catch(CloneNotSupportedException exception)
+		{
+			exception.printStackTrace();
+		}
+		
+		return null;
 	}
 }

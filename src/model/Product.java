@@ -1,6 +1,6 @@
 package model;
 
-public class Product
+public class Product implements Cloneable
 {
 	private String name, id, description, tag;
 	private float price;
@@ -68,5 +68,40 @@ public class Product
 	public void setRemaining(int aRemaining)
 	{
 		remaining=aRemaining;
+	}
+	
+	public String toString()
+	{
+		return getClass().getName() + "[name= " + name + ", id= " + id + ", description= " + description + ", tag= " + tag +
+				", price= " + price + ", remaining= " + remaining + "]";
+	}
+	
+	public boolean equals(Object obj)
+	{
+		if(obj==null)
+			return false;
+		if(getClass()!=obj.getClass())
+			return false;
+		
+		Product otherProduct=(Product) obj;
+		
+		return name.equals(otherProduct.name) && id.equals(otherProduct.id) && description.equals(otherProduct.description) &&
+				tag.equals(otherProduct.tag) && price==otherProduct.price && remaining==otherProduct.remaining;
+	}
+	
+	public Product clone()
+	{
+		try
+		{
+			Product clone=(Product) super.clone();
+			
+			return clone;
+		}
+		catch(CloneNotSupportedException exception)
+		{
+			exception.printStackTrace();
+		}
+		
+		return null;
 	}
 }
