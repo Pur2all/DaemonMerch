@@ -1,0 +1,173 @@
+DROP DATABASE IF EXISTS DaemonMerch;
+
+CREATE DATABASE DaemonMerch;
+
+USE DaemonMerch;
+
+CREATE TABLE Utente(
+	ID INT NOT NULL AUTO_INCREMENT,
+    Nome VARCHAR(10) NOT NULL,
+    Cognome VARCHAR(15) NOT NULL,
+    Tipo ENUM('REGISTERED_USER', 'ADMIN', 'DELETED') NOT NULL,
+    DataDiNascita CHAR(10) NOT NULL,
+    Username VARCHAR(15) NOT NULL,
+    Password VARCHAR(20) NOT NULL,
+    PRIMARY KEY (ID)
+)ENGINE=InnoDB, AUTO_INCREMENT=1;
+	
+CREATE TABLE CartaDiCredito(
+	CVV CHAR(3) NOT NULL,
+    DataScadenza CHAR(10) NOT NULL,
+    Numero CHAR(16) NOT NULL,
+    PRIMARY KEY (Numero)
+)ENGINE=InnoDB;
+
+CREATE TABLE IndirizzoDiFatturazione(
+	Stato VARCHAR(10) NOT NULL,
+    Via VARCHAR(20) NOT NULL,
+    Paese VARCHAR(20) NOT NULL,
+    Provincia CHAR(2) NOT NULL,
+    NumeroCivico INT NOT NULL,
+    PRIMARY KEY (Stato, Via, Paese, Provincia, NumeroCivico)
+)ENGINE=InnoDB;
+
+CREATE TABLE Ordine(
+	ID INT NOT NULL AUTO_INCREMENT,
+    Data CHAR(10) NOT NULL,
+    Totale FLOAT NOT NULL,
+    StatoOrdine ENUM('SHIPPED', 'DELIVERED', 'PREPARING', 'CANCELED') NOT NULL,
+    ID_Utente INT NOT NULL,
+    Stato VARCHAR(10) NOT NULL,
+    Via VARCHAR(20) NOT NULL,
+    Paese VARCHAR(20) NOT NULL,
+    Provincia CHAR(2) NOT NULL,
+    NumeroCivico INT NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ID_Utente) REFERENCES Utente(ID)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+	FOREIGN KEY (Stato, Via, Paese, Provincia, NumeroCivico) REFERENCES IndirizzoDiFatturazione(Stato, Via, Paese, Provincia, NumeroCivico)
+		ON DELETE NO ACTION
+        ON UPDATE CASCADE,
+	
+    CHECK (Totale>0)
+)ENGINE=InnoDB, AUTO_INCREMENT=1;
+
+CREATE TABLE Artista(
+	ID INT NOT NULL AUTO_INCREMENT,
+    Nome VARCHAR(15) NOT NULL,
+    Logo BLOB NOT NULL,
+    PRIMARY KEY (ID)
+)ENGINE=InnoDB, AUTO_INCREMENT=1;
+
+CREATE TABLE Prodotto(
+	ID INT NOT NULL AUTO_INCREMENT,
+    Nome VARCHAR(15) NOT NULL,
+    Prezzo FLOAT NOT NULL,
+    Descrizione VARCHAR(200),
+    QuantitàRimanente INT NOT NULL,
+    Tag VARCHAR(15) NOT NULL,
+    ID_Artista INT NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ID_Artista) REFERENCES Artista(ID)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+	
+    CHECK (QuantitàRimanente>=0),
+    CHECK (Prezzo>0)
+)ENGINE=InnoDB, AUTO_INCREMENT=1;
+
+CREATE TABLE Patch(
+	ID INT NOT NULL,
+    Misure CHAR(9) NOT NULL,
+    Tipo ENUM('BACKPATCH', 'PATCH', 'BACKSHAPE') NOT NULL,
+    Tessuto VARCHAR(10) NOT NULL,
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ID) REFERENCES Prodotto(ID)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE Top(
+	ID INT NOT NULL,
+    Taglia ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL'),
+    Categoria ENUM('HOODIE', 'LONGSLEEVE', 'T-SHIRT'),
+    TipoStampa ENUM('BACK', 'FRONT', 'BACKFRONT'),
+    PRIMARY KEY (ID),
+    FOREIGN KEY (ID) REFERENCES Prodotto(ID)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE Foto(
+	NomeFoto VARCHAR(20) NOT NULL,
+	Foto BLOB NOT NULL,
+    ID_Prodotto INT,
+    ID_Artista INT,
+    PRIMARY KEY (NomeFoto),
+    FOREIGN KEY (ID_Prodotto) REFERENCES Prodotto(ID)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE,
+	FOREIGN KEY (ID_Artista) REFERENCES Artista(ID)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE PagaCon(
+	ID INT NOT NULL,
+    Numero CHAR(16) NOT NULL,
+    PRIMARY KEY (Numero, ID),
+    FOREIGN KEY (Numero) REFERENCES CartaDiCredito(Numero)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE,
+    FOREIGN KEY (ID) REFERENCES Utente(ID)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE Ha(
+	ID INT NOT NULL,
+	Stato VARCHAR(10) NOT NULL,
+    Via VARCHAR(20) NOT NULL,
+    Paese VARCHAR(20) NOT NULL,
+    Provincia CHAR(2) NOT NULL,
+    NumeroCivico INT NOT NULL,
+    PRIMARY KEY (Stato, Via, Paese, Provincia, NumeroCivico, ID),
+    FOREIGN KEY (Stato, Via, Paese, Provincia, NumeroCivico) REFERENCES IndirizzoDiFatturazione(Stato, Via, Paese, Provincia, NumeroCivico)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE,
+	FOREIGN KEY (ID) REFERENCES Utente(ID)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE
+)ENGINE=InnoDB;
+
+CREATE TABLE VorrebbeAcquistare(
+	ID_Utente INT NOT NULL,
+    ID_Prodotto INT NOT NULL,
+    Quantità INT NOT NULL,
+    DataAggiunzione CHAR(10) NOT NULL,
+    PRIMARY KEY (ID_Utente, ID_Prodotto),
+    FOREIGN KEY (ID_Utente) REFERENCES Utente(ID)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+	FOREIGN KEY (ID_Prodotto) REFERENCES Prodotto(ID)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE,
+	
+    CHECK (Quantità>0)
+)ENGINE=InnoDB;
+
+CREATE TABLE Contiene(
+	ID_Ordine INT NOT NULL,
+    ID_Prodotto INT NOT NULL,
+    Quantità INT NOT NULL,
+    PRIMARY KEY (ID_Ordine, ID_Prodotto),
+    FOREIGN KEY (ID_Ordine) REFERENCES Ordine(ID)
+		ON DELETE CASCADE
+        ON UPDATE CASCADE,
+	FOREIGN KEY (ID_Prodotto) REFERENCES Prodotto(ID)
+		ON DELETE RESTRICT
+        ON UPDATE CASCADE,
+	
+     CHECK (Quantità>0)
+)ENGINE=InnoDB;
