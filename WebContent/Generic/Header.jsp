@@ -6,11 +6,11 @@
 	<link rel="stylesheet" type="text/css" href="./Css/Header.css">
 </head>
 
-<div id="logo">
-	<img src="../images/logo.png">
+<div id="logo" class="flex-item">
+	<img src="../images/logo.png" width="175">
 </div>
 
-<div id="searchbar">
+<div id="searchbar" class="flex-item">
 	<form name="searchbar" action="Search" method=GET>
 		<input type="text" placeholder="Type to search">
 		<button type="submit">
@@ -19,24 +19,24 @@
 	</form>
 </div>
 
-<div id="services_icons">
-	<span id="account">
+<div class="services-flex-container">
+	<span id="account" class="service-flex-item">
 		<a href="account.jsp"> <img src="../images/account.png"> </a>
 	</span>
 	
-	<span id="wishlist">
+	<span id="wishlist" class="service-flex-item">
 		<a href="wishlist.jsp"> <img src="../images/wishlist.png"> </a>
 	</span>
 	
-	<span id="cart">
-		<a href="cart.jsp"> <img src="../images/cart.png"> </a>
+	<span id="cart" class="service-flex-item">
+		<a href="cart.jsp"> <img src="cart.png" alt="Cart"> </a>
 	</span>
 	
-	<span id="faq">
+	<span id="faq" class="service-flex-item">
 		<a href="faq.jsp"> <img src="../images/faq.png"> </a>
 	</span>
 	
-	<span id="info">
+	<span id="info" class="service-flex-item">
 		<a href="info.jsp"> <img src="../images/info.png"> </a>
 	</span>
 </div>
