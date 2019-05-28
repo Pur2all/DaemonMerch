@@ -29,11 +29,11 @@
 	</span>
 	
 	<span id="cart" class="service-flex-item">
-		<a href="cart.jsp"> <img src="cart.png" alt="Cart"> </a>
+		<a href="cart.jsp"> <img src="../images/wishlist.png" alt="Cart"> </a>
 	</span>
 	
 	<span id="faq" class="service-flex-item">
-		<a href="faq.jsp"> <img src="../images/faq.png"> </a>
+		<a href="faq.jsp"> <img src="../images/faq.jpg"> </a>
 	</span>
 	
 	<span id="info" class="service-flex-item">
