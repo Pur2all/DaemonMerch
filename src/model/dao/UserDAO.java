@@ -1,4 +1,4 @@
-package dao;
+package model.dao;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -7,35 +7,40 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.CreditCard;
+import model.User;
+import model.UserType;
 
-public class CreditCardDAO implements DAO<CreditCard>
+public class UserDAO implements DAO<User>
 {
-	private static final String TABLE_NAME="CartaDiCredito";
+	private static final String TABLE_NAME="Utente";
 
-	public CreditCard doRetrieveByKey(Object key) throws SQLException
+	public User doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		CreditCard creditCardFromTable=new CreditCard();
+		User userFromTable=new User();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Number = ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
 
 		try 
 		{
-			String number=(String) key;
+			int code=(int) key;
 			connection=DBConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
-			preparedStatement.setString(1, number);
+			preparedStatement.setInt(1, code);
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while(rs.next()) 
+			while (rs.next()) 
 			{
-				creditCardFromTable.setCVV(rs.getString("ID"));
-				creditCardFromTable.setExpireDate(rs.getString("DataScadenza"));
-				creditCardFromTable.setNumber(String.valueOf(number));
+				userFromTable.setId(rs.getString("ID"));
+				userFromTable.setName(rs.getString("Nome"));
+				userFromTable.setSurname(rs.getString("Cognome"));
+				userFromTable.setUserType(UserType.valueOf(rs.getString("Tipo")));
+				userFromTable.setBirthday(rs.getString("DataDiNascita"));
+				userFromTable.setUsername(rs.getString("Username"));
+				userFromTable.setPassword(rs.getString("Password"));
 			}
 		} 
 		finally 
@@ -51,20 +56,21 @@ public class CreditCardDAO implements DAO<CreditCard>
 			}
 		}
 		
-		return creditCardFromTable;
+		return userFromTable;
 	}
 
-	public Collection<CreditCard> doRetrieveAll(String order) throws SQLException
+	public Collection<User> doRetrieveAll(String order) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		Collection<CreditCard> users=new LinkedList<CreditCard>();
+		Collection<User> users=new LinkedList<User>();
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME;
 
 		if (order!=null && !order.equals("")) 
 			selectSQL+=" ORDER BY " + order;
+
 		try 
 		{
 			connection=DBConnectionPool.getConnection();
@@ -74,19 +80,23 @@ public class CreditCardDAO implements DAO<CreditCard>
 			
 			while (rs.next())
 			{
-				CreditCard creditCardFromTable=new CreditCard();
+				User userFromTable=new User();
 				
-				creditCardFromTable.setCVV(rs.getString("CVV"));
-				creditCardFromTable.setExpireDate(rs.getString("DataScadenza"));
-				creditCardFromTable.setNumber(rs.getString("Number"));
-				users.add(creditCardFromTable);
+				userFromTable.setId(rs.getString("ID"));
+				userFromTable.setName(rs.getString("Nome"));
+				userFromTable.setSurname(rs.getString("Cognome"));
+				userFromTable.setUserType(UserType.valueOf(rs.getString("Tipo")));
+				userFromTable.setBirthday(rs.getString("DataDiNascita"));
+				userFromTable.setUsername(rs.getString("Username"));
+				userFromTable.setPassword(rs.getString("Password"));
+				users.add(userFromTable);
 			}
 		} 
 		finally 
 		{
 			try 
 			{
-				if(preparedStatement!=null)
+				if (preparedStatement!=null)
 					preparedStatement.close();
 			} 
 			finally 
@@ -98,20 +108,23 @@ public class CreditCardDAO implements DAO<CreditCard>
 		return users;
 	}
 
-	public void doSave(CreditCard creditCard) throws SQLException
+	public void doSave(User user) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (CVV, DataScadenza, Numero) VALUES (?, ?, ?)";
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Cognome, Tipo, DataDiNascita, Username, Password) VALUES (?, ?, ?, ?, ?, ?)";
 
 		try 
 		{
 			connection=DBConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, creditCard.getCVV());
-			preparedStatement.setString(2, creditCard.getExpireDate());
-			preparedStatement.setString(3, creditCard.getNumber());
+			preparedStatement.setString(1, user.getName());
+			preparedStatement.setString(2, user.getSurname());
+			preparedStatement.setString(3, user.getUserType().name());
+			preparedStatement.setString(4, user.getBirthday());
+			preparedStatement.setString(5, user.getUsername());
+			preparedStatement.setString(6, user.getPassword());
 
 			preparedStatement.executeUpdate();
 
@@ -131,23 +144,27 @@ public class CreditCardDAO implements DAO<CreditCard>
 		}
 	}
 
-	public void doUpdate(CreditCard creditCard) throws SQLException
+	public void doUpdate(User user) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
-				" CVV = ?, DataScadenza = ?, Numero = ? " +
-				" WHERE Numero = ?";
+				" Nome = ?, Cognome = ?, Tipo = ?, DataDiNascita = ?, Username = ?, Password = ? " +
+				" WHERE ID = ?";
 				
 		try 
 		{
 			connection=DBConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);			
 			
-			preparedStatement.setString(1, creditCard.getCVV());
-			preparedStatement.setString(2, creditCard.getExpireDate());
-			preparedStatement.setString(3, creditCard.getNumber());
+			preparedStatement.setString(1, user.getName());
+			preparedStatement.setString(2, user.getSurname());
+			preparedStatement.setString(3, user.getUserType().name());
+			preparedStatement.setString(4, user.getBirthday());
+			preparedStatement.setString(5, user.getUsername());
+			preparedStatement.setString(6, user.getPassword());
+			preparedStatement.setString(7, user.getId());
 			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			preparedStatement.executeUpdate();	
@@ -168,20 +185,20 @@ public class CreditCardDAO implements DAO<CreditCard>
 		}
 	}
 
-	public boolean doDelete(CreditCard creditCard) throws SQLException
+	public boolean doDelete(User user) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		int result=0;
 
-		String deleteSQL="DELETE FROM " + TABLE_NAME + " WHERE Number = ?";
+		String deleteSQL="DELETE FROM " + TABLE_NAME + " WHERE ID = ?";
 
 		try 
 		{
 			connection=DBConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, Integer.parseInt(creditCard.getNumber()));
+			preparedStatement.setInt(1, Integer.parseInt(user.getId()));
 
 			result=preparedStatement.executeUpdate();
 		} 
