@@ -14,17 +14,19 @@
 		<title>DaemonMerch</title>
 	</head>
 	<body>
-    <header>
-      <%@ include file="../Generic/Header.jsp" %>
-    </header>
+	<div class="index-grid">
+  	  <header class="index-header">
+  	    <%@ include file="../Generic/Header.jsp" %>
+  	  </header>
     
-    <div id="main">
-    	<h2>Un po' di garbo Ciccio</h2>
-    </div>
+ 	   <main class="index-main">
+  	  	<h2>Un po' di garbo Ciccio</h2>
+  	  </main>
     
-    <footer>
-      <%@ include file="../Generic/Footer.jsp" %>
-    </footer>
+   	  <footer class="index-footer">
+   	   <%@ include file="../Generic/Footer.jsp" %>
+  	  </footer>
+   </div>
     
 	</body>
 </html>
