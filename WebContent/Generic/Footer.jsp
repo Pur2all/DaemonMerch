@@ -2,5 +2,5 @@
     pageEncoding="ISO-8859-1"%>
 
 <div>
-  Roba header da riempire
+  Roba footer da riempire
 </div>

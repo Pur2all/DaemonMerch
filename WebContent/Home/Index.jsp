@@ -20,7 +20,7 @@
   	  </header>
     
  	   <main class="index-main">
-  	  	<h2>Un po' di garbo Ciccio</h2>
+  	  	<%@ include file="../Generic/Main.jsp" %>
   	  </main>
     
    	  <footer class="index-footer">
