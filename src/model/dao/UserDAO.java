@@ -14,6 +14,48 @@ public class UserDAO implements DAO<User>
 {
 	private static final String TABLE_NAME="Utente";
 
+	private DBConnectionPool dbConnectionPool;
+	
+	public UserDAO(DBConnectionPool aDBConnectionPool)
+	{
+		dbConnectionPool=aDBConnectionPool;
+		
+		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
+	}
+	
+	public boolean searchForUsernameAndPassword(String username, String password) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		ResultSet rs=null;
+		
+		String selectSQL="SELECT * FROM " + TABLE_NAME + "WHERE Username = ? AND Password = ?";
+		
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, username);
+			preparedStatement.setString(2, password);
+			
+			rs=preparedStatement.executeQuery();
+		}
+		finally
+		{
+			try 
+			{
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} 
+			finally 
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+		
+		return rs.first();
+	}
+	
 	public User doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -26,7 +68,7 @@ public class UserDAO implements DAO<User>
 		try 
 		{
 			int code=(int) key;
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
 
@@ -52,7 +94,7 @@ public class UserDAO implements DAO<User>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -73,7 +115,7 @@ public class UserDAO implements DAO<User>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
@@ -101,7 +143,7 @@ public class UserDAO implements DAO<User>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -117,7 +159,7 @@ public class UserDAO implements DAO<User>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2, user.getSurname());
@@ -139,7 +181,7 @@ public class UserDAO implements DAO<User>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -155,7 +197,7 @@ public class UserDAO implements DAO<User>
 				
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);			
 			
 			preparedStatement.setString(1, user.getName());
@@ -180,7 +222,7 @@ public class UserDAO implements DAO<User>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
 	}
@@ -196,7 +238,7 @@ public class UserDAO implements DAO<User>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, Integer.parseInt(user.getId()));
 
@@ -211,7 +253,7 @@ public class UserDAO implements DAO<User>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		

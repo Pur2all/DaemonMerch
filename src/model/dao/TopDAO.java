@@ -16,12 +16,21 @@ public class TopDAO implements DAO<Top>
 {
 	private static final String TABLE_NAME="Top";
 	
+	private DBConnectionPool dbConnectionPool;
+	
+	public TopDAO(DBConnectionPool aDBConnectionPool)
+	{
+		dbConnectionPool=aDBConnectionPool;
+		
+		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
+	}
+	
 	public Top doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO();
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		Top topFromTable=(Top) productDAO.doRetrieveByKey(key);
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
@@ -29,7 +38,7 @@ public class TopDAO implements DAO<Top>
 		try 
 		{
 			int code=(int) key;
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
 
@@ -51,7 +60,7 @@ public class TopDAO implements DAO<Top>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -72,7 +81,7 @@ public class TopDAO implements DAO<Top>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
@@ -103,7 +112,7 @@ public class TopDAO implements DAO<Top>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -115,14 +124,14 @@ public class TopDAO implements DAO<Top>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
-		ProductDAO productDAO=new ProductDAO();
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		productDAO.doSave(top);
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Taglia, Categoria, TipoStampa) VALUES (?, ?, ?)";
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, top.getSize().name());
 			preparedStatement.setString(2, top.getCategory().name());
@@ -141,7 +150,7 @@ public class TopDAO implements DAO<Top>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -151,7 +160,7 @@ public class TopDAO implements DAO<Top>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
 
-		ProductDAO productDAO=new ProductDAO();
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		productDAO.doUpdate(top);
 		
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
@@ -159,7 +168,7 @@ public class TopDAO implements DAO<Top>
 				
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);			
 			
 			preparedStatement.setString(1, top.getSize().name());
@@ -180,14 +189,14 @@ public class TopDAO implements DAO<Top>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
 	}
 
 	public boolean doDelete(Top top) throws SQLException
 	{
-		ProductDAO productDAO=new ProductDAO();
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		
 		return productDAO.doDelete(top);
 	}

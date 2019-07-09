@@ -13,6 +13,15 @@ public class CreditCardDAO implements DAO<CreditCard>
 {
 	private static final String TABLE_NAME="CartaDiCredito";
 
+	private DBConnectionPool dbConnectionPool;
+	
+	public CreditCardDAO(DBConnectionPool aDBConnectionPool)
+	{
+		dbConnectionPool=aDBConnectionPool;
+		
+		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
+	}
+	
 	public CreditCard doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -25,7 +34,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 		try 
 		{
 			String number=(String) key;
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, number);
 
@@ -47,7 +56,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -67,7 +76,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			selectSQL+=" ORDER BY " + order;
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
@@ -91,7 +100,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -107,7 +116,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, creditCard.getCVV());
 			preparedStatement.setString(2, creditCard.getExpireDate());
@@ -126,7 +135,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -142,7 +151,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 				
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);			
 			
 			preparedStatement.setString(1, creditCard.getCVV());
@@ -164,7 +173,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
 	}
@@ -180,7 +189,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, Integer.parseInt(creditCard.getNumber()));
 
@@ -195,7 +204,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		

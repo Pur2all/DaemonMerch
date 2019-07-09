@@ -13,6 +13,15 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 {
 	private static final String TABLE_NAME="IndirizzoDiFatturazione";
 
+	private DBConnectionPool dbConnectionPool;
+	
+	public BillingAddressDAO(DBConnectionPool aDBConnectionPool)
+	{
+		dbConnectionPool=aDBConnectionPool;
+		
+		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
+	}
+	
 	public BillingAddress doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -25,7 +34,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 		try 
 		{
 			BillingAddress billingAddress=(BillingAddress) key;
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, billingAddress.getState());
 			preparedStatement.setString(2, billingAddress.getStreet());
@@ -53,7 +62,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -74,7 +83,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
@@ -100,7 +109,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -116,7 +125,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, billingAddress.getState());
 			preparedStatement.setString(2, billingAddress.getStreet());
@@ -137,7 +146,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -158,7 +167,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, billingAddress.getState());
 			preparedStatement.setString(2, billingAddress.getStreet());
@@ -177,7 +186,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		

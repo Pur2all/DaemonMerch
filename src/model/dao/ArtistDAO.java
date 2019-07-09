@@ -12,6 +12,15 @@ import model.Artist;
 public class ArtistDAO implements DAO<Artist>
 {
 	private static final String TABLE_NAME="Artista";
+	
+	private DBConnectionPool dbConnectionPool;
+	
+	public ArtistDAO(DBConnectionPool aDBConnectionPool)
+	{
+		dbConnectionPool=aDBConnectionPool;
+		
+		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
+	}
 
 	public Artist doRetrieveByKey(Object key) throws SQLException
 	{
@@ -25,7 +34,7 @@ public class ArtistDAO implements DAO<Artist>
 		try 
 		{
 			int id=(int) key;
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, id);
 
@@ -46,7 +55,7 @@ public class ArtistDAO implements DAO<Artist>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -66,7 +75,7 @@ public class ArtistDAO implements DAO<Artist>
 			selectSQL+=" ORDER BY " + order;
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
@@ -89,7 +98,7 @@ public class ArtistDAO implements DAO<Artist>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -105,7 +114,7 @@ public class ArtistDAO implements DAO<Artist>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, artist.getName());
 			preparedStatement.setBytes(2, artist.getLogo());
@@ -123,7 +132,7 @@ public class ArtistDAO implements DAO<Artist>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -139,7 +148,7 @@ public class ArtistDAO implements DAO<Artist>
 				
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);			
 			
 			preparedStatement.setString(1, artist.getName());
@@ -160,7 +169,7 @@ public class ArtistDAO implements DAO<Artist>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
 	}
@@ -176,7 +185,7 @@ public class ArtistDAO implements DAO<Artist>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, artist.getId());
 
@@ -191,7 +200,7 @@ public class ArtistDAO implements DAO<Artist>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		

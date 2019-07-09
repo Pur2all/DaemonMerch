@@ -15,7 +15,16 @@ import model.State;
 public class OrderDAO implements DAO<Order>
 {
 	private static final String TABLE_NAME="Ordine";
+	
 	private int userID;
+	private DBConnectionPool dbConnectionPool;
+	
+	public OrderDAO(DBConnectionPool aDBConnectionPool)
+	{
+		dbConnectionPool=aDBConnectionPool;
+		
+		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
+	}
 	
 	public OrderDAO(int anUserID)
 	{
@@ -34,7 +43,7 @@ public class OrderDAO implements DAO<Order>
 		try 
 		{
 			int id=(int) key;
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, id);
 
@@ -76,7 +85,7 @@ public class OrderDAO implements DAO<Order>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -96,7 +105,7 @@ public class OrderDAO implements DAO<Order>
 			selectSQL+=" ORDER BY Ordine.ID, " + order;
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
@@ -143,7 +152,7 @@ public class OrderDAO implements DAO<Order>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -159,7 +168,7 @@ public class OrderDAO implements DAO<Order>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, order.getDate());
 			preparedStatement.setFloat(2, order.getTotal());
@@ -184,7 +193,7 @@ public class OrderDAO implements DAO<Order>
 			} 
 			finally
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -200,7 +209,7 @@ public class OrderDAO implements DAO<Order>
 				
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);			
 			
 			preparedStatement.setString(1, order.getDate());
@@ -222,7 +231,7 @@ public class OrderDAO implements DAO<Order>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
 	}
@@ -238,7 +247,7 @@ public class OrderDAO implements DAO<Order>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, Integer.parseInt(order.getId()));
 
@@ -253,7 +262,7 @@ public class OrderDAO implements DAO<Order>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		

@@ -7,23 +7,24 @@ import java.util.LinkedList;
 import java.util.List;
 
 
-public class DBConnectionPool 
+public class DBConnectionPool
 {
 	private static List<Connection> freeDbConnections;
 
-	static 
+	static
 	{
 		freeDbConnections=new LinkedList<Connection>();
-		try 
+		try
 		{
 			Class.forName("com.mysql.cj.jdbc.Driver");
-		}catch (ClassNotFoundException exception) 
+		}
+		catch (ClassNotFoundException exception)
 		{
 			exception.printStackTrace();
-		} 
+		}
 	}
 
-	private static synchronized Connection createDBConnection() throws SQLException 
+	private synchronized Connection createDBConnection() throws SQLException
 	{
 		Connection newConnection=null;
 		String ip="localhost";
@@ -32,43 +33,44 @@ public class DBConnectionPool
 		String username="root";
 		String password="admin";
 
-		newConnection=DriverManager.getConnection("jdbc:mysql://"+ ip + ":" + 
+		newConnection=DriverManager.getConnection("jdbc:mysql://"+ ip + ":" +
 				port + "/" + db + "?serverTimezone=UTC", username, password);
 
 		System.out.println("Create a new DB connection");
 		newConnection.setAutoCommit(false);
-		
-		return newConnection;
-	}	
 
-	public static synchronized Connection getConnection() throws SQLException 
+		return newConnection;
+	}
+
+	public synchronized Connection getConnection() throws SQLException
 	{
 		Connection connection;
 
-		if (!freeDbConnections.isEmpty()) 
+		if (!freeDbConnections.isEmpty())
 		{
 			connection=(Connection) freeDbConnections.get(0);
 			freeDbConnections.remove(0);
 
-			try 
+			try
 			{
 				if (connection.isClosed())
 					connection=getConnection();
-			}catch (SQLException e) 
+			}
+			catch (SQLException e) 
 			{
 				connection.close();
 				connection=getConnection();
 			}
-		} 
-		else 
+		}
+		else
 			connection=createDBConnection();
 
 		return connection;
 	}
 
-	public static synchronized void releaseConnection(Connection connection) throws SQLException 
+	public synchronized void releaseConnection(Connection connection) throws SQLException
 	{
-		if(connection != null) 
+		if(connection != null)
 			freeDbConnections.add(connection);
-	}	
+	}
 }

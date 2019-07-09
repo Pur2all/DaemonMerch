@@ -13,6 +13,15 @@ public class ProductDAO implements DAO<Product>
 {
 	private static final String TABLE_NAME="Prodotto";
 	
+	private DBConnectionPool dbConnectionPool;
+	
+	public ProductDAO(DBConnectionPool aDBConnectionPool)
+	{
+		dbConnectionPool=aDBConnectionPool;
+		
+		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
+	}
+	
 	public Product doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -25,7 +34,7 @@ public class ProductDAO implements DAO<Product>
 		try 
 		{
 			int code=(int) key;
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
 
@@ -51,7 +60,7 @@ public class ProductDAO implements DAO<Product>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -72,7 +81,7 @@ public class ProductDAO implements DAO<Product>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
@@ -100,7 +109,7 @@ public class ProductDAO implements DAO<Product>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -116,7 +125,7 @@ public class ProductDAO implements DAO<Product>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, product.getName());
 			preparedStatement.setFloat(2, product.getPrice());
@@ -138,7 +147,7 @@ public class ProductDAO implements DAO<Product>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -154,7 +163,7 @@ public class ProductDAO implements DAO<Product>
 				
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);			
 			
 			preparedStatement.setString(1, product.getName());
@@ -179,7 +188,7 @@ public class ProductDAO implements DAO<Product>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
 	}
@@ -195,7 +204,7 @@ public class ProductDAO implements DAO<Product>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, Integer.parseInt(product.getId()));
 
@@ -210,7 +219,7 @@ public class ProductDAO implements DAO<Product>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		

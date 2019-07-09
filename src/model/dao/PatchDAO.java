@@ -14,12 +14,21 @@ public class PatchDAO implements DAO<Patch>
 {
 	private static final String TABLE_NAME="Patch";
 	
+	private DBConnectionPool dbConnectionPool;
+	
+	public PatchDAO(DBConnectionPool aDBConnectionPool)
+	{
+		dbConnectionPool=aDBConnectionPool;
+		
+		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
+	}
+	
 	public Patch doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO();
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		Patch patchFromTable=(Patch) productDAO.doRetrieveByKey(key);
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
@@ -27,7 +36,7 @@ public class PatchDAO implements DAO<Patch>
 		try 
 		{
 			int code=(int) key;
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, code);
 
@@ -49,7 +58,7 @@ public class PatchDAO implements DAO<Patch>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -70,7 +79,7 @@ public class PatchDAO implements DAO<Patch>
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
@@ -101,7 +110,7 @@ public class PatchDAO implements DAO<Patch>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 		
@@ -113,14 +122,14 @@ public class PatchDAO implements DAO<Patch>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
-		ProductDAO productDAO=new ProductDAO();
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		productDAO.doSave(patch);
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Misure, Tipo, Tessuto) VALUES (?, ?, ?)";
 
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, patch.getMeasures());
 			preparedStatement.setString(2, patch.getPatchType().name());
@@ -139,7 +148,7 @@ public class PatchDAO implements DAO<Patch>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}
 		}
 	}
@@ -149,7 +158,7 @@ public class PatchDAO implements DAO<Patch>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
 
-		ProductDAO productDAO=new ProductDAO();
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		productDAO.doUpdate(patch);
 		
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
@@ -157,7 +166,7 @@ public class PatchDAO implements DAO<Patch>
 				
 		try 
 		{
-			connection=DBConnectionPool.getConnection();
+			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);			
 			
 			preparedStatement.setString(1, patch.getMeasures());
@@ -178,14 +187,14 @@ public class PatchDAO implements DAO<Patch>
 			} 
 			finally 
 			{
-				DBConnectionPool.releaseConnection(connection);
+				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
 	}
 
 	public boolean doDelete(Patch patch) throws SQLException
 	{
-		ProductDAO productDAO=new ProductDAO();
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		
 		return productDAO.doDelete(patch);
 	}
