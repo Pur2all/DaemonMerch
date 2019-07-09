@@ -1,17 +1,16 @@
 package model;
 
-import java.io.File;
-
 public class Artist implements Cloneable
 {
-	private String id, name;
-	private File logo;
+	private int id;
+	private String name;
+	private byte[] logo;
 	
 	public Artist()
 	{
 	}
 	
-	public String getId()
+	public int getId()
 	{
 		return id;
 	}
@@ -21,12 +20,12 @@ public class Artist implements Cloneable
 		return name;
 	}
 	
-	public File getLogo()
+	public byte[] getLogo()
 	{
 		return logo;
 	}
 	
-	public void setId(String anId)
+	public void setId(int anId)
 	{
 		id=anId;
 	}
@@ -36,7 +35,7 @@ public class Artist implements Cloneable
 		name=aName;
 	}
 	
-	public void setLogo(File aLogo)
+	public void setLogo(byte[] aLogo)
 	{
 		logo=aLogo;
 	}
@@ -55,7 +54,7 @@ public class Artist implements Cloneable
 		
 		Artist otherArtist=(Artist) obj;
 		
-		return id.equals(otherArtist.id) && name.equals(otherArtist.name) && logo.equals(otherArtist.logo);
+		return id==otherArtist.id && name.equals(otherArtist.name) && logo.equals(otherArtist.logo);
 	}
 	
 	public Artist clone()

@@ -2,7 +2,7 @@ package model;
 
 public class Product implements Cloneable
 {
-	private String name, id, description, tag;
+	private String name, id, description, tag, artistId;
 	private float price;
 	private int remaining;
 	
@@ -40,6 +40,11 @@ public class Product implements Cloneable
 		return remaining;
 	}
 	
+	public String getArtistId()
+	{
+		return artistId;
+	}
+	
 	public void setName(String aName)
 	{
 		name=aName;
@@ -70,10 +75,15 @@ public class Product implements Cloneable
 		remaining=aRemaining;
 	}
 	
+	public void setArtistId(String anArtistId)
+	{
+		artistId=anArtistId;
+	}
+	
 	public String toString()
 	{
 		return getClass().getName() + "[name= " + name + ", id= " + id + ", description= " + description + ", tag= " + tag +
-				", price= " + price + ", remaining= " + remaining + "]";
+				", price= " + price + ", remaining= " + remaining + ", artistId= " + artistId + "]";
 	}
 	
 	public boolean equals(Object obj)
@@ -86,7 +96,8 @@ public class Product implements Cloneable
 		Product otherProduct=(Product) obj;
 		
 		return name.equals(otherProduct.name) && id.equals(otherProduct.id) && description.equals(otherProduct.description) &&
-				tag.equals(otherProduct.tag) && price==otherProduct.price && remaining==otherProduct.remaining;
+				tag.equals(otherProduct.tag) && price==otherProduct.price && remaining==otherProduct.remaining &&
+				artistId.equals(otherProduct.artistId);
 	}
 	
 	public Product clone()
