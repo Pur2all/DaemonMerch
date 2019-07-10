@@ -42,7 +42,7 @@
 		</div>
 		
 		<div class="navbar">
-				<%@include file="Navbar.jsp" %>
-			</div>
+			<%@include file="Navbar.jsp" %>
+		</div>
 	</div>
 </body>

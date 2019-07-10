@@ -1,4 +1,4 @@
-package control;
+package control.insertservlet;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -56,5 +56,4 @@ public class InsertProduct extends HttpServlet
 			getServletContext().getRequestDispatcher("InsertImage").forward(request, response);
 		}
 	}
-
 }

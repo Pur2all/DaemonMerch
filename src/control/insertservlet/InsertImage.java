@@ -1,4 +1,4 @@
-package control;
+package control.insertservlet;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -21,6 +21,9 @@ public class InsertImage extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		//TODO pensa a come prendere più immagini e come capire a quale tabella fare riferimento
+		
+		
+		
 		byte[] image=request.getParameter("image").getBytes();
 	}
 }

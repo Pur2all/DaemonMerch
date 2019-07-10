@@ -19,16 +19,12 @@ public class OrderDAO implements DAO<Order>
 	private int userID;
 	private DBConnectionPool dbConnectionPool;
 	
-	public OrderDAO(DBConnectionPool aDBConnectionPool)
+	public OrderDAO(DBConnectionPool aDBConnectionPool, int anUserID)
 	{
+		userID=anUserID;
 		dbConnectionPool=aDBConnectionPool;
 		
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
-	}
-	
-	public OrderDAO(int anUserID)
-	{
-		userID=anUserID;
 	}
 
 	public Order doRetrieveByKey(Object key) throws SQLException
