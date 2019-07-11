@@ -42,7 +42,24 @@
 		</div>
 		
 		<div class="navbar">
+<<<<<<< HEAD:WebContent/Generic/Header.jsp
+			<nav role="navigation">
+				<ul>
+					<li><a href="#">Meme</a></li>
+					<li><a href="#">Memone</a>
+						<ul class="dropdown">
+							<li><a href="#">Sub-1</a></li>
+							<li><a href="#">Sub-2</a></li>
+							<li><a href="#">Sub-3</a></li>
+						</ul>
+					</li>
+					<li><a href="#">Gianni</a></li>
+					<li><a href="#">Gianni2</a></li>
+				</ul>
+			</nav>
+=======
 			<%@include file="Navbar.jsp" %>
+>>>>>>> a3ce06b742fb6377ecbeebc50e5f55d7ae5517b9:WebContent/HTML/Generic/Header.jsp
 		</div>
 	</div>
 </body>
