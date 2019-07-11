@@ -57,9 +57,8 @@
 					<li><a href="#">Gianni2</a></li>
 				</ul>
 			</nav>
-=======
+
 			<%@include file="Navbar.jsp" %>
->>>>>>> a3ce06b742fb6377ecbeebc50e5f55d7ae5517b9:WebContent/HTML/Generic/Header.jsp
 		</div>
 	</div>
 </body>
