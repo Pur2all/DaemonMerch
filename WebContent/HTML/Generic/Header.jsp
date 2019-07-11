@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-    import="model.*"%>
+    import="model.bean.*"%>
 
 <head>
 	<base href="./" target="_self">

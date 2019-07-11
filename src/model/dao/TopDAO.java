@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.Category;
-import model.PrintType;
-import model.Size;
-import model.Top;
+import model.bean.Category;
+import model.bean.PrintType;
+import model.bean.Size;
+import model.bean.Top;
 
 public class TopDAO implements DAO<Top>
 {

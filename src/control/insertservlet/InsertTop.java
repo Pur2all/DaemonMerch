@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Category;
-import model.PrintType;
-import model.Size;
-import model.Top;
+import model.bean.Category;
+import model.bean.PrintType;
+import model.bean.Size;
+import model.bean.Top;
 import model.dao.DBConnectionPool;
 import model.dao.TopDAO;
 

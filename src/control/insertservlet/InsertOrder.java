@@ -10,10 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.BillingAddress;
-import model.Order;
-import model.Product;
-import model.State;
+import model.bean.BillingAddress;
+import model.bean.Order;
+import model.bean.Product;
+import model.bean.State;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 

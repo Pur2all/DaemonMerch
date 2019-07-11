@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.User;
-import model.UserType;
+import model.bean.User;
+import model.bean.UserType;
 
 public class UserDAO implements DAO<User>
 {

@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.WishlistProduct;
+import model.bean.WishlistProduct;
 
 public class WishlistDAO implements DAO<WishlistProduct>
 {

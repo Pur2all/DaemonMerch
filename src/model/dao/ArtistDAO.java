@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.Artist;
+import model.bean.Artist;
 
 public class ArtistDAO implements DAO<Artist>
 {

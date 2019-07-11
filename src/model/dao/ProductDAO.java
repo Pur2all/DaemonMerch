@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.Product;
+import model.bean.Product;
 
 public class ProductDAO implements DAO<Product>
 {

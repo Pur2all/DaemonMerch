@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.BillingAddress;
-import model.Order;
-import model.Product;
-import model.State;
+import model.bean.BillingAddress;
+import model.bean.Order;
+import model.bean.Product;
+import model.bean.State;
 
 public class OrderDAO implements DAO<Order>
 {

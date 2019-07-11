@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.BillingAddress;
+import model.bean.BillingAddress;
 
 public class BillingAddressDAO implements DAO<BillingAddress>
 {

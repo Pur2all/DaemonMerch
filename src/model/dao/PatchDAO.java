@@ -7,8 +7,8 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.Patch;
-import model.PatchType;
+import model.bean.Patch;
+import model.bean.PatchType;
 
 public class PatchDAO implements DAO<Patch>
 {

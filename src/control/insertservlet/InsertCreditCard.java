@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.CreditCard;
+import model.bean.CreditCard;
 import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 

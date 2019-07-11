@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.Patch;
-import model.PatchType;
+import model.bean.Patch;
+import model.bean.PatchType;
 import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 

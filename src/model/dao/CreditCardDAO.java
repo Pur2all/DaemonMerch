@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.CreditCard;
+import model.bean.CreditCard;
 
 public class CreditCardDAO implements DAO<CreditCard>
 {
