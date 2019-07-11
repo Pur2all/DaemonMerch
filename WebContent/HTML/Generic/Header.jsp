@@ -42,7 +42,6 @@
 		</div>
 		
 		<div class="navbar">
-<<<<<<< HEAD:WebContent/Generic/Header.jsp
 			<nav role="navigation">
 				<ul>
 					<li><a href="#">Meme</a></li>
