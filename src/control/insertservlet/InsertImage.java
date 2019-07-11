@@ -8,6 +8,8 @@ import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
 
+import org.apache.tomcat.util.http.fileupload.MultipartStream;
+
 @WebServlet(name = "/InsertImage", 
 			urlPatterns = "/ImageUpload" )
 @MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB after which the file will be 
@@ -34,19 +36,21 @@ public class InsertImage extends HttpServlet
 		String savePath=request.getServletContext().getRealPath("") + File.separator + SAVE_DIR;
 
 		String message="upload =\n";
+		
 		if(request.getParts()!=null && request.getParts().size()>0)
-		for (Part part : request.getParts()) 
-		{
-			String fileName=extractFileName(part);
-			if(fileName!=null && !fileName.equals("")) 
+			for (Part part : request.getParts()) 
 			{
-				part.write(savePath + File.separator + fileName);
-				System.out.println(savePath + File.separator + fileName);
-				message = message + fileName + "\n";
+				String fileName=extractFileName(part);
+				if(fileName!=null && !fileName.equals("")) 
+				{
+					part.write(savePath + File.separator + fileName);
+					System.out.println(savePath + File.separator + fileName);
+					message = message + fileName + "\n";
+					//TODO Da salvare nel db
+				}
+				else
+					request.setAttribute("error", "Errore: Bisogna selezionare almeno un file");
 			}
-			else
-				request.setAttribute("error", "Errore: Bisogna selezionare almeno un file");
-		}
 		
 		request.setAttribute("message", message);
 		

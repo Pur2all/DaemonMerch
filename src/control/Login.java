@@ -33,6 +33,7 @@ public class Login extends HttpServlet
 
 			try
 			{
+				//TODO Gestire la sessione
 				if(userDAO.searchForUsernameAndPassword(username, password))
 					response.sendRedirect("Home");
 				else
