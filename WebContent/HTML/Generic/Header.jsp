@@ -57,7 +57,6 @@
 				</ul>
 			</nav>
 
-			<%@include file="Navbar.jsp" %>
 		</div>
 	</div>
 </body>
