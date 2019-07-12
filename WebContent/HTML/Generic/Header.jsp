@@ -16,9 +16,11 @@
 	
 		<div class="wrap-item">
 	 	  <div class="searchbar-item">
-	   	 	 <input type="text" class="searchTerm" placeholder="What are you looking for?">
-	     	 <button type="submit" class="searchButton">
+	 	  <form action="SearchProduct" method="get">
+	   	 	 <input type="text" class="searchTerm" placeholder="Cerca..." name="q">
+	     	 <button type="submit" class="searchButton"></button>
 	     	 	<i class="fa fa-search"></i>
+	     	 </form>
 	     	 </button>
 	  	  </div>	
 		</div>
@@ -37,23 +39,23 @@
 			</span>
 			
 			<span id="faq" class="service-flex-item">
-				<a href="Generic/faq.jsp" title="FAQ" class="services-link"> <img src="./images/faq.png" alt="FAQ" class="services-image"> </a>
+				<a href="./HTML/Generic/faq.jsp" title="FAQ" class="services-link"> <img src="./images/faq.png" alt="FAQ" class="services-image"> </a>
 			</span>
 		</div>
 		
 		<div class="navbar">
 			<nav role="navigation">
 				<ul>
-					<li><a href="#">Meme</a></li>
-					<li><a href="#">Memone</a>
-						<ul class="dropdown">
-							<li><a href="#">Sub-1</a></li>
-							<li><a href="#">Sub-2</a></li>
-							<li><a href="#">Sub-3</a></li>
+					<li class="parent"><a href="#">Lista Band</a>
+						<ul class="child">
+							<li><a href="#">Slipknot</a></li>
+							<li><a href="#">Powerwolf</a></li>
+							<li><a href="#">Nightwish</a></li>
 						</ul>
 					</li>
-					<li><a href="#">Gianni</a></li>
-					<li><a href="#">Gianni2</a></li>
+					<li><a href="#">Top</a></li>
+					<li><a href="#">Patch</a></li>
+					<li><a href="#">Altro</a></li>
 				</ul>
 			</nav>
 

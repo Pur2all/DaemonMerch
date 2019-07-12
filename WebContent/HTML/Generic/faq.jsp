@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="../Css/faq.css">
+		<link rel="stylesheet" type="text/css" href="../../Css/faq.css">
 	</head>
 
 	<body>

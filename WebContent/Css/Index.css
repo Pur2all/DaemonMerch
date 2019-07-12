@@ -44,29 +44,3 @@
 		margin: inherit;
 	}
 }
-
-@media screen and (orientation: portrait)
-{
-	body
-	{
-		margin:0%;
-	}
-	
-	header
-	{
-		margin: inherit;
-		background-color: brown;
-	}
-	
-	main
-	{
-		margin-top: 100px;
-		background-color: blue;
-	}
-	
-	footer
-	{
-		margin: inherit;
-		background-color: black;
-	}
-}
