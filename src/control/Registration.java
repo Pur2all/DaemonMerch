@@ -1,4 +1,4 @@
-package control.insertservlet;
+package control;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.Artist;
-import model.dao.ArtistDAO;
+import model.bean.User;
 import model.dao.DBConnectionPool;
+import model.dao.UserDAO;
 
-@WebServlet("/InsertArtist")
-public class InsertArtist extends HttpServlet 
+@WebServlet("/Registration")
+public class Registration extends HttpServlet
 {
-	private static final long serialVersionUID = -4942013933491000676L;
+	private static final long serialVersionUID = -3640960812226803240L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
@@ -29,24 +29,29 @@ public class InsertArtist extends HttpServlet
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String name=request.getParameter("name");
+			String name=request.getParameter("name"), surname=request.getParameter("surname"), username=request.getParameter("username"),
+					password=request.getParameter("password"), birthday=request.getParameter("birthday");
 
-			Artist artist=new Artist();
+			User user=new User();
 
-			artist.setName(name);
+			user.setName(name);
+			user.setSurname(surname);
+			user.setUsername(username);
+			user.setPassword(password);
+			user.setBirthday(birthday);
 
-			ArtistDAO artistDAO =new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				artistDAO.doSave(artist);
+				userDAO.doSave(user);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("InsertImage").forward(request, response);
+			response.sendRedirect("Home.jsp");
 		}
 	}
 }

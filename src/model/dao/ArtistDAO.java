@@ -72,7 +72,7 @@ public class ArtistDAO implements DAO<Artist>
 		String selectSQL="SELECT * FROM " + TABLE_NAME;
 
 		if (order!=null && !order.equals("")) 
-			selectSQL+=" ORDER BY " + order;
+			selectSQL+=" ORDER BY '" + order + "'";
 		try 
 		{
 			connection=dbConnectionPool.getConnection();

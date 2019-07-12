@@ -1,4 +1,4 @@
-package control.insertservlet;
+package control.servlet.insert;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.Product;
+import model.bean.WishlistProduct;
 import model.dao.DBConnectionPool;
-import model.dao.ProductDAO;
+import model.dao.WishlistDAO;
 
-@WebServlet("/InsertProduct")
-public class InsertProduct extends HttpServlet
+@WebServlet("/InsertProductInWishlist")
+public class InsertProductInWishlist extends HttpServlet 
 {
-	private static final long serialVersionUID = 7338819740934942720L;
+	private static final long serialVersionUID = 8699191442651130979L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -29,20 +29,15 @@ public class InsertProduct extends HttpServlet
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String name=request.getParameter("name"), description=request.getParameter("description"), tag=request.getParameter("tag");
-			float price=Float.parseFloat(request.getParameter("price"));
-			int remaining=Integer.parseInt(request.getParameter("remaining")), artistID=Integer.parseInt(request.getParameter("artistId"));
+			String dateOfAddition=request.getParameter("dateOfAddition");
+			int quantity=Integer.parseInt(request.getParameter("quantity"));
 			
-			Product product=new Product();
+			WishlistProduct product=new WishlistProduct();
 			
-			product.setName(name);
-			product.setDescription(description);
-			product.setTag(tag);
-			product.setPrice(price);
-			product.setRemaining(remaining);
-			product.setArtistId(Integer.toString(artistID));
+			product.setDateOfAddition(dateOfAddition);
+			product.setQuantity(quantity);
 			
-			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			WishlistDAO productDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 			
 			try
 			{

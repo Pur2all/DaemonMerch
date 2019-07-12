@@ -1,4 +1,4 @@
-package control.insertservlet;
+package control.servlet.insert;
 
 import java.io.IOException;
 import java.sql.SQLException;

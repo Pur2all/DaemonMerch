@@ -7,19 +7,18 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import model.bean.Artist;
 import model.bean.Image;
 
 public class ImageDAO implements DAO<Image>
 {
 	private static final String TABLE_NAME="Foto";
-	
+
 	private DBConnectionPool dbConnectionPool;
-	
+
 	public ImageDAO(DBConnectionPool aDBConnectionPool)
 	{
 		dbConnectionPool=aDBConnectionPool;
-		
+
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
@@ -32,7 +31,7 @@ public class ImageDAO implements DAO<Image>
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE NomeFoto = ?";
 
-		try 
+		try
 		{
 			int id=(int) key;
 			connection=dbConnectionPool.getConnection();
@@ -41,27 +40,27 @@ public class ImageDAO implements DAO<Image>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while(rs.next()) 
+			while(rs.next())
 			{
 				image=new Image();
-				
+
 				image.setImageName(rs.getString("NomeFoto"));
 				image.setImage(rs.getBlob("Foto"));
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return image;
 	}
 
@@ -74,38 +73,38 @@ public class ImageDAO implements DAO<Image>
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME;
 
-		if (order!=null && !order.equals("")) 
+		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			while (rs.next())
 			{
 				Image image=new Image();
-				
+
 				image.setImageName(rs.getString("NomeFoto"));
 				image.setImage(rs.getBlob("Foto"));
-				
+
 				artists.add(image);
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return artists;
 	}
 
@@ -113,10 +112,10 @@ public class ImageDAO implements DAO<Image>
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		
+
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Foto, NomeFoto) VALUES (?, ?)";
 
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
@@ -126,15 +125,15 @@ public class ImageDAO implements DAO<Image>
 			preparedStatement.executeUpdate();
 
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
@@ -144,35 +143,35 @@ public class ImageDAO implements DAO<Image>
 	public void doUpdate(Image image) throws SQLException
 	{
 		Connection connection=null;
-		PreparedStatement preparedStatement=null;		
+		PreparedStatement preparedStatement=null;
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Foto = ? WHERE NomeFoto = ?";
-				
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
-			preparedStatement=connection.prepareStatement(updateSQL);			
-			
+			preparedStatement=connection.prepareStatement(updateSQL);
+
 			preparedStatement.setBlob(1, image.getImage());
 			preparedStatement.setString(2, image.getImageName());
-			
+
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
-			
+			preparedStatement.executeUpdate();
+
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
-				if(preparedStatement!=null) 
+				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
-			}			
+			}
 		}
 	}
 
@@ -185,27 +184,27 @@ public class ImageDAO implements DAO<Image>
 
 		String deleteSQL="DELETE FROM " + TABLE_NAME + " WHERE NomeFoto = ?";
 
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setString(1, image.getImageName());
 
 			result=preparedStatement.executeUpdate();
-		} 
+		}
 		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return (result!=0);
 	}
 }

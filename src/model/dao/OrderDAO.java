@@ -98,11 +98,12 @@ public class OrderDAO implements DAO<Order>
 		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Contiene INNER JOIN Prodotto WHERE " + TABLE_NAME + ".ID = ?";
 
 		if (order!=null && !order.equals("")) 
-			selectSQL+=" ORDER BY Ordine.ID, " + order;
+			selectSQL+=" ORDER BY Ordine.ID  " + order;
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, userID);
 
 			ResultSet rs=preparedStatement.executeQuery();
 			

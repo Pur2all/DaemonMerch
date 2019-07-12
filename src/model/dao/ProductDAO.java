@@ -22,6 +22,66 @@ public class ProductDAO implements DAO<Product>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 	
+	public Collection<Product> doRetrieveByName(String productName) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<Product> products=new LinkedList<Product>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Nome LIKE ?";
+		
+		if (productName!=null && !productName.equals("")) 
+		{
+			try 
+			{
+				connection=dbConnectionPool.getConnection();
+				preparedStatement=connection.prepareStatement(selectSQL);
+				preparedStatement.setString(1, "%" + productName + "%");
+				
+				ResultSet rs=preparedStatement.executeQuery();
+				
+				while (rs.next())
+				{
+					Product productFromTable=new Product();
+					
+					productFromTable.setId(rs.getString("ID"));
+					productFromTable.setName(rs.getString("Nome"));
+					productFromTable.setPrice(rs.getFloat("Prezzo"));
+					productFromTable.setDescription(rs.getString("Descrizione"));
+					productFromTable.setRemaining(rs.getInt("Quantit‡Rimanente"));
+					productFromTable.setTag(rs.getString("Tag"));
+					productFromTable.setArtistId(rs.getString("ID_Artista"));
+					products.add(productFromTable);
+				}
+			} 
+			finally 
+			{
+				try 
+				{
+					if (preparedStatement!=null)
+						preparedStatement.close();
+				} 
+				finally 
+				{
+					dbConnectionPool.releaseConnection(connection);
+				}
+			}
+			
+			return products;
+		} 
+		else
+			try
+			{
+				throw new Exception();
+			} 
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}	
+		return null;
+	}
+	
 	public Product doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;

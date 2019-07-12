@@ -1,4 +1,4 @@
-package control.insertservlet;
+package control.servlet.insert;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -9,14 +9,14 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.WishlistProduct;
+import model.bean.Product;
 import model.dao.DBConnectionPool;
-import model.dao.WishlistDAO;
+import model.dao.ProductDAO;
 
-@WebServlet("/InsertProductInWishlist")
-public class InsertProductInWishlist extends HttpServlet 
+@WebServlet("/InsertProduct")
+public class InsertProduct extends HttpServlet
 {
-	private static final long serialVersionUID = 8699191442651130979L;
+	private static final long serialVersionUID = 7338819740934942720L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
@@ -29,15 +29,20 @@ public class InsertProductInWishlist extends HttpServlet
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String dateOfAddition=request.getParameter("dateOfAddition");
-			int quantity=Integer.parseInt(request.getParameter("quantity"));
+			String name=request.getParameter("name"), description=request.getParameter("description"), tag=request.getParameter("tag");
+			float price=Float.parseFloat(request.getParameter("price"));
+			int remaining=Integer.parseInt(request.getParameter("remaining")), artistID=Integer.parseInt(request.getParameter("artistId"));
 			
-			WishlistProduct product=new WishlistProduct();
+			Product product=new Product();
 			
-			product.setDateOfAddition(dateOfAddition);
-			product.setQuantity(quantity);
+			product.setName(name);
+			product.setDescription(description);
+			product.setTag(tag);
+			product.setPrice(price);
+			product.setRemaining(remaining);
+			product.setArtistId(Integer.toString(artistID));
 			
-			WishlistDAO productDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 			
 			try
 			{
