@@ -15,19 +15,19 @@
 		</logo>
 	
 		<div class="wrap-item">
-	 	  <div class="searchbar-item">
-	 	  <form action="SearchProduct" method="get">
-	   	 	 <input type="text" class="searchTerm" placeholder="Cerca..." name="q">
-	     	 <button type="submit" class="searchButton"></button>
-	     	 	<i class="fa fa-search"></i>
-	     	 </form>
-	     	 </button>
-	  	  </div>	
+			<form action="SearchProduct" method="get">
+				<div class="searchbar-item">
+					<input type="text" class="searchTerm" placeholder="Search..." name="q">
+					<button type="submit" class="searchButton">
+	     	 		<i class="fa fa-search"></i>
+	     	 		</button>
+	     	 	</div>
+			</form>
 		</div>
 	
 		<div class="services-icons">
 			<span id="account" class="service-flex-item">
-				<a href="account.jsp" title="Account" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
+				<a href="HTML/Generic/LoginForm.jsp" title="Account" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
 			</span>
 			
 			<span id="wishlist" class="service-flex-item">
@@ -46,7 +46,7 @@
 		<div class="navbar">
 			<nav role="navigation">
 				<ul>
-					<li class="parent"><a href="#">Lista Band</a>
+					<li class="parent"><a href="#">Band List</a>
 						<ul class="child">
 							<li><a href="#">Slipknot</a></li>
 							<li><a href="#">Powerwolf</a></li>
@@ -55,7 +55,7 @@
 					</li>
 					<li><a href="#">Top</a></li>
 					<li><a href="#">Patch</a></li>
-					<li><a href="#">Altro</a></li>
+					<li><a href="#">Other</a></li>
 				</ul>
 			</nav>
 
