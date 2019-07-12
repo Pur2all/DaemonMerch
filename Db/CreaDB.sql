@@ -12,6 +12,7 @@ CREATE TABLE Utente(
     DataDiNascita CHAR(10) NOT NULL,
     Username VARCHAR(15) NOT NULL,
     Password VARCHAR(20) NOT NULL,
+    UNIQUE (Username),
     PRIMARY KEY (ID)
 )ENGINE=InnoDB, AUTO_INCREMENT=1;
 	
@@ -67,7 +68,7 @@ CREATE TABLE Prodotto(
     Descrizione VARCHAR(200),
     QuantitàRimanente INT NOT NULL,
     Tag VARCHAR(15) NOT NULL,
-    ID_Artista INT NOT NULL,
+    ID_Artista INT,
     PRIMARY KEY (ID),
     FOREIGN KEY (ID_Artista) REFERENCES Artista(ID)
 		ON DELETE RESTRICT
