@@ -27,6 +27,71 @@ public class OrderDAO implements DAO<Order>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Collection<Order> doRetrieveForAllUsers() throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<Order> orders=new LinkedList<Order>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Contiene INNER JOIN Prodotto";
+
+		try 
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+
+			ResultSet rs=preparedStatement.executeQuery();
+			
+			while(rs.next())
+			{
+				Order orderFromTable=new Order();
+				
+				orderFromTable.setId(rs.getString("Ordine.ID"));
+				orderFromTable.setDate(rs.getString("Data"));
+				orderFromTable.setTotal(rs.getFloat("Totale"));
+				orderFromTable.setState(State.valueOf(rs.getString("StatoOrdine")));
+				BillingAddress aBillingAddress=new BillingAddress();
+				aBillingAddress.setState(rs.getString("Stato"));
+				aBillingAddress.setStreet(rs.getString("Via"));
+				aBillingAddress.setCity(rs.getString("Paese"));
+				aBillingAddress.setDistrict(rs.getString("Provincia"));
+				aBillingAddress.setHouseNumber(String.valueOf(rs.getInt("NumeroCivico")));
+				orderFromTable.setBillingAddress(aBillingAddress);
+				while(rs.next() && rs.getString("Ordine.ID").equals(orderFromTable.getId()))
+				{
+					Product aProduct=new Product();
+					
+					aProduct.setId(rs.getString("Prodotto.ID"));
+					aProduct.setName(rs.getString("Nome"));
+					aProduct.setPrice(rs.getFloat("Prezzo"));
+					aProduct.setDescription(rs.getString("Descrizione"));
+					aProduct.setRemaining(rs.getInt("Quantit‡Rimanente"));
+					aProduct.setTag(rs.getString("Tag"));
+					orderFromTable.addProducts(aProduct);
+				}
+				if(!rs.getString("Ordine.ID").equals(orderFromTable.getId()))
+					rs.previous();
+				
+				orders.add(orderFromTable);
+			}
+		} 
+		finally 
+		{
+			try 
+			{
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} 
+			finally 
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+		
+		return orders;
+	}
+	
 	public Order doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;

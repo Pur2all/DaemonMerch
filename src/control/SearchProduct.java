@@ -34,7 +34,7 @@ public class SearchProduct extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("Result.jsp").forward(request, response);
+			getServletContext().getRequestDispatcher("Result").forward(request, response);
 		}
 		else
 		{

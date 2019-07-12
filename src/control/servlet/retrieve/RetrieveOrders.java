@@ -10,9 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.CreditCard;
 import model.bean.Order;
-import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
@@ -23,13 +21,13 @@ public class RetrieveOrders extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), request.get);
+		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
 
 		try
 		{
 			LinkedList<Order> order=(LinkedList<Order>) orderDAO.doRetrieveAll(null);
 
-			request.setAttribute("creditCards", order);
+			request.setAttribute("orders", order);
 
 			getServletContext().getRequestDispatcher("CreditCards").forward(request, response);
 		}
