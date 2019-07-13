@@ -108,13 +108,14 @@ public class ImageDAO implements DAO<Image>
 		return artists;
 	}
 
-	public void doSave(Image image) throws SQLException
+	public boolean doSave(Image image) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Foto, NomeFoto) VALUES (?, ?)";
-
+		int rowsAffected; 
+		
 		try
 		{
 			connection=dbConnectionPool.getConnection();
@@ -122,7 +123,7 @@ public class ImageDAO implements DAO<Image>
 			preparedStatement.setBlob(1, image.getImage());
 			preparedStatement.setString(2, image.getImageName());
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		}
@@ -138,16 +139,19 @@ public class ImageDAO implements DAO<Image>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(Image image) throws SQLException
+	public boolean doUpdate(Image image) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Foto = ? WHERE NomeFoto = ?";
-
+		int rowsAffected;
+		
 		try
 		{
 			connection=dbConnectionPool.getConnection();
@@ -157,7 +161,7 @@ public class ImageDAO implements DAO<Image>
 			preparedStatement.setString(2, image.getImageName());
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		}
@@ -173,6 +177,8 @@ public class ImageDAO implements DAO<Image>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(Image image) throws SQLException

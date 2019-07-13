@@ -117,7 +117,7 @@ public class PatchDAO implements DAO<Patch>
 		return patches;
 	}
 
-	public void doSave(Patch patch) throws SQLException
+	public boolean doSave(Patch patch) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -126,7 +126,8 @@ public class PatchDAO implements DAO<Patch>
 		productDAO.doSave(patch);
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Misure, Tipo, Tessuto) VALUES (?, ?, ?)";
-
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -135,7 +136,7 @@ public class PatchDAO implements DAO<Patch>
 			preparedStatement.setString(2, patch.getPatchType().name());
 			preparedStatement.setString(3, patch.getMaterial());
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -151,9 +152,11 @@ public class PatchDAO implements DAO<Patch>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(Patch patch) throws SQLException
+	public boolean doUpdate(Patch patch) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
@@ -163,7 +166,8 @@ public class PatchDAO implements DAO<Patch>
 		
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Misure = ?, Tipo = ?, Tessuto = ? WHERE ID = ?";
-				
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -174,7 +178,7 @@ public class PatchDAO implements DAO<Patch>
 			preparedStatement.setString(3, patch.getMaterial());
 			preparedStatement.setString(4, patch.getId());
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
+			rowsAffected=preparedStatement.executeUpdate();	
 			
 			connection.commit();
 		} 
@@ -190,6 +194,8 @@ public class PatchDAO implements DAO<Patch>
 				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(Patch patch) throws SQLException

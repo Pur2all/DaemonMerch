@@ -141,13 +141,14 @@ public class CreditCardDAO implements DAO<CreditCard>
 		return users;
 	}
 
-	public void doSave(CreditCard creditCard) throws SQLException
+	public boolean doSave(CreditCard creditCard) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (CVV, DataScadenza, Numero) VALUES (?, ?, ?)";
-
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -156,7 +157,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			preparedStatement.setString(2, creditCard.getExpireDate());
 			preparedStatement.setString(3, creditCard.getNumber());
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -172,9 +173,11 @@ public class CreditCardDAO implements DAO<CreditCard>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(CreditCard creditCard) throws SQLException
+	public boolean doUpdate(CreditCard creditCard) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
@@ -182,7 +185,8 @@ public class CreditCardDAO implements DAO<CreditCard>
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" CVV = ?, DataScadenza = ?, Numero = ? " +
 				" WHERE Numero = ?";
-				
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -194,7 +198,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			preparedStatement.setString(4, creditCard.getNumber());
 			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
+			rowsAffected=preparedStatement.executeUpdate();	
 			
 			connection.commit();
 		} 
@@ -210,6 +214,8 @@ public class CreditCardDAO implements DAO<CreditCard>
 				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(CreditCard creditCard) throws SQLException

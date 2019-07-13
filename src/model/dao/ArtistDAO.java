@@ -105,13 +105,14 @@ public class ArtistDAO implements DAO<Artist>
 		return artists;
 	}
 
-	public void doSave(Artist artist) throws SQLException
+	public boolean doSave(Artist artist) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Logo) VALUES (?, ?)";
-
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -119,7 +120,7 @@ public class ArtistDAO implements DAO<Artist>
 			preparedStatement.setString(1, artist.getName());
 			preparedStatement.setBytes(2, artist.getLogo());
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -135,9 +136,11 @@ public class ArtistDAO implements DAO<Artist>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(Artist artist) throws SQLException
+	public boolean doUpdate(Artist artist) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
@@ -145,7 +148,8 @@ public class ArtistDAO implements DAO<Artist>
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Nome = ?, Logo = ? " +
 				" WHERE ID = ?";
-				
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -156,7 +160,7 @@ public class ArtistDAO implements DAO<Artist>
 			preparedStatement.setInt(3, artist.getId());
 			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
+			rowsAffected=preparedStatement.executeUpdate();	
 			
 			connection.commit();
 		} 
@@ -172,6 +176,8 @@ public class ArtistDAO implements DAO<Artist>
 				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(Artist artist) throws SQLException

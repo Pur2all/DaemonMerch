@@ -116,13 +116,14 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 		return billingAddresses;
 	}
 
-	public void doSave(BillingAddress billingAddress) throws SQLException
+	public boolean doSave(BillingAddress billingAddress) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Stato, Via, Paese, Provincia, NumeroCivico) VALUES (?, ?, ?, ?, ?)";
-
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -133,7 +134,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			preparedStatement.setString(4, billingAddress.getDistrict());
 			preparedStatement.setInt(5, Integer.valueOf(billingAddress.getHouseNumber()));
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -149,11 +150,14 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(BillingAddress billingAddress) throws SQLException
+	public boolean doUpdate(BillingAddress billingAddress) throws SQLException
 	{
 		//Method is empty because the entire billing address is a primary key and a primary key is immutable
+		return false;
 	}
 
 	public boolean doDelete(BillingAddress billingAddress) throws SQLException

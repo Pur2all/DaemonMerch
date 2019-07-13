@@ -119,7 +119,7 @@ public class TopDAO implements DAO<Top>
 		return tops;
 	}
 
-	public void doSave(Top top) throws SQLException
+	public boolean doSave(Top top) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -128,7 +128,8 @@ public class TopDAO implements DAO<Top>
 		productDAO.doSave(top);
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Taglia, Categoria, TipoStampa) VALUES (?, ?, ?)";
-
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -137,7 +138,7 @@ public class TopDAO implements DAO<Top>
 			preparedStatement.setString(2, top.getCategory().name());
 			preparedStatement.setString(3, top.getPrintType().name());
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -153,9 +154,11 @@ public class TopDAO implements DAO<Top>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(Top top) throws SQLException
+	public boolean doUpdate(Top top) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
@@ -165,7 +168,8 @@ public class TopDAO implements DAO<Top>
 		
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Taglia = ?, Categoria = ?, TipoStampa = ? WHERE ID = ?";
-				
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -175,8 +179,9 @@ public class TopDAO implements DAO<Top>
 			preparedStatement.setString(2, top.getCategory().name());
 			preparedStatement.setString(3, top.getPrintType().name());
 			preparedStatement.setString(4, top.getId());
+			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
+			rowsAffected=preparedStatement.executeUpdate();	
 			
 			connection.commit();
 		} 
@@ -192,6 +197,8 @@ public class TopDAO implements DAO<Top>
 				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(Top top) throws SQLException

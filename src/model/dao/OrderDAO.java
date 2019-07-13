@@ -221,13 +221,14 @@ public class OrderDAO implements DAO<Order>
 		return orders;
 	}
 
-	public void doSave(Order order) throws SQLException
+	public boolean doSave(Order order) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Data, Totale, StatoOrdine, ID_Utente, Stato, Via, Paese, Provincia, NumeroCivico) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -242,7 +243,7 @@ public class OrderDAO implements DAO<Order>
 			preparedStatement.setString(8, order.getBillingAddress().getDistrict());
 			preparedStatement.setInt(9, Integer.parseInt(order.getBillingAddress().getHouseNumber()));
 			
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -258,9 +259,11 @@ public class OrderDAO implements DAO<Order>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(Order order) throws SQLException
+	public boolean doUpdate(Order order) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
@@ -268,7 +271,8 @@ public class OrderDAO implements DAO<Order>
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Data = ?, Totale = ?, StatoOrdine = ? " +
 				" WHERE ID = ?";
-				
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -280,7 +284,7 @@ public class OrderDAO implements DAO<Order>
 			preparedStatement.setString(4, order.getId());
 			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
+			rowsAffected=preparedStatement.executeUpdate();	
 			
 			connection.commit();
 		} 
@@ -296,6 +300,8 @@ public class OrderDAO implements DAO<Order>
 				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(Order order) throws SQLException

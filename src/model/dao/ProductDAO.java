@@ -176,13 +176,14 @@ public class ProductDAO implements DAO<Product>
 		return products;
 	}
 
-	public void doSave(Product product) throws SQLException
+	public boolean doSave(Product product) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Prezzo, Descrizione, Quantit‡Rimanente, Tag, ID_Artista) VALUES (?, ?, ?, ?, ?, ?)";
-
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -194,7 +195,7 @@ public class ProductDAO implements DAO<Product>
 			preparedStatement.setString(5, product.getTag());
 			preparedStatement.setString(6, product.getArtistId());
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -210,9 +211,11 @@ public class ProductDAO implements DAO<Product>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(Product product) throws SQLException
+	public boolean doUpdate(Product product) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
@@ -220,7 +223,8 @@ public class ProductDAO implements DAO<Product>
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Nome = ?, Prezzo = ?, Descrizione = ?, Quantit‡Rimanente = ?, Tag = ?, ID_Artista = ? " +
 				" WHERE ID = ?";
-				
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -235,7 +239,7 @@ public class ProductDAO implements DAO<Product>
 			preparedStatement.setString(7, product.getId());
 			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
+			rowsAffected=preparedStatement.executeUpdate();	
 			
 			connection.commit();
 		} 
@@ -251,6 +255,8 @@ public class ProductDAO implements DAO<Product>
 				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(Product product) throws SQLException

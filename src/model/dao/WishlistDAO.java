@@ -167,21 +167,24 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		return products;
 	}
 
-	public void doSave(WishlistProduct product) throws SQLException
+	public boolean doSave(WishlistProduct product) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (DataAggiunzione, Quantità) VALUES (?, ?)";
-
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (ID_Utente, ID_Prodotto, DataAggiunzione, Quantità) VALUES (?, ?, ?, ?)";
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, product.getDateOfAddition());
-			preparedStatement.setInt(2, product.getQuantity());
+			preparedStatement.setInt(1, product.getUserID());
+			preparedStatement.setString(2, product.getId());
+			preparedStatement.setString(3, product.getDateOfAddition());
+			preparedStatement.setInt(4, product.getQuantity());
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -197,17 +200,20 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(WishlistProduct product) throws SQLException
+	public boolean doUpdate(WishlistProduct product) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
 
-		String updateSQL = "UPDATE " + TABLE_NAME + " INNER JOIN PRODOTTO ON VorrebbeAcquistare.ID_Prodotto=Prodotto.ID"
-				+ " SET  DataAggiunzione = ?, Quantità = ? " +
+		String updateSQL = "UPDATE " + TABLE_NAME +
+				" SET  DataAggiunzione = ?, Quantità = ? " +
 				" WHERE ID_Prodotto = ?";
-				
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -215,9 +221,10 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			
 			preparedStatement.setString(1, product.getDateOfAddition());
 			preparedStatement.setInt(2, product.getQuantity());
+			preparedStatement.setString(3, product.getId());
 			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
+			rowsAffected=preparedStatement.executeUpdate();	
 			
 			connection.commit();
 		} 
@@ -233,6 +240,8 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(WishlistProduct product) throws SQLException

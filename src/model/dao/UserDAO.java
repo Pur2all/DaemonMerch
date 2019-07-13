@@ -150,13 +150,14 @@ public class UserDAO implements DAO<User>
 		return users;
 	}
 
-	public void doSave(User user) throws SQLException
+	public boolean doSave(User user) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Cognome, Tipo, DataDiNascita, Username, Password) VALUES (?, ?, ?, ?, ?, ?)";
-
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -168,7 +169,7 @@ public class UserDAO implements DAO<User>
 			preparedStatement.setString(5, user.getUsername());
 			preparedStatement.setString(6, user.getPassword());
 
-			preparedStatement.executeUpdate();
+			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
 		} 
@@ -184,9 +185,11 @@ public class UserDAO implements DAO<User>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
-	public void doUpdate(User user) throws SQLException
+	public boolean doUpdate(User user) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;		
@@ -194,7 +197,8 @@ public class UserDAO implements DAO<User>
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Nome = ?, Cognome = ?, Tipo = ?, DataDiNascita = ?, Username = ?, Password = ? " +
 				" WHERE ID = ?";
-				
+		int rowsAffected;
+		
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
@@ -209,7 +213,7 @@ public class UserDAO implements DAO<User>
 			preparedStatement.setString(7, user.getId());
 			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			preparedStatement.executeUpdate();	
+			rowsAffected=preparedStatement.executeUpdate();	
 			
 			connection.commit();
 		} 
@@ -225,6 +229,8 @@ public class UserDAO implements DAO<User>
 				dbConnectionPool.releaseConnection(connection);
 			}			
 		}
+		
+		return rowsAffected>0 ? true : false;
 	}
 
 	public boolean doDelete(User user) throws SQLException
