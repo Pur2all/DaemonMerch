@@ -15,34 +15,34 @@ import model.dao.DBConnectionPool;
 
 
 @WebServlet("/InsertBillingAddress")
-public class InsertBillingAddress extends HttpServlet 
+public class InsertBillingAddress extends HttpServlet
 {
 	private static final long serialVersionUID = -3229112474089218224L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getParameterMap().containsKey(null))
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String state=request.getParameter("state"), street=request.getParameter("street"), city=request.getParameter("city"), 
+			String state=request.getParameter("state"), street=request.getParameter("street"), city=request.getParameter("city"),
 					district=request.getParameter("district"), houseNumber=request.getParameter("houseNumber");
-			
+
 			BillingAddress billingAddress=new BillingAddress();
-			
+
 			billingAddress.setState(state);
 			billingAddress.setStreet(street);
 			billingAddress.setCity(city);
 			billingAddress.setDistrict(district);
 			billingAddress.setHouseNumber(houseNumber);
-			
-			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-			
+
+			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
+
 			try
 			{
 				billingAddressDAO.doSave(billingAddress);
@@ -51,7 +51,7 @@ public class InsertBillingAddress extends HttpServlet
 			{
 				sqlException.printStackTrace();
 			}
-			
+
 			response.sendRedirect("InsertBillingAddress.jsp");
 		}
 	}

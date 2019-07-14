@@ -14,16 +14,16 @@ import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 
 @WebServlet("/InsertCreditCard")
-public class InsertCreditCard extends HttpServlet 
+public class InsertCreditCard extends HttpServlet
 {
 	private static final long serialVersionUID = -8804571230137329789L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getParameterMap().containsKey(null))
 			response.sendRedirect("ErrorPage");
@@ -31,25 +31,24 @@ public class InsertCreditCard extends HttpServlet
 		{
 			String cvv=request.getParameter("cvv"), expireDate=request.getParameter("expireDate"), number=request.getParameter("number");
 			int userID=Integer.parseInt(request.getParameter("userID"));
-			
+
 			CreditCard creditCard=new CreditCard();
-			
+
 			creditCard.setCVV(cvv);
 			creditCard.setExpireDate(expireDate);
 			creditCard.setNumber(number);
-			
-			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-			
+
+			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);
+
 			try
 			{
 				creditCardDAO.doSave(creditCard);
-				creditCardDAO.saveUserCreditCardRelation(creditCard, userID);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-			
+
 			response.sendRedirect("InsertBillingAddress.jsp");
 		}
 	}

@@ -16,7 +16,7 @@ import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
 @WebServlet("/DeleteBillingAddress")
-public class DeleteBillingAddress extends HttpServlet 
+public class DeleteBillingAddress extends HttpServlet
 {
 	private static final long serialVersionUID = -7209622442712731144L;
 
@@ -32,8 +32,8 @@ public class DeleteBillingAddress extends HttpServlet
 		else
 		{
 			BillingAddress billingAddress=new Gson().fromJson((String) request.getAttribute("billingAddress"), BillingAddress.class);
-			
-			BillingAddressDAO billingAddressDAO =new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+			BillingAddressDAO billingAddressDAO =new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
 
 			try
 			{

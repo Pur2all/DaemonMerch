@@ -16,7 +16,7 @@ import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 
 @WebServlet("/DeleteCreditCard")
-public class DeleteCreditCard extends HttpServlet 
+public class DeleteCreditCard extends HttpServlet
 {
 	private static final long serialVersionUID = 25258374114530719L;
 
@@ -33,7 +33,7 @@ public class DeleteCreditCard extends HttpServlet
 		{
 			CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
 
-			CreditCardDAO creditCardDAO =new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			CreditCardDAO creditCardDAO =new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
 
 			try
 			{
