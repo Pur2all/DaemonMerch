@@ -186,7 +186,7 @@ public class UserDAO implements DAO<User>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(User user) throws SQLException
@@ -230,7 +230,7 @@ public class UserDAO implements DAO<User>
 			}			
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(User user) throws SQLException

@@ -137,7 +137,7 @@ public class ArtistDAO implements DAO<Artist>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Artist artist) throws SQLException
@@ -177,7 +177,7 @@ public class ArtistDAO implements DAO<Artist>
 			}			
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(Artist artist) throws SQLException

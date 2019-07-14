@@ -47,5 +47,4 @@ public class SearchProduct extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }

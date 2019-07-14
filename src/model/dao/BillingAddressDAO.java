@@ -14,9 +14,11 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 	private static final String TABLE_NAME="IndirizzoDiFatturazione";
 
 	private DBConnectionPool dbConnectionPool;
+	private int userID;
 	
-	public BillingAddressDAO(DBConnectionPool aDBConnectionPool)
+	public BillingAddressDAO(DBConnectionPool aDBConnectionPool, int anUserID)
 	{
+		userID=anUserID;
 		dbConnectionPool=aDBConnectionPool;
 		
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
@@ -29,7 +31,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 
 		BillingAddress billingAddressFromTable=new BillingAddress();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Stato = ?, Via = ?, Paese = ?, Provincia = ?, NumeroCivico = ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Ha WHERE Stato = ?, Via = ?, Paese = ?, Provincia = ?, NumeroCivico = ? AND ID = ?";
 
 		try 
 		{
@@ -41,6 +43,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			preparedStatement.setString(3, billingAddress.getCity());
 			preparedStatement.setString(4, billingAddress.getDistrict());
 			preparedStatement.setInt(5, Integer.valueOf(billingAddress.getHouseNumber()));
+			preparedStatement.setInt(6, userID);
 
 			ResultSet rs=preparedStatement.executeQuery();
 
@@ -76,7 +79,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 
 		Collection<BillingAddress> billingAddresses=new LinkedList<BillingAddress>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME;
+		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Ha WHERE ID = ?";
 
 		if (order!=null && !order.equals("")) 
 			selectSQL+=" ORDER BY " + order;
@@ -85,7 +88,8 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
-
+			preparedStatement.setInt(1, userID);
+			
 			ResultSet rs=preparedStatement.executeQuery();
 			
 			while (rs.next())
@@ -137,6 +141,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
+			saveUserBillingAddressRelation(billingAddress);
 		} 
 		finally 
 		{
@@ -151,7 +156,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(BillingAddress billingAddress) throws SQLException
@@ -195,5 +200,41 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 		}
 		
 		return (result!=0);
+	}
+	
+	private void saveUserBillingAddressRelation(BillingAddress aBillingAddress) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		
+		String insertSQL="INSERT INTO Ha (ID, Stato, Via, Paese, Provincia, NumeroCivico) VALUES (?, ?, ?, ?, ?, ?)";
+		
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(insertSQL);
+			preparedStatement.setInt(1, userID);
+			preparedStatement.setString(2, aBillingAddress.getState());
+			preparedStatement.setString(3, aBillingAddress.getStreet());
+			preparedStatement.setString(4, aBillingAddress.getCity());
+			preparedStatement.setString(5, aBillingAddress.getDistrict());
+			preparedStatement.setString(6, aBillingAddress.getHouseNumber());
+			
+			preparedStatement.executeUpdate();
+			
+			connection.commit();
+		}
+		finally
+		{
+			try 
+			{
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} 
+			finally 
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
 	}
 }

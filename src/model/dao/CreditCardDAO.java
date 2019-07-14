@@ -14,46 +14,14 @@ public class CreditCardDAO implements DAO<CreditCard>
 	private static final String TABLE_NAME="CartaDiCredito";
 
 	private DBConnectionPool dbConnectionPool;
+	private int userID;
 	
-	public CreditCardDAO(DBConnectionPool aDBConnectionPool)
+	public CreditCardDAO(DBConnectionPool aDBConnectionPool, int anUserID)
 	{
+		userID=anUserID;
 		dbConnectionPool=aDBConnectionPool;
 		
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
-	}
-	
-	public void saveUserCreditCardRelation(CreditCard creditCard, int userID) throws SQLException
-	{
-		Connection connection=null;
-		PreparedStatement preparedStatement=null;
-		
-		String insertSQL="INSERT INTO PagaCon (ID, CVV, DataScadenza, Numero) VALUES (?, ?, ?, ?)";
-		
-		try
-		{
-			connection=dbConnectionPool.getConnection();
-			preparedStatement=connection.prepareStatement(insertSQL);
-			preparedStatement.setInt(1, userID);
-			preparedStatement.setString(2, creditCard.getCVV());
-			preparedStatement.setString(3, creditCard.getExpireDate());
-			preparedStatement.setString(4, creditCard.getNumber());
-			
-			preparedStatement.executeUpdate();
-			
-			connection.commit();
-		}
-		finally
-		{
-			try 
-			{
-				if(preparedStatement!=null)
-					preparedStatement.close();
-			} 
-			finally 
-			{
-				dbConnectionPool.releaseConnection(connection);
-			}
-		}
 	}
 	
 	public CreditCard doRetrieveByKey(Object key) throws SQLException
@@ -63,7 +31,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 
 		CreditCard creditCardFromTable=new CreditCard();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Numero = ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN PagaCon WHERE Numero = ? AND ID = ?";
 
 		try 
 		{
@@ -71,6 +39,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, number);
+			preparedStatement.setInt(2, userID);
 
 			ResultSet rs=preparedStatement.executeQuery();
 
@@ -104,7 +73,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 
 		Collection<CreditCard> users=new LinkedList<CreditCard>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME;
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN PagaCon WHERE ID = ?";
 
 		if (order!=null && !order.equals("")) 
 			selectSQL+=" ORDER BY " + order;
@@ -112,7 +81,8 @@ public class CreditCardDAO implements DAO<CreditCard>
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
-
+			preparedStatement.setInt(1, userID);
+			
 			ResultSet rs=preparedStatement.executeQuery();
 			
 			while (rs.next())
@@ -160,6 +130,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
+			saveUserCreditCardRelation(creditCard);
 		} 
 		finally 
 		{
@@ -174,7 +145,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(CreditCard creditCard) throws SQLException
@@ -215,7 +186,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			}			
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(CreditCard creditCard) throws SQLException
@@ -249,5 +220,37 @@ public class CreditCardDAO implements DAO<CreditCard>
 		}
 		
 		return (result!=0);
+	}
+	
+	private void saveUserCreditCardRelation(CreditCard creditCard) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+		
+		String insertSQL="INSERT INTO PagaCon (ID, Numero) VALUES (?, ?)";
+		
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(insertSQL);
+			preparedStatement.setInt(1, userID);
+			preparedStatement.setString(4, creditCard.getNumber());
+			
+			preparedStatement.executeUpdate();
+			
+			connection.commit();
+		}
+		finally
+		{
+			try 
+			{
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			} 
+			finally 
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
 	}
 }

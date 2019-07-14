@@ -201,7 +201,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(WishlistProduct product) throws SQLException
@@ -211,7 +211,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 
 		String updateSQL = "UPDATE " + TABLE_NAME +
 				" SET  DataAggiunzione = ?, Quantità = ? " +
-				" WHERE ID_Prodotto = ?";
+				" WHERE ID_Prodotto = ? AND ID_Utente = ?";
 		int rowsAffected;
 		
 		try 
@@ -222,6 +222,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			preparedStatement.setString(1, product.getDateOfAddition());
 			preparedStatement.setInt(2, product.getQuantity());
 			preparedStatement.setString(3, product.getId());
+			preparedStatement.setInt(4, product.getUserID());
 			
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();	
@@ -241,7 +242,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			}			
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(WishlistProduct product) throws SQLException

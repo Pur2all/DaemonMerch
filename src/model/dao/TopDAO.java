@@ -155,7 +155,7 @@ public class TopDAO implements DAO<Top>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Top top) throws SQLException
@@ -198,7 +198,7 @@ public class TopDAO implements DAO<Top>
 			}			
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(Top top) throws SQLException

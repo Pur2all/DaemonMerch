@@ -212,7 +212,7 @@ public class ProductDAO implements DAO<Product>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Product product) throws SQLException
@@ -256,7 +256,7 @@ public class ProductDAO implements DAO<Product>
 			}			
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(Product product) throws SQLException

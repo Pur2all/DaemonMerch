@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Order implements Cloneable
 {
 	private String id, date;
+	private int userID;
 	private float total;
 	private State state;
 	private BillingAddress billingAddress;
@@ -23,6 +24,11 @@ public class Order implements Cloneable
 	public String getDate()
 	{
 		return date;
+	}
+	
+	public int getUserID()
+	{
+		return userID;
 	}
 	
 	public float getTotal()
@@ -82,7 +88,7 @@ public class Order implements Cloneable
 	
 	public String toString()
 	{
-		return getClass().getName() + "[id= " + id + ", date= " + date + ", total= " + total + ", state= " + state + 
+		return getClass().getName() + "[id= " + id + ", date= " + date + ", userID= " + userID + ", total= " + total + ", state= " + state + 
 				", billingAddress= " + billingAddress + ", products= " + products + "]";
 	}
 	
@@ -102,7 +108,7 @@ public class Order implements Cloneable
 				if(!products.get(i).equals(otherOrder.products.get(i)))
 					return false;
 		
-		return id.equals(otherOrder.id) && date.equals(otherOrder.date) && total==otherOrder.total &&
+		return id.equals(otherOrder.id) && date.equals(otherOrder.date) && userID==otherOrder.userID && total==otherOrder.total &&
 				state==otherOrder.state && billingAddress.equals(otherOrder.billingAddress);
 	}
 	

@@ -153,7 +153,7 @@ public class PatchDAO implements DAO<Patch>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Patch patch) throws SQLException
@@ -195,7 +195,7 @@ public class PatchDAO implements DAO<Patch>
 			}			
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(Patch patch) throws SQLException

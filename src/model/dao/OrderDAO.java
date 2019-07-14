@@ -236,7 +236,7 @@ public class OrderDAO implements DAO<Order>
 			preparedStatement.setString(1, order.getDate());
 			preparedStatement.setFloat(2, order.getTotal());
 			preparedStatement.setString(3, String.valueOf(order.getState()));
-			preparedStatement.setInt(4, userID);
+			preparedStatement.setInt(4, order.getUserID());
 			preparedStatement.setString(5, order.getBillingAddress().getState());
 			preparedStatement.setString(6, order.getBillingAddress().getStreet());
 			preparedStatement.setString(7, order.getBillingAddress().getCity());
@@ -260,7 +260,7 @@ public class OrderDAO implements DAO<Order>
 			}
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Order order) throws SQLException
@@ -301,7 +301,7 @@ public class OrderDAO implements DAO<Order>
 			}			
 		}
 		
-		return rowsAffected>0 ? true : false;
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(Order order) throws SQLException
