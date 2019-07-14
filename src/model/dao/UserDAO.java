@@ -233,6 +233,7 @@ public class UserDAO implements DAO<User>
 		return rowsAffected>0;
 	}
 
+	//This is a fake delete, because we want to store user info even if he has deleted his account, because we need them to keep informations about orders
 	public boolean doDelete(User user) throws SQLException
 	{
 		Connection connection=null;
@@ -240,13 +241,15 @@ public class UserDAO implements DAO<User>
 
 		int result=0;
 
-		String deleteSQL="DELETE FROM " + TABLE_NAME + " WHERE ID = ?";
+		String updateSQL = "UPDATE " + TABLE_NAME + " SET Tipo = ? " +
+				" WHERE ID = ?";
 
 		try 
 		{
 			connection=dbConnectionPool.getConnection();
-			preparedStatement=connection.prepareStatement(deleteSQL);
-			preparedStatement.setInt(1, Integer.parseInt(user.getId()));
+			preparedStatement=connection.prepareStatement(updateSQL);
+			preparedStatement.setString(1, UserType.DELETED.name());
+			preparedStatement.setInt(2, Integer.parseInt(user.getId()));
 
 			result=preparedStatement.executeUpdate();
 		} 
