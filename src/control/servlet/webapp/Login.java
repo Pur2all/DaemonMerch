@@ -2,14 +2,15 @@ package control.servlet.webapp;
 
 import java.io.IOException;
 import java.sql.SQLException;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.UserDAO;
 
@@ -30,12 +31,15 @@ public class Login extends HttpServlet
 		if(username!=null && password!=null)
 		{
 			UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
+			User loggedUser=null;
 			try
 			{
-				//TODO Gestire la sessione
-				if(userDAO.searchForUsernameAndPassword(username, password))
+				if((loggedUser=userDAO.searchForUsernameAndPassword(username, password))!=null)
+				{
+					HttpSession session=request.getSession(true);
+					session.setAttribute("userInfo", loggedUser);
 					response.sendRedirect("Home");
+				}
 				else
 				{
 					request.setAttribute("error", Boolean.TRUE);

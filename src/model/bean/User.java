@@ -1,18 +1,12 @@
 package model.bean;
 
-import java.util.ArrayList;
-
 public class User implements Cloneable
 {
 	private String name, surname, username, password, birthday, id;
 	private UserType type;
-	private ArrayList<CreditCard> creditCards;
-	private ArrayList<BillingAddress> billingAddresses;
 	
 	public User()
 	{
-		creditCards=new ArrayList<CreditCard>();
-		billingAddresses=new ArrayList<BillingAddress>();
 	}
 	
 	public String getName()
@@ -50,16 +44,6 @@ public class User implements Cloneable
 		return type;
 	}
 	
-	public CreditCard getCreditCard(int index)
-	{
-		return creditCards.get(index).clone();
-	}
-	
-	public BillingAddress getBillingAddress(int index)
-	{
-		return billingAddresses.get(index).clone();
-	}
-	
 	public void setName(String aName)
 	{
 		name=aName;
@@ -95,46 +79,10 @@ public class User implements Cloneable
 		type=aUserType;
 	}
 	
-	public int getNumberOfCreditCard()
-	{
-		return creditCards.size();
-	}
-	
-	public void addCreditCard(CreditCard aCreditCard)
-	{
-		creditCards.add(aCreditCard.clone());
-	}
-	
-	public void removeCreditCard(int index)
-	{
-		creditCards.remove(index);
-	}
-	
-	public int getNumberOfBillingAddresses()
-	{
-		return billingAddresses.size();
-	}
-	
-	public void addBillingAddress(BillingAddress aBillingAddress)
-	{
-		billingAddresses.add(aBillingAddress.clone());
-	}
-	
-	public void setBillingAddress(int index, BillingAddress aBillingAddress)
-	{
-		billingAddresses.set(index, aBillingAddress.clone());
-	}
-	
-	public void removeBillingAddress(int index)
-	{
-		billingAddresses.remove(index);
-	}
-	
 	public String toString()
 	{
 		return getClass().getName() + "[name= " + name + ", surname= " + surname + ", username= " + username + ", password= " + password +
-				", birthday= " + birthday + ", id= " + id + ", type= " + type + ", creditCards= " + creditCards + ", billingAddresses= " + 
-				billingAddresses + "]";
+				", birthday= " + birthday + ", id= " + id + ", type= " + type + "]";
 	}
 	
 	public boolean equals(Object obj)
@@ -146,18 +94,6 @@ public class User implements Cloneable
 		
 		User otherUser=(User) obj;
 		
-		if(creditCards.size()!=otherUser.creditCards.size() || billingAddresses.size()!=otherUser.billingAddresses.size())
-			return false;
-		else
-		{
-			for(int i=0; i<creditCards.size(); i++)
-				if(creditCards.get(i)!=otherUser.getCreditCard(i))
-					return false;
-			for(int i=0; i<billingAddresses.size(); i++)
-				if(billingAddresses.get(i)!=otherUser.billingAddresses.get(i))
-					return false;
-		}
-		
 		return name.equals(otherUser.name) && surname.equals(otherUser.surname) && username.equals(otherUser.username) && 
 				password.equals(otherUser.password) && birthday.equals(otherUser.birthday) && id.equals(otherUser.id) &&
 				type==otherUser.type;
@@ -168,13 +104,6 @@ public class User implements Cloneable
 		try
 		{
 			User clone=(User) super.clone();
-			
-			clone.creditCards=new ArrayList<CreditCard>();
-			clone.billingAddresses=new ArrayList<BillingAddress>();
-			for(int i=0; i<creditCards.size(); i++)
-				clone.creditCards.add(i, creditCards.get(i).clone());
-			for(int i=0; i<billingAddresses.size(); i++)
-				clone.billingAddresses.add(i, billingAddresses.get(i).clone());
 			
 			return clone;
 		}

@@ -23,11 +23,13 @@ public class UserDAO implements DAO<User>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 	
-	public boolean searchForUsernameAndPassword(String username, String password) throws SQLException
+	public User searchForUsernameAndPassword(String username, String password) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet rs=null;
+		
+		User user=null;
 		
 		String selectSQL="SELECT * FROM " + TABLE_NAME + "WHERE Username = ? AND Password = ?";
 		
@@ -39,6 +41,19 @@ public class UserDAO implements DAO<User>
 			preparedStatement.setString(2, password);
 			
 			rs=preparedStatement.executeQuery();
+			
+			if(rs.next())
+				if(!rs.getString("Tipo").equals(UserType.DELETED.name()))
+				{
+					user=new User();
+					user.setId(rs.getString("ID"));
+					user.setName(rs.getString("Nome"));
+					user.setSurname(rs.getString("Cognome"));
+					user.setUserType(UserType.valueOf(rs.getString("Tipo")));
+					user.setBirthday(rs.getString("DataDiNascita"));
+					user.setUsername(rs.getString("Username"));
+					user.setPassword(rs.getString("Password"));
+				}
 		}
 		finally
 		{
@@ -53,7 +68,7 @@ public class UserDAO implements DAO<User>
 			}
 		}
 		
-		return rs.first() && !rs.getString("Tipo").equals(UserType.DELETED.name());
+		return user;
 	}
 	
 	public User doRetrieveByKey(Object key) throws SQLException
