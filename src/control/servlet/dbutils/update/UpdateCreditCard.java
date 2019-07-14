@@ -33,7 +33,7 @@ public class UpdateCreditCard extends HttpServlet
 		{
 			CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
 
-			CreditCardDAO creditCardDAO =new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
 
 			try
 			{

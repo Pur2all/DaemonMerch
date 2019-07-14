@@ -53,7 +53,7 @@ public class UserDAO implements DAO<User>
 			}
 		}
 		
-		return rs.first();
+		return rs.first() && !rs.getString("Tipo").equals(UserType.DELETED.name());
 	}
 	
 	public User doRetrieveByKey(Object key) throws SQLException
