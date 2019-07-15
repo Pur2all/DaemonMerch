@@ -13,7 +13,7 @@
 		<logo class="logo-item">
 			<img src="./images/logo.png" width="200">
 		</logo>
-	
+
 		<div class="wrap-item">
 			<form action="SearchProduct" method="get">
 				<div class="searchbar-item">
@@ -24,25 +24,25 @@
 	     	 	</div>
 			</form>
 		</div>
-	
+
 		<div class="services-icons">
 			<span id="account" class="service-flex-item">
-				<a href="HTML/Generic/LoginForm.jsp" title="Account" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
+				<a href="LoginForm" title="Account" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
 			</span>
-			
+
 			<span id="wishlist" class="service-flex-item">
 				<a href="wishlist.jsp" title="Wishlist" class="services-link"> <img src="./images/wishlist.png" alt="Wishlist" class="services-image"> </a>
 			</span>
-			
+
 			<span id="cart" class="service-flex-item">
 				<a href="cart.jsp" title="Cart" class="services-link"> <img src="./images/cart.png" alt="Cart" class="services-image"> </a>
 			</span>
-			
+
 			<span id="faq" class="service-flex-item">
 				<a href="./HTML/Generic/faq.jsp" title="FAQ" class="services-link"> <img src="./images/faq.png" alt="FAQ" class="services-image"> </a>
 			</span>
 		</div>
-		
+
 		<div class="navbar">
 			<nav role="navigation">
 				<ul>

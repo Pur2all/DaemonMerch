@@ -31,8 +31,7 @@ public class UserDAO implements DAO<User>
 		
 		User user=null;
 		
-		String selectSQL="SELECT * FROM " + TABLE_NAME + "WHERE Username = ? AND Password = ?";
-		
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Username = ? AND Password = ? ";
 		try
 		{
 			connection=dbConnectionPool.getConnection();

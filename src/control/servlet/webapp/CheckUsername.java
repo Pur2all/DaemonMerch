@@ -13,7 +13,6 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.UserDAO;
 
-@WebServlet("/CheckUsername")
 public class CheckUsername extends HttpServlet 
 {
 	private static final long serialVersionUID = 7053841079424305976L;

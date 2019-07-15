@@ -7,4 +7,61 @@
   <listener>
     <listener-class>control.servlet.webapp.ContextListener</listener-class>
   </listener>
+
+  <!-- servlet mapping -->
+
+  <!-- login servlet mapping -->
+  <servlet>
+    <servlet-name>LoginServlet</servlet-name>
+    <servlet-class>control.servlet.webapp.Login</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginServlet</servlet-name>
+    <url-pattern>/servlet/Login</url-pattern>
+  </servlet-mapping>
+
+  <!-- registration servlet mapping -->
+  <servlet>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <servlet-class>control.servlet.webapp.Registration</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>RegistrationServlet</servlet-name>
+    <url-pattern>/Registration</url-pattern>
+  </servlet-mapping>
+
+  <!-- checkusername servlet mapping -->
+  <servlet>
+    <servlet-name>CheckUsername</servlet-name>
+    <servlet-class>control.servlet.webapp.CheckUsername</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>CheckUsername</servlet-name>
+    <url-pattern>/CheckUsername</url-pattern>
+  </servlet-mapping>
+
+
+  <!-- jsp mapping -->
+
+  <!-- login jsp mapping -->
+  <servlet>
+    <servlet-name>LoginForm</servlet-name>
+    <jsp-file>/HTML/Generic/LoginForm.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>LoginForm</servlet-name>
+    <url-pattern>/LoginForm</url-pattern>
+  </servlet-mapping>
+
+  <!-- index jsp mapping -->
+  <servlet>
+    <servlet-name>Index</servlet-name>
+    <jsp-file>/HTML/Home/Index.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Index</servlet-name>
+    <url-pattern>/Index</url-pattern>
+  </servlet-mapping>
+
+  
 </web-app>
