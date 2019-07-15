@@ -1,72 +1,49 @@
 package control.servlet.dbutils.insert;
 
-import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.sql.SQLException;
 
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
+import javax.sql.rowset.serial.SerialBlob;
 
-@WebServlet(name = "/InsertImage",
-			urlPatterns = "/ImageUpload" )
-@MultipartConfig(fileSizeThreshold = 1024 * 1024 * 2, // 2MB after which the file will be
-													  // temporarily stored on disk
-				 maxFileSize = 1024 * 1024 * 10, // 10MB maximum size allowed for uploaded files
-				 maxRequestSize = 1024 * 1024 * 50) // 50MB overall size of all uploaded files
+import model.bean.Image;
+import model.dao.DBConnectionPool;
+import model.dao.ImageDAO;
+import model.dao.TypeOfImage;
+import utils.ImageGetter;
+
+@WebServlet("/servlet/InsertImage")
+@MultipartConfig(fileSizeThreshold=1024 * 1024 * 2,	// 2MB after which the file will be temporarily stored on disk
+				 maxFileSize=1024 * 1024 * 10,		// 10MB maximum size allowed for uploaded files
+				 maxRequestSize=1024 * 1024 * 50)	// 50MB overall size of all uploaded files
 public class InsertImage extends HttpServlet
 {
 	private static final long serialVersionUID = -4011837396284189680L;
 
-	static String SAVE_DIR="img";
-
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		PrintWriter out = response.getWriter();
 		response.setContentType("text/plain");
 
-		out.write("Error: GET method is used but POST method is required");
-		out.close();
+		response.getWriter().write("Error: GET method is used but POST method is required");
+		response.getWriter().close();
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String savePath=request.getServletContext().getRealPath("") + File.separator + SAVE_DIR;
+		Image image=ImageGetter.getImage(request);
+		
+		ImageDAO imageDAO=new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+				Integer.parseInt(request.getParameter("id")), TypeOfImage.valueOf(request.getParameter("typeOfImage")));
 
-		String message="upload =\n";
-
-		if(request.getParts()!=null && request.getParts().size()>0)
-			for (Part part : request.getParts())
-			{
-				String fileName=extractFileName(part);
-				if(fileName!=null && !fileName.equals(""))
-				{
-					part.write(savePath + File.separator + fileName);
-					System.out.println(savePath + File.separator + fileName);
-					message = message + fileName + "\n";
-					//TODO Da salvare nel db
-				}
-				else
-					request.setAttribute("error", "Errore: Bisogna selezionare almeno un file");
-			}
-
-		request.setAttribute("message", message);
-
-		RequestDispatcher dispatcher = getServletContext().
-				getRequestDispatcher("/index.jsp");
-		dispatcher.forward(request, response);
-
-	}
-
-	private String extractFileName(Part part)
-	{
-		//content-disposition: form-data; name="file"; filename="file.txt"
-		String contentDisp = part.getHeader("content-disposition");
-		String[] items = contentDisp.split(";");
-		for (String s : items)
-			if (s.trim().startsWith("filename"))
-				return s.substring(s.indexOf("=") + 2, s.length() - 1);
-
-		return "";
+		try
+		{
+			imageDAO.doSave(image);
+		} 
+		catch (SQLException sqlException)
+		{
+			sqlException.printStackTrace();
+		}
 	}
 }

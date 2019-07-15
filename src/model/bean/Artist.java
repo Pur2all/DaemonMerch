@@ -1,10 +1,14 @@
 package model.bean;
 
+import java.util.ArrayList;
+
 public class Artist implements Cloneable
 {
 	private int id;
 	private String name;
 	private byte[] logo;
+	private byte[][] images;
+	private ArrayList<Product> products;
 	
 	public Artist()
 	{
@@ -25,6 +29,16 @@ public class Artist implements Cloneable
 		return logo;
 	}
 	
+	public byte[][] getImages()
+	{
+		return images;
+	}
+	
+	public ArrayList<Product> getProducts()
+	{
+		return products;
+	}
+	
 	public void setId(int anId)
 	{
 		id=anId;
@@ -38,6 +52,16 @@ public class Artist implements Cloneable
 	public void setLogo(byte[] aLogo)
 	{
 		logo=aLogo;
+	}
+	
+	public void setImages(byte[][] someImages)
+	{
+		images=someImages;
+	}
+	
+	public void setProducts(ArrayList<Product> someProducts)
+	{
+		products=someProducts;
 	}
 	
 	public String toString()
@@ -54,7 +78,8 @@ public class Artist implements Cloneable
 		
 		Artist otherArtist=(Artist) obj;
 		
-		return id==otherArtist.id && name.equals(otherArtist.name) && logo.equals(otherArtist.logo);
+		return id==otherArtist.id && name.equals(otherArtist.name) && logo.equals(otherArtist.logo) && images.equals(otherArtist.images) &&
+				products.equals(otherArtist.products);
 	}
 	
 	public Artist clone()
@@ -62,6 +87,9 @@ public class Artist implements Cloneable
 		try
 		{
 			Artist clone=(Artist) super.clone();
+			
+			for(int i=0; i<products.size(); i++)
+				clone.products.set(i, products.get(i).clone());
 			
 			return clone;
 		}

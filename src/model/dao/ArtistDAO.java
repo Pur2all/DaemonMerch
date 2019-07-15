@@ -15,6 +15,7 @@ public class ArtistDAO implements DAO<Artist>
 	
 	private DBConnectionPool dbConnectionPool;
 	
+	//TODO Prendere anche la lista dei prodotti relativi all'artista
 	public ArtistDAO(DBConnectionPool aDBConnectionPool)
 	{
 		dbConnectionPool=aDBConnectionPool;
@@ -29,7 +30,7 @@ public class ArtistDAO implements DAO<Artist>
 
 		Artist artistFromTable=new Artist();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Artista WHERE ID = ?";
 
 		try 
 		{
@@ -40,11 +41,15 @@ public class ArtistDAO implements DAO<Artist>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
+			artistFromTable.setName(rs.getString("Nome"));
+			artistFromTable.setLogo(rs.getBytes("Logo"));
+			rs.last();
+			byte[][] artistFromTableImages=new byte [rs.getRow()][];
+			int i=0;
+			rs.beforeFirst();
 			while(rs.next()) 
-			{
-				artistFromTable.setName(rs.getString("Nome"));
-				artistFromTable.setLogo(rs.getBytes("Logo"));
-			}
+				artistFromTableImages[i++]=rs.getBytes("Foto");
+			artistFromTable.setImages(artistFromTableImages);
 		} 
 		finally 
 		{

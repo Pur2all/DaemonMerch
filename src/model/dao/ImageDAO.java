@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLType;
+import java.sql.Types;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -14,9 +16,13 @@ public class ImageDAO implements DAO<Image>
 	private static final String TABLE_NAME="Foto";
 
 	private DBConnectionPool dbConnectionPool;
+	private int id;
+	private TypeOfImage typeOfImage;
 
-	public ImageDAO(DBConnectionPool aDBConnectionPool)
+	public ImageDAO(DBConnectionPool aDBConnectionPool, int anID, TypeOfImage aTypeOfImage)
 	{
+		id=anID;
+		typeOfImage=aTypeOfImage;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
@@ -113,7 +119,7 @@ public class ImageDAO implements DAO<Image>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (Foto, NomeFoto) VALUES (?, ?)";
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (Foto, NomeFoto, ID_Prodotto, ID_Artista) VALUES (?, ?, ?, ?)";
 		int rowsAffected; 
 		
 		try
@@ -122,6 +128,8 @@ public class ImageDAO implements DAO<Image>
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setBlob(1, image.getImage());
 			preparedStatement.setString(2, image.getImageName());
+			preparedStatement.setInt(3, typeOfImage==TypeOfImage.PRODUCT ? id : Types.NULL);
+			preparedStatement.setInt(4, typeOfImage==TypeOfImage.ARTIST ? id : Types.NULL);
 
 			rowsAffected=preparedStatement.executeUpdate();
 

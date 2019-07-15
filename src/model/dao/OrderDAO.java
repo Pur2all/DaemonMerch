@@ -27,6 +27,7 @@ public class OrderDAO implements DAO<Order>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	//TODO Aggiustare il metodo per prendere i BillingAddress, vedi ProductDAO
 	public Collection<Order> doRetrieveForAllUsers() throws SQLException
 	{
 		Connection connection=null;

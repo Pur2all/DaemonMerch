@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import model.bean.Image;
 import model.bean.Product;
 
 public class ProductDAO implements DAO<Product>
@@ -22,6 +23,7 @@ public class ProductDAO implements DAO<Product>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 	
+	//TODO Fare con tutti l'inner join con le foto e prenderle dal db
 	public Collection<Product> doRetrieveByName(String productName) throws SQLException
 	{
 		Connection connection=null;
@@ -29,7 +31,7 @@ public class ProductDAO implements DAO<Product>
 
 		Collection<Product> products=new LinkedList<Product>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Nome LIKE ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE Nome LIKE ?";
 		
 		if (productName!=null && !productName.equals("")) 
 		{
@@ -52,6 +54,18 @@ public class ProductDAO implements DAO<Product>
 					productFromTable.setRemaining(rs.getInt("Quantit‡Rimanente"));
 					productFromTable.setTag(rs.getString("Tag"));
 					productFromTable.setArtistId(rs.getString("ID_Artista"));
+					if(rs.next())
+					{
+						rs.previous();
+						while(rs.getString("ID").equals(productFromTable.getId()));
+						{
+							Image image=new Image();
+							
+							image.setImageName(rs.getString("NomeFoto"));
+							image.setImage(rs.getBlob("Foto"));
+							productFromTable.addImage(image);
+						}
+					}
 					products.add(productFromTable);
 				}
 			} 
