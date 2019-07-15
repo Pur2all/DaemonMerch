@@ -1,0 +1,73 @@
+@media screen and (orientation: landscape) {
+	
+	body {
+		background: #2E3740;
+	}
+	
+	.sc-user-profile {
+		margin: auto;
+		width: 50%;
+		background: #fff;
+		border-radius: .3em;
+	}
+	
+	.sc-user-profile .left {
+		float: left;
+		padding: 0 15px 10px;
+		width: 20%;
+		font-weight: bold;
+	}
+	
+	.sc-user-profile .right {
+		padding: 0 5px 10px;
+		width: 80%;
+	}
+	
+	.sc-user-profile .username {
+		margin: auto;
+		margin-top: -4.40em;
+		margin-left: 5.80em;
+		color: #658585;
+		font-size: 1.53em;
+		font-family: "Coda", sans-serif;
+		font-weight: bold;
+	}
+		
+	div.sc-user-profile img.edit-icon {
+		float: right;
+	    width: 3%;
+	    border: thin;
+	    border-color: #999999;
+	    border-style: solid;
+	    border-radius: 0.2em;
+	    margin: 0.5%;
+	}
+
+	div.sc-user-profile img.edit-icon:hover {
+		background: #999999;
+	}
+		
+	.sc-user-profile > img.avatar {
+		padding: .7em;
+		margin-left: .3em;
+		margin-top: .3em;
+		height: 6.23em;
+		width: 6.23em;
+		border-radius: 18em;
+	}
+	
+	.sc-user-profile div.data {
+		margin: 2em auto 1em;
+		background: #1FCE6D;
+		text-align: center;
+	}
+	
+	.sc-user-profile span {
+		font-family: "varela round", sans-serif;
+		color: #e3eeee;
+		white-space: nowrap;
+		font-size: 1.27em;
+		font-weight: bold;
+	}
+
+}
