@@ -16,15 +16,15 @@
 	<body>
 	<div class="index-grid">
   	  <header class="index-header">
-  	    <%@ include file="../Generic/Header.jsp" %>
+  	    <%@ include file="./Header.jsp" %>
   	  </header>
     
  	   <main class="index-main">
-  	  	<%@ include file="../Generic/Main.jsp" %>
+  	  	<%@ include file="./Main.jsp" %>
   	  </main>
     
    	  <footer class="index-footer">
-   	   <%@ include file="../Generic/Footer.jsp" %>
+   	   <%@ include file="./Footer.jsp" %>
   	  </footer>
    </div>
     
