@@ -1,4 +1,4 @@
-package control.servlet.async;
+package control.servlet.webapp.async;
 
 import java.io.IOException;
 
@@ -30,5 +30,4 @@ public class CheckIfLogged extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }

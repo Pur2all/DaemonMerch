@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import model.bean.BillingAddress;
+import model.bean.User;
 import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
@@ -33,7 +34,8 @@ public class DeleteBillingAddress extends HttpServlet
 		{
 			BillingAddress billingAddress=new Gson().fromJson((String) request.getAttribute("billingAddress"), BillingAddress.class);
 
-			BillingAddressDAO billingAddressDAO =new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
+			BillingAddressDAO billingAddressDAO =new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try
 			{

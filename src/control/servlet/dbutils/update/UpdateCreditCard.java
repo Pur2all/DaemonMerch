@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import model.bean.CreditCard;
+import model.bean.User;
 import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 
@@ -33,7 +34,8 @@ public class UpdateCreditCard extends HttpServlet
 		{
 			CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
 
-			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
+			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try
 			{

@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.BillingAddress;
+import model.bean.User;
 import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
@@ -41,7 +42,8 @@ public class InsertBillingAddress extends HttpServlet
 			billingAddress.setDistrict(district);
 			billingAddress.setHouseNumber(houseNumber);
 
-			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
+			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try
 			{

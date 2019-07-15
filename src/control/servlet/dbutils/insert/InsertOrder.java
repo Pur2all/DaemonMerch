@@ -14,6 +14,7 @@ import model.bean.BillingAddress;
 import model.bean.Order;
 import model.bean.Product;
 import model.bean.State;
+import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
@@ -34,7 +35,7 @@ public class InsertOrder extends HttpServlet
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			int userID=Integer.parseInt(request.getParameter("userID"));
+			int userID=Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId());
 			String date=request.getParameter("date");
 			float total=Float.parseFloat(request.getParameter("total"));
 			State state=State.valueOf(request.getParameter("state"));

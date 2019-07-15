@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.CreditCard;
+import model.bean.User;
 import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 
@@ -21,7 +22,8 @@ public class RetrieveCreditCards extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
+		CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 		try
 		{

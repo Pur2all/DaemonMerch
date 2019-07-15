@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.CreditCard;
+import model.bean.User;
 import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 
@@ -30,7 +31,7 @@ public class InsertCreditCard extends HttpServlet
 		else
 		{
 			String cvv=request.getParameter("cvv"), expireDate=request.getParameter("expireDate"), number=request.getParameter("number");
-			int userID=Integer.parseInt(request.getParameter("userID"));
+			int userID=Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId());
 
 			CreditCard creditCard=new CreditCard();
 

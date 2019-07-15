@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Order;
+import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
@@ -21,7 +22,8 @@ public class RetrieveOrders extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("userID")));
+		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 		try
 		{
