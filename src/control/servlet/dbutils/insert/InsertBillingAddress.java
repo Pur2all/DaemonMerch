@@ -15,7 +15,7 @@ import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
 
-@WebServlet("/InsertBillingAddress")
+@WebServlet("/servlet/InsertBillingAddress")
 public class InsertBillingAddress extends HttpServlet
 {
 	private static final long serialVersionUID = -3229112474089218224L;
@@ -42,7 +42,7 @@ public class InsertBillingAddress extends HttpServlet
 			billingAddress.setDistrict(district);
 			billingAddress.setHouseNumber(houseNumber);
 
-			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try

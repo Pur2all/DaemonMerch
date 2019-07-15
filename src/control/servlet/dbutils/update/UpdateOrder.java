@@ -16,8 +16,8 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
-@WebServlet("/UpdateOrder")
-public class UpdateOrder extends HttpServlet 
+@WebServlet("/servlet/UpdateOrder")
+public class UpdateOrder extends HttpServlet
 {
 	private static final long serialVersionUID = 8260432438802305074L;
 
@@ -34,7 +34,7 @@ public class UpdateOrder extends HttpServlet
 		{
 			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
 
-			OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+			OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try

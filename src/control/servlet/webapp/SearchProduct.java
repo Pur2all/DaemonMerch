@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
 
-@WebServlet("/SearchProduct")
+@WebServlet("/servlet/SearchProduct")
 public class SearchProduct extends HttpServlet
 {
 	private static final long serialVersionUID = 861594351321285535L;
@@ -20,7 +20,7 @@ public class SearchProduct extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String productName=request.getParameter("q");
-		
+
 		if(productName!=null && !productName.equals(""))
 		{
 			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));

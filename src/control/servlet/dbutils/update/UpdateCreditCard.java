@@ -16,8 +16,8 @@ import model.bean.User;
 import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/UpdateCreditCard")
-public class UpdateCreditCard extends HttpServlet 
+@WebServlet("/servlet/UpdateCreditCard")
+public class UpdateCreditCard extends HttpServlet
 {
 	private static final long serialVersionUID = -4599610942013407431L;
 
@@ -34,7 +34,7 @@ public class UpdateCreditCard extends HttpServlet
 		{
 			CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
 
-			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try

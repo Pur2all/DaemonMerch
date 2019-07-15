@@ -14,30 +14,30 @@ import model.bean.WishlistProduct;
 import model.dao.DBConnectionPool;
 import model.dao.WishlistDAO;
 
-@WebServlet("/RetrieveProductsInWishlist")
-public class RetrieveProductsInWishlist extends HttpServlet 
+@WebServlet("/servlet/RetrieveProductsInWishlist")
+public class RetrieveProductsInWishlist extends HttpServlet
 {
 	private static final long serialVersionUID = 4832505934016090804L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		
+
 		try
 		{
 			LinkedList<WishlistProduct> wishlistProducts=(LinkedList<WishlistProduct>) wishlistDAO.doRetrieveByUserID((int) request.getAttribute("userID"));
-			
+
 			request.setAttribute("wishlistProducts", wishlistProducts);
-			
+
 			getServletContext().getRequestDispatcher("Wishlist").forward(request, response);
-		} 
+		}
 		catch (SQLException sqlException)
 		{
 			sqlException.printStackTrace();
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doGet(request, response);
 	}

@@ -15,7 +15,7 @@ import model.bean.Top;
 import model.dao.DBConnectionPool;
 import model.dao.TopDAO;
 
-@WebServlet("/DeleteTop")
+@WebServlet("/servlet/DeleteTop")
 public class DeleteTop extends HttpServlet
 {
 	private static final long serialVersionUID = 279430285158310032L;
