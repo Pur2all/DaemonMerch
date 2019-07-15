@@ -11,7 +11,16 @@
 
 	<body>
 	
-		<h2>Garbo!<h2/>
+		<h2 id="heading">Prodotti incredibili impressionanti!</h2>
+		
+		<div class="flex-container">
+		
+			<div></div>
+			<div></div>
+			<div></div>
+			<div></div>
+		
+		</div>
 		
 	</body>
 </html>
