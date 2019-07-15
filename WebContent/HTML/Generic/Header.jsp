@@ -6,6 +6,9 @@
 	<base href="./" target="_self">
 	<link rel="stylesheet" type="text/css" href="./Css/Header.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script type="text/javascript">
+		
+	</script>
 </head>
 
 <body>
@@ -27,7 +30,7 @@
 
 		<div class="services-icons">
 			<span id="account" class="service-flex-item">
-				<a href="LoginForm" title="Account" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
+				<a href="LoginForm" title="Account" onclick="loginFunction()" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
 			</span>
 
 			<span id="wishlist" class="service-flex-item">
