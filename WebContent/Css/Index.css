@@ -2,28 +2,28 @@
 
 @media screen and (orientation: landscape)
 {
-	
+
 	.index-grid {
 		height: 1500px;
 		display: grid;
 		grid-template-rows: 15% 70% 15%;
 	}
-	
+
 	.index-header {
 		grid-column: 1 / 1;
 		grid-row: 1 / 1;
 	}
-	
+
 	.index-main {
 		grid-column: 1 / 1;
 		grid-row: 2 / 2;
 	}
-	
+
 	.index-footer {
 		grid-column: 1 / 1;
 		grid-row: 3 / 3;
 	}
-	
+
 	*
 	{
 		padding: 0;
@@ -34,11 +34,7 @@
 	{
 		margin: inherit;
 	}
-	
-	main
-	{
-	}
-	
+
 	footer
 	{
 		margin: inherit;
