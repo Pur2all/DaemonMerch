@@ -34,15 +34,15 @@
 			</span>
 
 			<span id="wishlist" class="service-flex-item">
-				<a href="wishlist.jsp" title="Wishlist" class="services-link"> <img src="./images/wishlist.png" alt="Wishlist" class="services-image"> </a>
+				<a href="Wishlist" title="Wishlist" class="services-link"> <img src="./images/wishlist.png" alt="Wishlist" class="services-image"> </a>
 			</span>
 
 			<span id="cart" class="service-flex-item">
-				<a href="cart.jsp" title="Cart" class="services-link"> <img src="./images/cart.png" alt="Cart" class="services-image"> </a>
+				<a href="Cart" title="Cart" class="services-link"> <img src="./images/cart.png" alt="Cart" class="services-image"> </a>
 			</span>
 
 			<span id="faq" class="service-flex-item">
-				<a href="./HTML/Generic/faq.jsp" title="FAQ" class="services-link"> <img src="./images/faq.png" alt="FAQ" class="services-image"> </a>
+				<a href="Faq" title="FAQ" class="services-link"> <img src="./images/faq.png" alt="FAQ" class="services-image"> </a>
 			</span>
 		</div>
 

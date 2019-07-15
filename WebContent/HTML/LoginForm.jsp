@@ -15,7 +15,7 @@
 			<input name='username' placeholder='Username' type='text'>
 			<input id='pw' name='password' placeholder='Password' type='password'>
 			<input class='animated' type='submit' value='Submit'>
-			<a class='forgot' href='RegistrationForm.jsp'>Don't have an account?</a>
+			<a class='forgot' href='RegistrationForm'>Don't have an account?</a>
 		</form>
 	</div>
 
