@@ -37,8 +37,6 @@ public class RetrievePatches extends HttpServlet
 			});
 
 			request.setAttribute("patches", patches);
-
-			getServletContext().getRequestDispatcher("Artist").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{
@@ -50,5 +48,4 @@ public class RetrievePatches extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }

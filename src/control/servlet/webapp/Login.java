@@ -50,6 +50,8 @@ public class Login extends HttpServlet
 				sqlException.printStackTrace();
 			}
 		}
+		else
+			response.sendRedirect("ErrorPage");
 	}
 
 }

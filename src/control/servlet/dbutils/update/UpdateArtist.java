@@ -27,23 +27,18 @@ public class UpdateArtist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
-			response.sendRedirect("ErrorPage");
-		else
+		Artist artist=new Gson().fromJson((String) request.getAttribute("artist"), Artist.class);
+
+		ArtistDAO artistDAO =new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+		try
 		{
-			Artist artist=new Gson().fromJson((String) request.getAttribute("artist"), Artist.class);
-
-			ArtistDAO artistDAO =new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
-			try
-			{
-				response.setContentType("text/plain");
-				response.getWriter().write(artistDAO.doUpdate(artist) ? 1 : 0);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
+			response.setContentType("text/plain");
+			response.getWriter().write(artistDAO.doUpdate(artist) ? 1 : 0);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

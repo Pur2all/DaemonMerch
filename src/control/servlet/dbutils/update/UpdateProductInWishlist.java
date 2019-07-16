@@ -27,23 +27,18 @@ public class UpdateProductInWishlist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
-			response.sendRedirect("ErrorPage");
-		else
+		WishlistProduct wishlistProduct=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);
+
+		WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+		try
 		{
-			WishlistProduct wishlistProduct=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);
-
-			WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
-			try
-			{
-				response.setContentType("text/plain");
-				response.getWriter().write(wishlistDAO.doUpdate(wishlistProduct) ? 1 : 0);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
+			response.setContentType("text/plain");
+			response.getWriter().write(wishlistDAO.doUpdate(wishlistProduct) ? 1 : 0);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

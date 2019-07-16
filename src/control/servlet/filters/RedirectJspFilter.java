@@ -10,9 +10,9 @@ import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebFilter(filterName="/RedirectServletFilter",
-			urlPatterns={"/servlet/*", "/*.jsp"})
-public class RedirectServletFilter implements Filter 
+@WebFilter(filterName="/RedirectJspFilter",
+			urlPatterns={"*.jsp"})
+public class RedirectJspFilter implements Filter 
 {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
 	{

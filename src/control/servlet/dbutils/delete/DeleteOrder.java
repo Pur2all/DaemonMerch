@@ -28,7 +28,7 @@ public class DeleteOrder extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("order")==null || request.getSession().getAttribute("userInfo")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{

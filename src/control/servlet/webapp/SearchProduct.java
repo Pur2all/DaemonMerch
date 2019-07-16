@@ -39,7 +39,7 @@ public class SearchProduct extends HttpServlet
 		else
 		{
 			request.setAttribute("error", "Invalid query");
-			response.sendRedirect("ErrorPage.jsp");
+			response.sendRedirect("ErrorPage");
 		}
 	}
 

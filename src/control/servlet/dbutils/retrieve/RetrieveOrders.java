@@ -30,8 +30,6 @@ public class RetrieveOrders extends HttpServlet
 			LinkedList<Order> order=(LinkedList<Order>) orderDAO.doRetrieveAll(null);
 
 			request.setAttribute("orders", order);
-
-			getServletContext().getRequestDispatcher("CreditCards").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

@@ -9,9 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.Category;
-import model.bean.PrintType;
-import model.bean.Size;
+import com.google.gson.Gson;
+
 import model.bean.Top;
 import model.dao.DBConnectionPool;
 import model.dao.TopDAO;
@@ -28,28 +27,11 @@ public class InsertTop extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("top")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String name=request.getParameter("name"), description=request.getParameter("description"), tag=request.getParameter("tag");
-			float price=Float.parseFloat(request.getParameter("price"));
-			int remaining=Integer.parseInt(request.getParameter("remaining")), artistID=Integer.parseInt(request.getParameter("artistId"));
-			Size size=Size.valueOf(request.getParameter("size"));
-			Category category=Category.valueOf(request.getParameter("category"));
-			PrintType printType=PrintType.valueOf(request.getParameter("printType"));
-
-			Top product=new Top();
-
-			product.setName(name);
-			product.setDescription(description);
-			product.setTag(tag);
-			product.setPrice(price);
-			product.setRemaining(remaining);
-			product.setArtistId(Integer.toString(artistID));
-			product.setSize(size);
-			product.setCategory(category);
-			product.setPrintType(printType);
+			Top product=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
 
 			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 

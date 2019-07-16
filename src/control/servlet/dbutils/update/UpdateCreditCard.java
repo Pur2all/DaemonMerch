@@ -28,24 +28,19 @@ public class UpdateCreditCard extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
-			response.sendRedirect("ErrorPage");
-		else
+		CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
+
+		CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
+
+		try
 		{
-			CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
-
-			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
-
-			try
-			{
-				response.setContentType("text/plain");
-				response.getWriter().write(creditCardDAO.doUpdate(creditCard) ? 1 : 0);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
+			response.setContentType("text/plain");
+			response.getWriter().write(creditCardDAO.doUpdate(creditCard) ? 1 : 0);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

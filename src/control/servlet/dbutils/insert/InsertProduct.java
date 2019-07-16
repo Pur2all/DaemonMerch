@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.bean.Product;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
@@ -25,22 +27,11 @@ public class InsertProduct extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("product")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String name=request.getParameter("name"), description=request.getParameter("description"), tag=request.getParameter("tag");
-			float price=Float.parseFloat(request.getParameter("price"));
-			int remaining=Integer.parseInt(request.getParameter("remaining")), artistID=Integer.parseInt(request.getParameter("artistId"));
-
-			Product product=new Product();
-
-			product.setName(name);
-			product.setDescription(description);
-			product.setTag(tag);
-			product.setPrice(price);
-			product.setRemaining(remaining);
-			product.setArtistId(Integer.toString(artistID));
+			Product product=new Gson().fromJson((String) request.getAttribute("product"), Product.class);
 
 			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 

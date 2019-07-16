@@ -30,8 +30,6 @@ public class RetrieveBillingAddresses extends HttpServlet
 			LinkedList<BillingAddress> billingAddresses=(LinkedList<BillingAddress>) billingAddressDAO.doRetrieveAll(null);
 
 			request.setAttribute("billingAddresses", billingAddresses);
-
-			getServletContext().getRequestDispatcher("BillingAddresses").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{
@@ -43,5 +41,4 @@ public class RetrieveBillingAddresses extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }
