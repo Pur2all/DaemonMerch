@@ -15,14 +15,14 @@ import model.bean.User;
 import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/RetrieveBillingAddresses")
+@WebServlet("/servlet/RetrieveBillingAddresses")
 public class RetrieveBillingAddresses extends HttpServlet
 {
 	private static final long serialVersionUID = 7701777277576385762L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+		BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 		try

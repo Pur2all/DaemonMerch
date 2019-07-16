@@ -15,19 +15,19 @@ import model.bean.Artist;
 import model.dao.ArtistDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/RetrieveArtists")
-public class RetrieveArtists extends HttpServlet 
+@WebServlet("/servlet/RetrieveArtists")
+public class RetrieveArtists extends HttpServlet
 {
 	private static final long serialVersionUID = 5020282298100482632L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		
+
 		try
 		{
 			LinkedList<Artist> artists=(LinkedList<Artist>) artistDAO.doRetrieveAll(null);
-			
+
 			artists.sort(new Comparator<Artist>()
 			{
 				public int compare(Artist first, Artist second)
@@ -35,18 +35,18 @@ public class RetrieveArtists extends HttpServlet
 					return first.getName().compareTo(second.getName());
 				}
 			});
-			
+
 			request.setAttribute("artists", artists);
-			
+
 			getServletContext().getRequestDispatcher("Artist").forward(request, response);
-		} 
+		}
 		catch (SQLException sqlException)
 		{
 			sqlException.printStackTrace();
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doGet(request, response);
 	}

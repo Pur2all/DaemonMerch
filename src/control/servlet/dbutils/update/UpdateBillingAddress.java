@@ -16,7 +16,7 @@ import model.bean.User;
 import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/UpdateBillingAddress")
+@WebServlet("/servlet/UpdateBillingAddress")
 public class UpdateBillingAddress extends HttpServlet
 {
 	private static final long serialVersionUID = -6250726725794124158L;
@@ -34,8 +34,8 @@ public class UpdateBillingAddress extends HttpServlet
 		{
 			BillingAddress oldBillingAddress=new Gson().fromJson((String) request.getAttribute("oldBillingAddress"), BillingAddress.class);
 			BillingAddress newBillingAddress=new Gson().fromJson((String) request.getAttribute("newBillingAddress"), BillingAddress.class);
-			
-			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+
+			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try

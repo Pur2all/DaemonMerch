@@ -4,14 +4,14 @@
 
 <head>
 	<base href="./" target="_self">
-	<link rel="stylesheet" type="text/css" href="../../Css/RegistrationLoginForm.css">
+	<link rel="stylesheet" type="text/css" href="./Css/RegistrationLoginForm.css">
 </head>
 
 <body>
 
 	<div class='registrationLoginForm'>
 		<h2>Sign up</h2>
-		<form action="Registration" method="post">
+		<form action="/servlet/Registration" method="post">
 			<input name='name' placeholder='First Name' type='text'>
 			<input name='surname' placeholder='Last Name' type='text'>
 			<input name="birthday" type="date" placeholder='Birth Date'>
@@ -23,7 +23,7 @@
 			</div>
 			<input class='animated' type='submit' value='Submit'>
 		</form>
-		<a class='forgot' href='LoginForm.jsp'>Do you already have an account?</a>
+		<a class='forgot' href='LoginForm'>Do you already have an account?</a>
 	</div>
 
 </body>

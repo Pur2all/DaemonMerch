@@ -14,17 +14,17 @@ import model.bean.PatchType;
 import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 
-@WebServlet("/InsertPatch")
-public class InsertPatch extends HttpServlet 
+@WebServlet("/servlet/InsertPatch")
+public class InsertPatch extends HttpServlet
 {
 	private static final long serialVersionUID = 856348204473800058L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getParameterMap().containsKey(null))
 			response.sendRedirect("ErrorPage");
@@ -35,9 +35,9 @@ public class InsertPatch extends HttpServlet
 			float price=Float.parseFloat(request.getParameter("price"));
 			int remaining=Integer.parseInt(request.getParameter("remaining")), artistID=Integer.parseInt(request.getParameter("artistId"));
 			PatchType patchType=PatchType.valueOf(request.getParameter("patchType"));
-			
+
 			Patch product=new Patch();
-			
+
 			product.setName(name);
 			product.setDescription(description);
 			product.setTag(tag);
@@ -47,18 +47,18 @@ public class InsertPatch extends HttpServlet
 			product.setMaterial(material);
 			product.setMeasures(measures);
 			product.setPatchType(patchType);
-			
+
 			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-			
+
 			try
 			{
 				patchDAO.doSave(product);
-			} 
+			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-			
+
 			getServletContext().getRequestDispatcher("InsertImage").forward(request, response);
 		}
 	}

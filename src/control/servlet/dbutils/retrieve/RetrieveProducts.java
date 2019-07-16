@@ -15,19 +15,19 @@ import model.bean.Product;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
 
-@WebServlet("/RetrieveProducts")
-public class RetrieveProducts extends HttpServlet 
+@WebServlet("/servlet/RetrieveProducts")
+public class RetrieveProducts extends HttpServlet
 {
 	private static final long serialVersionUID = 1661985961843759472L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		
+
 		try
 		{
 			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(null);
-			
+
 			products.sort(new Comparator<Product>()
 			{
 				public int compare(Product first, Product second)
@@ -35,18 +35,16 @@ public class RetrieveProducts extends HttpServlet
 					return first.getName().compareTo(second.getName());
 				}
 			});
-			
+
 			request.setAttribute("products", products);
-			
-			getServletContext().getRequestDispatcher("Artist").forward(request, response);
-		} 
+		}
 		catch (SQLException sqlException)
 		{
 			sqlException.printStackTrace();
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doGet(request, response);
 	}

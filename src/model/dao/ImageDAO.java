@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Types;
 import java.util.Collection;
 import java.util.LinkedList;
 
@@ -14,9 +15,13 @@ public class ImageDAO implements DAO<Image>
 	private static final String TABLE_NAME="Foto";
 
 	private DBConnectionPool dbConnectionPool;
+	private int id;
+	private TypeOfImage typeOfImage;
 
-	public ImageDAO(DBConnectionPool aDBConnectionPool)
+	public ImageDAO(DBConnectionPool aDBConnectionPool, int anID, TypeOfImage aTypeOfImage)
 	{
+		id=anID;
+		typeOfImage=aTypeOfImage;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
@@ -33,10 +38,10 @@ public class ImageDAO implements DAO<Image>
 
 		try
 		{
-			int id=(int) key;
+			String imageName=(String) key;
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, id);
+			preparedStatement.setString(1, imageName);
 
 			ResultSet rs=preparedStatement.executeQuery();
 
@@ -69,9 +74,9 @@ public class ImageDAO implements DAO<Image>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		Collection<Image> artists=new LinkedList<Image>();
+		Collection<Image> images=new LinkedList<Image>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME;
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID_Artista = ? AND ID_Prodotto = ?";
 
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
@@ -79,6 +84,9 @@ public class ImageDAO implements DAO<Image>
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
+
+			preparedStatement.setInt(1, typeOfImage==TypeOfImage.ARTIST ? id : Types.NULL);
+			preparedStatement.setInt(2, typeOfImage==TypeOfImage.PRODUCT ? id : Types.NULL);
 
 			ResultSet rs=preparedStatement.executeQuery();
 
@@ -89,7 +97,7 @@ public class ImageDAO implements DAO<Image>
 				image.setImageName(rs.getString("NomeFoto"));
 				image.setImage(rs.getBlob("Foto"));
 
-				artists.add(image);
+				images.add(image);
 			}
 		}
 		finally
@@ -105,7 +113,7 @@ public class ImageDAO implements DAO<Image>
 			}
 		}
 
-		return artists;
+		return images;
 	}
 
 	public boolean doSave(Image image) throws SQLException
@@ -113,15 +121,17 @@ public class ImageDAO implements DAO<Image>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (Foto, NomeFoto) VALUES (?, ?)";
-		int rowsAffected; 
-		
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (Foto, NomeFoto, ID_Prodotto, ID_Artista) VALUES (?, ?, ?, ?)";
+		int rowsAffected;
+
 		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setBlob(1, image.getImage());
 			preparedStatement.setString(2, image.getImageName());
+			preparedStatement.setInt(3, typeOfImage==TypeOfImage.PRODUCT ? id : Types.NULL);
+			preparedStatement.setInt(4, typeOfImage==TypeOfImage.ARTIST ? id : Types.NULL);
 
 			rowsAffected=preparedStatement.executeUpdate();
 
@@ -139,8 +149,8 @@ public class ImageDAO implements DAO<Image>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
-		return rowsAffected>0 ? true : false;
+
+		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Image image) throws SQLException
@@ -151,7 +161,7 @@ public class ImageDAO implements DAO<Image>
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Foto = ? WHERE NomeFoto = ?";
 		int rowsAffected;
-		
+
 		try
 		{
 			connection=dbConnectionPool.getConnection();
@@ -177,8 +187,8 @@ public class ImageDAO implements DAO<Image>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
-		return rowsAffected>0 ? true : false;
+
+		return rowsAffected>0;
 	}
 
 	public boolean doDelete(Image image) throws SQLException

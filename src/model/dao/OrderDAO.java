@@ -15,15 +15,15 @@ import model.bean.State;
 public class OrderDAO implements DAO<Order>
 {
 	private static final String TABLE_NAME="Ordine";
-	
+
 	private int userID;
 	private DBConnectionPool dbConnectionPool;
-	
+
 	public OrderDAO(DBConnectionPool aDBConnectionPool, int anUserID)
 	{
 		userID=anUserID;
 		dbConnectionPool=aDBConnectionPool;
-		
+
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
@@ -34,19 +34,19 @@ public class OrderDAO implements DAO<Order>
 
 		Collection<Order> orders=new LinkedList<Order>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Contiene INNER JOIN Prodotto";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Contiene INNER JOIN Prodotto";
 
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			while(rs.next())
 			{
 				Order orderFromTable=new Order();
-				
+
 				orderFromTable.setId(rs.getString("Ordine.ID"));
 				orderFromTable.setDate(rs.getString("Data"));
 				orderFromTable.setTotal(rs.getFloat("Totale"));
@@ -58,40 +58,39 @@ public class OrderDAO implements DAO<Order>
 				aBillingAddress.setDistrict(rs.getString("Provincia"));
 				aBillingAddress.setHouseNumber(String.valueOf(rs.getInt("NumeroCivico")));
 				orderFromTable.setBillingAddress(aBillingAddress);
+				rs.previous();
 				while(rs.next() && rs.getString("Ordine.ID").equals(orderFromTable.getId()))
 				{
 					Product aProduct=new Product();
-					
+
 					aProduct.setId(rs.getString("Prodotto.ID"));
 					aProduct.setName(rs.getString("Nome"));
 					aProduct.setPrice(rs.getFloat("Prezzo"));
 					aProduct.setDescription(rs.getString("Descrizione"));
-					aProduct.setRemaining(rs.getInt("QuantitàRimanente"));
+					aProduct.setRemaining(rs.getInt("Quantitï¿½Rimanente"));
 					aProduct.setTag(rs.getString("Tag"));
 					orderFromTable.addProducts(aProduct);
 				}
-				if(!rs.getString("Ordine.ID").equals(orderFromTable.getId()))
-					rs.previous();
-				
+
 				orders.add(orderFromTable);
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return orders;
 	}
-	
+
 	public Order doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -101,7 +100,7 @@ public class OrderDAO implements DAO<Order>
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Contiene INNER JOIN Prodotto WHERE " + TABLE_NAME + ".ID = ?";
 
-		try 
+		try
 		{
 			int id=(int) key;
 			connection=dbConnectionPool.getConnection();
@@ -109,7 +108,7 @@ public class OrderDAO implements DAO<Order>
 			preparedStatement.setInt(1, id);
 
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			if(rs.next())
 			{
 				orderFromTable.setId(rs.getString("Ordine.ID"));
@@ -123,33 +122,34 @@ public class OrderDAO implements DAO<Order>
 				aBillingAddress.setDistrict(rs.getString("Provincia"));
 				aBillingAddress.setHouseNumber(String.valueOf(rs.getInt("NumeroCivico")));
 				orderFromTable.setBillingAddress(aBillingAddress);
-				while(rs.next()) 
+				rs.previous();
+				while(rs.next())
 				{
 					Product aProduct=new Product();
-					
+
 					aProduct.setId(rs.getString("Prodotto.ID"));
 					aProduct.setName(rs.getString("Nome"));
 					aProduct.setPrice(rs.getFloat("Prezzo"));
 					aProduct.setDescription(rs.getString("Descrizione"));
-					aProduct.setRemaining(rs.getInt("QuantitàRimanente"));
+					aProduct.setRemaining(rs.getInt("Quantitï¿½Rimanente"));
 					aProduct.setTag(rs.getString("Tag"));
 					orderFromTable.addProducts(aProduct);
 				}
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return orderFromTable;
 	}
 
@@ -162,20 +162,20 @@ public class OrderDAO implements DAO<Order>
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Contiene INNER JOIN Prodotto WHERE " + TABLE_NAME + ".ID = ?";
 
-		if (order!=null && !order.equals("")) 
+		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY Ordine.ID  " + order;
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, userID);
 
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			while(rs.next())
 			{
 				Order orderFromTable=new Order();
-				
+
 				orderFromTable.setId(rs.getString("Ordine.ID"));
 				orderFromTable.setDate(rs.getString("Data"));
 				orderFromTable.setTotal(rs.getFloat("Totale"));
@@ -187,37 +187,36 @@ public class OrderDAO implements DAO<Order>
 				aBillingAddress.setDistrict(rs.getString("Provincia"));
 				aBillingAddress.setHouseNumber(String.valueOf(rs.getInt("NumeroCivico")));
 				orderFromTable.setBillingAddress(aBillingAddress);
+				rs.previous();
 				while(rs.next() && rs.getString("Ordine.ID").equals(orderFromTable.getId()))
 				{
 					Product aProduct=new Product();
-					
+
 					aProduct.setId(rs.getString("Prodotto.ID"));
 					aProduct.setName(rs.getString("Nome"));
 					aProduct.setPrice(rs.getFloat("Prezzo"));
 					aProduct.setDescription(rs.getString("Descrizione"));
-					aProduct.setRemaining(rs.getInt("QuantitàRimanente"));
+					aProduct.setRemaining(rs.getInt("Quantitï¿½Rimanente"));
 					aProduct.setTag(rs.getString("Tag"));
 					orderFromTable.addProducts(aProduct);
 				}
-				if(!rs.getString("Ordine.ID").equals(orderFromTable.getId()))
-					rs.previous();
-				
+
 				orders.add(orderFromTable);
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return orders;
 	}
 
@@ -225,11 +224,11 @@ public class OrderDAO implements DAO<Order>
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		
+
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Data, Totale, StatoOrdine, ID_Utente, Stato, Via, Paese, Provincia, NumeroCivico) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
@@ -242,65 +241,65 @@ public class OrderDAO implements DAO<Order>
 			preparedStatement.setString(7, order.getBillingAddress().getCity());
 			preparedStatement.setString(8, order.getBillingAddress().getDistrict());
 			preparedStatement.setInt(9, Integer.parseInt(order.getBillingAddress().getHouseNumber()));
-			
+
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
 			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
+			}
 			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Order order) throws SQLException
 	{
 		Connection connection=null;
-		PreparedStatement preparedStatement=null;		
+		PreparedStatement preparedStatement=null;
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Data = ?, Totale = ?, StatoOrdine = ? " +
 				" WHERE ID = ?";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
-			preparedStatement=connection.prepareStatement(updateSQL);			
-			
+			preparedStatement=connection.prepareStatement(updateSQL);
+
 			preparedStatement.setString(1, order.getDate());
 			preparedStatement.setFloat(2, order.getTotal());
 			preparedStatement.setString(3, String.valueOf(order.getState()));
 			preparedStatement.setString(4, order.getId());
-			
+
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			rowsAffected=preparedStatement.executeUpdate();	
-			
+			rowsAffected=preparedStatement.executeUpdate();
+
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
-				if(preparedStatement!=null) 
+				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
-			}			
+			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
@@ -313,27 +312,27 @@ public class OrderDAO implements DAO<Order>
 
 		String deleteSQL="DELETE FROM " + TABLE_NAME + " WHERE ID = ?";
 
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, Integer.parseInt(order.getId()));
 
 			result=preparedStatement.executeUpdate();
-		} 
+		}
 		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return (result!=0);
 	}
 }

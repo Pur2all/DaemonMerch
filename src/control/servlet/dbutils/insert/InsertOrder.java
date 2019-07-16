@@ -18,18 +18,18 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
-@WebServlet("/InsertOrder")
-public class InsertOrder extends HttpServlet 
+@WebServlet("/servlet/InsertOrder")
+public class InsertOrder extends HttpServlet
 {
 	private static final long serialVersionUID = -6431170288308520299L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doPost(request, response);
 	}
 
 	@SuppressWarnings("unchecked")
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getParameterMap().containsKey(null))
 			response.sendRedirect("ErrorPage");
@@ -41,18 +41,18 @@ public class InsertOrder extends HttpServlet
 			State state=State.valueOf(request.getParameter("state"));
 			BillingAddress billingAddress=(BillingAddress) request.getAttribute("billingAddress");
 			ArrayList<Product> products=(ArrayList<Product>) request.getAttribute("products");
-			
+
 			Order order=new Order();
-			
+
 			order.setDate(date);
 			order.setTotal(total);
 			order.setState(state);
 			order.setBillingAddress(billingAddress);
 			for(Product p: products)
 				order.addProducts(p);
-			
+
 			OrderDAO orderDAO =new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);
-			
+
 			try
 			{
 				orderDAO.doSave(order);
@@ -61,7 +61,7 @@ public class InsertOrder extends HttpServlet
 			{
 				sqlException.printStackTrace();
 			}
-			
+
 			response.sendRedirect("Orders.jsp");
 		}
 	}

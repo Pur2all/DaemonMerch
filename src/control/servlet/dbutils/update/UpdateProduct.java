@@ -15,8 +15,8 @@ import model.bean.Product;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
 
-@WebServlet("/UpdateProduct")
-public class UpdateProduct extends HttpServlet 
+@WebServlet("/servlet/UpdateProduct")
+public class UpdateProduct extends HttpServlet
 {
 	private static final long serialVersionUID = 7917186766059734018L;
 

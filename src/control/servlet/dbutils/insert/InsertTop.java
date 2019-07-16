@@ -16,17 +16,17 @@ import model.bean.Top;
 import model.dao.DBConnectionPool;
 import model.dao.TopDAO;
 
-@WebServlet("/InsertTop")
-public class InsertTop extends HttpServlet 
+@WebServlet("/servlet/InsertTop")
+public class InsertTop extends HttpServlet
 {
 	private static final long serialVersionUID = 1238131106097045840L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doPost(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getParameterMap().containsKey(null))
 			response.sendRedirect("ErrorPage");
@@ -38,9 +38,9 @@ public class InsertTop extends HttpServlet
 			Size size=Size.valueOf(request.getParameter("size"));
 			Category category=Category.valueOf(request.getParameter("category"));
 			PrintType printType=PrintType.valueOf(request.getParameter("printType"));
-			
+
 			Top product=new Top();
-			
+
 			product.setName(name);
 			product.setDescription(description);
 			product.setTag(tag);
@@ -50,18 +50,18 @@ public class InsertTop extends HttpServlet
 			product.setSize(size);
 			product.setCategory(category);
 			product.setPrintType(printType);
-			
+
 			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-			
+
 			try
 			{
 				topDAO.doSave(product);
-			} 
+			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-			
+
 			getServletContext().getRequestDispatcher("InsertImage").forward(request, response);
 		}
 	}

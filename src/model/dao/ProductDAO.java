@@ -12,16 +12,16 @@ import model.bean.Product;
 public class ProductDAO implements DAO<Product>
 {
 	private static final String TABLE_NAME="Prodotto";
-	
+
 	private DBConnectionPool dbConnectionPool;
-	
+
 	public ProductDAO(DBConnectionPool aDBConnectionPool)
 	{
 		dbConnectionPool=aDBConnectionPool;
-		
+
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
-	
+
 	public Collection<Product> doRetrieveByName(String productName) throws SQLException
 	{
 		Connection connection=null;
@@ -30,58 +30,59 @@ public class ProductDAO implements DAO<Product>
 		Collection<Product> products=new LinkedList<Product>();
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Nome LIKE ?";
-		
-		if (productName!=null && !productName.equals("")) 
+
+		if (productName!=null && !productName.equals(""))
 		{
-			try 
+			try
 			{
 				connection=dbConnectionPool.getConnection();
 				preparedStatement=connection.prepareStatement(selectSQL);
 				preparedStatement.setString(1, "%" + productName + "%");
-				
+
 				ResultSet rs=preparedStatement.executeQuery();
-				
+
 				while (rs.next())
 				{
 					Product productFromTable=new Product();
-					
+
 					productFromTable.setId(rs.getString("ID"));
 					productFromTable.setName(rs.getString("Nome"));
 					productFromTable.setPrice(rs.getFloat("Prezzo"));
 					productFromTable.setDescription(rs.getString("Descrizione"));
-					productFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
+					productFromTable.setRemaining(rs.getInt("Quantitï¿½Rimanente"));
 					productFromTable.setTag(rs.getString("Tag"));
 					productFromTable.setArtistId(rs.getString("ID_Artista"));
+
 					products.add(productFromTable);
 				}
-			} 
-			finally 
+			}
+			finally
 			{
-				try 
+				try
 				{
 					if (preparedStatement!=null)
 						preparedStatement.close();
-				} 
-				finally 
+				}
+				finally
 				{
 					dbConnectionPool.releaseConnection(connection);
 				}
 			}
-			
+
 			return products;
-		} 
+		}
 		else
 			try
 			{
 				throw new Exception();
-			} 
+			}
 			catch (Exception e)
 			{
 				e.printStackTrace();
-			}	
+			}
 		return null;
 	}
-	
+
 	public Product doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -91,7 +92,7 @@ public class ProductDAO implements DAO<Product>
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
 
-		try 
+		try
 		{
 			int code=(int) key;
 			connection=dbConnectionPool.getConnection();
@@ -100,30 +101,30 @@ public class ProductDAO implements DAO<Product>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while (rs.next()) 
+			while (rs.next())
 			{
 				productFromTable.setId(rs.getString("ID"));
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
 				productFromTable.setDescription(rs.getString("Descrizione"));
-				productFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
+				productFromTable.setRemaining(rs.getInt("Quantitï¿½Rimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return productFromTable;
 	}
 
@@ -136,43 +137,44 @@ public class ProductDAO implements DAO<Product>
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME;
 
-		if (order!=null && !order.equals("")) 
+		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
 
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			while (rs.next())
 			{
 				Product productFromTable=new Product();
-				
+
 				productFromTable.setId(rs.getString("ID"));
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
 				productFromTable.setDescription(rs.getString("Descrizione"));
-				productFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
+				productFromTable.setRemaining(rs.getInt("Quantitï¿½Rimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
+
 				products.add(productFromTable);
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if (preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return products;
 	}
 
@@ -180,11 +182,11 @@ public class ProductDAO implements DAO<Product>
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Prezzo, Descrizione, QuantitàRimanente, Tag, ID_Artista) VALUES (?, ?, ?, ?, ?, ?)";
+
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Prezzo, Descrizione, Quantitï¿½Rimanente, Tag, ID_Artista) VALUES (?, ?, ?, ?, ?, ?)";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
@@ -198,38 +200,38 @@ public class ProductDAO implements DAO<Product>
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Product product) throws SQLException
 	{
 		Connection connection=null;
-		PreparedStatement preparedStatement=null;		
+		PreparedStatement preparedStatement=null;
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
-				" Nome = ?, Prezzo = ?, Descrizione = ?, QuantitàRimanente = ?, Tag = ?, ID_Artista = ? " +
+				" Nome = ?, Prezzo = ?, Descrizione = ?, Quantitï¿½Rimanente = ?, Tag = ?, ID_Artista = ? " +
 				" WHERE ID = ?";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
-			preparedStatement=connection.prepareStatement(updateSQL);			
-			
+			preparedStatement=connection.prepareStatement(updateSQL);
+
 			preparedStatement.setString(1, product.getName());
 			preparedStatement.setFloat(2, product.getPrice());
 			preparedStatement.setString(3, product.getDescription());
@@ -237,25 +239,25 @@ public class ProductDAO implements DAO<Product>
 			preparedStatement.setString(5, product.getTag());
 			preparedStatement.setString(6, product.getArtistId());
 			preparedStatement.setString(7, product.getId());
-			
+
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			rowsAffected=preparedStatement.executeUpdate();	
-			
+			rowsAffected=preparedStatement.executeUpdate();
+
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
-				if(preparedStatement!=null) 
+				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
-			}			
+			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
@@ -268,28 +270,27 @@ public class ProductDAO implements DAO<Product>
 
 		String deleteSQL="DELETE FROM " + TABLE_NAME + " WHERE ID = ?";
 
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, Integer.parseInt(product.getId()));
 
 			result=preparedStatement.executeUpdate();
-		} 
+		}
 		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return (result!=0);
 	}
-
 }

@@ -15,8 +15,8 @@ import model.bean.Product;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
 
-@WebServlet("/DeleteProduct")
-public class DeleteProduct extends HttpServlet 
+@WebServlet("/servlet/DeleteProduct")
+public class DeleteProduct extends HttpServlet
 {
 	private static final long serialVersionUID = -6548247580467322903L;
 

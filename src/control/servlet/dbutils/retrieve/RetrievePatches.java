@@ -15,19 +15,19 @@ import model.bean.Patch;
 import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 
-@WebServlet("/RetrievePatches")
-public class RetrievePatches extends HttpServlet 
+@WebServlet("/servlet/RetrievePatches")
+public class RetrievePatches extends HttpServlet
 {
 	private static final long serialVersionUID = 3964359746975342691L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		
+
 		try
 		{
 			LinkedList<Patch> patches=(LinkedList<Patch>) patchDAO.doRetrieveAll(null);
-			
+
 			patches.sort(new Comparator<Patch>()
 			{
 				public int compare(Patch first, Patch second)
@@ -35,18 +35,18 @@ public class RetrievePatches extends HttpServlet
 					return first.getName().compareTo(second.getName());
 				}
 			});
-			
+
 			request.setAttribute("patches", patches);
-			
+
 			getServletContext().getRequestDispatcher("Artist").forward(request, response);
-		} 
+		}
 		catch (SQLException sqlException)
 		{
 			sqlException.printStackTrace();
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doGet(request, response);
 	}

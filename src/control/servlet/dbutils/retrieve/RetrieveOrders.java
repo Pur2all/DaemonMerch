@@ -15,14 +15,14 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
-@WebServlet("/RetrieveOrders")
-public class RetrieveOrders extends HttpServlet 
+@WebServlet("/servlet/RetrieveOrders")
+public class RetrieveOrders extends HttpServlet
 {
 	private static final long serialVersionUID = 5046150917986327220L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), 
+		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 		try
