@@ -16,7 +16,7 @@ import model.bean.User;
 import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/servlet/DeleteCreditCard")
+@WebServlet("/servlet/auth/DeleteCreditCard")
 public class DeleteCreditCard extends HttpServlet
 {
 	private static final long serialVersionUID = 25258374114530719L;

@@ -15,7 +15,7 @@ import model.bean.Patch;
 import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 
-@WebServlet("/servlet/InsertPatch")
+@WebServlet("/servlet/admin/InsertPatch")
 public class InsertPatch extends HttpServlet
 {
 	private static final long serialVersionUID = 856348204473800058L;
@@ -28,7 +28,7 @@ public class InsertPatch extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("patch")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			Patch product=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
@@ -44,7 +44,7 @@ public class InsertPatch extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("InsertImage").forward(request, response);
+			getServletContext().getRequestDispatcher(request.getContextPath() + "servlet/auth/InsertImage").forward(request, response);
 		}
 	}
 }

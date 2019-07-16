@@ -16,7 +16,7 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
-@WebServlet("/servlet/DeleteOrder")
+@WebServlet("/servlet/auth/DeleteOrder")
 public class DeleteOrder extends HttpServlet
 {
 	private static final long serialVersionUID = 6082078324685114470L;

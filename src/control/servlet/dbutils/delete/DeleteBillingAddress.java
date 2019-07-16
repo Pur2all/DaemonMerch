@@ -16,7 +16,7 @@ import model.bean.User;
 import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/servlet/DeleteBillingAddress")
+@WebServlet("/servlet/auth/DeleteBillingAddress")
 public class DeleteBillingAddress extends HttpServlet
 {
 	private static final long serialVersionUID = -7209622442712731144L;
