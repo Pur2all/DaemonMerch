@@ -6,7 +6,6 @@ import java.sql.SQLException;
 import javax.servlet.*;
 import javax.servlet.annotation.*;
 import javax.servlet.http.*;
-import javax.sql.rowset.serial.SerialBlob;
 
 import model.bean.Image;
 import model.dao.DBConnectionPool;
@@ -33,14 +32,14 @@ public class InsertImage extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Image image=ImageGetter.getImage(request);
-		
+
 		ImageDAO imageDAO=new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 				Integer.parseInt(request.getParameter("id")), TypeOfImage.valueOf(request.getParameter("typeOfImage")));
 
 		try
 		{
 			imageDAO.doSave(image);
-		} 
+		}
 		catch (SQLException sqlException)
 		{
 			sqlException.printStackTrace();

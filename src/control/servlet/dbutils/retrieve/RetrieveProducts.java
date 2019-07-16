@@ -37,8 +37,6 @@ public class RetrieveProducts extends HttpServlet
 			});
 
 			request.setAttribute("products", products);
-
-			getServletContext().getRequestDispatcher("Artist").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{
