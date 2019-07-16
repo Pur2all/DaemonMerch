@@ -7,7 +7,7 @@
 	<link rel="stylesheet" type="text/css" href="./Css/Header.css">
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script type="text/javascript">
-		
+
 	</script>
 </head>
 
@@ -18,7 +18,7 @@
 		</logo>
 
 		<div class="wrap-item">
-			<form action="SearchProduct" method="get">
+			<form action="servlet/SearchProduct" method="get">
 				<div class="searchbar-item">
 					<input type="text" class="searchTerm" placeholder="Search..." name="q">
 					<button type="submit" class="searchButton">
