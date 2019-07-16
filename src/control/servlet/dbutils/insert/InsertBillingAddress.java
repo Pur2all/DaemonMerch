@@ -17,7 +17,7 @@ import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
 
-@WebServlet("/servlet/InsertBillingAddress")
+@WebServlet("/servlet/auth/InsertBillingAddress")
 public class InsertBillingAddress extends HttpServlet
 {
 	private static final long serialVersionUID = -3229112474089218224L;

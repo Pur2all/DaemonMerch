@@ -15,7 +15,7 @@ import model.bean.Artist;
 import model.dao.ArtistDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/servlet/DeleteArtist")
+@WebServlet("/servlet/admin/DeleteArtist")
 public class DeleteArtist extends HttpServlet
 {
 	private static final long serialVersionUID = -2768257519745818809L;

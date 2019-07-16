@@ -15,7 +15,7 @@ import model.bean.Top;
 import model.dao.DBConnectionPool;
 import model.dao.TopDAO;
 
-@WebServlet("/servlet/UpdateTop")
+@WebServlet("/servlet/admin/UpdateTop")
 public class UpdateTop extends HttpServlet
 {
 	private static final long serialVersionUID = 7835836504205280483L;

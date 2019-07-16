@@ -15,7 +15,7 @@ import model.bean.Patch;
 import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 
-@WebServlet("/servlet/DeletePatch")
+@WebServlet("/servlet/admin/DeletePatch")
 public class DeletePatch extends HttpServlet
 {
 	private static final long serialVersionUID = -2285916888690744812L;
