@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.bean.WishlistProduct;
 import model.dao.DBConnectionPool;
 import model.dao.WishlistDAO;
@@ -25,30 +27,23 @@ public class InsertProductInWishlist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("wishlistProduct")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String dateOfAddition=request.getParameter("dateOfAddition");
-			int quantity=Integer.parseInt(request.getParameter("quantity"));
-
-			WishlistProduct product=new WishlistProduct();
-
-			product.setDateOfAddition(dateOfAddition);
-			product.setQuantity(quantity);
+			WishlistProduct product=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);
 
 			WishlistDAO productDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				productDAO.doSave(product);
+				response.setContentType("text/plain");
+				response.getWriter().write(productDAO.doUpdate(product) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-
-			getServletContext().getRequestDispatcher("InsertImage").forward(request, response);
 		}
 	}
 }

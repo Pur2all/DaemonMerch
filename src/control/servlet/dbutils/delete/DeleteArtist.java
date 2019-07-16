@@ -27,13 +27,13 @@ public class DeleteArtist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("artist")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
 			Artist artist=new Gson().fromJson((String) request.getAttribute("artist"), Artist.class);
 
-			ArtistDAO artistDAO =new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{

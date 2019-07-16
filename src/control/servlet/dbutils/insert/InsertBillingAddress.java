@@ -1,5 +1,7 @@
 package control.servlet.dbutils.insert;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -27,34 +29,24 @@ public class InsertBillingAddress extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("billingAddress")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String state=request.getParameter("state"), street=request.getParameter("street"), city=request.getParameter("city"),
-					district=request.getParameter("district"), houseNumber=request.getParameter("houseNumber");
-
-			BillingAddress billingAddress=new BillingAddress();
-
-			billingAddress.setState(state);
-			billingAddress.setStreet(street);
-			billingAddress.setCity(city);
-			billingAddress.setDistrict(district);
-			billingAddress.setHouseNumber(houseNumber);
+			BillingAddress billingAddress=new Gson().fromJson((String) request.getAttribute("billingAddress"), BillingAddress.class);
 
 			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try
 			{
-				billingAddressDAO.doSave(billingAddress);
+				response.setContentType("text/plain");
+				response.getWriter().write(billingAddressDAO.doUpdate(billingAddress) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-
-			response.sendRedirect("InsertBillingAddress.jsp");
 		}
 	}
 }

@@ -37,8 +37,6 @@ public class RetrieveTops extends HttpServlet
 			});
 
 			request.setAttribute("tops", tops);
-
-			getServletContext().getRequestDispatcher("Artist").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{
@@ -50,5 +48,4 @@ public class RetrieveTops extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }

@@ -1,5 +1,7 @@
 package control.servlet.dbutils.insert;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -26,31 +28,24 @@ public class InsertCreditCard extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("creditCard")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String cvv=request.getParameter("cvv"), expireDate=request.getParameter("expireDate"), number=request.getParameter("number");
-			int userID=Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId());
-
-			CreditCard creditCard=new CreditCard();
-
-			creditCard.setCVV(cvv);
-			creditCard.setExpireDate(expireDate);
-			creditCard.setNumber(number);
+			CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
+			int userID=Integer.parseInt(((User)request.getSession().getAttribute("userInfo")).getId());
 
 			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);
 
 			try
 			{
-				creditCardDAO.doSave(creditCard);
+				response.setContentType("text/plain");
+				response.getWriter().write(creditCardDAO.doUpdate(creditCard) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-
-			response.sendRedirect("InsertBillingAddress.jsp");
 		}
 	}
 }

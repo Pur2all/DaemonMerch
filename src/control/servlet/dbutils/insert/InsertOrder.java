@@ -1,8 +1,9 @@
 package control.servlet.dbutils.insert;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.BillingAddress;
 import model.bean.Order;
-import model.bean.Product;
-import model.bean.State;
 import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
@@ -28,28 +26,15 @@ public class InsertOrder extends HttpServlet
 		doPost(request, response);
 	}
 
-	@SuppressWarnings("unchecked")
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("order")==null || ((User) request.getSession().getAttribute("userInfo")).getId()==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
 			int userID=Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId());
-			String date=request.getParameter("date");
-			float total=Float.parseFloat(request.getParameter("total"));
-			State state=State.valueOf(request.getParameter("state"));
-			BillingAddress billingAddress=(BillingAddress) request.getAttribute("billingAddress");
-			ArrayList<Product> products=(ArrayList<Product>) request.getAttribute("products");
 
-			Order order=new Order();
-
-			order.setDate(date);
-			order.setTotal(total);
-			order.setState(state);
-			order.setBillingAddress(billingAddress);
-			for(Product p: products)
-				order.addProducts(p);
+			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
 
 			OrderDAO orderDAO =new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);
 
@@ -62,7 +47,7 @@ public class InsertOrder extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			response.sendRedirect("Orders.jsp");
+			response.sendRedirect("Orders");
 		}
 	}
 }

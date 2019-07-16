@@ -28,24 +28,19 @@ public class UpdateOrder extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
-			response.sendRedirect("ErrorPage");
-		else
+		Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
+
+		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
+
+		try
 		{
-			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
-
-			OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
-
-			try
-			{
-				response.setContentType("text/plain");
-				response.getWriter().write(orderDAO.doUpdate(order) ? 1 : 0);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
+			response.setContentType("text/plain");
+			response.getWriter().write(orderDAO.doUpdate(order) ? 1 : 0);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

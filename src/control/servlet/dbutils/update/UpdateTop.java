@@ -27,23 +27,18 @@ public class UpdateTop extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
-			response.sendRedirect("ErrorPage");
-		else
+		Top top=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
+
+		TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+		try
 		{
-			Top top=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
-
-			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
-			try
-			{
-				response.setContentType("text/plain");
-				response.getWriter().write(topDAO.doUpdate(top) ? 1 : 0);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
+			response.setContentType("text/plain");
+			response.getWriter().write(topDAO.doUpdate(top) ? 1 : 0);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

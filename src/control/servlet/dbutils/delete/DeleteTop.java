@@ -27,7 +27,7 @@ public class DeleteTop extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("top")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{

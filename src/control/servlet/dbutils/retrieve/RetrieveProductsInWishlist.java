@@ -28,8 +28,6 @@ public class RetrieveProductsInWishlist extends HttpServlet
 			LinkedList<WishlistProduct> wishlistProducts=(LinkedList<WishlistProduct>) wishlistDAO.doRetrieveByUserID((int) request.getAttribute("userID"));
 
 			request.setAttribute("wishlistProducts", wishlistProducts);
-
-			getServletContext().getRequestDispatcher("Wishlist").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{
@@ -41,5 +39,4 @@ public class RetrieveProductsInWishlist extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }

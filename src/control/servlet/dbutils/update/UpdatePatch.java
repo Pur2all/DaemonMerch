@@ -27,23 +27,18 @@ public class UpdatePatch extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
-			response.sendRedirect("ErrorPage");
-		else
+		Patch patch=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
+
+		PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+		try
 		{
-			Patch patch=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
-
-			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
-			try
-			{
-				response.setContentType("text/plain");
-				response.getWriter().write(patchDAO.doUpdate(patch) ? 1 : 0);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
+			response.setContentType("text/plain");
+			response.getWriter().write(patchDAO.doUpdate(patch) ? 1 : 0);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

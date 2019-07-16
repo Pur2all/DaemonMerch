@@ -27,7 +27,7 @@ public class DeleteProduct extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("product")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{

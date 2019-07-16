@@ -28,26 +28,21 @@ public class UpdateBillingAddress extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
-			response.sendRedirect("ErrorPage");
-		else
+		BillingAddress oldBillingAddress=new Gson().fromJson((String) request.getAttribute("oldBillingAddress"), BillingAddress.class);
+		BillingAddress newBillingAddress=new Gson().fromJson((String) request.getAttribute("newBillingAddress"), BillingAddress.class);
+
+		BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
+
+		try
 		{
-			BillingAddress oldBillingAddress=new Gson().fromJson((String) request.getAttribute("oldBillingAddress"), BillingAddress.class);
-			BillingAddress newBillingAddress=new Gson().fromJson((String) request.getAttribute("newBillingAddress"), BillingAddress.class);
-
-			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
-
-			try
-			{
-				response.setContentType("text/plain");
-				billingAddressDAO.doDelete(oldBillingAddress);
-				response.getWriter().write(billingAddressDAO.doSave(newBillingAddress) ? 1 : 0);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
+			response.setContentType("text/plain");
+			billingAddressDAO.doDelete(oldBillingAddress);
+			response.getWriter().write(billingAddressDAO.doSave(newBillingAddress) ? 1 : 0);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

@@ -31,18 +31,23 @@ public class InsertImage extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		Image image=ImageGetter.getImage(request);
-
-		ImageDAO imageDAO=new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(request.getParameter("id")), TypeOfImage.valueOf(request.getParameter("typeOfImage")));
-
-		try
+		if(request.getParameter("id")==null || request.getParameter("typeOfImage")==null)
+			response.sendRedirect("ErrorPage");
+		else
 		{
-			imageDAO.doSave(image);
-		}
-		catch (SQLException sqlException)
-		{
-			sqlException.printStackTrace();
+			Image image=ImageGetter.getImage(request);
+
+			ImageDAO imageDAO=new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+					Integer.parseInt(request.getParameter("id")), TypeOfImage.valueOf(request.getParameter("typeOfImage")));
+
+			try
+			{
+				imageDAO.doSave(image);
+			}
+			catch (SQLException sqlException)
+			{
+				sqlException.printStackTrace();
+			}
 		}
 	}
 }

@@ -38,7 +38,7 @@ public class RetrieveArtists extends HttpServlet
 
 			request.setAttribute("artists", artists);
 
-			getServletContext().getRequestDispatcher("Artist").forward(request, response);
+			response.sendRedirect("Artists");
 		}
 		catch (SQLException sqlException)
 		{

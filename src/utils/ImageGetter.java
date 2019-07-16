@@ -1,6 +1,8 @@
 package utils;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -22,7 +24,7 @@ public class ImageGetter
 			{
 				try
 				{
-					image.setImage(new SerialBlob(part.getInputStream().readAllBytes()));
+					image.setImage(new SerialBlob(readAllBytes(part.getInputStream())));
 				}
 				catch(Exception exception)
 				{
@@ -45,5 +47,17 @@ public class ImageGetter
 				return s.substring(s.indexOf("=") + 2, s.length() - 1);
 
 		return "";
+	}
+	
+	private static byte[] readAllBytes(InputStream inputStream) throws IOException
+	{
+		byte[] buffer=new byte[8192];
+	    int bytesRead;
+	    ByteArrayOutputStream output=new ByteArrayOutputStream();
+	    
+	    while((bytesRead=inputStream.read(buffer))!=-1)
+	        output.write(buffer, 0, bytesRead);
+	    
+	    return output.toByteArray();
 	}
 }

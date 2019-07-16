@@ -1,5 +1,7 @@
 package control.servlet.dbutils.insert;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -10,7 +12,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Patch;
-import model.bean.PatchType;
 import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 
@@ -26,27 +27,11 @@ public class InsertPatch extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("patch")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			String name=request.getParameter("name"), description=request.getParameter("description"), tag=request.getParameter("tag"),
-					material=request.getParameter("material"), measures=request.getParameter("measures");
-			float price=Float.parseFloat(request.getParameter("price"));
-			int remaining=Integer.parseInt(request.getParameter("remaining")), artistID=Integer.parseInt(request.getParameter("artistId"));
-			PatchType patchType=PatchType.valueOf(request.getParameter("patchType"));
-
-			Patch product=new Patch();
-
-			product.setName(name);
-			product.setDescription(description);
-			product.setTag(tag);
-			product.setPrice(price);
-			product.setRemaining(remaining);
-			product.setArtistId(Integer.toString(artistID));
-			product.setMaterial(material);
-			product.setMeasures(measures);
-			product.setPatchType(patchType);
+			Patch product=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
 
 			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 

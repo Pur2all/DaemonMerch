@@ -28,7 +28,7 @@ public class DeleteCreditCard extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getSession().getAttribute("userInfo")==null || request.getAttribute("credtiCard")==null)
 			response.sendRedirect("ErrorPage");
 		else
 		{
