@@ -11,6 +11,10 @@
     <listener-class>control.servlet.webapp.ContextListener</listener-class>
   </listener>
 
+  <error-page>
+    <location>/HTML/ErrorPage.jsp</location>
+  </error-page>
+
   <!-- jsp mapping -->
 
   <!-- login jsp mapping -->
