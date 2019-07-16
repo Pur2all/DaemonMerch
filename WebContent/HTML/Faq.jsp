@@ -12,7 +12,7 @@
 	
 		<dl class="faq">
 			<div class="category-faq">
-				<div class="cat-name">Categoria 1</div>
+				<div class="cat-name">Categoria Uno</div>
 			
 				<dt>Question?</dt>
 				<dd class="answer"><div>Answer!</div></dd>
