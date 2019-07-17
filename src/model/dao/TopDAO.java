@@ -98,7 +98,7 @@ public class TopDAO implements DAO<Top>
 				topFromTable.setName(rs.getString("Nome"));
 				topFromTable.setPrice(rs.getFloat("Prezzo"));
 				topFromTable.setDescription(rs.getString("Descrizione"));
-				topFromTable.setRemaining(rs.getInt("Quantit�Rimanente"));
+				topFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				topFromTable.setTag(rs.getString("Tag"));
 				topFromTable.setArtistId(rs.getString("ID_Artista"));
 				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));

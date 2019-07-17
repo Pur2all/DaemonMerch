@@ -96,7 +96,7 @@ public class PatchDAO implements DAO<Patch>
 				patchFromTable.setName(rs.getString("Nome"));
 				patchFromTable.setPrice(rs.getFloat("Prezzo"));
 				patchFromTable.setDescription(rs.getString("Descrizione"));
-				patchFromTable.setRemaining(rs.getInt("Quantit�Rimanente"));
+				patchFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				patchFromTable.setTag(rs.getString("Tag"));
 				patchFromTable.setArtistId(rs.getString("ID_Artista"));
 				patchFromTable.setMeasures(rs.getString("Misure"));

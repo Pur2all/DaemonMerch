@@ -50,11 +50,11 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
 				productFromTable.setDescription(rs.getString("Descrizione"));
-				productFromTable.setRemaining(rs.getInt("Quantit�Rimanente"));
+				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
 				productFromTable.setDateOfAddition("DataAggiunzione");
-				productFromTable.setQuantity(rs.getInt("Quantit�"));
+				productFromTable.setQuantity(rs.getInt("Quantita"));
 				products.add(productFromTable);
 			}
 		}
@@ -98,7 +98,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
 				productFromTable.setDescription(rs.getString("Descrizione"));
-				productFromTable.setRemaining(rs.getInt("Quantit�Rimanente"));
+				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
 				productFromTable.setDateOfAddition("DataAggiunzione");
@@ -148,7 +148,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
 				productFromTable.setDescription(rs.getString("Descrizione"));
-				productFromTable.setRemaining(rs.getInt("Quantit�Rimanente"));
+				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
 				productFromTable.setDateOfAddition("DataAggiunzione");
@@ -176,7 +176,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (ID_Utente, ID_Prodotto, DataAggiunzione, Quantit�) VALUES (?, ?, ?, ?)";
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (ID_Utente, ID_Prodotto, DataAggiunzione, Quantita) VALUES (?, ?, ?, ?)";
 		int rowsAffected;
 
 		try
@@ -214,7 +214,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		PreparedStatement preparedStatement=null;
 
 		String updateSQL = "UPDATE " + TABLE_NAME +
-				" SET  DataAggiunzione = ?, Quantit� = ? " +
+				" SET  DataAggiunzione = ?, Quantita = ? " +
 				" WHERE ID_Prodotto = ? AND ID_Utente = ?";
 		int rowsAffected;
 

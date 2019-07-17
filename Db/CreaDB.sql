@@ -66,7 +66,7 @@ CREATE TABLE Prodotto(
     Nome VARCHAR(15) NOT NULL,
     Prezzo FLOAT NOT NULL,
     Descrizione VARCHAR(200),
-    QuantitàRimanente INT NOT NULL,
+    QuantitaRimanente INT NOT NULL,
     Tag VARCHAR(15) NOT NULL,
     ID_Artista INT,
     PRIMARY KEY (ID),
@@ -74,7 +74,7 @@ CREATE TABLE Prodotto(
 		ON DELETE RESTRICT
         ON UPDATE CASCADE,
 
-    CHECK (QuantitàRimanente>=0),
+    CHECK (QuantitaRimanente>=0),
     CHECK (Prezzo>0)
 )ENGINE=InnoDB, AUTO_INCREMENT=1;
 
@@ -145,7 +145,7 @@ CREATE TABLE Ha(
 CREATE TABLE VorrebbeAcquistare(
 	ID_Utente INT NOT NULL,
     ID_Prodotto INT NOT NULL,
-    Quantità INT NOT NULL,
+    Quantita INT NOT NULL,
     DataAggiunzione CHAR(10) NOT NULL,
     PRIMARY KEY (ID_Utente, ID_Prodotto),
     FOREIGN KEY (ID_Utente) REFERENCES Utente(ID)
@@ -155,13 +155,13 @@ CREATE TABLE VorrebbeAcquistare(
 		ON DELETE CASCADE
         ON UPDATE CASCADE,
 
-    CHECK (Quantità>0)
+    CHECK (Quantita>0)
 )ENGINE=InnoDB;
 
 CREATE TABLE Contiene(
 	ID_Ordine INT NOT NULL,
     ID_Prodotto INT NOT NULL,
-    Quantità INT NOT NULL,
+    Quantita INT NOT NULL,
     PRIMARY KEY (ID_Ordine, ID_Prodotto),
     FOREIGN KEY (ID_Ordine) REFERENCES Ordine(ID)
 		ON DELETE CASCADE
@@ -170,5 +170,5 @@ CREATE TABLE Contiene(
 		ON DELETE RESTRICT
         ON UPDATE CASCADE,
 
-     CHECK (Quantità>0)
+     CHECK (Quantita>0)
 )ENGINE=InnoDB;

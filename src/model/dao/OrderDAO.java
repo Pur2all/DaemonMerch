@@ -70,7 +70,7 @@ public class OrderDAO implements DAO<Order>
 					aProduct.setName(rs.getString("Nome"));
 					aProduct.setPrice(rs.getFloat("Prezzo"));
 					aProduct.setDescription(rs.getString("Descrizione"));
-					aProduct.setRemaining(rs.getInt("Quantit�Rimanente"));
+					aProduct.setRemaining(rs.getInt("QuantitaRimanente"));
 					aProduct.setTag(rs.getString("Tag"));
 					orderFromTable.addProducts(aProduct);
 				}
@@ -134,7 +134,7 @@ public class OrderDAO implements DAO<Order>
 					aProduct.setName(rs.getString("Nome"));
 					aProduct.setPrice(rs.getFloat("Prezzo"));
 					aProduct.setDescription(rs.getString("Descrizione"));
-					aProduct.setRemaining(rs.getInt("Quantit�Rimanente"));
+					aProduct.setRemaining(rs.getInt("QuantitaRimanente"));
 					aProduct.setTag(rs.getString("Tag"));
 					orderFromTable.addProducts(aProduct);
 				}
@@ -200,7 +200,7 @@ public class OrderDAO implements DAO<Order>
 					aProduct.setName(rs.getString("Nome"));
 					aProduct.setPrice(rs.getFloat("Prezzo"));
 					aProduct.setDescription(rs.getString("Descrizione"));
-					aProduct.setRemaining(rs.getInt("Quantit�Rimanente"));
+					aProduct.setRemaining(rs.getInt("QuantitaRimanente"));
 					aProduct.setTag(rs.getString("Tag"));
 					orderFromTable.addProducts(aProduct);
 				}

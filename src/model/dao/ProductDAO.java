@@ -53,7 +53,7 @@ public class ProductDAO implements DAO<Product>
 					productFromTable.setName(rs.getString("Nome"));
 					productFromTable.setPrice(rs.getFloat("Prezzo"));
 					productFromTable.setDescription(rs.getString("Descrizione"));
-					productFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
+					productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 					productFromTable.setTag(rs.getString("Tag"));
 					productFromTable.setArtistId(rs.getString("ID_Artista"));
 
@@ -111,7 +111,7 @@ public class ProductDAO implements DAO<Product>
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
 				productFromTable.setDescription(rs.getString("Descrizione"));
-				productFromTable.setRemaining(rs.getInt("Quantit�Rimanente"));
+				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
 			}
@@ -160,7 +160,7 @@ public class ProductDAO implements DAO<Product>
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
 				productFromTable.setDescription(rs.getString("Descrizione"));
-				productFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
+				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
 
@@ -188,7 +188,7 @@ public class ProductDAO implements DAO<Product>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Prezzo, Descrizione, Quantit�Rimanente, Tag, ID_Artista) VALUES (?, ?, ?, ?, ?, ?)";
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Prezzo, Descrizione, QuantitaRimanente, Tag, ID_Artista) VALUES (?, ?, ?, ?, ?, ?)";
 		int rowsAffected;
 
 		try
@@ -228,7 +228,7 @@ public class ProductDAO implements DAO<Product>
 		PreparedStatement preparedStatement=null;
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
-				" Nome = ?, Prezzo = ?, Descrizione = ?, Quantit�Rimanente = ?, Tag = ?, ID_Artista = ? " +
+				" Nome = ?, Prezzo = ?, Descrizione = ?, QuantitaRimanente = ?, Tag = ?, ID_Artista = ? " +
 				" WHERE ID = ?";
 		int rowsAffected;
 
