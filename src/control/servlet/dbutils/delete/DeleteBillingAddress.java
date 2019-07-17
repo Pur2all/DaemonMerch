@@ -29,7 +29,7 @@ public class DeleteBillingAddress extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("billingAddress")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			BillingAddress billingAddress=new Gson().fromJson((String) request.getAttribute("billingAddress"), BillingAddress.class);

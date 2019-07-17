@@ -29,7 +29,7 @@ public class InsertOrder extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("order")==null || ((User) request.getSession().getAttribute("userInfo")).getId()==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			int userID=Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId());
@@ -47,7 +47,7 @@ public class InsertOrder extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			response.sendRedirect("Orders");
+			response.sendRedirect(request.getContextPath() + "/Orders");
 		}
 	}
 }

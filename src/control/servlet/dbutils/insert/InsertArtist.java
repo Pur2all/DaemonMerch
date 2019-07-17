@@ -28,7 +28,7 @@ public class InsertArtist extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getParameter("name")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			String name=request.getParameter("name");
@@ -57,7 +57,7 @@ public class InsertArtist extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("InsertImage").forward(request, response);
+			getServletContext().getRequestDispatcher("servlet/auth/InsertImage").forward(request, response);
 		}
 	}
 }

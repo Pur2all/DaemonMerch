@@ -29,7 +29,7 @@ public class DeleteCreditCard extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getSession().getAttribute("userInfo")==null || request.getAttribute("credtiCard")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);

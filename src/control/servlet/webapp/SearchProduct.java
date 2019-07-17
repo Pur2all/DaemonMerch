@@ -34,12 +34,12 @@ public class SearchProduct extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("Result").forward(request, response);
+			getServletContext().getRequestDispatcher(request.getContextPath() + "/Result").forward(request, response);
 		}
 		else
 		{
 			request.setAttribute("error", "Invalid query");
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		}
 	}
 

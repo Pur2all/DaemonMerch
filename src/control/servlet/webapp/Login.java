@@ -25,7 +25,7 @@ public class Login extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String username=(String) request.getParameter("username"), password=(String) request.getParameter("password");
+		String username=request.getParameter("username"), password=request.getParameter("password");
 
 		if(username!=null && password!=null)
 		{
@@ -51,7 +51,7 @@ public class Login extends HttpServlet
 			}
 		}
 		else
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 	}
 
 }

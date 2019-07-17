@@ -28,7 +28,7 @@ public class DeleteTop extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("top")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			Top top=new Gson().fromJson((String) request.getAttribute("top"), Top.class);

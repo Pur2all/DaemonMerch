@@ -29,7 +29,7 @@ public class DeleteOrder extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("order")==null || request.getSession().getAttribute("userInfo")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);

@@ -28,7 +28,7 @@ public class InsertProductInWishlist extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("wishlistProduct")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			WishlistProduct product=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);

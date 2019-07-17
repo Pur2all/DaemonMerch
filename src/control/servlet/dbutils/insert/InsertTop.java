@@ -28,7 +28,7 @@ public class InsertTop extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("top")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			Top product=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
@@ -44,7 +44,7 @@ public class InsertTop extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("InsertImage").forward(request, response);
+			getServletContext().getRequestDispatcher(request.getContextPath() + "/InsertImage").forward(request, response);
 		}
 	}
 }

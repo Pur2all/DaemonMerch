@@ -28,7 +28,7 @@ public class DeleteProductInWishlist extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("wishlistProduct")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			WishlistProduct wishlistProduct=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);

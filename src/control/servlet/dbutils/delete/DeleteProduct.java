@@ -28,7 +28,7 @@ public class DeleteProduct extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("product")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			Product product=new Gson().fromJson((String) request.getAttribute("product"), Product.class);

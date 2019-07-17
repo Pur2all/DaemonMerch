@@ -26,7 +26,7 @@ public class Registration extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getParameterMap().containsKey(null))
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			String name=request.getParameter("name"), surname=request.getParameter("surname"), username=request.getParameter("username"),
@@ -51,7 +51,7 @@ public class Registration extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("Login").forward(request, response);
+			getServletContext().getRequestDispatcher("servlet/Login").forward(request, response);
 		}
 	}
 }

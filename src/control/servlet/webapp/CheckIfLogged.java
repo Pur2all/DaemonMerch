@@ -16,11 +16,11 @@ public class CheckIfLogged extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getSession().getAttribute("userInfo")!=null)
-			response.sendRedirect("UserProfile");
+			response.sendRedirect(request.getContextPath() + "/UserProfile");
 		else
 		{
 			request.setAttribute("error", Boolean.TRUE);
-			response.sendRedirect("LoginForm");
+			response.sendRedirect(request.getContextPath() + "/LoginForm");
 		}
 	}
 

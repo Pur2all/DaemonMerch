@@ -38,7 +38,7 @@ public class RetrieveArtists extends HttpServlet
 
 			request.setAttribute("artists", artists);
 
-			response.sendRedirect("Artists");
+			response.sendRedirect(request.getContextPath() + "/Artists");
 		}
 		catch (SQLException sqlException)
 		{
@@ -50,5 +50,4 @@ public class RetrieveArtists extends HttpServlet
 	{
 		doGet(request, response);
 	}
-
 }

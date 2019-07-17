@@ -28,7 +28,7 @@ public class DeletePatch extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		if(request.getAttribute("patch")==null)
-			response.sendRedirect("ErrorPage");
+			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			Patch patch=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
