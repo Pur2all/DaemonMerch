@@ -43,7 +43,7 @@ public class InsertImage extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(imageDAO.doUpdate(image) ? 1 : 0);
+				response.getWriter().write(imageDAO.doSave(image) ? 1 : 0);
 			}
 			catch (SQLException sqlException)
 			{

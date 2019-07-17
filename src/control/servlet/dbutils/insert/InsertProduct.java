@@ -38,7 +38,7 @@ public class InsertProduct extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(productDAO.doUpdate(product) ? 1 : 0);
+				response.getWriter().write(productDAO.doSave(product) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{

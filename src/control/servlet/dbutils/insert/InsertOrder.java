@@ -41,14 +41,14 @@ public class InsertOrder extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(orderDAO.doUpdate(order) ? 1 : 0);
+				response.getWriter().write(orderDAO.doSave(order) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-			//TODO Redirect alla jsp degli ordini tramite la servlet per visualizzarli
-			response.sendRedirect(request.getContextPath() + "/Orders");
+
+			getServletContext().getRequestDispatcher("/servlet/auth/RetrieveOrders");
 		}
 	}
 }

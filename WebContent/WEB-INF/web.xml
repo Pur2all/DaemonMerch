@@ -4,7 +4,7 @@
   <display-name>DaemonMerch</display-name>
 
   <welcome-file-list>
-    <welcome-file>/HTML/Index.jsp</welcome-file>
+    <welcome-file>/Home</welcome-file>
   </welcome-file-list>
 
   <listener>

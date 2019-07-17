@@ -38,7 +38,7 @@ public class InsertTop extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(topDAO.doUpdate(product) ? 1 : 0);
+				response.getWriter().write(topDAO.doSave(product) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{

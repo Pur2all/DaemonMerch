@@ -51,7 +51,7 @@ public class InsertArtist extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(artistDAO.doUpdate(artist) ? 1 : 0);
+				response.getWriter().write(artistDAO.doSave(artist) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{

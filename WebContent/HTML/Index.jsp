@@ -18,15 +18,16 @@
   	  <header class="index-header">
   	    <%@ include file="./Header.jsp" %>
   	  </header>
-    
+
  	   <main class="index-main">
+ 	   	<% String pageName=(String) request.getAttribute("mainPage"); %>
   	  	<%@ include file="./Main.jsp" %>
   	  </main>
-    
+
    	  <footer class="index-footer">
    	   <%@ include file="./Footer.jsp" %>
   	  </footer>
    </div>
-    
+
 	</body>
 </html>

@@ -37,7 +37,7 @@ public class RetrieveProducts extends HttpServlet
 			});
 
 			request.setAttribute("products", products);
-			request.setAttribute("mainPage", "Products");
+			//request.setAttribute("mainPage", "Products");
 
 			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}

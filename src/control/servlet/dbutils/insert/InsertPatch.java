@@ -38,7 +38,7 @@ public class InsertPatch extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(patchDAO.doUpdate(product) ? 1 : 0);
+				response.getWriter().write(patchDAO.doSave(product) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
