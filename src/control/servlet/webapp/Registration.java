@@ -1,5 +1,7 @@
 package control.servlet.webapp;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -25,33 +27,31 @@ public class Registration extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getParameterMap().containsKey(null))
+		if(request.getAttribute("newUser")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			String name=request.getParameter("name"), surname=request.getParameter("surname"), username=request.getParameter("username"),
-					password=request.getParameter("password"), birthday=request.getParameter("birthday");
-
-			User user=new User();
-
-			user.setName(name);
-			user.setSurname(surname);
-			user.setUsername(username);
-			user.setPassword(password);
-			user.setBirthday(birthday);
+			User user=new Gson().fromJson((String) request.getAttribute("newUser"), User.class);
 
 			UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				userDAO.doSave(user);
+				if(userDAO.doSave(user))
+				{
+					request.setAttribute("username", user.getUsername());
+					request.setAttribute("password", user.getPassword());
+					getServletContext().getRequestDispatcher("servlet/Login").forward(request, response);
+				}
+				else
+				{
+					response.sendRedirect(request.getContextPath() + "/ErrorPage");
+				}
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-
-			getServletContext().getRequestDispatcher("servlet/Login").forward(request, response);
 		}
 	}
 }

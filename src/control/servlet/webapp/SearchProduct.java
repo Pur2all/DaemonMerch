@@ -29,6 +29,7 @@ public class SearchProduct extends HttpServlet
 			{
 				request.setAttribute("result", productDAO.doRetrieveByName(productName,
 					(int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd")));
+				request.setAttribute("mainPage", "Artists");
 			}
 			catch (SQLException sqlException)
 			{

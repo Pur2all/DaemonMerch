@@ -42,7 +42,7 @@ public class Login extends HttpServlet
 				else
 				{
 					request.setAttribute("error", Boolean.TRUE);
-					response.sendRedirect(request.getContextPath() + "/LoginForm");
+					getServletContext().getRequestDispatcher("/LoginForm").forward(request, response);
 				}
 			}
 			catch (SQLException sqlException)

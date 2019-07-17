@@ -20,6 +20,7 @@ public class RemoveFromCart extends HttpServlet
 
 		cart.removeProduct((int) request.getAttribute("index"));
 		request.getSession(false).setAttribute("cart", cart);
+		response.setContentType("plain/text");
 		response.getWriter().write(1);
 	}
 

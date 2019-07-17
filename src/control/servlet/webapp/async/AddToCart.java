@@ -23,6 +23,7 @@ public class AddToCart extends HttpServlet
 			cart=new Cart();
 		cart.addProduct((Product) request.getAttribute("product"));
 		request.getSession(false).setAttribute("cart", cart);
+		response.setContentType("plain/text");
 		response.getWriter().write(1);
 	}
 
