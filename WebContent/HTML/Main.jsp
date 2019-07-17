@@ -28,8 +28,8 @@
 						<a>
 							<img class="image" alt="" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Squircle_rounded_square.svg">
 						</a>
-							<h3 class="name"><%((LinkedList<Product>)request.getAttribute("products")).getFirst().getName();%></h3>
-							<h4 class="price"><%((LinkedList<Product>)request.getAttribute("products")).getFirst().getPrice();%></h4>
+							<h3 class="name"><%out.println(((LinkedList<Product>)request.getAttribute("products")).getFirst().getName());%></h3>
+							<h4 class="price"><%out.println(((LinkedList<Product>)request.getAttribute("products")).getFirst().getPrice());%></h4>
 							<button class="button">Add to Cart</button>
 					</li>
 				</c:forEach>

@@ -53,7 +53,7 @@ public class ProductDAO implements DAO<Product>
 					productFromTable.setName(rs.getString("Nome"));
 					productFromTable.setPrice(rs.getFloat("Prezzo"));
 					productFromTable.setDescription(rs.getString("Descrizione"));
-					productFromTable.setRemaining(rs.getInt("Quantit�Rimanente"));
+					productFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
 					productFromTable.setTag(rs.getString("Tag"));
 					productFromTable.setArtistId(rs.getString("ID_Artista"));
 
@@ -160,7 +160,7 @@ public class ProductDAO implements DAO<Product>
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
 				productFromTable.setDescription(rs.getString("Descrizione"));
-				productFromTable.setRemaining(rs.getInt("Quantit�Rimanente"));
+				productFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
 

@@ -38,6 +38,8 @@ public class RetrieveProducts extends HttpServlet
 			});
 
 			request.setAttribute("products", products);
+			System.out.println(products);
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

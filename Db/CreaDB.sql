@@ -15,7 +15,7 @@ CREATE TABLE Utente(
     UNIQUE (Username),
     PRIMARY KEY (ID)
 )ENGINE=InnoDB, AUTO_INCREMENT=1;
-	
+
 CREATE TABLE CartaDiCredito(
 	CVV CHAR(3) NOT NULL,
     DataScadenza CHAR(10) NOT NULL,
@@ -50,7 +50,7 @@ CREATE TABLE Ordine(
 	FOREIGN KEY (Stato, Via, Paese, Provincia, NumeroCivico) REFERENCES IndirizzoDiFatturazione(Stato, Via, Paese, Provincia, NumeroCivico)
 		ON DELETE NO ACTION
         ON UPDATE CASCADE,
-	
+
     CHECK (Totale>0)
 )ENGINE=InnoDB, AUTO_INCREMENT=1;
 
@@ -73,7 +73,7 @@ CREATE TABLE Prodotto(
     FOREIGN KEY (ID_Artista) REFERENCES Artista(ID)
 		ON DELETE RESTRICT
         ON UPDATE CASCADE,
-	
+
     CHECK (QuantitàRimanente>=0),
     CHECK (Prezzo>0)
 )ENGINE=InnoDB, AUTO_INCREMENT=1;
@@ -154,7 +154,7 @@ CREATE TABLE VorrebbeAcquistare(
 	FOREIGN KEY (ID_Prodotto) REFERENCES Prodotto(ID)
 		ON DELETE CASCADE
         ON UPDATE CASCADE,
-	
+
     CHECK (Quantità>0)
 )ENGINE=InnoDB;
 
@@ -169,6 +169,6 @@ CREATE TABLE Contiene(
 	FOREIGN KEY (ID_Prodotto) REFERENCES Prodotto(ID)
 		ON DELETE RESTRICT
         ON UPDATE CASCADE,
-	
+
      CHECK (Quantità>0)
 )ENGINE=InnoDB;

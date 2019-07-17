@@ -16,7 +16,7 @@ public class AuthFilter implements Filter
 {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
 	{
-		if(((HttpServletRequest) request).getSession()!=null)
+		if((((HttpServletRequest) request).getSession(false))!=null)
 			chain.doFilter(request, response);
 		else
 			((HttpServletResponse) response).sendRedirect("ErrorPage");

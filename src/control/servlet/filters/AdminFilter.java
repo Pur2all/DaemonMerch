@@ -19,8 +19,13 @@ public class AdminFilter implements Filter
 {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
+		if((((HttpServletRequest) request).getSession(false))==null)
+			((HttpServletResponse) response).sendRedirect("Index");
 		if(((User)((HttpServletRequest) request).getSession(false).getAttribute("userInfo")).getUserType()==UserType.ADMIN)
-			chain.doFilter(request, response);
+		{
+			System.out.println("Ciao sono passato qui mocc a mammt");
+			((HttpServletResponse) response).sendRedirect("Index");
+		}
 		else
 			((HttpServletResponse) response).sendRedirect("Index");
 	}
