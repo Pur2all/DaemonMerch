@@ -22,12 +22,11 @@ public class RetrieveProducts extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-			Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
-			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(null);
+			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			products.sort(new Comparator<Product>()
 			{
@@ -38,7 +37,8 @@ public class RetrieveProducts extends HttpServlet
 			});
 
 			request.setAttribute("products", products);
-			System.out.println(products);
+			request.setAttribute("mainPage", "Products");
+
 			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)

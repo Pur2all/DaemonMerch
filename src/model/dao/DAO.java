@@ -8,7 +8,7 @@ public interface DAO<T>
 
 	public T doRetrieveByKey(Object key) throws SQLException;
 
-	public Collection<T> doRetrieveAll(String order) throws SQLException;
+	public Collection<T> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException;
 
 	public boolean doSave(T object) throws SQLException;
 

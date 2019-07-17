@@ -13,19 +13,16 @@ public class WishlistDAO implements DAO<WishlistProduct>
 {
 	private static final String TABLE_NAME="VorrebbeAcquistare";
 
-	private int pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
 
-	public WishlistDAO(DBConnectionPool aDBConnectionPool, int aPageInit, int aPageEnd)
+	public WishlistDAO(DBConnectionPool aDBConnectionPool)
 	{
-		pageInit=aPageInit;
-		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
-	public Collection<WishlistProduct> doRetrieveByUserID(int userID) throws SQLException
+	public Collection<WishlistProduct> doRetrieveByUserID(int userID, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -120,7 +117,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		return productFromTable;
 	}
 
-	public Collection<WishlistProduct> doRetrieveAll(String order) throws SQLException
+	public Collection<WishlistProduct> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;

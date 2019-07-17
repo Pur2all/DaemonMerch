@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.WishlistProduct;
+import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.WishlistDAO;
 
@@ -21,14 +22,17 @@ public class RetrieveProductsInWishlist extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-			Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+		WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
-			LinkedList<WishlistProduct> wishlistProducts=(LinkedList<WishlistProduct>) wishlistDAO.doRetrieveByUserID((int) request.getAttribute("userID"));
+			LinkedList<WishlistProduct> wishlistProducts=(LinkedList<WishlistProduct>) wishlistDAO.doRetrieveByUserID(Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()),
+				(int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			request.setAttribute("wishlistProducts", wishlistProducts);
+			request.setAttribute("mainPage", "WishlistProducts");
+
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

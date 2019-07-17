@@ -66,7 +66,7 @@ public class ArtistDAO implements DAO<Artist>
 		return artistFromTable;
 	}
 
-	public Collection<Artist> doRetrieveAll(String order) throws SQLException
+	public Collection<Artist> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -77,7 +77,7 @@ public class ArtistDAO implements DAO<Artist>
 
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY '" + order + "'";
-			
+
 		try
 		{
 			connection=dbConnectionPool.getConnection();

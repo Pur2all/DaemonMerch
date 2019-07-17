@@ -50,14 +50,13 @@ public class InsertArtist extends HttpServlet
 
 			try
 			{
-				artistDAO.doSave(artist);
+				response.setContentType("text/plain");
+				response.getWriter().write(artistDAO.doUpdate(artist) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-
-			getServletContext().getRequestDispatcher("servlet/auth/InsertImage").forward(request, response);
 		}
 	}
 }

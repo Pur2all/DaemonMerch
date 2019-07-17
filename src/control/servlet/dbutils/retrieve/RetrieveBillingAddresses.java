@@ -27,9 +27,12 @@ public class RetrieveBillingAddresses extends HttpServlet
 
 		try
 		{
-			LinkedList<BillingAddress> billingAddresses=(LinkedList<BillingAddress>) billingAddressDAO.doRetrieveAll(null);
+			LinkedList<BillingAddress> billingAddresses=(LinkedList<BillingAddress>) billingAddressDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			request.setAttribute("billingAddresses", billingAddresses);
+			request.setAttribute("mainPage", "BillingAddresses");
+
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

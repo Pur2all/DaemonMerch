@@ -29,7 +29,7 @@ public class UpdateArtist extends HttpServlet
 	{
 		Artist artist=new Gson().fromJson((String) request.getAttribute("artist"), Artist.class);
 
-		ArtistDAO artistDAO =new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{

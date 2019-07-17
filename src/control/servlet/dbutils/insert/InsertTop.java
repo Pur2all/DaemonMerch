@@ -33,19 +33,19 @@ public class InsertTop extends HttpServlet
 		{
 			Top product=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
 
-			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				topDAO.doSave(product);
+				response.setContentType("text/plain");
+				response.getWriter().write(topDAO.doUpdate(product) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher(request.getContextPath() + "/InsertImage").forward(request, response);
+			getServletContext().getRequestDispatcher("servlet/auth/InsertImage").forward(request, response);
 		}
 	}
 }

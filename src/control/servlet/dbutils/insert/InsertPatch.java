@@ -33,19 +33,19 @@ public class InsertPatch extends HttpServlet
 		{
 			Patch product=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
 
-			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				patchDAO.doSave(product);
+				response.setContentType("text/plain");
+				response.getWriter().write(patchDAO.doUpdate(product) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher(request.getContextPath() + "servlet/auth/InsertImage").forward(request, response);
+			getServletContext().getRequestDispatcher("servlet/auth/InsertImage").forward(request, response);
 		}
 	}
 }

@@ -22,12 +22,11 @@ public class RetrievePatches extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-			Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+		PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
-			LinkedList<Patch> patches=(LinkedList<Patch>) patchDAO.doRetrieveAll(null);
+			LinkedList<Patch> patches=(LinkedList<Patch>) patchDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			patches.sort(new Comparator<Patch>()
 			{
@@ -38,6 +37,9 @@ public class RetrievePatches extends HttpServlet
 			});
 
 			request.setAttribute("patches", patches);
+			request.setAttribute("mainPage", "Patches");
+
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

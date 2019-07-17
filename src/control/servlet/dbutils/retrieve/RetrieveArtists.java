@@ -26,7 +26,7 @@ public class RetrieveArtists extends HttpServlet
 
 		try
 		{
-			LinkedList<Artist> artists=(LinkedList<Artist>) artistDAO.doRetrieveAll(null);
+			LinkedList<Artist> artists=(LinkedList<Artist>) artistDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			artists.sort(new Comparator<Artist>()
 			{
@@ -37,8 +37,9 @@ public class RetrieveArtists extends HttpServlet
 			});
 
 			request.setAttribute("artists", artists);
+			request.setAttribute("mainPage", "Artists");
 
-			response.sendRedirect(request.getContextPath() + "/Artists");
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

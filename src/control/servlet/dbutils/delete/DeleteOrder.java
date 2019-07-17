@@ -35,8 +35,7 @@ public class DeleteOrder extends HttpServlet
 			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
 
 			OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()),
-					Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try
 			{

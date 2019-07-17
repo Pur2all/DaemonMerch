@@ -22,13 +22,12 @@ public class CheckUsername extends HttpServlet
 	{
 		String username=request.getParameter("username");
 
-		UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-			Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+		UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
 			boolean isAlreadyPresent=false;
-			for(User u: userDAO.doRetrieveAll(null))
+			for(User u: userDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd")))
 				if(u.getUsername().equals(username))
 				{
 					isAlreadyPresent=true;

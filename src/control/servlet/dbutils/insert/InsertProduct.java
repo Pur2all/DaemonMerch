@@ -33,19 +33,19 @@ public class InsertProduct extends HttpServlet
 		{
 			Product product=new Gson().fromJson((String) request.getAttribute("product"), Product.class);
 
-			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				productDAO.doSave(product);
+				response.setContentType("text/plain");
+				response.getWriter().write(productDAO.doUpdate(product) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher(request.getContextPath() + "/InsertImage").forward(request, response);
+			getServletContext().getRequestDispatcher("servlet/auth/InsertImage").forward(request, response);
 		}
 	}
 }

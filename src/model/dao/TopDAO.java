@@ -16,13 +16,10 @@ public class TopDAO implements DAO<Top>
 {
 	private static final String TABLE_NAME="Top";
 
-	private int pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
 
-	public TopDAO(DBConnectionPool aDBConnectionPool, int aPageInit, int aPageEnd)
+	public TopDAO(DBConnectionPool aDBConnectionPool)
 	{
-		pageInit=aPageInit;
-		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
@@ -33,7 +30,7 @@ public class TopDAO implements DAO<Top>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		Top topFromTable=(Top) productDAO.doRetrieveByKey(key);
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
@@ -70,7 +67,7 @@ public class TopDAO implements DAO<Top>
 		return topFromTable;
 	}
 
-	public Collection<Top> doRetrieveAll(String order) throws SQLException
+	public Collection<Top> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -128,7 +125,7 @@ public class TopDAO implements DAO<Top>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		productDAO.doSave(top);
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Taglia, Categoria, TipoStampa) VALUES (?, ?, ?)";
@@ -167,7 +164,7 @@ public class TopDAO implements DAO<Top>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		productDAO.doUpdate(top);
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
@@ -207,7 +204,7 @@ public class TopDAO implements DAO<Top>
 
 	public boolean doDelete(Top top) throws SQLException
 	{
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 
 		return productDAO.doDelete(top);
 	}

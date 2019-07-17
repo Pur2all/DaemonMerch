@@ -22,12 +22,11 @@ public class RetrieveTops extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-			Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+		TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
-			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(null);
+			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			tops.sort(new Comparator<Top>()
 			{
@@ -38,6 +37,9 @@ public class RetrieveTops extends HttpServlet
 			});
 
 			request.setAttribute("tops", tops);
+			request.setAttribute("mainPage", "Tops");
+
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

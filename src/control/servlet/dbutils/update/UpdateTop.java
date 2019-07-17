@@ -29,8 +29,7 @@ public class UpdateTop extends HttpServlet
 	{
 		Top top=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
 
-		TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-			Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+		TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{

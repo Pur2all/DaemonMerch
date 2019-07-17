@@ -27,9 +27,12 @@ public class RetrieveCreditCards extends HttpServlet
 
 		try
 		{
-			LinkedList<CreditCard> creditCards=(LinkedList<CreditCard>) creditCardDAO.doRetrieveAll(null);
+			LinkedList<CreditCard> creditCards=(LinkedList<CreditCard>) creditCardDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			request.setAttribute("creditCards", creditCards);
+			request.setAttribute("mainPage", "CreditCards");
+
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

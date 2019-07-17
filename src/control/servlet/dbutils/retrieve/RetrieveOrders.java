@@ -23,15 +23,16 @@ public class RetrieveOrders extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()),
-				Integer.parseInt(request.getParameter("pageInit")),
-				Integer.parseInt(request.getParameter("pageEnd")));
+				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 		try
 		{
-			LinkedList<Order> order=(LinkedList<Order>) orderDAO.doRetrieveAll(null);
+			LinkedList<Order> order=(LinkedList<Order>) orderDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			request.setAttribute("orders", order);
+			request.setAttribute("mainPage", "Orders");
+
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

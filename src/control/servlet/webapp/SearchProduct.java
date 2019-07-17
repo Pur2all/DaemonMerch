@@ -23,12 +23,12 @@ public class SearchProduct extends HttpServlet
 
 		if(productName!=null && !productName.equals(""))
 		{
-			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				request.setAttribute("result", productDAO.doRetrieveByName(productName));
+				request.setAttribute("result", productDAO.doRetrieveByName(productName,
+					(int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd")));
 			}
 			catch (SQLException sqlException)
 			{

@@ -33,8 +33,7 @@ public class DeletePatch extends HttpServlet
 		{
 			Patch patch=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
 
-			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{

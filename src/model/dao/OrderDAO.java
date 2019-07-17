@@ -16,20 +16,18 @@ public class OrderDAO implements DAO<Order>
 {
 	private static final String TABLE_NAME="Ordine";
 
-	private int userID, pageInit, pageEnd;
+	private int userID;
 	private DBConnectionPool dbConnectionPool;
 
-	public OrderDAO(DBConnectionPool aDBConnectionPool, int anUserID, int aPageInit, int aPageEnd)
+	public OrderDAO(DBConnectionPool aDBConnectionPool, int anUserID)
 	{
 		userID=anUserID;
-		pageInit=aPageInit;
-		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
-	public Collection<Order> doRetrieveForAllUsers() throws SQLException
+	public Collection<Order> doRetrieveForAllUsers(int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -156,7 +154,7 @@ public class OrderDAO implements DAO<Order>
 		return orderFromTable;
 	}
 
-	public Collection<Order> doRetrieveAll(String order) throws SQLException
+	public Collection<Order> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;

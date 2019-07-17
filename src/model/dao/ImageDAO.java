@@ -69,7 +69,7 @@ public class ImageDAO implements DAO<Image>
 		return image;
 	}
 
-	public Collection<Image> doRetrieveAll(String order) throws SQLException
+	public Collection<Image> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;

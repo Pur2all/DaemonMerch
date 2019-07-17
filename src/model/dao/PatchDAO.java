@@ -14,13 +14,10 @@ public class PatchDAO implements DAO<Patch>
 {
 	private static final String TABLE_NAME="Patch";
 
-	private int pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
 
-	public PatchDAO(DBConnectionPool aDBConnectionPool, int aPageInit, int aPageEnd)
+	public PatchDAO(DBConnectionPool aDBConnectionPool)
 	{
-		pageInit=aPageInit;
-		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
@@ -31,7 +28,7 @@ public class PatchDAO implements DAO<Patch>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		Patch patchFromTable=(Patch) productDAO.doRetrieveByKey(key);
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
@@ -68,7 +65,7 @@ public class PatchDAO implements DAO<Patch>
 		return patchFromTable;
 	}
 
-	public Collection<Patch> doRetrieveAll(String order) throws SQLException
+	public Collection<Patch> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -126,7 +123,7 @@ public class PatchDAO implements DAO<Patch>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		productDAO.doSave(patch);
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Misure, Tipo, Tessuto) VALUES (?, ?, ?)";
@@ -165,7 +162,7 @@ public class PatchDAO implements DAO<Patch>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 		productDAO.doUpdate(patch);
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
@@ -204,7 +201,7 @@ public class PatchDAO implements DAO<Patch>
 
 	public boolean doDelete(Patch patch) throws SQLException
 	{
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
 
 		return productDAO.doDelete(patch);
 	}

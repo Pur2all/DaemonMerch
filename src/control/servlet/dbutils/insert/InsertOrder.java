@@ -36,18 +36,18 @@ public class InsertOrder extends HttpServlet
 
 			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
 
-			OrderDAO orderDAO =new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID,
-				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			OrderDAO orderDAO =new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);
 
 			try
 			{
-				orderDAO.doSave(order);
+				response.setContentType("text/plain");
+				response.getWriter().write(orderDAO.doUpdate(order) ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
-
+			//TODO Redirect alla jsp degli ordini tramite la servlet per visualizzarli
 			response.sendRedirect(request.getContextPath() + "/Orders");
 		}
 	}

@@ -14,13 +14,10 @@ public class UserDAO implements DAO<User>
 {
 	private static final String TABLE_NAME="Utente";
 
-	private int pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
 
-	public UserDAO(DBConnectionPool aDBConnectionPool, int aPageInit, int aPageEnd)
+	public UserDAO(DBConnectionPool aDBConnectionPool)
 	{
-		pageInit=aPageInit;
-		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
@@ -118,7 +115,7 @@ public class UserDAO implements DAO<User>
 		return userFromTable;
 	}
 
-	public Collection<User> doRetrieveAll(String order) throws SQLException
+	public Collection<User> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;

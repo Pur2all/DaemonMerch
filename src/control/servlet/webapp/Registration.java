@@ -40,8 +40,7 @@ public class Registration extends HttpServlet
 			user.setPassword(password);
 			user.setBirthday(birthday);
 
-			UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
