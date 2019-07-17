@@ -29,7 +29,8 @@ public class UpdateProduct extends HttpServlet
 	{
 		Product product=new Gson().fromJson((String) request.getAttribute("product"), Product.class);
 
-		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+			Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
 		try
 		{

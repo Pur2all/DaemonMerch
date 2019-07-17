@@ -14,23 +14,26 @@ public class UserDAO implements DAO<User>
 {
 	private static final String TABLE_NAME="Utente";
 
+	private int pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
-	
-	public UserDAO(DBConnectionPool aDBConnectionPool)
+
+	public UserDAO(DBConnectionPool aDBConnectionPool, int aPageInit, int aPageEnd)
 	{
+		pageInit=aPageInit;
+		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
-		
+
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
-	
+
 	public User searchForUsernameAndPassword(String username, String password) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 		ResultSet rs=null;
-		
+
 		User user=null;
-		
+
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Username = ? AND Password = ? ";
 		try
 		{
@@ -38,9 +41,9 @@ public class UserDAO implements DAO<User>
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, username);
 			preparedStatement.setString(2, password);
-			
+
 			rs=preparedStatement.executeQuery();
-			
+
 			if(rs.next())
 				if(!rs.getString("Tipo").equals(UserType.DELETED.name()))
 				{
@@ -56,20 +59,20 @@ public class UserDAO implements DAO<User>
 		}
 		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return user;
 	}
-	
+
 	public User doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -79,7 +82,7 @@ public class UserDAO implements DAO<User>
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
 
-		try 
+		try
 		{
 			int code=(int) key;
 			connection=dbConnectionPool.getConnection();
@@ -88,7 +91,7 @@ public class UserDAO implements DAO<User>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while (rs.next()) 
+			while (rs.next())
 			{
 				userFromTable.setId(rs.getString("ID"));
 				userFromTable.setName(rs.getString("Nome"));
@@ -98,20 +101,20 @@ public class UserDAO implements DAO<User>
 				userFromTable.setUsername(rs.getString("Username"));
 				userFromTable.setPassword(rs.getString("Password"));
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return userFromTable;
 	}
 
@@ -124,20 +127,21 @@ public class UserDAO implements DAO<User>
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME;
 
-		if (order!=null && !order.equals("")) 
+		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
 
-		try 
+		selectSQL+="LIMIT " + pageInit + ", " + pageEnd;
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			while (rs.next())
 			{
 				User userFromTable=new User();
-				
+
 				userFromTable.setId(rs.getString("ID"));
 				userFromTable.setName(rs.getString("Nome"));
 				userFromTable.setSurname(rs.getString("Cognome"));
@@ -147,20 +151,20 @@ public class UserDAO implements DAO<User>
 				userFromTable.setPassword(rs.getString("Password"));
 				users.add(userFromTable);
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if (preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return users;
 	}
 
@@ -168,11 +172,11 @@ public class UserDAO implements DAO<User>
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		
+
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Cognome, Tipo, DataDiNascita, Username, Password) VALUES (?, ?, ?, ?, ?, ?)";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
@@ -186,38 +190,38 @@ public class UserDAO implements DAO<User>
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(User user) throws SQLException
 	{
 		Connection connection=null;
-		PreparedStatement preparedStatement=null;		
+		PreparedStatement preparedStatement=null;
 
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Nome = ?, Cognome = ?, Tipo = ?, DataDiNascita = ?, Username = ?, Password = ? " +
 				" WHERE ID = ?";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
-			preparedStatement=connection.prepareStatement(updateSQL);			
-			
+			preparedStatement=connection.prepareStatement(updateSQL);
+
 			preparedStatement.setString(1, user.getName());
 			preparedStatement.setString(2, user.getSurname());
 			preparedStatement.setString(3, user.getUserType().name());
@@ -225,25 +229,25 @@ public class UserDAO implements DAO<User>
 			preparedStatement.setString(5, user.getUsername());
 			preparedStatement.setString(6, user.getPassword());
 			preparedStatement.setString(7, user.getId());
-			
+
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			rowsAffected=preparedStatement.executeUpdate();	
-			
+			rowsAffected=preparedStatement.executeUpdate();
+
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
-				if(preparedStatement!=null) 
+				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
-			}			
+			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
@@ -258,7 +262,7 @@ public class UserDAO implements DAO<User>
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET Tipo = ? " +
 				" WHERE ID = ?";
 
-		try 
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);
@@ -266,20 +270,20 @@ public class UserDAO implements DAO<User>
 			preparedStatement.setInt(2, Integer.parseInt(user.getId()));
 
 			result=preparedStatement.executeUpdate();
-		} 
+		}
 		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return (result!=0);
 	}
 }

@@ -16,12 +16,14 @@ public class OrderDAO implements DAO<Order>
 {
 	private static final String TABLE_NAME="Ordine";
 
-	private int userID;
+	private int userID, pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
 
-	public OrderDAO(DBConnectionPool aDBConnectionPool, int anUserID)
+	public OrderDAO(DBConnectionPool aDBConnectionPool, int anUserID, int aPageInit, int aPageEnd)
 	{
 		userID=anUserID;
+		pageInit=aPageInit;
+		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
@@ -34,7 +36,8 @@ public class OrderDAO implements DAO<Order>
 
 		Collection<Order> orders=new LinkedList<Order>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Contiene INNER JOIN Prodotto";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Contiene INNER JOIN Prodotto LIMIT " +
+			pageInit + ", " + pageEnd;
 
 		try
 		{
@@ -160,7 +163,8 @@ public class OrderDAO implements DAO<Order>
 
 		Collection<Order> orders=new LinkedList<Order>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Contiene INNER JOIN Prodotto WHERE " + TABLE_NAME + ".ID = ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Contiene INNER JOIN Prodotto WHERE ID_Utente = ? LIMIT " +
+			pageInit + ", " + pageEnd;
 
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY Ordine.ID  " + order;

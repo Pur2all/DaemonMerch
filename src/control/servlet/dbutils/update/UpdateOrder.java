@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import model.bean.Order;
+import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
@@ -30,7 +31,9 @@ public class UpdateOrder extends HttpServlet
 		Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
 
 		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(request.getParameter("userID")));
+				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()),
+				Integer.parseInt(request.getParameter("pageInit")),
+				Integer.parseInt(request.getParameter("pageEnd")));
 
 		try
 		{

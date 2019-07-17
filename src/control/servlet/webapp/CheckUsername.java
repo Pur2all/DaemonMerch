@@ -14,16 +14,17 @@ import model.dao.DBConnectionPool;
 import model.dao.UserDAO;
 
 @WebServlet("/servlet/CheckUsername")
-public class CheckUsername extends HttpServlet 
+public class CheckUsername extends HttpServlet
 {
 	private static final long serialVersionUID = 7053841079424305976L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String username=request.getParameter("username");
-		
-		UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		
+
+		UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+			Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+
 		try
 		{
 			boolean isAlreadyPresent=false;
@@ -34,14 +35,14 @@ public class CheckUsername extends HttpServlet
 					break;
 				}
 			response.getWriter().write(isAlreadyPresent ? 1 : 0);
-		} 
+		}
 		catch (SQLException sqlException)
 		{
 			sqlException.printStackTrace();
 		}
 	}
-	
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doGet(request, response);
 	}

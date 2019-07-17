@@ -33,7 +33,8 @@ public class InsertPatch extends HttpServlet
 		{
 			Patch product=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
 
-			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
 			try
 			{

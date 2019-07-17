@@ -13,15 +13,19 @@ public class ProductDAO implements DAO<Product>
 {
 	private static final String TABLE_NAME="Prodotto";
 
+	private int pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
 
-	public ProductDAO(DBConnectionPool aDBConnectionPool)
+	public ProductDAO(DBConnectionPool aDBConnectionPool, int aPageInit, int aPageEnd)
 	{
+		pageInit=aPageInit;
+		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	//TODO Paginare la ricerca
 	public Collection<Product> doRetrieveByName(String productName) throws SQLException
 	{
 		Connection connection=null;
@@ -140,6 +144,7 @@ public class ProductDAO implements DAO<Product>
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
 
+		selectSQL+=" LIMIT " + pageInit + ", " + pageEnd;
 		try
 		{
 			connection=dbConnectionPool.getConnection();

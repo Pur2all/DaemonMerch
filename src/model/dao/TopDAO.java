@@ -15,27 +15,30 @@ import model.bean.Top;
 public class TopDAO implements DAO<Top>
 {
 	private static final String TABLE_NAME="Top";
-	
+
+	private int pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
-	
-	public TopDAO(DBConnectionPool aDBConnectionPool)
+
+	public TopDAO(DBConnectionPool aDBConnectionPool, int aPageInit, int aPageEnd)
 	{
+		pageInit=aPageInit;
+		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
-		
+
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
-	
+
 	public Top doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
 		Top topFromTable=(Top) productDAO.doRetrieveByKey(key);
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
 
-		try 
+		try
 		{
 			int code=(int) key;
 			connection=dbConnectionPool.getConnection();
@@ -44,26 +47,26 @@ public class TopDAO implements DAO<Top>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while (rs.next()) 
+			while (rs.next())
 			{
 				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
 				topFromTable.setCategory(Category.valueOf(rs.getString("Categoria")));
 				topFromTable.setPrintType(PrintType.valueOf(rs.getString("TipoStampa")));
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return topFromTable;
 	}
 
@@ -73,28 +76,29 @@ public class TopDAO implements DAO<Top>
 		PreparedStatement preparedStatement=null;
 
 		Collection<Top> tops=new LinkedList<Top>();
-		
+
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto";
 
-		if (order!=null && !order.equals("")) 
+		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
 
-		try 
+		selectSQL+="LIMIT " + pageInit + ", " + pageEnd;
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			while (rs.next())
 			{
 				Top topFromTable=new Top();
-				
+
 				topFromTable.setId(rs.getString("ID"));
 				topFromTable.setName(rs.getString("Nome"));
 				topFromTable.setPrice(rs.getFloat("Prezzo"));
 				topFromTable.setDescription(rs.getString("Descrizione"));
-				topFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
+				topFromTable.setRemaining(rs.getInt("Quantitï¿½Rimanente"));
 				topFromTable.setTag(rs.getString("Tag"));
 				topFromTable.setArtistId(rs.getString("ID_Artista"));
 				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
@@ -102,20 +106,20 @@ public class TopDAO implements DAO<Top>
 				topFromTable.setPrintType(PrintType.valueOf(rs.getString("TipoStampa")));
 				tops.add(topFromTable);
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if (preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return tops;
 	}
 
@@ -123,14 +127,14 @@ public class TopDAO implements DAO<Top>
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
+
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
 		productDAO.doSave(top);
-		
+
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Taglia, Categoria, TipoStampa) VALUES (?, ?, ?)";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
@@ -141,70 +145,70 @@ public class TopDAO implements DAO<Top>
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Top top) throws SQLException
 	{
 		Connection connection=null;
-		PreparedStatement preparedStatement=null;		
+		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
 		productDAO.doUpdate(top);
-		
+
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Taglia = ?, Categoria = ?, TipoStampa = ? WHERE ID = ?";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
-			preparedStatement=connection.prepareStatement(updateSQL);			
-			
+			preparedStatement=connection.prepareStatement(updateSQL);
+
 			preparedStatement.setString(1, top.getSize().name());
 			preparedStatement.setString(2, top.getCategory().name());
 			preparedStatement.setString(3, top.getPrintType().name());
 			preparedStatement.setString(4, top.getId());
-			
+
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			rowsAffected=preparedStatement.executeUpdate();	
-			
+			rowsAffected=preparedStatement.executeUpdate();
+
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
-				if(preparedStatement!=null) 
+				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
-			}			
+			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
 	public boolean doDelete(Top top) throws SQLException
 	{
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
-		
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+
 		return productDAO.doDelete(top);
 	}
 }

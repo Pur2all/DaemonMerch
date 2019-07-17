@@ -14,7 +14,7 @@ public class ArtistDAO implements DAO<Artist>
 	private static final String TABLE_NAME="Artista";
 
 	private DBConnectionPool dbConnectionPool;
-	
+
 	public ArtistDAO(DBConnectionPool aDBConnectionPool)
 	{
 		dbConnectionPool=aDBConnectionPool;
@@ -77,6 +77,7 @@ public class ArtistDAO implements DAO<Artist>
 
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY '" + order + "'";
+			
 		try
 		{
 			connection=dbConnectionPool.getConnection();

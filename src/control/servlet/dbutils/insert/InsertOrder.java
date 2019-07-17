@@ -36,7 +36,8 @@ public class InsertOrder extends HttpServlet
 
 			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
 
-			OrderDAO orderDAO =new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);
+			OrderDAO orderDAO =new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID,
+				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
 			try
 			{

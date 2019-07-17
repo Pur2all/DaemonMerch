@@ -13,27 +13,30 @@ import model.bean.PatchType;
 public class PatchDAO implements DAO<Patch>
 {
 	private static final String TABLE_NAME="Patch";
-	
+
+	private int pageInit, pageEnd;
 	private DBConnectionPool dbConnectionPool;
-	
-	public PatchDAO(DBConnectionPool aDBConnectionPool)
+
+	public PatchDAO(DBConnectionPool aDBConnectionPool, int aPageInit, int aPageEnd)
 	{
+		pageInit=aPageInit;
+		pageEnd=aPageEnd;
 		dbConnectionPool=aDBConnectionPool;
-		
+
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
-	
+
 	public Patch doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
 		Patch patchFromTable=(Patch) productDAO.doRetrieveByKey(key);
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
 
-		try 
+		try
 		{
 			int code=(int) key;
 			connection=dbConnectionPool.getConnection();
@@ -42,26 +45,26 @@ public class PatchDAO implements DAO<Patch>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while (rs.next()) 
+			while (rs.next())
 			{
 				patchFromTable.setMeasures(rs.getString("Misure"));
 				patchFromTable.setPatchType(PatchType.valueOf(rs.getString("Tipo")));
 				patchFromTable.setMaterial(rs.getString("Tessuto"));
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return patchFromTable;
 	}
 
@@ -71,28 +74,29 @@ public class PatchDAO implements DAO<Patch>
 		PreparedStatement preparedStatement=null;
 
 		Collection<Patch> patches=new LinkedList<Patch>();
-		
+
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto";
 
-		if (order!=null && !order.equals("")) 
+		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
 
-		try 
+		selectSQL+="LIMIT " + pageInit + ", " + pageEnd;
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			while (rs.next())
 			{
 				Patch patchFromTable=new Patch();
-				
+
 				patchFromTable.setId(rs.getString("ID"));
 				patchFromTable.setName(rs.getString("Nome"));
 				patchFromTable.setPrice(rs.getFloat("Prezzo"));
 				patchFromTable.setDescription(rs.getString("Descrizione"));
-				patchFromTable.setRemaining(rs.getInt("QuantitàRimanente"));
+				patchFromTable.setRemaining(rs.getInt("Quantitï¿½Rimanente"));
 				patchFromTable.setTag(rs.getString("Tag"));
 				patchFromTable.setArtistId(rs.getString("ID_Artista"));
 				patchFromTable.setMeasures(rs.getString("Misure"));
@@ -100,20 +104,20 @@ public class PatchDAO implements DAO<Patch>
 				patchFromTable.setMaterial(rs.getString("Tessuto"));
 				patches.add(patchFromTable);
 			}
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if (preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return patches;
 	}
 
@@ -121,14 +125,14 @@ public class PatchDAO implements DAO<Patch>
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-		
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
+
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
 		productDAO.doSave(patch);
-		
+
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Misure, Tipo, Tessuto) VALUES (?, ?, ?)";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
@@ -139,69 +143,69 @@ public class PatchDAO implements DAO<Patch>
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
 				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
 	public boolean doUpdate(Patch patch) throws SQLException
 	{
 		Connection connection=null;
-		PreparedStatement preparedStatement=null;		
+		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
 		productDAO.doUpdate(patch);
-		
+
 		String updateSQL = "UPDATE " + TABLE_NAME + " SET" +
 				" Misure = ?, Tipo = ?, Tessuto = ? WHERE ID = ?";
 		int rowsAffected;
-		
-		try 
+
+		try
 		{
 			connection=dbConnectionPool.getConnection();
-			preparedStatement=connection.prepareStatement(updateSQL);			
-			
+			preparedStatement=connection.prepareStatement(updateSQL);
+
 			preparedStatement.setString(1, patch.getMeasures());
 			preparedStatement.setString(2, patch.getPatchType().name());
 			preparedStatement.setString(3, patch.getMaterial());
 			preparedStatement.setString(4, patch.getId());
 			System.out.println("doUpdate: "+ preparedStatement.toString());
-			rowsAffected=preparedStatement.executeUpdate();	
-			
+			rowsAffected=preparedStatement.executeUpdate();
+
 			connection.commit();
-		} 
-		finally 
+		}
+		finally
 		{
-			try 
+			try
 			{
-				if(preparedStatement!=null) 
+				if(preparedStatement!=null)
 					preparedStatement.close();
-			} 
-			finally 
+			}
+			finally
 			{
 				dbConnectionPool.releaseConnection(connection);
-			}			
+			}
 		}
-		
+
 		return rowsAffected>0;
 	}
 
 	public boolean doDelete(Patch patch) throws SQLException
 	{
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
-		
+		ProductDAO productDAO=new ProductDAO(dbConnectionPool, pageInit, pageEnd);
+
 		return productDAO.doDelete(patch);
 	}
 }

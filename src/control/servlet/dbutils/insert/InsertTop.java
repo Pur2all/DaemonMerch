@@ -33,7 +33,8 @@ public class InsertTop extends HttpServlet
 		{
 			Top product=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
 
-			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
+				Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
 			try
 			{

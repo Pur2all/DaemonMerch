@@ -23,7 +23,9 @@ public class RetrieveOrders extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
+				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()),
+				Integer.parseInt(request.getParameter("pageInit")),
+				Integer.parseInt(request.getParameter("pageEnd")));
 
 		try
 		{
