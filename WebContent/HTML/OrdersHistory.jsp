@@ -2,7 +2,7 @@
     pageEncoding="ISO-8859-1"
     import="model.bean.*"
     import="control.servlet.dbutils.retrieve.*"
-    import="java.uti.LinkedList"
+    import="java.util.LinkedList"
 	%>
 
 <%@ 
@@ -17,7 +17,14 @@
 	</head>
 
 	<body>
+		<%  %>
 		<!-- servlet/admin/RetrieveAllOrders -->
+		<c:forEach var="i" begin="1" end="<%((LinkedList<Order>)RetrieveAllOrders).size();%>">
+			<p>Order ID: <c:out value=""></c:out> </p>
+			<p>Oder made by user <% %> on date <% %></p>
+			<p>State: <% %></p>
+			<p>Billing Address: <% %></p>
+		</c:forEach>
 		
 	</body>
 

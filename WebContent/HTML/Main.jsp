@@ -23,19 +23,19 @@
 
 			<ul class="product-list">
 				
-				<c:forEach begin="1" end="16">
+				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
+
+				<c:forEach items="${products}" var="currentProduct">
 					<li class="product">
 						<a>
 							<img class="image" alt="" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Squircle_rounded_square.svg">
 						</a>
-							<h3 class="name">qualcosa</h3>
-							<h4 class="price">un miliardo</h4>
-						<form action="https://youtu.be/dQw4w9WgXcQ">
+							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
+							<h4 class="price"> <c:out value="${currentProduct.price}"> </c:out></h4>
+
 							<button class="button">Add to Cart</button>
-						</form>
 					</li>
-				</c:forEach>
-					
+				</c:forEach>		
 			
 			</ul>
 		
