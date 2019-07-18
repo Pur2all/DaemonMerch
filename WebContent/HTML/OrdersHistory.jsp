@@ -17,13 +17,13 @@
 	</head>
 
 	<body>
-		<%  %>
+		<% LinkedList<Orders> orders = (LinkedList<Orders>)RetrieveAllOrders %>
 		<!-- servlet/admin/RetrieveAllOrders -->
-		<c:forEach var="i" begin="1" end="<%((LinkedList<Order>)RetrieveAllOrders).size();%>">
-			<p>Order ID: <c:out value=""></c:out> </p>
-			<p>Oder made by user <% %> on date <% %></p>
-			<p>State: <% %></p>
-			<p>Billing Address: <% %></p>
+		<c:forEach items="orders" var="currentOrder" begin="1" end="<%((LinkedList<Order>)RetrieveAllOrders).size();%>">
+			<p>Order ID: <c:out value="${currentOrder.id}"></c:out> </p>
+			<p>Oder made by user <c:out value="${currentOrder.userID}"></c:out> on date <c:out value="${currentOrder.date}"></c:out></p>
+			<p>State: <c:out value="${currentOrder.state}"></c:out> </p>
+			<p>Billing Address: <c:out value="currentOrder.billingAddress"></c:out> </p>
 		</c:forEach>
 		
 	</body>

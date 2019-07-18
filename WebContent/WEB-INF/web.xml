@@ -97,4 +97,14 @@
     <url-pattern>/AddArtistForm</url-pattern>
   </servlet-mapping>
 
+    <!-- product page jsp -->
+  <servlet>
+    <servlet-name>ProductPage</servlet-name>
+    <jsp-file>/HTML/ProductPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductPage</servlet-name>
+    <url-pattern>/ProductPage</url-pattern>
+  </servlet-mapping>
+
 </web-app>
