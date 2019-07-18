@@ -16,6 +16,7 @@
 			<input name='surname' placeholder='Last Name' type='text'>
 			<input name="birthday" type="date" placeholder='Birth Date'>
 			<input name='username' placeholder='Username' type='text'>
+			<input name="address" placeholder="Address" type="text">
 			<input id='pw' name='password' placeholder='Password' type='password'>
 			<div class='agree'>
 				<input id='agree' name='agree' type='checkbox'>
