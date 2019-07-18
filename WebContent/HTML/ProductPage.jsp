@@ -19,7 +19,7 @@
 			<% UserType userRole = ((User)request.getSession(false).getAttribute("userInfo")).getUserType();%>
 			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
 		
-		<c:if test="${userRole == UserType.ADMIN">	
+		<c:if test="${userRole == UserType.ADMIN}">	
 			<a href="#"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>
 		</c:if>
 

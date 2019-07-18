@@ -66,7 +66,7 @@
     <servlet-name>UserProfile</servlet-name>
     <url-pattern>/UserProfile</url-pattern>
   </servlet-mapping>
-  
+
     <!-- admin area jsp -->
   <servlet>
     <servlet-name>AdminArea</servlet-name>
@@ -105,6 +105,16 @@
   <servlet-mapping>
     <servlet-name>ProductPage</servlet-name>
     <url-pattern>/ProductPage</url-pattern>
+  </servlet-mapping>
+
+  <!-- main page jsp -->
+  <servlet>
+    <servlet-name>Main</servlet-name>
+    <jsp-file>/HTML/Main.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Main</servlet-name>
+    <url-pattern>/Main</url-pattern>
   </servlet-mapping>
 
 </web-app>

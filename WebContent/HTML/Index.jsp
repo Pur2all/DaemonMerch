@@ -10,7 +10,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
 		<link rel="icon" href="../Images/icon.jpg">
-		<link rel="stylesheet" type="text/css" href="./Css/Index.css">
+		<link rel="stylesheet" type="text/css" href="../Css/Index.css">
 		<title>DaemonMerch</title>
 	</head>
 	<body>
@@ -21,7 +21,7 @@
 
  	   <main class="index-main">
  	   	<% String pageName=(String) request.getAttribute("mainPage"); %>
-  	  	<%@ include file="./Main.jsp" %>
+  	  	<jsp:include page="<%= pageName %>" flush="true"/>
   	  </main>
 
    	  <footer class="index-footer">
