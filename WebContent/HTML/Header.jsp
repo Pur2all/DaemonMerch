@@ -32,7 +32,7 @@
 
 		<div class="services-icons">
 			<span id="account" class="service-flex-item">
-				<a href="LoginForm" title="Account" onclick="loginFunction()" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
+				<a href="servlet/CheckIfLogged" title="Account" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
 			</span>
 
 			<span id="wishlist" class="service-flex-item">

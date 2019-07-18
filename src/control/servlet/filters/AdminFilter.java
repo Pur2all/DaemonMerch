@@ -22,9 +22,11 @@ public class AdminFilter implements Filter
 		HttpServletRequest servletRequest=(HttpServletRequest) request;
 		HttpServletResponse servletResponse=(HttpServletResponse) response;
 		System.out.println("Admin filter");
-		if(servletRequest.getSession(false).getAttribute("userInfo")!=null)
+		if(servletRequest.getSession(false)!=null && servletRequest.getSession(false).getAttribute("userInfo")!=null)
+		{
 			if(((User)servletRequest.getSession(false).getAttribute("userInfo")).getUserType()==UserType.ADMIN)
 				chain.doFilter(request, response);
+		}
 		else
 			servletResponse.sendRedirect(servletRequest.getContextPath() + "/Index");
 	}
