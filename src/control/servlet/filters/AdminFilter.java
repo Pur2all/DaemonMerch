@@ -14,19 +14,18 @@ import model.bean.User;
 import model.bean.UserType;
 
 @WebFilter(filterName="/AdminFilter",
-		urlPatterns={"/admin/*"})
+		urlPatterns={"/servlet/admin/*"})
 public class AdminFilter implements Filter 
 {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
-		if((((HttpServletRequest) request).getSession(false))==null)
-			((HttpServletResponse) response).sendRedirect("Index");
-		if(((User)((HttpServletRequest) request).getSession(false).getAttribute("userInfo")).getUserType()==UserType.ADMIN)
-		{
-			System.out.println("Ciao sono passato qui mocc a mammt");
-			((HttpServletResponse) response).sendRedirect("Index");
-		}
+		HttpServletRequest servletRequest=(HttpServletRequest) request;
+		HttpServletResponse servletResponse=(HttpServletResponse) response;
+		System.out.println("Admin filter");
+		if(servletRequest.getSession(false).getAttribute("userInfo")!=null)
+			if(((User)servletRequest.getSession(false).getAttribute("userInfo")).getUserType()==UserType.ADMIN)
+				chain.doFilter(request, response);
 		else
-			((HttpServletResponse) response).sendRedirect("Index");
+			servletResponse.sendRedirect(servletRequest.getContextPath() + "/Index");
 	}
 }

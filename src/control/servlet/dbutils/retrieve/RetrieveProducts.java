@@ -2,7 +2,6 @@ package control.servlet.dbutils.retrieve;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -26,20 +25,17 @@ public class RetrieveProducts extends HttpServlet
 
 		try
 		{
-			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
-
-			products.sort(new Comparator<Product>()
-			{
-				public int compare(Product first, Product second)
-				{
-					return first.getName().compareTo(second.getName());
-				}
-			});
+			String orderString=request.getParameter("orderString");
+			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(orderString, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			request.setAttribute("products", products);
-			//request.setAttribute("mainPage", "Products");
-
-			getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			if(request.getAttribute("originPage")==null || !request.getAttribute("originPage").equals("Home"))
+			{
+				request.setAttribute("mainPage", "Products");
+				getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			}
+			else
+				request.removeAttribute("originPage");
 		}
 		catch (SQLException sqlException)
 		{

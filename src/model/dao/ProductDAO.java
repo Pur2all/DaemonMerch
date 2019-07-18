@@ -22,7 +22,6 @@ public class ProductDAO implements DAO<Product>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
-	//TODO Paginare la ricerca
 	public Collection<Product> doRetrieveByName(String productName, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;

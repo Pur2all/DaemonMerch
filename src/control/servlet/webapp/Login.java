@@ -42,10 +42,10 @@ public class Login extends HttpServlet
 				else
 				{
 					request.setAttribute("error", Boolean.TRUE);
-					getServletContext().getRequestDispatcher("/LoginForm").forward(request, response);
+					getServletContext().getRequestDispatcher((request.getContextPath() + "/LoginForm")).forward(request, response);
 				}
 			}
-			catch (SQLException sqlException)
+			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
@@ -53,5 +53,4 @@ public class Login extends HttpServlet
 		else
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 	}
-
 }

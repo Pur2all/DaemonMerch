@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.bean.User;
+import model.bean.UserType;
+
 @WebServlet("/servlet/CheckIfLogged")
 public class CheckIfLogged extends HttpServlet 
 {
@@ -15,12 +18,15 @@ public class CheckIfLogged extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getSession().getAttribute("userInfo")!=null)
-			response.sendRedirect(request.getContextPath() + "/UserProfile");
+		if(request.getSession(false).getAttribute("userInfo")!=null)
+			if(((User) request.getSession(false).getAttribute("userInfo")).getUserType()==UserType.ADMIN)
+				response.sendRedirect(request.getContextPath() + "/AdminArea");
+			else
+				response.sendRedirect(request.getContextPath() + "/UserProfile");
 		else
 		{
 			request.setAttribute("error", Boolean.TRUE);
-			response.sendRedirect(request.getContextPath() + "/LoginForm");
+			getServletContext().getRequestDispatcher("/LoginForm").forward(request, response);
 		}
 	}
 

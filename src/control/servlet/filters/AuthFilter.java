@@ -11,14 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(filterName="/AuthFilter",
-		urlPatterns={"/auth/*"})
+		urlPatterns={"/servlet/auth/*"})
 public class AuthFilter implements Filter 
 {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
 	{
-		if((((HttpServletRequest) request).getSession(false))!=null)
+		HttpServletRequest servletRequest=(HttpServletRequest) request;
+		HttpServletResponse servletResponse=(HttpServletResponse) response;
+		System.out.println("Auth filter");
+		if(servletRequest.getSession(false).getAttribute("userInfo")!=null)
 			chain.doFilter(request, response);
 		else
-			((HttpServletResponse) response).sendRedirect("ErrorPage");
+			servletResponse.sendRedirect(servletRequest.getContextPath() + "/ErrorPage");
 	}
 }

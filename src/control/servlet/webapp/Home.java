@@ -17,9 +17,9 @@ public class Home extends HttpServlet
 		request.setAttribute("mainPage", "./Main.jsp");
 		request.setAttribute("pageInit", 0);
 		request.setAttribute("pageEnd", 15);
+		request.setAttribute("originPage", "Home");
 		getServletContext().getRequestDispatcher("/servlet/RetrieveProducts").include(request, response);
-		//TODO Risolvere il problema che se chiamo la servlet sopra mi include la pagina dei prodotti
-		//getServletContext().getRequestDispatcher("/Index").forward(request, response);
+		getServletContext().getRequestDispatcher("/Index").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
