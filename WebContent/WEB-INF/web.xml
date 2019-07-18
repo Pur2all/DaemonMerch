@@ -66,5 +66,25 @@
     <servlet-name>UserProfile</servlet-name>
     <url-pattern>/UserProfile</url-pattern>
   </servlet-mapping>
+  
+    <!-- admin area jsp -->
+  <servlet>
+    <servlet-name>AdminArea</servlet-name>
+    <jsp-file>/HTML/AdminArea.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AdminArea</servlet-name>
+    <url-pattern>/AdminArea</url-pattern>
+  </servlet-mapping>
+
+    <!-- add product jsp -->
+  <servlet>
+    <servlet-name>AddProductForm</servlet-name>
+    <jsp-file>/HTML/AddProductForm.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddProductForm</servlet-name>
+    <url-pattern>/AddProductForm</url-pattern>
+  </servlet-mapping>
 
 </web-app>

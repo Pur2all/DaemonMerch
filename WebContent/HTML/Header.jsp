@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
-    import="model.bean.*"%>
+    import="model.bean.*"
+    import="control.servlet.webapp.*"%>
 
 <head>
 	<base href="./" target="_self">
@@ -46,6 +47,8 @@
 				<a href="Faq" title="FAQ" class="services-link"> <img src="./images/faq.png" alt="FAQ" class="services-image"> </a>
 			</span>
 		</div>
+
+		<button class="services-icons" onclick="servlet/auth/Logout">Logout</button>
 
 		<div class="navbar">
 			<nav role="navigation">

@@ -11,7 +11,7 @@
 
 	<div class='registrationLoginForm'>
 		<form method="post" action="servlet/Login">
-			<h2>Sign up</h2>
+			<h2>Log in</h2>
 			<input name='username' placeholder='Username' type='text'>
 			<input id='pw' name='password' placeholder='Password' type='password'>
 			<input class='animated' type='submit' value='Submit'>
