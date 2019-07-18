@@ -9,7 +9,8 @@
 	</head>
 
 	<body>	
-		<form action="/servlet/Registration" method="post">
+
+		<form action="/servlet/admin/InsertProduct" method="post">
 			<input name='name' placeholder='Product Name' type='text'>
 			<input name='price' placeholder='Product Price' step="0.01" min="0" type="number">
 			<input name="description" placeholder='Product Description' type="text">

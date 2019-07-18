@@ -87,4 +87,14 @@
     <url-pattern>/AddProductForm</url-pattern>
   </servlet-mapping>
 
+    <!-- add artist jsp -->
+  <servlet>
+    <servlet-name>AddArtistForm</servlet-name>
+    <jsp-file>/HTML/AddArtistForm.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddArtistForm</servlet-name>
+    <url-pattern>/AddArtistForm</url-pattern>
+  </servlet-mapping>
+
 </web-app>

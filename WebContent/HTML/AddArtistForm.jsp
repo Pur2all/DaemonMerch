@@ -8,9 +8,15 @@
 		<title>Insert title here</title>
 	</head>
 
-	<body>
+	<body>	
+
+		<form action="/servlet/admin/InsertArtist" method="post">
+			<input name='name' placeholder='Artist Name' type='text'>
+			<input type="file" name="logo" accept="image/*">
+			<input type="file" name="pic" accept="image/*">
+			<input class='animated' type='submit' value='Submit'>
+		</form>
 		
-			
 	</body>
 
 </html>

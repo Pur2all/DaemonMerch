@@ -48,7 +48,7 @@
 			</span>
 		</div>
 
-		<button class="services-icons" onclick="servlet/auth/Logout">Logout</button>
+		<a class="services-icons" href="servlet/auth/Logout">LOGOUT</a>		
 
 		<div class="navbar">
 			<nav role="navigation">
