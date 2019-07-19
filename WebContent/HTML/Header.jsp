@@ -55,13 +55,7 @@
 		<div class="navbar">
 			<nav role="navigation">
 				<ul>
-					<li class="parent"><a href="#">Band List</a>
-						<ul class="child">
-							<li><a href="#">Slipknot</a></li>
-							<li><a href="#">Powerwolf</a></li>
-							<li><a href="#">Nightwish</a></li>
-						</ul>
-					</li>
+					<li><a href="./ArtistsPage">Band List</a></li>
 					<li><a href="#">Top</a></li>
 					<li><a href="#">Patch</a></li>
 					<li><a href="#">Other</a></li>
