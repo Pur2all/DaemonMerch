@@ -16,7 +16,7 @@
 
 	<body>
 
-		<%User user = (User) request.getSession(false).getAttribute("userInfo"); %>
+		<% User user = (User)request.getSession(false).getAttribute("userInfo"); %>
 		<div class="sc-user-profile">
 			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
 			<a href="#"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>

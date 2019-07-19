@@ -16,7 +16,7 @@
 		<form method="post" action="servlet/admin/InsertArtist" enctype="multipart/form-data">
 
 			<div class="group">
-					<input type="text" value="" placeholder="Artist Name" name="name"/>
+					<input type="text" placeholder="Artist Name" name="name"/>
 			</div>
 
 

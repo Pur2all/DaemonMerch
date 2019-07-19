@@ -23,11 +23,11 @@
 				<span class="entypo-heart"> Profiles Details</span>
 			</div>
 			<div class="left">First Name</div>
-			<div class="right"> <c:out value="${user.name}"></c:out>  </div>
+			<div class="right"> <c:out value="${user.name}">No name</c:out>  </div>
 			<div class="left">Last Name</div>
-			<div class="right"> <c:out value="${user.surname}"></c:out>  </div>
+			<div class="right"> <c:out value="${user.surname}">No surname</c:out>  </div>
 			<div class="left">Birth Date</div>
-			<div class="right"> <c:out value="${user.birthday}"></c:out>  </div>
+			<div class="right"> <c:out value="${user.birthday}">No birth date</c:out>  </div>
 		</div>
 
 	</body>
