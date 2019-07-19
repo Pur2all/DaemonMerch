@@ -16,7 +16,7 @@ public class Logout extends HttpServlet
 	{
 		request.getSession(false).removeAttribute("userInfo");
 		request.getSession(false).invalidate();
-		response.sendRedirect(request.getContextPath() + "/Index");
+		response.sendRedirect(request.getContextPath() + "/Home");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

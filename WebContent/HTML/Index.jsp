@@ -9,8 +9,8 @@
 		<meta name="keywords" lang="eng" content="Metal, Thrash Metal, Black Metal, Death Metal, Merchandise, Metal Band">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta charset="utf-8">
-		<link rel="icon" href="../Images/icon.jpg">
-		<link rel="stylesheet" type="text/css" href="../Css/Index.css">
+		<link rel="icon" href="./images/icon.jpg">
+		<link rel="stylesheet" type="text/css" href="./Css/Index.css">
 		<title>DaemonMerch</title>
 	</head>
 	<body>

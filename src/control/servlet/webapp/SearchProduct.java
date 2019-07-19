@@ -27,16 +27,16 @@ public class SearchProduct extends HttpServlet
 
 			try
 			{
-				request.setAttribute("result", productDAO.doRetrieveByName(productName,
-					(int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd")));
-				request.setAttribute("mainPage", "Artists");
+				request.setAttribute("products", productDAO.doRetrieveByName(productName,
+					Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd"))));
+				request.setAttribute("mainPage", "Main");
 			}
 			catch (SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher(request.getContextPath() + "/Result").forward(request, response);
+			getServletContext().getRequestDispatcher("/Home").forward(request, response);
 		}
 		else
 		{

@@ -19,7 +19,7 @@ public class AuthFilter implements Filter
 		HttpServletRequest servletRequest=(HttpServletRequest) request;
 		HttpServletResponse servletResponse=(HttpServletResponse) response;
 		System.out.println("Auth filter");
-		if(servletRequest.getSession(false).getAttribute("userInfo")!=null)
+		if(servletRequest.getSession(false)!=null && servletRequest.getSession(false).getAttribute("userInfo")!=null)
 			chain.doFilter(request, response);
 		else
 			servletResponse.sendRedirect(servletRequest.getContextPath() + "/ErrorPage");

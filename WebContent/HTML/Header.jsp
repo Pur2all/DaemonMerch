@@ -22,6 +22,8 @@
 		<div class="wrap-item">
 			<form action="servlet/SearchProduct" method="get">
 				<div class="searchbar-item">
+					<input type="hidden" name="pageInit" value='0'>
+					<input type="hidden" name="pageEnd" value='15'>
 					<input type="text" class="searchTerm" placeholder="Search..." name="q">
 					<button type="submit" class="searchButton">
 	     	 		<i class="fa fa-search"></i>
