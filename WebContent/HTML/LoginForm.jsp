@@ -4,13 +4,13 @@
 
 <head>
 	<base href="./" target="_self">
-	<link rel="stylesheet" type="text/css" href="../Css/RegistrationLoginForm.css">
+	<link rel="stylesheet" type="text/css" href="./Css/RegistrationLoginForm.css">
 </head>
 
 <body>
 
 	<div class='registrationLoginForm'>
-		<form method="post" action="Login">
+		<form method="post" action="servlet/Login">
 			<h2>Log in</h2>
 			<input name='username' placeholder='Username' type='text'>
 			<input id='pw' name='password' placeholder='Password' type='password'>

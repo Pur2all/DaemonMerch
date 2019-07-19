@@ -26,7 +26,7 @@ public class CheckIfLogged extends HttpServlet
 		else
 		{
 			request.setAttribute("error", Boolean.TRUE);
-			getServletContext().getRequestDispatcher("/LoginForm").forward(request, response);
+			response.sendRedirect(request.getContextPath() + "/LoginForm");
 		}
 	}
 

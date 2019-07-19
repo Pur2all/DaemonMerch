@@ -12,7 +12,6 @@ import javax.servlet.http.HttpSession;
 import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.UserDAO;
-import sun.reflect.ReflectionFactory.GetReflectionFactoryAction;
 
 @WebServlet("/servlet/Login")
 public class Login extends HttpServlet
@@ -39,9 +38,7 @@ public class Login extends HttpServlet
 					HttpSession session=request.getSession(true);
 					session.setAttribute("userInfo", loggedUser);
 					request.setAttribute("mainPage", "Main");
-					//TODO Far riempire home, vedi in realtà come far condiviedere l'attributo della richiesta
-					getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
-					//response.sendRedirect(response.encodeRedirectURL((request.getContextPath() + "/Index")));
+					getServletContext().getRequestDispatcher(response.encodeURL("/Home")).forward(request, response);
 				}
 				else
 				{
