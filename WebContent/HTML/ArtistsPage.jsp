@@ -10,16 +10,23 @@
 
 <html>
     <head>
-    	<link rel="stylesheet" type="text/css" href="./Css/UserProfile.css">
+    	<link rel="stylesheet" type="text/css" href="./Css/ArtistsPage.css">
     </head>
 
 	<body>
 		<%LinkedList<Artist> artists = (LinkedList<Artist>) request.getAttribute("artists"); %>
+		<%String letter = "a";%>
 	
 		<c:forEach items="${artists}" var="currentArtist">		
-
-			<div> <c:out value="${currentArtist.name}">No name</c:out> </div>
-			<div> <c:out value="${currentArtist.logo}">No image</c:out> </div>
+			
+			<c:if test="${!currentArtist.name.charAt(0).equalsIgnoreCase(letter)}">
+				<div class="letter"><c:out value="${currentArtist.name.substring(0, 1).toUpperCase()}"></c:out></div>
+			</c:if>
+			
+			<%letter = ((Artist)pageContext.getAttribute("currentArtist")).getName().substring(0, 1);%>
+			
+			<div class="name"> <c:out value="${currentArtist.name}">No name</c:out> </div>
+			<div class="image"> <c:out value="${currentArtist.logo}">No image</c:out> </div>
 
 		</c:forEach>
 		

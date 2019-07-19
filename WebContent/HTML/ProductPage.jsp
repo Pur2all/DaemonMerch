@@ -15,8 +15,8 @@
 	<body>
 
 		<div class="sc-user-profile">
-			<% Product product = (Product)request.getAttribute("product"); %>
-			<% UserType userRole = ((User)request.getSession(false).getAttribute("userInfo")).getUserType();%>
+			<%Product product = (Product)request.getAttribute("product"); %>
+			<%UserType userRole = ((User)request.getSession(false).getAttribute("userInfo")).getUserType();%>
 			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
 		
 		<c:if test="${userRole == UserType.ADMIN}">	
@@ -26,7 +26,6 @@
 		<div class="name">NOMe</div>
 		<div class="description">DDDDDDDDDDDDDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAu</div>
 		<div class="price">19.99</div>
-		<button class="delete-product-button">DELETE PRODUCT</button>
 
 		</div>
 
