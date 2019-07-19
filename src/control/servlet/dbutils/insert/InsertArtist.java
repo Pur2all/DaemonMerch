@@ -35,25 +35,18 @@ public class InsertArtist extends HttpServlet
 
 		Artist artist=new Artist();
 
-		try
-		{
-			artist.setLogo(image.getImage().getBytes(1, (int) image.getImage().length()));
-		}
-		catch(SQLException sqlException)
-		{
-			sqlException.printStackTrace();
-		}
+		artist.setLogo(image);
 
 		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
-			
+
 		if(request.getParameter("name")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
 			String name=request.getParameter("name");
 			artist.setName(name);
-			
+
 			try
 			{
 				response.setContentType("text/plain");

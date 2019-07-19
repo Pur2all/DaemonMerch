@@ -53,7 +53,7 @@ public class Artist implements Cloneable
 
 	public String toString()
 	{
-		return getClass().getName() + "[id= " + id + ", name= " + name + "]";
+		return getClass().getName() + "[id= " + id + ", name= " + name + ", logo=" + logo + "]";
 	}
 
 	public boolean equals(Object obj)

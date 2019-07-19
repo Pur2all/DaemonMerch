@@ -19,10 +19,11 @@ public class Artists extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
-		ArtistDAO aDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 		try 
 		{
-			request.setAttribute("artists", aDAO.doRetrieveAll());
+			System.out.println(artistDAO.doRetrieveAll());
+			request.setAttribute("artists", artistDAO.doRetrieveAll());
 		} 
 		catch(SQLException sqlException) 
 		{

@@ -27,6 +27,47 @@ public class ImageDAO implements DAO<Image>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Image doRetrieveByKeyInArtist(String key) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Image image=null;
+
+		String selectSQL="SELECT * FROM Artista WHERE Nome = ?";
+
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, key);
+
+			ResultSet rs=preparedStatement.executeQuery();
+
+			while(rs.next())
+			{
+				image=new Image();
+
+				image.setImageName(rs.getString("Nome"));
+				image.setImage(rs.getBytes("Logo"));
+			}
+		}
+		finally
+		{
+			try
+			{
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			}
+			finally
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return image;
+	}
+	
 	public Image doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -85,6 +126,7 @@ public class ImageDAO implements DAO<Image>
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 
+			//TODO Controlla sta roba, ha senso ciò che fai? Cioè meglio il metodo a parte o sta roba ti serve a qualcosa? Pensa come il te del passato
 			preparedStatement.setInt(1, typeOfImage==TypeOfImage.ARTIST ? id : Types.NULL);
 			preparedStatement.setInt(2, typeOfImage==TypeOfImage.PRODUCT ? id : Types.NULL);
 

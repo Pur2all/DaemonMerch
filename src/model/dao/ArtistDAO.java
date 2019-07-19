@@ -44,7 +44,12 @@ public class ArtistDAO implements DAO<Artist>
 				Artist artistFromTable=new Artist();
 
 				artistFromTable.setName(rs.getString("Nome"));
-				artistFromTable.setLogo(rs.getBytes("Logo"));
+
+				Image newImage=new Image();
+				newImage.setImage(rs.getBytes("Logo"));
+				newImage.setImageName(rs.getString("Nome"));
+
+				artistFromTable.setLogo(newImage);
 				artists.add(artistFromTable);
 			}
 		}
@@ -63,7 +68,7 @@ public class ArtistDAO implements DAO<Artist>
 
 		return artists;
 	}
-	
+
 	public Artist doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -83,15 +88,19 @@ public class ArtistDAO implements DAO<Artist>
 			ResultSet rs=preparedStatement.executeQuery();
 
 			artistFromTable.setName(rs.getString("Nome"));
-			//TODO Mettere attributo nome logo in artista così puoi usarla come le altre immagini
-			artistFromTable.setLogo(rs.getBytes("Logo"));
+
+			Image newImage=new Image();
+			newImage.setImage(rs.getBytes("Logo"));
+			newImage.setImageName(rs.getString("Nome"));
+
+			artistFromTable.setLogo(newImage);
 			rs.last();
 			Image[] artistFromTableImages=new Image[rs.getRow()];
 			int i=0;
 			rs.beforeFirst();
 			while(rs.next())
 			{
-				artistFromTableImages[i++].setImageName(rs.getString("NomeFoto"));
+				artistFromTableImages[i++].setImageName(rs.getString("Nome"));
 				artistFromTableImages[i++].setImage(rs.getBytes("Foto"));
 			}
 			artistFromTable.setImages(artistFromTableImages);
@@ -136,7 +145,12 @@ public class ArtistDAO implements DAO<Artist>
 				Artist artistFromTable=new Artist();
 
 				artistFromTable.setName(rs.getString("Nome"));
-				artistFromTable.setLogo(rs.getBytes("Logo"));
+
+				Image newImage=new Image();
+				newImage.setImage(rs.getBytes("Logo"));
+				newImage.setImageName(rs.getString("Nome"));
+
+				artistFromTable.setLogo(newImage);
 				artists.add(artistFromTable);
 			}
 		}
@@ -161,7 +175,7 @@ public class ArtistDAO implements DAO<Artist>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Logo) VALUES (?, ?)";
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Logo, NomeFileLogo) VALUES (?, ?, ?)";
 		int rowsAffected;
 
 		try
@@ -169,7 +183,7 @@ public class ArtistDAO implements DAO<Artist>
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setString(1, artist.getName());
-			preparedStatement.setBytes(2, artist.getLogo());
+			preparedStatement.setBytes(2, artist.getLogo().getImage());
 
 			rowsAffected=preparedStatement.executeUpdate();
 
@@ -207,7 +221,7 @@ public class ArtistDAO implements DAO<Artist>
 			preparedStatement=connection.prepareStatement(updateSQL);
 
 			preparedStatement.setString(1, artist.getName());
-			preparedStatement.setBytes(2, artist.getLogo());
+			preparedStatement.setBytes(2, artist.getLogo().getImage());
 			preparedStatement.setInt(3, artist.getId());
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
