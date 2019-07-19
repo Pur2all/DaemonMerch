@@ -6,16 +6,45 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Insert title here</title>
+		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
 	</head>
 
 	<body>	
 
-		<form action="/servlet/admin/InsertArtist" method="post">
-			<input name='name' placeholder='Artist Name' type='text'>
-			<input type="file" name="logo" accept="image/*">
-			<input type="file" name="pic" accept="image/*">
-			<input class='animated' type='submit' value='Submit'>
+		<h2>Add Artist</h2>
+
+		<form method="post" action="servlet/admin/InsertArtist" enctype="multipart/form-data">
+
+			<div class="group">
+					<input type="text" value="" placeholder="Artist Name" name="name"/>
+			</div>
+
+
+			<div class="group">
+				<div class="left text">
+					Band Logo:
+				</div>
+				<div class="right">
+					<input type="file" accept="image/*" name="logo"/>
+				</div>
+			</div>
+
+
+			<div class="group">
+				<div class="left text">
+					Band Picture:
+				</div>
+				<div class="right">
+					<input type="file" accept="image/*" name="artist-picture"/>
+				</div>
+			</div>
+
+			<div class="centered-button">
+				<input type="submit" value="Submit">
+			</div>
+
 		</form>
+
 		
 	</body>
 

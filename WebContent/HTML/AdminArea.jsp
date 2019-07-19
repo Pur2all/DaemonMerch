@@ -1,6 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
     import="model.bean.*"%>
+    
+<%@
+	taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"
+	%>
+    
 <!DOCTYPE html>
 <html>
 	<head>
@@ -11,28 +16,33 @@
 
 	<body>
 
+		<%User user = (User) request.getSession(false).getAttribute("userInfo"); %>
 		<div class="sc-user-profile">
 			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
 			<a href="#"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>
-			<div class="username">username (Admin)</div>
+			<div class="username"><c:out value="${user.username}"></c:out> (Admin)</div>
 			<div class="data">
 				<span class="entypo-heart"> Profiles Details</span>
 			</div>
 			<div class="left">First Name</div>
-			<div class="right">pelato</div>
+			<div class="right"><c:out value="${user.name}"></c:out></div>
 			<div class="left">Last Name</div>
-			<div class="right">dellamensa</div>
+			<div class="right"><c:out value="${user.surname}"></c:out></div>
 			<div class="left">Birth Date</div>
-			<div class="right">ieri</div>
+			<div class="right"><c:out value="${user.birthday}"></c:out></div>
 			
-			<div class="admin-button">
-				<button class="add-product">Add Product</button>
-			</div>
-			<div class="admin-button add-artist">
-				<button class="add-artist">Add Artist</button>
-			</div>
-			<div></div>
-			
+			<form action="./AddProductForm">
+				<div class="admin-button">
+					<button class="add-product">Add Product</button>
+				</div>
+			</form>
+				
+			<form action="./AddArtistForm">			
+				<div class="admin-button add-artist">
+					<button class="add-artist">Add Artist</button>
+				</div>
+			</form>
+				
 		</div>
 			
 	</body>

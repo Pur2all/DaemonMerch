@@ -1,0 +1,92 @@
+@charset "ISO-8859-1";
+
+@media screen and (orientation: landscape) {
+
+	body {
+		background: #2E3740;
+	}
+	
+	h2 {
+		color: #6D7781;
+		font-family: "Sofia", cursive;
+		font-size: 15px;
+		font-weight: bold;
+		font-size: 3.6em;
+		text-align: center;
+		margin-bottom: 20px;
+	}
+	
+	textarea, input:not([type=button]):not([type=submit]) {
+		width: 100%;
+		border: 1px solid rgba(0,0,0,.2);
+		padding: .5em 1em;
+	  font-family: sans-serif;
+	}
+
+	input[type=button], input[type=submit] {
+		cursor: pointer;
+		margin: 0;
+		padding: .5em 2em;
+		margin-top: .3em;
+		background: #16aa56;
+		border: none;
+		color: #fff;
+		border-radius: 3px;
+	}
+
+	.group:after {
+		content: "";
+		display: table;
+		clear: both;
+	}
+
+	.left {
+		float: left;
+	}
+
+	.right {
+		float: right;
+	}
+
+	form {
+	  width: 30em;
+	  margin: 0 auto;
+	}
+
+	form div.group > div {
+		width: 46%;
+		margin: 0 0 .5em;
+	}
+
+	div.group:nth-child(2) > div:nth-child(1) > select:nth-child(1) {
+		width: 100%;
+		padding: .5em 1em;
+	  	font-family: sans-serif;
+	}
+	
+	div.group:nth-child(2) > div:nth-child(2) > input:nth-child(1) {
+		width: 100%;
+		padding: .5em 1em;
+	  	font-family: sans-serif;
+	}
+	
+	div.text {
+		padding-bottom: 5%;
+		padding-top: 5%;
+		text-align: center;
+		color: white;
+		width: 100%;
+		padding: .5em 1em;
+	  	font-family: sans-serif;
+	}
+	
+	
+	div.centered-button {
+		text-align: center; 
+	}
+	
+	div.centered-button > input {
+		width: 25%;
+	}
+
+}
