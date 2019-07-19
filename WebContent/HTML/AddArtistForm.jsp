@@ -9,7 +9,7 @@
 		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
 	</head>
 
-	<body>	
+	<body>
 
 		<h2>Add Artist</h2>
 

@@ -116,5 +116,15 @@
     <servlet-name>Main</servlet-name>
     <url-pattern>/Main</url-pattern>
   </servlet-mapping>
+  
+  <!-- artists page jsp -->
+  <servlet>
+    <servlet-name>ArtistsPage</servlet-name>
+    <jsp-file>/HTML/ArtistsPage.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ArtistsPage</servlet-name>
+    <url-pattern>/ArtistsPage</url-pattern>
+  </servlet-mapping>
 
 </web-app>
