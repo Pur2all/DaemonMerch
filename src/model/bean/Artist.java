@@ -4,8 +4,8 @@ public class Artist implements Cloneable
 {
 	private int id;
 	private String name;
-	private byte[] logo;
-	private byte[][] images;
+	private Image logo;
+	private Image[] images;
 
 	public Artist()
 	{
@@ -21,12 +21,12 @@ public class Artist implements Cloneable
 		return name;
 	}
 
-	public byte[] getLogo()
+	public Image getLogo()
 	{
 		return logo;
 	}
 
-	public byte[][] getImages()
+	public Image[] getImages()
 	{
 		return images;
 	}
@@ -41,12 +41,12 @@ public class Artist implements Cloneable
 		name=aName;
 	}
 
-	public void setLogo(byte[] aLogo)
+	public void setLogo(Image aLogo)
 	{
 		logo=aLogo;
 	}
 
-	public void setImages(byte[][] someImages)
+	public void setImages(Image[] someImages)
 	{
 		images=someImages;
 	}

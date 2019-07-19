@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import model.bean.Artist;
+import model.bean.Image;
 
 public class ArtistDAO implements DAO<Artist>
 {
@@ -22,6 +23,47 @@ public class ArtistDAO implements DAO<Artist>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Collection<Artist> doRetrieveAll() throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<Artist> artists=new LinkedList<Artist>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " ORDER BY Nome ";
+
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+
+			ResultSet rs=preparedStatement.executeQuery();
+
+			while (rs.next())
+			{
+				Artist artistFromTable=new Artist();
+
+				artistFromTable.setName(rs.getString("Nome"));
+				artistFromTable.setLogo(rs.getBytes("Logo"));
+				artists.add(artistFromTable);
+			}
+		}
+		finally
+		{
+			try
+			{
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			}
+			finally
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return artists;
+	}
+	
 	public Artist doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
@@ -41,13 +83,17 @@ public class ArtistDAO implements DAO<Artist>
 			ResultSet rs=preparedStatement.executeQuery();
 
 			artistFromTable.setName(rs.getString("Nome"));
+			//TODO Mettere attributo nome logo in artista così puoi usarla come le altre immagini
 			artistFromTable.setLogo(rs.getBytes("Logo"));
 			rs.last();
-			byte[][] artistFromTableImages=new byte [rs.getRow()][];
+			Image[] artistFromTableImages=new Image[rs.getRow()];
 			int i=0;
 			rs.beforeFirst();
 			while(rs.next())
-				artistFromTableImages[i++]=rs.getBytes("Foto");
+			{
+				artistFromTableImages[i++].setImageName(rs.getString("NomeFoto"));
+				artistFromTableImages[i++].setImage(rs.getBytes("Foto"));
+			}
 			artistFromTable.setImages(artistFromTableImages);
 		}
 		finally

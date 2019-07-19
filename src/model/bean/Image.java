@@ -1,11 +1,9 @@
 package model.bean;
 
-import java.sql.Blob;
-
 public class Image
 {
 	private String imageName;
-	private Blob image;
+	private byte[] image;
 	
 	public Image()
 	{
@@ -16,7 +14,7 @@ public class Image
 		return imageName;
 	}
 	
-	public Blob getImage()
+	public byte[] getImage()
 	{
 		return image;
 	}
@@ -26,7 +24,7 @@ public class Image
 		imageName=anImageName;
 	}
 	
-	public void setImage(Blob anImage)
+	public void setImage(byte[] anImage)
 	{
 		image=anImage;
 	}

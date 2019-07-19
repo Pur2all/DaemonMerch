@@ -8,7 +8,6 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
-import javax.sql.rowset.serial.SerialBlob;
 
 import model.bean.Image;
 
@@ -28,7 +27,7 @@ public class ImageGetter
 			{
 				try
 				{
-					image.setImage(new SerialBlob(readAllBytes(part.getInputStream())));
+					image.setImage(readAllBytes(part.getInputStream()));
 				}
 				catch(Exception exception)
 				{
@@ -53,7 +52,7 @@ public class ImageGetter
 		return "";
 	}
 	
-	private static byte[] readAllBytes(InputStream inputStream) throws IOException
+	public static byte[] readAllBytes(InputStream inputStream) throws IOException
 	{
 		byte[] buffer=new byte[8192];
 	    int bytesRead;

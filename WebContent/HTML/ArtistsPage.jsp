@@ -14,12 +14,13 @@
     </head>
 
 	<body>
+	<h1>porco dio </h1>
 		<%LinkedList<Artist> artists = (LinkedList<Artist>) request.getAttribute("artists"); %>
 	
 		<c:forEach items="${artists}" var="currentArtist">		
 
 			<div> <c:out value="${currentArtist.name}">No name</c:out> </div>
-			<div> <c:out value="${currentArtist.logo}">No image</c:out> </div>
+			<div> <img src="images/${currentArtist.logo.imagename}"> </div>
 
 		</c:forEach>
 		

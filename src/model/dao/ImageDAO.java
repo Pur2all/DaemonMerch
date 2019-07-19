@@ -50,7 +50,7 @@ public class ImageDAO implements DAO<Image>
 				image=new Image();
 
 				image.setImageName(rs.getString("NomeFoto"));
-				image.setImage(rs.getBlob("Foto"));
+				image.setImage(rs.getBytes("Foto"));
 			}
 		}
 		finally
@@ -95,7 +95,7 @@ public class ImageDAO implements DAO<Image>
 				Image image=new Image();
 
 				image.setImageName(rs.getString("NomeFoto"));
-				image.setImage(rs.getBlob("Foto"));
+				image.setImage(rs.getBytes("Foto"));
 
 				images.add(image);
 			}
@@ -128,7 +128,7 @@ public class ImageDAO implements DAO<Image>
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
-			preparedStatement.setBlob(1, image.getImage());
+			preparedStatement.setBytes(1, image.getImage());
 			preparedStatement.setString(2, image.getImageName());
 			preparedStatement.setInt(3, typeOfImage==TypeOfImage.PRODUCT ? id : Types.NULL);
 			preparedStatement.setInt(4, typeOfImage==TypeOfImage.ARTIST ? id : Types.NULL);
@@ -167,7 +167,7 @@ public class ImageDAO implements DAO<Image>
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);
 
-			preparedStatement.setBlob(1, image.getImage());
+			preparedStatement.setBytes(1, image.getImage());
 			preparedStatement.setString(2, image.getImageName());
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
