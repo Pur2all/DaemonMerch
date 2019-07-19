@@ -5,12 +5,16 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.Part;
 import javax.sql.rowset.serial.SerialBlob;
 
 import model.bean.Image;
 
+@MultipartConfig(fileSizeThreshold=1024 * 1024 * 2,	// 2MB after which the file will be temporarily stored on disk
+				maxFileSize=1024 * 1024 * 10,		// 10MB maximum size allowed for uploaded files
+				maxRequestSize=1024 * 1024 * 50)	// 50MB overall size of all uploaded files
 public class ImageGetter
 {
 	public static Image getImage(HttpServletRequest request) throws IOException, ServletException

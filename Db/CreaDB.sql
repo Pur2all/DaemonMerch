@@ -101,7 +101,7 @@ CREATE TABLE Top(
 )ENGINE=InnoDB;
 
 CREATE TABLE Foto(
-	NomeFoto VARCHAR(20) NOT NULL,
+	NomeFoto VARCHAR(50) NOT NULL,
 	Foto BLOB NOT NULL,
     ID_Prodotto INT,
     ID_Artista INT,
