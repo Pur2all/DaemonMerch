@@ -20,7 +20,7 @@
 		</logo>
 
 		<div class="wrap-item">
-			<form action="servlet/SearchProduct" method="get">
+			<form action="/SearchProduct" method="get">
 				<div class="searchbar-item">
 					<input type="hidden" name="pageInit" value='0'>
 					<input type="hidden" name="pageEnd" value='15'>
@@ -34,7 +34,7 @@
 
 		<div class="services-icons">
 			<span id="account" class="service-flex-item">
-				<a href="servlet/CheckIfLogged" title="Account" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
+				<a href="/CheckIfLogged" title="Account" class="services-link"> <img src="./images/account.png" alt="Account" class="services-image"> </a>
 			</span>
 
 			<span id="wishlist" class="service-flex-item">
@@ -50,7 +50,7 @@
 			</span>
 		</div>
 
-		<a class="services-icons" href="servlet/auth/Logout">LOGOUT</a>		
+		<a class="services-icons" href="/auth/Logout">LOGOUT</a>
 
 		<div class="navbar">
 			<nav role="navigation">

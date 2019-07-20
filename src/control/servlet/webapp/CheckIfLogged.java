@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.User;
 import model.bean.UserType;
 
-@WebServlet("/servlet/CheckIfLogged")
-public class CheckIfLogged extends HttpServlet 
+@WebServlet("/CheckIfLogged")
+public class CheckIfLogged extends HttpServlet
 {
 	private static final long serialVersionUID = 2478406480045722293L;
 
@@ -30,7 +30,7 @@ public class CheckIfLogged extends HttpServlet
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doGet(request, response);
 	}

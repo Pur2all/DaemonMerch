@@ -13,7 +13,7 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.UserDAO;
 
-@WebServlet("/servlet/Login")
+@WebServlet("/Login")
 public class Login extends HttpServlet
 {
 	private static final long serialVersionUID = 2794033284698836496L;

@@ -16,7 +16,7 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
-@WebServlet("/servlet/auth/InsertOrder")
+@WebServlet("/auth/InsertOrder")
 public class InsertOrder extends HttpServlet
 {
 	private static final long serialVersionUID = -6431170288308520299L;
@@ -48,7 +48,7 @@ public class InsertOrder extends HttpServlet
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("/servlet/auth/RetrieveOrders");
+			getServletContext().getRequestDispatcher("/auth/RetrieveOrders");
 		}
 	}
 }

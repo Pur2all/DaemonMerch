@@ -16,7 +16,7 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
-@WebServlet("/servlet/admin/UpdateOrder")
+@WebServlet("/admin/UpdateOrder")
 public class UpdateOrder extends HttpServlet
 {
 	private static final long serialVersionUID = 8260432438802305074L;

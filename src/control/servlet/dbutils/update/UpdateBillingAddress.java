@@ -16,7 +16,7 @@ import model.bean.User;
 import model.dao.BillingAddressDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/servlet/auth/UpdateBillingAddress")
+@WebServlet("/auth/UpdateBillingAddress")
 public class UpdateBillingAddress extends HttpServlet
 {
 	private static final long serialVersionUID = -6250726725794124158L;

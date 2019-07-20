@@ -15,7 +15,7 @@ import model.bean.Top;
 import model.dao.DBConnectionPool;
 import model.dao.TopDAO;
 
-@WebServlet("/servlet/RetrieveTops")
+@WebServlet("/RetrieveTops")
 public class RetrieveTops extends HttpServlet
 {
 	private static final long serialVersionUID = 5745183530748350346L;

@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.bean.Cart;
 
-@WebServlet("/servlet/auth/RemoveFromCart")
+@WebServlet("/auth/RemoveFromCart")
 public class RemoveFromCart extends HttpServlet
 {
 	private static final long serialVersionUID = -1507530678488154117L;

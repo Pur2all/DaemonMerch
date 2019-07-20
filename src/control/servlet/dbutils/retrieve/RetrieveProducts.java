@@ -14,7 +14,7 @@ import model.bean.Product;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
 
-@WebServlet("/servlet/RetrieveProducts")
+@WebServlet("/RetrieveProducts")
 public class RetrieveProducts extends HttpServlet
 {
 	private static final long serialVersionUID = 1661985961843759472L;

@@ -15,7 +15,7 @@ import model.bean.WishlistProduct;
 import model.dao.DBConnectionPool;
 import model.dao.WishlistDAO;
 
-@WebServlet("/servlet/auth/UpdateProductInWishlist")
+@WebServlet("/auth/UpdateProductInWishlist")
 public class UpdateProductInWishlist extends HttpServlet
 {
 	private static final long serialVersionUID = -5003518934020844020L;

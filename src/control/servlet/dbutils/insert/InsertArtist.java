@@ -16,7 +16,7 @@ import model.dao.ArtistDAO;
 import model.dao.DBConnectionPool;
 import utils.ImageGetter;
 
-@WebServlet("/servlet/admin/InsertArtist")
+@WebServlet("/admin/InsertArtist")
 @MultipartConfig(fileSizeThreshold=1024 * 1024 * 2,	// 2MB after which the file will be temporarily stored on disk
 				maxFileSize=1024 * 1024 * 10,		// 10MB maximum size allowed for uploaded files
 				maxRequestSize=1024 * 1024 * 50)	// 50MB overall size of all uploaded files

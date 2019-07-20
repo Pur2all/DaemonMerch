@@ -11,7 +11,7 @@
 
 	<div class='registrationLoginForm'>
 		<h2>Sign up</h2>
-		<form action="/servlet/Registration" method="post">
+		<form action="/Registration" method="post">
 			<input name='name' placeholder='First Name' type='text'>
 			<input name='surname' placeholder='Last Name' type='text'>
 			<input name="birthday" type="date" placeholder='Birth Date'>

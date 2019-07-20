@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
 
-@WebServlet("/servlet/SearchProduct")
+@WebServlet("/SearchProduct")
 public class SearchProduct extends HttpServlet
 {
 	private static final long serialVersionUID = 861594351321285535L;

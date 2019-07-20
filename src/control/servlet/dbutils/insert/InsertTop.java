@@ -15,7 +15,7 @@ import model.bean.Top;
 import model.dao.DBConnectionPool;
 import model.dao.TopDAO;
 
-@WebServlet("/servlet/admin/InsertTop")
+@WebServlet("/admin/InsertTop")
 public class InsertTop extends HttpServlet
 {
 	private static final long serialVersionUID = 1238131106097045840L;

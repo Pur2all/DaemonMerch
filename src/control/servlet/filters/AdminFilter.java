@@ -14,8 +14,8 @@ import model.bean.User;
 import model.bean.UserType;
 
 @WebFilter(filterName="/AdminFilter",
-		urlPatterns={"/servlet/admin/*"})
-public class AdminFilter implements Filter 
+		urlPatterns={"/admin/*"})
+public class AdminFilter implements Filter
 {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{

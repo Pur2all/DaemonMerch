@@ -10,7 +10,7 @@
 <body>
 
 	<div class='registrationLoginForm'>
-		<form method="post" action="servlet/Login">
+		<form method="post" action="/Login">
 			<h2>Log in</h2>
 			<input name='username' placeholder='Username' type='text'>
 			<input id='pw' name='password' placeholder='Password' type='password'>

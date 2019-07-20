@@ -9,11 +9,11 @@
 		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
 	</head>
 
-	<body>	
+	<body>
 
 		<h2>Add Product</h2>
 
-		<form method="post" action="servlet/admin/InsertProduct" enctype="multipart/form-data">
+		<form method="post" action="/admin/InsertProduct" enctype="multipart/form-data">
 
 			<div class="group">
 				<div class="left">
@@ -50,7 +50,7 @@
 			</div>
 
 		</form>
-		
+
 	</body>
 
 </html>

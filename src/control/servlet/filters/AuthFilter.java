@@ -11,10 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(filterName="/AuthFilter",
-		urlPatterns={"/servlet/auth/*"})
-public class AuthFilter implements Filter 
+		urlPatterns={"/auth/*"})
+public class AuthFilter implements Filter
 {
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
 		HttpServletRequest servletRequest=(HttpServletRequest) request;
 		HttpServletResponse servletResponse=(HttpServletResponse) response;

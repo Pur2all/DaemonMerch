@@ -15,7 +15,7 @@ import model.bean.Product;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
 
-@WebServlet("/servlet/admin/InsertProduct")
+@WebServlet("/admin/InsertProduct")
 public class InsertProduct extends HttpServlet
 {
 	private static final long serialVersionUID = 7338819740934942720L;

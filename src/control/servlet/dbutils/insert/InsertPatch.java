@@ -15,7 +15,7 @@ import model.bean.Patch;
 import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 
-@WebServlet("/servlet/admin/InsertPatch")
+@WebServlet("/admin/InsertPatch")
 public class InsertPatch extends HttpServlet
 {
 	private static final long serialVersionUID = 856348204473800058L;

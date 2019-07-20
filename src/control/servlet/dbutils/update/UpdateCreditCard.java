@@ -16,7 +16,7 @@ import model.bean.User;
 import model.dao.CreditCardDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/servlet/auth/UpdateCreditCard")
+@WebServlet("/auth/UpdateCreditCard")
 public class UpdateCreditCard extends HttpServlet
 {
 	private static final long serialVersionUID = -4599610942013407431L;
