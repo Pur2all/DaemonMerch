@@ -8,7 +8,6 @@
 </head>
 
 <body>
-  <!-- TODO Togli indirizzo, va fatta una pagina per aggiungerlo, con i campi che ti ha dato crea un oggetto utente e salvalo nella request come attributo -->
 	<div class='registrationLoginForm'>
 		<h2>Sign up</h2>
 		<form action="Registration" method="post">
@@ -16,12 +15,21 @@
 			<input name='surname' placeholder='Last Name' type='text'>
 			<input name="birthday" type="date" placeholder='Birth Date'>
 			<input name='username' placeholder='Username' type='text'>
-			<input name="address" placeholder="Address" type="text">
 			<input id='pw' name='password' placeholder='Password' type='password'>
 			<div class='agree'>
 				<input id='agree' name='agree' type='checkbox'>
 				<label for='agree'></label>Accept terms and conditions
 			</div>
+			
+			<%User user = new  User();
+			  user.setBirthday((pageContext.getAttribute("birthday").toString()));
+			  user.setName((pageContext.getAttribute("name").toString()));
+			  user.setSurname((pageContext.getAttribute("surname").toString()));
+			  user.setUsername((pageContext.getAttribute("username").toString()));
+			  user.setUserType(UserType.REGISTERED_USER);
+			  user.setPassword((pageContext.getAttribute("password").toString()));
+			  %>
+			
 			<input class='animated' type='submit' value='Submit'>
 		</form>
 		<a class='forgot' href='LoginForm'>Do you already have an account?</a>
