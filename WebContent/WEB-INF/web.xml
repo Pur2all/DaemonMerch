@@ -138,4 +138,15 @@
     <url-pattern>/ArtistsPage</url-pattern>
   </servlet-mapping>
 
+  <!-- products list jsp -->
+  <servlet>
+    <servlet-name>ProductsList</servlet-name>
+    <jsp-file>/HTML/ProductsList.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ProductsList</servlet-name>
+    <url-pattern>/ProductsList</url-pattern>
+  </servlet-mapping>
+  
+
 </web-app>

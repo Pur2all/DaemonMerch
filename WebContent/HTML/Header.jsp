@@ -16,7 +16,9 @@
 <body>
 	<div class="header-grid" >
 		<logo class="logo-item">
-			<img src="./images/logo.png" width="200">
+			<a href="#">
+				<img src="./images/logo.png" width="200">
+			</a>
 		</logo>
 
 		<div class="wrap-item">

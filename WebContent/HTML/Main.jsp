@@ -17,29 +17,24 @@
 
 	<body>
 
-		<h2 id="heading">Prodotti incredibili impressionanti!</h2>
+		<h2>Banner incredibili impressionanti!</h2>
 
 		<div class="grid-container">
 
-			<ul class="product-list">
-				
-				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
-
-				<c:forEach items="${products}" var="currentProduct">
-					<li class="product">
-						<a>
-							<img class="image" alt="" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Squircle_rounded_square.svg">
-						</a>
-							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
-							<h4 class="price"> <c:out value="${currentProduct.price}"> </c:out></h4>
-
-							<button class="button">Add to Cart</button>
-					</li>
-				</c:forEach>		
+			<a href="#">
+				<img alt="error" src="./images/banner1.png">
+			</a>
 			
-			</ul>
-		
+			<a href="#">
+				<img alt="error" src="./images/banner2.png">
+			</a>
+			
+			<a href="#">
+				<img alt="error" src="./images/banner3.png">
+			</a>
+
 		</div>
+
 
 	</body>
 </html>
