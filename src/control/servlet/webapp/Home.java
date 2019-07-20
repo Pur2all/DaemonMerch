@@ -15,10 +15,6 @@ public class Home extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		request.setAttribute("mainPage", "Main");
-		request.setAttribute("pageInit", 0);
-		request.setAttribute("pageEnd", 16);
-		request.setAttribute("originPage", "Home");
-		getServletContext().getRequestDispatcher("/servlet/RetrieveProducts").include(request, response);
 		getServletContext().getRequestDispatcher("/Index").forward(request, response);
 	}
 

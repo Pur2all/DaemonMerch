@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import model.bean.User;
 import model.bean.UserType;
 
-@WebServlet("/CheckIfLogged")
-public class CheckIfLogged extends HttpServlet
+@WebServlet("/Profile")
+public class Profile extends HttpServlet
 {
 	private static final long serialVersionUID = 2478406480045722293L;
 
@@ -22,11 +22,14 @@ public class CheckIfLogged extends HttpServlet
 			if(((User) request.getSession(false).getAttribute("userInfo")).getUserType()==UserType.ADMIN)
 				response.sendRedirect(request.getContextPath() + "/AdminArea");
 			else
-				response.sendRedirect(request.getContextPath() + "/UserProfile");
+				{
+					request.setAttribute("mainPage", "UserProfile");
+					getServletContext().getRequestDispatcher("/Home").forward(request, response);
+				}
 		else
 		{
-			request.setAttribute("error", Boolean.TRUE);
-			response.sendRedirect(request.getContextPath() + "/LoginForm");
+			request.setAttribute("profileError", Boolean.TRUE);
+			getServletContext().getRequestDispatcher("/LoginForm").forward(request, response);
 		}
 	}
 

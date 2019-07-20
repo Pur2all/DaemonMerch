@@ -15,7 +15,7 @@ import model.bean.Patch;
 import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 
-@WebServlet("/RetrievePatches")
+@WebServlet("/Patches")
 public class RetrievePatches extends HttpServlet
 {
 	private static final long serialVersionUID = 3964359746975342691L;

@@ -15,7 +15,7 @@ import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.OrderDAO;
 
-@WebServlet("/auth/RetrieveOrders")
+@WebServlet("/auth/Orders")
 public class RetrieveOrders extends HttpServlet
 {
 	private static final long serialVersionUID = 5046150917986327220L;

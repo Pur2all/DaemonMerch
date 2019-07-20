@@ -12,10 +12,10 @@ import javax.servlet.http.HttpServletResponse;
 
 @WebFilter(filterName="/RedirectJspFilter",
 			urlPatterns={"*.jsp"})
-public class RedirectJspFilter implements Filter 
+public class RedirectJspFilter implements Filter
 {
-	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException 
+	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
-		((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/Index");
+		((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/Home");
 	}
 }

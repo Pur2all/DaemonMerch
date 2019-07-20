@@ -37,13 +37,11 @@ public class Login extends HttpServlet
 				{
 					HttpSession session=request.getSession(true);
 					session.setAttribute("userInfo", loggedUser);
-					request.setAttribute("mainPage", "Main");
-					//getServletContext().getRequestDispatcher(response.encodeURL("/Home")).forward(request, response);
 					response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/Home"));
 				}
 				else
 				{
-					request.setAttribute("error", Boolean.TRUE);
+					request.setAttribute("LoginError", Boolean.TRUE);
 					getServletContext().getRequestDispatcher(("/LoginForm")).forward(request, response);
 				}
 			}

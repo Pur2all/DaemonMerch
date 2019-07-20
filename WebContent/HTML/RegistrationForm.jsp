@@ -8,10 +8,10 @@
 </head>
 
 <body>
-
+  <!-- TODO Togli indirizzo, va fatta una pagina per aggiungerlo, con i campi che ti ha dato crea un oggetto utente e salvalo nella request come attributo -->
 	<div class='registrationLoginForm'>
 		<h2>Sign up</h2>
-		<form action="/Registration" method="post">
+		<form action="Registration" method="post">
 			<input name='name' placeholder='First Name' type='text'>
 			<input name='surname' placeholder='Last Name' type='text'>
 			<input name="birthday" type="date" placeholder='Birth Date'>

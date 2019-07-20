@@ -19,7 +19,6 @@
 					<input type="text" placeholder="Artist Name" name="name"/>
 			</div>
 
-      <!-- TODO Bisogna checkare che il nome del file del logo sia uguale a quello della band, se no zompa tutto-->
 			<div class="group">
 				<div class="left text">
 					Band Logo:

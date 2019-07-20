@@ -14,7 +14,7 @@ import model.bean.Product;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
 
-@WebServlet("/RetrieveProducts")
+@WebServlet("/Products")
 public class RetrieveProducts extends HttpServlet
 {
 	private static final long serialVersionUID = 1661985961843759472L;
@@ -29,13 +29,8 @@ public class RetrieveProducts extends HttpServlet
 			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(orderString, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			request.setAttribute("products", products);
-			if(request.getAttribute("originPage")==null || !request.getAttribute("originPage").equals("Home"))
-			{
-				request.setAttribute("mainPage", "Products");
-				getServletContext().getRequestDispatcher("/Index").forward(request, response);
-			}
-			else
-				request.removeAttribute("originPage");
+			request.setAttribute("mainPage", "Products");
+			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

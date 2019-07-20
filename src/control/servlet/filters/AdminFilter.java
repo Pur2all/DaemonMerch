@@ -28,6 +28,6 @@ public class AdminFilter implements Filter
 				chain.doFilter(request, response);
 		}
 		else
-			servletResponse.sendRedirect(servletRequest.getContextPath() + "/Index");
+			servletResponse.sendRedirect(servletRequest.getContextPath() + "/Home");
 	}
 }

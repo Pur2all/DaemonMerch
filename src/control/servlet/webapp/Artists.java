@@ -12,27 +12,29 @@ import javax.servlet.http.HttpServletResponse;
 import model.dao.ArtistDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/Artists")
+@WebServlet("/ArtistsProva")
 public class Artists extends HttpServlet
 {
 	private static final long serialVersionUID = 537019613255870404L;
 
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		try 
+		try
 		{
 			System.out.println(artistDAO.doRetrieveAll());
 			request.setAttribute("artists", artistDAO.doRetrieveAll());
-		} 
-		catch(SQLException sqlException) 
+		}
+		catch(SQLException sqlException)
 		{
 			sqlException.printStackTrace();
 		}
-		getServletContext().getRequestDispatcher("/ArtistsPage").forward(request, response);
+
+		request.setAttribute("mainPage", "ArtistsPage");
+		getServletContext().getRequestDispatcher("/Index").forward(request, response);
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		doGet(request, response);
 	}

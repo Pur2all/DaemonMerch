@@ -15,7 +15,7 @@ import model.bean.Artist;
 import model.dao.ArtistDAO;
 import model.dao.DBConnectionPool;
 
-@WebServlet("/RetrieveArtists")
+@WebServlet("/Artists")
 public class RetrieveArtists extends HttpServlet
 {
 	private static final long serialVersionUID = 5020282298100482632L;
