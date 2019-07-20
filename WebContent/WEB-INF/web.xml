@@ -1,15 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
+
   <display-name>DaemonMerch</display-name>
+
   <welcome-file-list>
     <welcome-file>/Home</welcome-file>
   </welcome-file-list>
+
   <listener>
     <listener-class>control.servlet.webapp.ContextListener</listener-class>
   </listener>
+
   <error-page>
     <location>/HTML/ErrorPage.jsp</location>
   </error-page>
+
+  <filter>
+      <filter-name>UrlRewriteFilter</filter-name>
+      <filter-class>org.tuckey.web.filters.urlrewrite.UrlRewriteFilter</filter-class>
+  </filter>
+  <filter-mapping>
+      <filter-name>UrlRewriteFilter</filter-name>
+      <url-pattern>/*</url-pattern>
+      <dispatcher>REQUEST</dispatcher>
+      <dispatcher>FORWARD</dispatcher>
+  </filter-mapping>
+
+  <!-- jsp mapping -->
+
+  <!-- login jsp mapping -->
   <servlet>
     <servlet-name>LoginForm</servlet-name>
     <jsp-file>/HTML/LoginForm.jsp</jsp-file>
@@ -18,6 +37,8 @@
     <servlet-name>LoginForm</servlet-name>
     <url-pattern>/LoginForm</url-pattern>
   </servlet-mapping>
+
+  <!-- index jsp mapping -->
   <servlet>
     <servlet-name>Index</servlet-name>
     <jsp-file>/HTML/Index.jsp</jsp-file>
@@ -26,6 +47,8 @@
     <servlet-name>Index</servlet-name>
     <url-pattern>/Index</url-pattern>
   </servlet-mapping>
+
+  <!-- faq jsp mapping -->
   <servlet>
     <servlet-name>Faq</servlet-name>
     <jsp-file>/HTML/Faq.jsp</jsp-file>
@@ -34,6 +57,8 @@
     <servlet-name>Faq</servlet-name>
     <url-pattern>/Faq</url-pattern>
   </servlet-mapping>
+
+  <!-- registration jsp mapping -->
   <servlet>
     <servlet-name>Registration</servlet-name>
     <jsp-file>/HTML/RegistrationForm.jsp</jsp-file>
@@ -42,6 +67,8 @@
     <servlet-name>Registration</servlet-name>
     <url-pattern>/RegistrationForm</url-pattern>
   </servlet-mapping>
+
+  <!-- user profile jsp -->
   <servlet>
     <servlet-name>UserProfile</servlet-name>
     <jsp-file>/HTML/UserProfile.jsp</jsp-file>
@@ -50,6 +77,8 @@
     <servlet-name>UserProfile</servlet-name>
     <url-pattern>/UserProfile</url-pattern>
   </servlet-mapping>
+
+    <!-- admin area jsp -->
   <servlet>
     <servlet-name>AdminArea</servlet-name>
     <jsp-file>/HTML/AdminArea.jsp</jsp-file>
@@ -58,6 +87,8 @@
     <servlet-name>AdminArea</servlet-name>
     <url-pattern>/AdminArea</url-pattern>
   </servlet-mapping>
+
+    <!-- add product jsp -->
   <servlet>
     <servlet-name>AddProductForm</servlet-name>
     <jsp-file>/HTML/AddProductForm.jsp</jsp-file>
@@ -66,6 +97,8 @@
     <servlet-name>AddProductForm</servlet-name>
     <url-pattern>/AddProductForm</url-pattern>
   </servlet-mapping>
+
+    <!-- add artist jsp -->
   <servlet>
     <servlet-name>AddArtistForm</servlet-name>
     <jsp-file>/HTML/AddArtistForm.jsp</jsp-file>
@@ -74,6 +107,8 @@
     <servlet-name>AddArtistForm</servlet-name>
     <url-pattern>/AddArtistForm</url-pattern>
   </servlet-mapping>
+
+    <!-- product page jsp -->
   <servlet>
     <servlet-name>ProductPage</servlet-name>
     <jsp-file>/HTML/ProductPage.jsp</jsp-file>
@@ -82,6 +117,8 @@
     <servlet-name>ProductPage</servlet-name>
     <url-pattern>/ProductPage</url-pattern>
   </servlet-mapping>
+
+  <!-- main page jsp -->
   <servlet>
     <servlet-name>Main</servlet-name>
     <jsp-file>/HTML/Main.jsp</jsp-file>
@@ -90,6 +127,8 @@
     <servlet-name>Main</servlet-name>
     <url-pattern>/Main</url-pattern>
   </servlet-mapping>
+
+  <!-- artists page jsp -->
   <servlet>
     <servlet-name>ArtistsPage</servlet-name>
     <jsp-file>/HTML/ArtistsPage.jsp</jsp-file>
@@ -98,4 +137,5 @@
     <servlet-name>ArtistsPage</servlet-name>
     <url-pattern>/ArtistsPage</url-pattern>
   </servlet-mapping>
+
 </web-app>

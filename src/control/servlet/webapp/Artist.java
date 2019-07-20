@@ -1,7 +1,6 @@
 package control.servlet.webapp;
 
 import java.io.IOException;
-import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,28 +8,16 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.dao.ArtistDAO;
-import model.dao.DBConnectionPool;
-
-@WebServlet("/ArtistsProva")
-public class Artists extends HttpServlet
+@WebServlet("/Artist")
+public class Artist extends HttpServlet
 {
-	private static final long serialVersionUID = 537019613255870404L;
+	private static final long serialVersionUID = 5745183530748350346L;
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		try
-		{
-			System.out.println(artistDAO.doRetrieveAll());
-			request.setAttribute("artists", artistDAO.doRetrieveAll());
-		}
-		catch(SQLException sqlException)
-		{
-			sqlException.printStackTrace();
-		}
-
-		request.setAttribute("mainPage", "ArtistsPage");
+		String artistName=request.getParameter("name");
+		System.out.println(artistName);
+		request.setAttribute("mainPage", "Artist");
 		getServletContext().getRequestDispatcher("/Index").forward(request, response);
 	}
 

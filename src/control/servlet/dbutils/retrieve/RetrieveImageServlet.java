@@ -1,4 +1,4 @@
-package control.servlet.webapp;
+package control.servlet.dbutils.retrieve;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -28,7 +28,7 @@ public class RetrieveImageServlet extends HttpServlet
         {
         	Image image=null;
         	
-        	if(request.getHeader("Referer").equalsIgnoreCase("http://localhost:8080/DaemonMerch/ArtistsProva"))
+        	if(request.getHeader("Referer").equalsIgnoreCase("http://localhost:8080/DaemonMerch/Artists"))
         		image=(new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), -1, null)).doRetrieveByKeyInArtist(imageName);
         	else
         		image=(new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("id")),

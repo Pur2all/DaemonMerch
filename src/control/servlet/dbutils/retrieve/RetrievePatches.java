@@ -2,7 +2,6 @@ package control.servlet.dbutils.retrieve;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -26,15 +25,8 @@ public class RetrievePatches extends HttpServlet
 
 		try
 		{
-			LinkedList<Patch> patches=(LinkedList<Patch>) patchDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
-
-			patches.sort(new Comparator<Patch>()
-			{
-				public int compare(Patch first, Patch second)
-				{
-					return first.getName().compareTo(second.getName());
-				}
-			});
+			String orderString=request.getParameter("orderString");
+			LinkedList<Patch> patches=(LinkedList<Patch>) patchDAO.doRetrieveAll(orderString, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			request.setAttribute("patches", patches);
 			request.setAttribute("mainPage", "Patches");

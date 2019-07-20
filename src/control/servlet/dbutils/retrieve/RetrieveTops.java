@@ -2,7 +2,6 @@ package control.servlet.dbutils.retrieve;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.Comparator;
 import java.util.LinkedList;
 
 import javax.servlet.ServletException;
@@ -26,15 +25,8 @@ public class RetrieveTops extends HttpServlet
 
 		try
 		{
-			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
-
-			tops.sort(new Comparator<Top>()
-			{
-				public int compare(Top first, Top second)
-				{
-					return first.getName().compareTo(second.getName());
-				}
-			});
+			String orderString=request.getParameter("orderString");
+			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(orderString, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
 
 			request.setAttribute("tops", tops);
 			request.setAttribute("mainPage", "Tops");

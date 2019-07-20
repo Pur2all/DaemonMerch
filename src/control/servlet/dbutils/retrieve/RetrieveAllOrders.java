@@ -1,4 +1,4 @@
-package control.servlet.webapp;
+package control.servlet.dbutils.retrieve;
 
 import java.sql.SQLException;
 
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet("/admin/AllOrdersHistory")
-public class AllOrdersHistory extends HttpServlet
+public class RetrieveAllOrders extends HttpServlet
 {
 	private static final long serialVersionUID = 1042434985115718411L;
 

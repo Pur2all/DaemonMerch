@@ -20,7 +20,7 @@
 
 		<c:forEach items="${artists}" var="currentArtist">
 
-			<div> <c:out value="${currentArtist.name}">No name</c:out> </div>
+			<div> <a href="Artist?name=${currentArtist.name}"> <c:out value="${currentArtist.name}">No name</c:out> </a> </div>
 			<div> <img src="Images/${currentArtist.logo.imageName}"> </div>
 
 			<!-- 
