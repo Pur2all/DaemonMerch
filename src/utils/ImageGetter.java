@@ -18,6 +18,7 @@ public class ImageGetter
 {
 	public static Image getImage(HttpServletRequest request) throws IOException, ServletException
 	{
+		//TODO Fai tornare un array di immagini che ne possono essere inserite più di una
 		String fileName;
 		Image image=new Image();
 		for(Part part: request.getParts())
