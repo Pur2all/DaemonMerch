@@ -6,4 +6,28 @@
 		background: #2E3740;
 	}
 	
+	h1 {
+		color: grey;
+		padding-left: 2%;
+		padding-top: .3%;
+		border-bottom: 1px;
+		border-bottom-style: outset;
+	}
+	
+	.artistsList {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	}
+	
+	.artist > div {
+		text-align: center;
+	}
+	
+	.artist > div > img {
+		width: 50%;
+		height: 50%;
+		border-radius: 100%;
+		margin-top: 5%;
+	}
+	
 }
