@@ -16,7 +16,7 @@ public class Artist extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String artistName=request.getParameter("name");
-		System.out.println(artistName);
+		
 		request.setAttribute("mainPage", "Artist");
 		getServletContext().getRequestDispatcher("/Index").forward(request, response);
 	}

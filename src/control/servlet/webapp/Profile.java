@@ -24,7 +24,7 @@ public class Profile extends HttpServlet
 			else
 				{
 					request.setAttribute("mainPage", "UserProfile");
-					getServletContext().getRequestDispatcher("/Home").forward(request, response);
+					getServletContext().getRequestDispatcher("/Index").forward(request, response);
 				}
 		else
 		{

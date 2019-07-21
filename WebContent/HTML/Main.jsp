@@ -13,6 +13,7 @@
 		<meta charset="ISO-8859-1">
 		<title>DaemonMerch</title>
 		<link rel="stylesheet" type="text/css" href="./Css/Main.css">
+		<link rel="stylesheet" type="text/css" href="../Css/Main.css">
 	</head>
 
 	<body>
@@ -22,15 +23,15 @@
 		<div class="grid-container">
 
 			<a href="#">
-				<img alt="error" src="./images/banner1.png">
+				<img alt="error" src="/DaemonMerch/images/banner1.png">
 			</a>
 			
 			<a href="#">
-				<img alt="error" src="./images/banner2.png">
+				<img alt="error" src="/DaemonMerch/images/banner2.png">
 			</a>
 			
 			<a href="#">
-				<img alt="error" src="./images/banner3.png">
+				<img alt="error" src="/DaemonMerch/images/banner3.png">
 			</a>
 
 		</div>

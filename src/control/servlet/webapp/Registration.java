@@ -1,7 +1,5 @@
 package control.servlet.webapp;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -12,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.User;
+import model.bean.UserType;
 import model.dao.DBConnectionPool;
 import model.dao.UserDAO;
 
@@ -27,11 +26,18 @@ public class Registration extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("newUser")==null)
+		if(request.getParameter("name")==null || request.getParameter("surname")==null || request.getParameter("birthday")==null ||
+			request.getParameter("username")==null || request.getParameter("password")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			User user=new Gson().fromJson((String) request.getAttribute("newUser"), User.class);
+			User user=new User();
+			user.setBirthday((String) request.getParameter("birthday"));
+			user.setName((String) request.getParameter("name"));
+			user.setSurname((String) request.getParameter("surname"));
+			user.setUsername((String) request.getParameter("username"));
+			user.setUserType(UserType.REGISTERED_USER);
+			user.setPassword((String) request.getParameter("password"));
 
 			UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
@@ -41,7 +47,7 @@ public class Registration extends HttpServlet
 				{
 					request.setAttribute("username", user.getUsername());
 					request.setAttribute("password", user.getPassword());
-					getServletContext().getRequestDispatcher("servlet/Login").forward(request, response);
+					getServletContext().getRequestDispatcher("/Login").forward(request, response);
 				}
 				else
 				{

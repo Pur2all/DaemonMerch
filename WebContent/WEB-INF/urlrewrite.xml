@@ -1,6 +1,7 @@
 <urlrewrite>
-  <rule>
-       <from>[\s\S]Artist[\s\S]name=([\s\S]+)</from>
-       <to type="redirect">/$1</to>
-   </rule>
+   <rule>
+      <from>/Artist/(.*)</from>
+      <set name="name">$1</set>
+      <to>/Artist?name=$1</to>
+  </rule>
 </urlrewrite>
