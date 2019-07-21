@@ -13,7 +13,7 @@
 
 		<h2>Add Product</h2>
 
-		<form method="post" action="/admin/InsertProduct" enctype="multipart/form-data">
+		<form method="post" action="admin/InsertProduct" enctype="multipart/form-data">
 
 			<div class="group">
 				<div class="left">

@@ -13,7 +13,7 @@
 
 		<h2>Add Artist</h2>
 
-		<form method="post" action="/admin/InsertArtist" enctype="multipart/form-data">
+		<form method="post" action="admin/InsertArtist" enctype="multipart/form-data">
 
 			<div class="group">
 					<input type="text" placeholder="Artist Name" name="name"/>

@@ -175,7 +175,7 @@ public class ArtistDAO implements DAO<Artist>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Logo, NomeFileLogo) VALUES (?, ?, ?)";
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Logo) VALUES (?, ?)";
 		int rowsAffected;
 
 		try
