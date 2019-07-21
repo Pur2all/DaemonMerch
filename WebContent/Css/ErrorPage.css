@@ -1,0 +1,11 @@
+@charset "ISO-8859-1";
+
+@media screen and (orientation: landscape) {
+	
+	.errorMessage {
+		color: red;
+		text-align: center;
+	}
+	
+	
+}
