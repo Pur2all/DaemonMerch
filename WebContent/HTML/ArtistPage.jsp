@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
 	import="model.bean.*"%>
+<%@
+    	taglib uri = "http://java.sun.com/jsp/jstl/core" prefix = "c"
+%>
 
 <head>
 	<base href="./" target="_self">
@@ -15,8 +18,8 @@
 		
 			<%Artist artist = (Artist)request.getAttribute("artist");%>
 		
-			<div> <img src="Images/${artist.logo.imageName}?id=${artist.id}"> </div>
-			<div> <a href="Artist?name=${artist.name}"> <c:out value="${artist.name}">No name</c:out> </a> </div>
+			<div> <img src="Images/${artist.images[0].imageName}?id=${artist.id}"> </div>
+			<div> <c:out value="${artist.name}">No name</c:out> </div>
 			<%Image[] images = artist.getImages(); %>
 			
 			<div id="slideshowContainer">
