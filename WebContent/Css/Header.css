@@ -9,7 +9,7 @@
 		grid-template-columns: 20% 55% 25%;
 		grid-template-rows: 85% 15%;
 		align-items: center;
-		background-color: lime;
+		background-image: url("https://wallpapercave.com/wp/4hgiRFC.jpg");
 		font-family: 'Open Sans', sans-serif;
 	}
 	
@@ -42,27 +42,30 @@
 	
 	.searchTerm {
 	  width: 100%;
-	  border: 3px solid #00B4CC;
+	  border: 3px solid #1ECD6C;
 	  border-right: none;
+	  border-bottom-left-radius: .35em;
+	  border-top-left-radius: .35em;
 	  padding: 5px;
 	  height: 20px;
 	  outline: none;
-	  color: #9DBFAF;
+	  color: #2E3740;
 	}
 	
 	.searchTerm:focus{
-	  color: #00B4CC;
+	  color: black;
 	}
 	
 	.searchButton {
 	  width: 40px;
-	  height: 35px;
-	  border: 1px solid #00B4CC;
-	  background: #00B4CC;
+	  border: 1px solid #1ECD6C;
+	  background: #1ECD6C;
 	  text-align: center;
 	  color: #fff;
 	  cursor: pointer;
 	  font-size: 20px;
+	  border-bottom-right-radius: .35em;
+	  border-top-right-radius: .35em;
 	}
 	
 
@@ -88,7 +91,7 @@
 	}
 	
 	nav {
-		background: pink;
+		background: #1FCE6D;
 		width: 100%;
 	}
 	
@@ -103,42 +106,19 @@
 		list-style-type: none;
 		margin: 0px;
 		padding: 10px 0;
+		transition: background 0.3s ease-in-out;
+		
 	}
 	
 	nav ul li:hover {
-		background: #fc38f9;
+		background: #16aa56;
 	}
 	
 	nav ul li a {
-		color: #5d60f5;
+		color: black;
 		text-decoration: none;
 		padding: 12px;
 	}
-	
-	nav ul li.parent ul.child {
-		display: none;
-	}
-
-	nav ul li.parent:hover ul.child {
-		display: block;
-		position : absolute;
-		top: 40px;
-		background: #fc38f9;
-	}
-	
-	nav ul li.parent ul.child li {
-		width: 9em;
-		padding: 0px;
-	}
-	
-	nav ul li.parent ul.child li:hover {
-		background: #fd60f5;
-	}
-	
-	nav ul li.parent ul.child a {
-		display: block;
-	}
-	
 	
 	/*NAVBAR END*/
 		

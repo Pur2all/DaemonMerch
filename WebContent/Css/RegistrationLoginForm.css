@@ -114,11 +114,6 @@
 		font-size: 12px;
 	}
 	
-	.animated {
-		animation-fill-mode: both;
-		animation-duration: 1s;
-	}
-	
 	label {
 		display: block;
 	}
