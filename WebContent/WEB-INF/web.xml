@@ -130,13 +130,13 @@
     <url-pattern>/Main</url-pattern>
   </servlet-mapping>
 
-  <!-- artists page jsp -->
+  <!-- artists list jsp -->
   <servlet>
-    <servlet-name>ArtistsPage</servlet-name>
-    <jsp-file>/HTML/ArtistsPage.jsp</jsp-file>
+    <servlet-name>ArtistsList</servlet-name>
+    <jsp-file>/HTML/ArtistsList.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>ArtistsPage</servlet-name>
+    <servlet-name>ArtistsList</servlet-name>
     <url-pattern>/ArtistsPage</url-pattern>
   </servlet-mapping>
 
