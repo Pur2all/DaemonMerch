@@ -16,7 +16,7 @@
 	
 	.artistsList {
 		display: grid;
-		grid-template-columns: repeat(3, 1fr);
+		grid-template-columns: repeat(4, 1fr);
 	}
 	
 	.artist > div {
@@ -24,8 +24,8 @@
 	}
 	
 	.artist > div > img {
-		width: 50%;
-		height: 50%;
+		width: 70%;
+		height: 70%;
 		border-radius: 100%;
 		margin-top: 5%;
 	}
