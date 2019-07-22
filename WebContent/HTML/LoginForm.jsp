@@ -19,13 +19,13 @@
 				
 							
 				<div class="errorMessage">
-				<%if((Boolean)request.getAttribute("LoginError")!=null) {
+				<%if((Boolean)request.getAttribute("loginError")!=null) {
 					out.println("Login error message");
 				} %>
 				</div>
 				
 				<div class="errorMessage">
-				<%if((Boolean)request.getAttribute("ProfileError")!=null) {
+				<%if((Boolean)request.getAttribute("profileError")!=null) {
 					out.println("ProfileError message");
 				} %>
 				</div>

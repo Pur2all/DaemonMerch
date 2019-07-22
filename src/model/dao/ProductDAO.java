@@ -201,6 +201,11 @@ public class ProductDAO implements DAO<Product>
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
+			
+			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, , TypeOfImage.PRODUCT);
+			
+			for(int i=0; i<product.getImages().length; i++)
+				imageDAO.doSave(product.getImages()[i]);
 		}
 		finally
 		{

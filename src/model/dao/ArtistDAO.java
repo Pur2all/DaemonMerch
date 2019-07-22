@@ -172,7 +172,7 @@ public class ArtistDAO implements DAO<Artist>
 		return artists;
 	}
 
-	public boolean doSave(Artist artist) throws SQLException
+	public synchronized boolean doSave(Artist artist) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -190,6 +190,20 @@ public class ArtistDAO implements DAO<Artist>
 			rowsAffected=preparedStatement.executeUpdate();
 
 			connection.commit();
+			
+			String selectSQL="SELECT * FROM " + TABLE_NAME;
+			
+			preparedStatement=connection.prepareStatement(selectSQL);
+			
+			ResultSet rs=preparedStatement.executeQuery();
+			
+			rs.last();
+			
+			System.out.println(rs.getInt("ID"));
+			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, rs.getInt("ID"), TypeOfImage.ARTIST);
+			
+			for(int i=0; i<artist.getImages().length; i++)
+				imageDAO.doSave(artist.getImages()[i]);
 		}
 		finally
 		{

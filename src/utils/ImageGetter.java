@@ -3,6 +3,8 @@ package utils;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -16,14 +18,17 @@ import model.bean.Image;
 				maxRequestSize=1024 * 1024 * 50)	// 50MB overall size of all uploaded files
 public class ImageGetter
 {
-	public static Image getImage(HttpServletRequest request) throws IOException, ServletException
+	public static Image[] getImage(HttpServletRequest request) throws IOException, ServletException
 	{
-		//TODO Fai tornare un array di immagini che ne possono essere inserite più di una
 		String fileName;
-		Image image=new Image();
+		Image[] imageList=new Image[request.getParts().size()];
+		int i=0;
+		
 		for(Part part: request.getParts())
 		{
+			Image image=new Image();
 			fileName=extractFileName(part);	
+			System.out.println("filename: " + fileName);
 			if(fileName!=null && !fileName.equals("")) 
 			{
 				try
@@ -35,10 +40,11 @@ public class ImageGetter
 					exception.printStackTrace();
 				}
 				image.setImageName(fileName);
+				imageList[i++]=image;
 			}
 		}
 		
-		return image;
+		return imageList;
 	}
 	
 	private static String extractFileName(Part part)

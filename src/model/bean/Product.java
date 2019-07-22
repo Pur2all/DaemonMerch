@@ -5,6 +5,7 @@ public class Product implements Cloneable
 	private String name, id, description, tag, artistId;
 	private float price;
 	private int remaining;
+	private Image[] images;
 
 	public Product()
 	{
@@ -45,6 +46,11 @@ public class Product implements Cloneable
 		return artistId;
 	}
 
+	public Image[] getImages()
+	{
+		return images;
+	}
+	
 	public void setName(String aName)
 	{
 		name=aName;
@@ -80,6 +86,11 @@ public class Product implements Cloneable
 		artistId=anArtistId;
 	}
 
+	public void setImages(Image[] someImages)
+	{
+		images=someImages;
+	}
+	
 	public String toString()
 	{
 		return getClass().getName() + "[name= " + name + ", id= " + id + ", description= " + description + ", tag= " + tag +
@@ -97,7 +108,7 @@ public class Product implements Cloneable
 
 		return name.equals(otherProduct.name) && id.equals(otherProduct.id) && description.equals(otherProduct.description) &&
 				tag.equals(otherProduct.tag) && price==otherProduct.price && remaining==otherProduct.remaining &&
-				artistId.equals(otherProduct.artistId);
+				artistId.equals(otherProduct.artistId) && images.equals(otherProduct.images);
 	}
 
 	public Product clone()

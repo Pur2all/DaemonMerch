@@ -8,6 +8,8 @@ import java.sql.Types;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import com.sun.org.apache.bcel.internal.generic.Type;
+
 import model.bean.Image;
 
 public class ImageDAO implements DAO<Image>
@@ -171,8 +173,16 @@ public class ImageDAO implements DAO<Image>
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setBytes(1, image.getImage());
 			preparedStatement.setString(2, image.getImageName());
-			preparedStatement.setInt(3, typeOfImage==TypeOfImage.PRODUCT ? id : Types.NULL);
-			preparedStatement.setInt(4, typeOfImage==TypeOfImage.ARTIST ? id : Types.NULL);
+			if(typeOfImage==TypeOfImage.PRODUCT)
+			{
+				preparedStatement.setInt(3, id);
+				preparedStatement.setObject(4, null);
+			}
+			else
+			{
+				preparedStatement.setObject(3, null);
+				preparedStatement.setInt(4, id);
+			}
 
 			rowsAffected=preparedStatement.executeUpdate();
 

@@ -18,14 +18,14 @@ public class Profile extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getSession(false).getAttribute("userInfo")!=null)
+		if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
 			if(((User) request.getSession(false).getAttribute("userInfo")).getUserType()==UserType.ADMIN)
 				response.sendRedirect(request.getContextPath() + "/AdminArea");
 			else
-				{
-					request.setAttribute("mainPage", "UserProfile");
-					getServletContext().getRequestDispatcher("/Index").forward(request, response);
-				}
+			{
+				request.setAttribute("mainPage", "UserProfile");
+				getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			}
 		else
 		{
 			request.setAttribute("profileError", Boolean.TRUE);

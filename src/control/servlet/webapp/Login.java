@@ -41,7 +41,7 @@ public class Login extends HttpServlet
 				}
 				else
 				{
-					request.setAttribute("LoginError", Boolean.TRUE);
+					request.setAttribute("loginError", Boolean.TRUE);
 					getServletContext().getRequestDispatcher(("/LoginForm")).forward(request, response);
 				}
 			}

@@ -31,12 +31,16 @@ public class InsertArtist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		//TODO rendilo un array di immagini per salvare anche le altre
-		Image image=ImageGetter.getImage(request);
+		Image[] image=ImageGetter.getImage(request);
+		Image[] images=new Image[image.length-1];
+		
+		for(int i=0; i<images.length; i++)
+			images[i]=image[i+1];
 
 		Artist artist=new Artist();
 
-		artist.setLogo(image);
+		artist.setLogo(image[0]);
+		artist.setImages(images);
 
 		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
