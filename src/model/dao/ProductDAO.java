@@ -202,7 +202,16 @@ public class ProductDAO implements DAO<Product>
 
 			connection.commit();
 			
-			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, , TypeOfImage.PRODUCT);
+			String selectSQL="SELECT * FROM " + TABLE_NAME;
+			
+			preparedStatement=connection.prepareStatement(selectSQL);
+			
+			ResultSet rs=preparedStatement.executeQuery();
+			
+			rs.last();
+			
+			System.out.println(rs.getInt("ID"));
+			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, rs.getInt("ID"), TypeOfImage.PRODUCT);
 			
 			for(int i=0; i<product.getImages().length; i++)
 				imageDAO.doSave(product.getImages()[i]);

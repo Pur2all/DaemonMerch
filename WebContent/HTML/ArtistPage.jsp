@@ -15,6 +15,9 @@
 		
 			<%Artist artist = (Artist)request.getAttribute("artist");%>
 		
+<<<<<<< HEAD
+			<div> <img src="Images/${artist.logo.imageName}"> </div>
+=======
 			<div> <a href="Artist?name=${artist.name}"> <c:out value="${artist.name}">No name</c:out> </a> </div>
 			<%Image[] images = artist.getImages(); %>
 			
@@ -31,5 +34,6 @@
 					<div id="next"><a title="next">&#62;</a></div>
 				</div>
 			</div>
+>>>>>>> f341ded4e58404842a81e2400e33201dc32045e5
 			
 	</body>
