@@ -30,7 +30,7 @@ public class ArtistDAO implements DAO<Artist>
 
 		Collection<Artist> artists=new LinkedList<Artist>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " ORDER BY Nome ";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " ORDER BY Nome";
 
 		try
 		{
@@ -39,7 +39,7 @@ public class ArtistDAO implements DAO<Artist>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while (rs.next())
+			while(rs.next())
 			{
 				Artist artistFromTable=new Artist();
 
@@ -88,23 +88,28 @@ public class ArtistDAO implements DAO<Artist>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			artistFromTable.setName(rs.getString("Nome"));
-
-			Image newImage=new Image();
-			newImage.setImage(rs.getBytes("Logo"));
-			newImage.setImageName(rs.getString("Nome"));
-
-			artistFromTable.setLogo(newImage);
-			rs.last();
-			Image[] artistFromTableImages=new Image[rs.getRow()];
-			int i=0;
-			rs.beforeFirst();
-			while(rs.next())
+			if(rs.next())
 			{
-				artistFromTableImages[i++].setImageName(rs.getString("Nome"));
-				artistFromTableImages[i++].setImage(rs.getBytes("Foto"));
+				artistFromTable.setName(rs.getString("Nome"));
+
+				Image newImage=new Image();
+				newImage.setImage(rs.getBytes("Logo"));
+				newImage.setImageName(rs.getString("Nome"));
+
+				artistFromTable.setLogo(newImage);
+				rs.last();
+				Image[] artistFromTableImages=new Image[rs.getRow()];
+				System.out.println("Number row: " + rs.getRow());
+				int i=0;
+				rs.beforeFirst();
+				while(rs.next())
+				{
+					artistFromTableImages[i]=new Image();
+					artistFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					artistFromTableImages[i++].setImage(rs.getBytes("Foto"));
+				}
+				artistFromTable.setImages(artistFromTableImages);
 			}
-			artistFromTable.setImages(artistFromTableImages);
 		}
 		finally
 		{
@@ -203,7 +208,9 @@ public class ArtistDAO implements DAO<Artist>
 			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, rs.getInt("ID"), TypeOfImage.ARTIST);
 			
 			for(int i=0; i<artist.getImages().length; i++)
-				imageDAO.doSave(artist.getImages()[i]);
+				if(artist.getImages()[i]!=null)
+					imageDAO.doSave(artist.getImages()[i]);
+				
 		}
 		finally
 		{

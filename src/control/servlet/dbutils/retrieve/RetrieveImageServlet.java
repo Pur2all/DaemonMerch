@@ -22,7 +22,7 @@ public class RetrieveImageServlet extends HttpServlet
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
     	System.out.println(request.getPathInfo());
-        String imageName=request.getPathInfo().substring(1).replace("%20", " "); // "/foo.png" -> "foo.png".
+        String imageName=request.getPathInfo().substring(1); // "/foo.png" -> "foo.png".
 
         try
         {

@@ -15,7 +15,6 @@
 		
 			<%Artist artist = (Artist)request.getAttribute("artist");%>
 		
-			<div> <a href="Artist?name=${artist.name}"> <c:out value="${artist.name}">No name</c:out> </a> </div>
 			<div> <img src="Images/${artist.logo.imageName}"> </div>
 			
 	</body>
