@@ -29,7 +29,9 @@
 
 					<li class="product">
 						<a>
-							<img class="image" alt="" src="https://upload.wikimedia.org/wikipedia/commons/a/a0/Squircle_rounded_square.svg">
+							<div>
+								<img src="Images/${currentProduct.images[0].imageName}">
+							</div>
 						</a>
 							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
 							<h4 class="price"> <c:out value="${currentProduct.price}"> </c:out></h4>					

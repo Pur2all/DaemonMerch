@@ -14,26 +14,27 @@
     </head>
 
 	<body>
-	<h1>porco dio </h1>
+
+		<h1>Artisti </h1>
 		<%LinkedList<Artist> artists = (LinkedList<Artist>) request.getAttribute("artists"); %>
 		<%char letter = 'a';%>
-
-		<c:forEach items="${artists}" var="currentArtist">
-
-			<div> <a href="Artist?name=${currentArtist.name}&id=${currentArtist.id}"> <c:out value="${currentArtist.name}">No name</c:out> </a> </div>
-			<div> <img src="Images/${currentArtist.logo.imageName}"> </div>
-
-			<!-- 
-			<c:if test="${!(currentArtist.name.charAt(0)==letter)}">
-				<div class="letter"><c:out value="${currentArtist.name.substring(0, 1).toUpperCase()}"></c:out></div>
-			</c:if>
-			-->
-			<%letter = ((Artist)pageContext.getAttribute("currentArtist")).getName().charAt(0);%>
-
-			<div class="name"> <c:out value="${currentArtist.name}">No name</c:out> </div>
-			<div class="image"> <c:out value="${currentArtist.logo}">No image</c:out> </div>
-
-		</c:forEach>
+		
+			<div class="artistsList">		
+			<c:forEach items="${artists}" var="currentArtist">
+				<div class="artist">	
+					<div> <img src="Images/${currentArtist.images[0].imageName}"> </div>
+					<div> <a href="Artist?name=${currentArtist.name}&id=${currentArtist.id}"> <c:out value="${currentArtist.name}">No name</c:out> </a> </div>
+				</div>
+		
+				<!-- 
+				<c:if test="${!(currentArtist.name.charAt(0)==letter)}">
+					<div class="letter"><c:out value="${currentArtist.name.substring(0, 1).toUpperCase()}"></c:out></div>
+				</c:if>
+				-->
+				<%letter = ((Artist)pageContext.getAttribute("currentArtist")).getName().charAt(0);%>
+	
+			</c:forEach>
+		</div>
 
 	</body>
 </html>

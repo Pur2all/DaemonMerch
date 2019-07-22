@@ -150,5 +150,26 @@
     <url-pattern>/ProductsList</url-pattern>
   </servlet-mapping>
 
+  <!-- wishlist jsp -->
+  <servlet>
+    <servlet-name>Wishlist</servlet-name>
+    <jsp-file>/HTML/Wishlist.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Wishlist</servlet-name>
+    <url-pattern>/Wishlist</url-pattern>
+  </servlet-mapping>
+
+
+  <!-- shopping cart jsp -->
+  <servlet>
+    <servlet-name>ShoppingCart</servlet-name>
+    <jsp-file>/HTML/ShoppingCart.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ShoppingCart</servlet-name>
+    <url-pattern>/ShoppingCart</url-pattern>
+  </servlet-mapping>
+
 
 </web-app>

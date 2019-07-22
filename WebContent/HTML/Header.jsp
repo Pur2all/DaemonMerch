@@ -60,7 +60,7 @@
 				<nav role="navigation">
 					<ul>
 						<li><a href="Artists">Band List</a></li>
-						<li><a href="#">Top</a></li>
+						<li><a href="ProductsList">Top</a></li>
 						<li><a href="#">Patch</a></li>
 						<li><a href="#">Other</a></li>
 					</ul>

@@ -34,7 +34,7 @@
 					Band Picture:
 				</div>
 				<div class="right">
-					<input type="file" accept="image/*" name="artist-picture"/>
+					<input type="file" accept="image/*" name="artist-picture" multiple/>
 				</div>
 			</div>
 
