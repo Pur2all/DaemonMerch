@@ -1,0 +1,38 @@
+@media screen and (orientation: landscape) {
+	
+	.container {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+		text-align: center;
+		margin-top: 1%;
+		margin-bottom: 1.5%;
+	}
+		
+	.container > .first-category {
+		border-right: 2px solid #aaaaaa;
+	}
+	
+	.container > .second-category {
+	}
+
+	.container > .third-category {
+		border-left: 2px solid #aaaaaa;
+	}
+	
+	.container > * {
+		display: grid;
+		grid-template-columns: 100%;
+		color: white;
+	}
+	
+	.container > * > div {
+		margin-top: 1%;
+		margin-bottom: 1%;
+	}
+	
+	.container > * > img {
+		width: 10%;
+		justify-self: center;
+	}
+	
+}

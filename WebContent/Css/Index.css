@@ -4,7 +4,6 @@
 {
 
 	.index-grid {
-		height: 1500px;
 		display: grid;
 		grid-template-rows: 15% 70% 15%;
 	}
@@ -34,9 +33,9 @@
 	{
 		margin: inherit;
 	}
-
-	footer
-	{
-		margin: inherit;
+	
+	footer {
+		background-image: url("https://wallpapercave.com/wp/4hgiRFC.jpg");
 	}
+
 }
