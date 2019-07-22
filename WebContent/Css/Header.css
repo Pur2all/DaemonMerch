@@ -7,7 +7,7 @@
 		height: 100%;
 		display: grid;
 		grid-template-columns: 20% 55% 25%;
-		grid-template-rows: 85% 15%;
+		grid-template-rows: 42.5% 42.5% 15%;
 		align-items: center;
 		background-image: url("https://wallpapercave.com/wp/4hgiRFC.jpg");
 		font-family: 'Open Sans', sans-serif;
@@ -15,7 +15,7 @@
 	
 	.logo-item {
 		grid-column: 1 / 1;
-		grid-row: 1 / 1;
+		grid-row: 1 / span 2;
 		text-align: center;
 	}
 	
@@ -72,7 +72,7 @@
 
 	.services-icons {
 		grid-column: 3 / 3;
-		grid-row: 1 / 1;
+		grid-row: 1 / span 2;
 		text-align: center;
 	}
 	
@@ -82,12 +82,18 @@
 		height: auto;
 	}
 	
+	.logout {
+		text-align: center;
+		grid-column: 3 / span 1;
+		grid-row: 2 / span 1;
+	}
+	
 	/*NAVBAR*/
 	
 	div.navbar {
 		grid-template-columns: 25% 25% 25% 25%;
 		grid-column: 1 / 4;
-		grid-row: 2 / 2;
+		grid-row: 3 / span 1;
 	}
 	
 	nav {

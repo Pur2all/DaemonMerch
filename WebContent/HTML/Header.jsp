@@ -54,7 +54,7 @@
 				</span>
 			</div>
 	
-			<a class="services-icons" href="auth/Logout">LOGOUT</a>
+			<a class="logout" href="auth/Logout">LOGOUT</a>
 	
 			<div class="navbar">
 				<nav role="navigation">
