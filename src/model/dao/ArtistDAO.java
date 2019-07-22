@@ -44,6 +44,7 @@ public class ArtistDAO implements DAO<Artist>
 				Artist artistFromTable=new Artist();
 
 				artistFromTable.setName(rs.getString("Nome"));
+				artistFromTable.setId(rs.getInt("ID"));
 
 				Image newImage=new Image();
 				newImage.setImage(rs.getBytes("Logo"));
@@ -145,6 +146,7 @@ public class ArtistDAO implements DAO<Artist>
 				Artist artistFromTable=new Artist();
 
 				artistFromTable.setName(rs.getString("Nome"));
+				artistFromTable.setId(rs.getInt("ID"));
 
 				Image newImage=new Image();
 				newImage.setImage(rs.getBytes("Logo"));

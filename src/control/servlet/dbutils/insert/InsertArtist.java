@@ -31,6 +31,7 @@ public class InsertArtist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		//TODO rendilo un array di immagini per salvare anche le altre
 		Image image=ImageGetter.getImage(request);
 
 		Artist artist=new Artist();

@@ -12,7 +12,6 @@
 		<link rel="icon" href="./images/icon.jpg">
 		<link rel="icon" href="../images/icon.jpg">
 		<link rel="stylesheet" type="text/css" href="./Css/Index.css">
-		<link rel="stylesheet" type="text/css" href="../Css/Index.css">
 		<title>DaemonMerch</title>
 	</head>
 	<body>
