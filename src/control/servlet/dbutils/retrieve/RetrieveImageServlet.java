@@ -27,7 +27,7 @@ public class RetrieveImageServlet extends HttpServlet
         try
         {
         	Image image=null;
-        	
+        	System.out.println("Parametro: " + request.getParameter("id"));
         	if(request.getHeader("Referer").equalsIgnoreCase("http://localhost:8080/DaemonMerch/Artists"))
         		image=(new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), -1, null)).doRetrieveByKeyInArtist(imageName);
         	else
