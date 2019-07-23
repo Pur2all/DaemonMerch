@@ -19,7 +19,6 @@
 		font-weight: bold;
 		font-size: 3.6em;
 		text-align: center;
-		margin-bottom: 20px;
 	}
 	
 	a {
@@ -27,12 +26,18 @@
 		text-decoration: none;
 	}
 	
-	.registrationLoginForm {
+	div {
 		width: 350px;
 		position: absolute;
-		top: 10%;
+		top: 20%;
 		left: 50%;
 		margin-left: -175px;
+	}
+	
+	div .errorMessage {
+		color: red;
+		left: 75%;
+		top: 102%;
 	}
 	
 	input {
@@ -45,8 +50,32 @@
 		color: #6D7781;
 		font-size: 16px;
 	}
+
+	a{
+		text-align:center;
+	    position:relative;
+	    display:table-cell;
+	    width:50%;
+	    cursor:pointer;
+	    background:#2E3740;
+	    width: 350px;
+		position: absolute;
+		top: 10%;
+		left: 50%;
+		margin-left: -175px;
+		line-height:40px;
+	    display:table;
+	    list-style:none;
+	    color:grey;
+	    margin-bottom:10px;
+	    
+	}	
 	
-		
+	a:hover {
+		color: #F0F0F0F0;
+		background: #54545454;
+	}
+	
 	input[type=checkbox] {
 		display: none;
 	}
@@ -85,28 +114,12 @@
 		background: #16aa56;
 	}
 	
-	.forgot {
-		margin-top: 30px;
-		display: block;
-		font-size: 11px;
-		text-align: center;
-		font-weight: bold;
-	}
-	
-	.forgot:hover {
-		margin-top: 30px;
-		display: block;
-		font-size: 11px;
-		text-align: center;
-		font-weight: bold;
-		color: #6D7781;
-	}
 	
 	.agree {
-		padding: 30px 0px;
 		font-size: 12px;
 		text-indent: 25px;
 		line-height: 15px;
+		margin-top: 350px;
 	}
 	
 	::-webkit-input-placeholder {
