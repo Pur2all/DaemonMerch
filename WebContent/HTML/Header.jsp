@@ -52,15 +52,17 @@
 				</span>
 			</div>
 	
-			<a class="logout" href="auth/Logout">LOGOUT</a>
-	
 			<div class="navbar">
 				<nav role="navigation">
 					<ul>
-						<li><a class="animated" href="Artists">Band List</a></li>
-						<li><a class="animated" href="ProductsList">Top</a></li>
-						<li><a class="animated" href="#">Patch</a></li>
-						<li><a class="animated" href="#">Other</a></li>
+						<div>
+							<li><a class="animated" href="Artists">Band List</a></li>
+							<li><a class="animated" href="ProductsList">Top</a></li>
+							<li><a class="animated" href="#">Patch</a></li>
+							<li><a class="animated" href="#">Other</a></li>
+						</div>
+						<li><a class="animated" href="auth/Logout">LOGOUT</a></li>
+						
 					</ul>
 				</nav>
 	

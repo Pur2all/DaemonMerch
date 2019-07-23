@@ -58,7 +58,7 @@
 	}
 
 	div.group:nth-child(2) > div:nth-child(1) > select:nth-child(1) {
-		width: 100%;
+		width: 113%;
 		padding: .5em 1em;
 	  	font-family: sans-serif;
 	}
@@ -67,6 +67,13 @@
 		width: 100%;
 		padding: .5em 1em;
 	  	font-family: sans-serif;
+	}
+	
+	#artists {
+		width: 113%;
+		padding: .5em 1em;
+	  	font-family: sans-serif;
+		
 	}
 	
 	div.text {
