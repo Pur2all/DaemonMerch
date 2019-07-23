@@ -12,11 +12,11 @@
     	<link rel="stylesheet" type="text/css" href="./Css/UserProfile.css">
     </head>
 
-	<body>
+	<body onload="editProfile()">
 
-		<div class="sc-user-profile">
+		<div class="sc-user-profile profile">
 			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
-			<a href="#"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>
+			<a class="edit-button"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>
 			<% User user = (User)request.getSession(false).getAttribute("userInfo"); %>
 			<div class="username"><%out.println(user.getUsername());%></div>
 			<div class="data">
@@ -28,6 +28,29 @@
 			<div class="right"><%out.println(user.getSurname());%></div>
 			<div class="left">Birth Date</div>
 			<div class="right"><%out.println(user.getBirthday());%></div>
+		</div>
+
+
+		<div class="sc-user-profile edit">
+			<form action="servlet/UpdateUser" method="post">	
+				<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
+				<a class="edit-button" onclick="updateUser()"><img class="edit-icon" alt="icon" src="./images/floppy.png" /></a>
+				<div class="username"><%out.println(user.getUsername());%></div>
+				<div class="data">
+					<span class="entypo-heart"> Edit Profile</span>
+				</div>
+				<div class="left">New Name:</div>
+				<div class="right"><input name="name" type="text"></div>
+				<div class="left">New Surname:</div>
+				<div class="right"><input name="surname" type="text"></div>
+				<div class="left">New Birthday:</div>
+				<div class="right"><input name="name" type="date"></div>
+				<div class="left">New Password:</div>
+				<div class="right"><input name="password" type="text"></div>
+				<div class="left">New Username:</div>
+				<div class="right"><input name="username" type="text"></div>
+
+			</form>
 		</div>
 
 	</body>

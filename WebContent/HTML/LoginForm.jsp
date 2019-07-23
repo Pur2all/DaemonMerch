@@ -12,7 +12,7 @@
 		
 	</head>
 	
-	<body>
+	<body onload="loginForm()">
 	
 
 		<a class='toggle-button'>Don't have an account?</a>

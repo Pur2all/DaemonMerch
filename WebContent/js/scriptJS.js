@@ -1,4 +1,4 @@
-$(document).ready(function(){
+loginForm = function(){
 	$('.registrationForm').hide();
 	$('.toggle-button').click(function(){
 		
@@ -12,7 +12,14 @@ $(document).ready(function(){
 		if($(".loginForm").is(':hidden'))
 			$('.registrationForm').slideToggle(250, function(){
 			$('.loginForm').slideToggle(250);
-		});
-			
+		});	
 	});
-});
+};
+
+
+editProfile = function(){
+	$('.edit-button').click(function(){
+		$('div.edit').slideToggle(250);
+		$('div.profile').slideToggle(250);
+	});
+}
