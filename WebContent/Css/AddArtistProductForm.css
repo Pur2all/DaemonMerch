@@ -69,11 +69,10 @@
 	  	font-family: sans-serif;
 	}
 	
-	#artists {
+	.select {
 		width: 113%;
 		padding: .5em 1em;
 	  	font-family: sans-serif;
-		
 	}
 	
 	div.text {

@@ -23,16 +23,27 @@
 					<input type="text" value="" placeholder="Product Name" name="name"/>
 				</div>
 				<div class="right">
-					<select name="artist" id="artists">
+					<select name="artist" id="artists" class="select">
 					</select>
 				</div>
 			</div>
 
-
+			<div class="group">
+				<div class="left">
+					<input type="number" step="1" min="0" value="" placeholder="Items in stock" name="remaining"/>
+				</div>
+				<div class="right">
+				<select name="type" class="select">
+					<option value="patch">Patch</option>
+					<option value="shirt">Shirt</option>
+					<option value="other">Other</option>
+				</select>
+				</div>
+			</div>
 
 			<div class="group">
 				<div class="left">
-				<select name="tag">
+				<select name="tag" class="select">
 					<option value="thrash">Thrash Metal</option>
 					<option value="death">Death Metal</option>
 					<option value="black">Black Metal</option>

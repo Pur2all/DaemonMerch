@@ -23,11 +23,22 @@
 		text-align: center;
 	}
 	
-	.artist > div > img {
+	.artist > div > a > img {
 		width: 70%;
 		height: 70%;
 		border-radius: 100%;
 		margin-top: 5%;
+	}
+	
+	div a.artist-name {
+		color: white;
+		text-decoration: none;
+		font-weight: 400;
+		margin-top: 10%;
+	}
+	
+	div a.artist-name:hover {
+		text-decoration: underline;
 	}
 	
 }

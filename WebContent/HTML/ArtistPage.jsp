@@ -17,10 +17,10 @@
 		</h4>
 		
 			<%Artist artist = (Artist)request.getAttribute("artist");%>
-		
+			<%Image[] images = artist.getImages();%>
+
 			<div> <img src="Images/${artist.images[0].imageName}?id=${artist.id}"> </div>
 			<div> <c:out value="${artist.name}">No name</c:out> </div>
-			<%Image[] images = artist.getImages(); %>
 			
 			<div id="slideshowContainer">
 				<div id="slideshow"> 
