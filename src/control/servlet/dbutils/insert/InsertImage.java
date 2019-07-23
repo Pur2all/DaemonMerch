@@ -35,7 +35,7 @@ public class InsertImage extends HttpServlet
 			response.sendRedirect("ErrorPage");
 		else
 		{
-			Image image=ImageGetter.getImage(request);
+			Image[] image=ImageGetter.getImage(request);
 
 			ImageDAO imageDAO=new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 					Integer.parseInt(request.getParameter("id")), TypeOfImage.valueOf(request.getParameter("typeOfImage")));
@@ -43,7 +43,8 @@ public class InsertImage extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(imageDAO.doSave(image) ? 1 : 0);
+				for(int i=0; i<image.length; i++)
+					response.getWriter().write(imageDAO.doSave(image[i]) ? 1 : 0);
 			}
 			catch (SQLException sqlException)
 			{

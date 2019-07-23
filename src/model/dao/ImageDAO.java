@@ -29,6 +29,51 @@ public class ImageDAO implements DAO<Image>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Collection<Image> doRetrieveAll() throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<Image> images=new LinkedList<Image>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID_Artista = ? AND ID_Prodotto = ?";
+
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+
+			preparedStatement.setInt(1, typeOfImage==TypeOfImage.ARTIST ? id : Types.NULL);
+			preparedStatement.setInt(2, typeOfImage==TypeOfImage.PRODUCT ? id : Types.NULL);
+
+			ResultSet rs=preparedStatement.executeQuery();
+
+			while (rs.next())
+			{
+				Image image=new Image();
+
+				image.setImageName(rs.getString("NomeFoto"));
+				image.setImage(rs.getBytes("Foto"));
+
+				images.add(image);
+			}
+		}
+		finally
+		{
+			try
+			{
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			}
+			finally
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return images;
+	}
+	
 	public Image doRetrieveByKeyInArtist(String key) throws SQLException
 	{
 		Connection connection=null;
@@ -77,7 +122,7 @@ public class ImageDAO implements DAO<Image>
 
 		Image image=null;
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE NomeFoto = ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE NomeFoto = ? ";
 
 		try
 		{
