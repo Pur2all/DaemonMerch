@@ -62,7 +62,18 @@
 							<li><a class="animated" href="#">Patch</a></li>
 							<li><a class="animated" href="#">Other</a></li>
 						</div>
+						<%
+							if(request.getSession(false) == null || request.getSession(false).getAttribute("userInfo") == null) {
+						%>
+						<li><a class="animated" href="LoginForm">LOGIN</a></li>
+						<%
+						 	  } 
+							  else {
+						%>
 						<li><a class="animated" href="auth/Logout">LOGOUT</a></li>
+						<% 
+							}
+						%>
 						
 					</ul>
 				</nav>
