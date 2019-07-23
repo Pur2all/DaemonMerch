@@ -30,12 +30,12 @@
 					<li class="product">
 						<a>
 							<div>
-								<img src="Images/${currentProduct.images[0].imageName}">
+								<img src="Images/${currentProduct.images[0].imageName}?id=${currentProduct.id}">
 							</div>
 						</a>
 							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
 							<h4 class="price"> <c:out value="${currentProduct.price}"> </c:out></h4>
-							
+
 							<button class="button" onclick="addToCart(<% new Gson().toJson(pageContext.getAttribute("currentProduct")); %>)">Add to Cart</button>
 					</li>
 				</c:forEach>

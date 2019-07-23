@@ -12,7 +12,8 @@
 	<body>
 
 		<h2>Add Artist</h2>
-
+		<%if(request.getAttribute("success")!=null)
+			out.print((int) request.getAttribute("success"));%>
 		<form method="post" action="admin/InsertArtist" enctype="multipart/form-data">
 
 			<div class="group">

@@ -49,11 +49,11 @@
 			<div>
 				<textarea placeholder="Description" name="description" tabindex="5" rows="10"></textarea>
 			</div>
-			
+
 			<div>
 				<input type="file" accept="image/*" name="productImage" multiple/>
 			</div>
-			
+
 			<div>
 				<input type="submit" value="Submit">
 			</div>

@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 import javax.servlet.ServletException;
+import javax.servlet.annotation.MultipartConfig;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -16,6 +17,9 @@ import model.dao.DBConnectionPool;
 import model.dao.PatchDAO;
 
 @WebServlet("/admin/InsertPatch")
+@MultipartConfig(fileSizeThreshold=1024 * 1024 * 2,	// 2MB after which the file will be temporarily stored on disk
+				maxFileSize=1024 * 1024 * 10,		// 10MB maximum size allowed for uploaded files
+				maxRequestSize=1024 * 1024 * 50)	// 50MB overall size of all uploaded files
 public class InsertPatch extends HttpServlet
 {
 	private static final long serialVersionUID = 856348204473800058L;

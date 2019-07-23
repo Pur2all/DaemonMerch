@@ -21,13 +21,13 @@ public class RetrieveImageServlet extends HttpServlet
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
     {
-    	System.out.println(request.getPathInfo());
+    	System.out.println("Nome file in RetrieveImageServlet: " + request.getPathInfo());
         String imageName=request.getPathInfo().substring(1); // "/foo.png" -> "foo.png".
 
         try
         {
         	Image image=null;
-        	System.out.println("Parametro: " + request.getParameter("id"));
+        	System.out.println("Parametro id in RetrieveImageServlet: " + request.getParameter("id"));
         	if(request.getHeader("Referer").equalsIgnoreCase("http://localhost:8080/DaemonMerch/Artists"))
         		image=(new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), -1, null)).doRetrieveByKeyInArtist(imageName);
         	else

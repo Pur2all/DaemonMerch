@@ -29,13 +29,13 @@ public class SearchProduct extends HttpServlet
 			{
 				request.setAttribute("products", productDAO.doRetrieveByName(productName,
 					Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd"))));
-				request.setAttribute("mainPage", "Main");
 			}
 			catch (SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
 
+			request.setAttribute("mainPage", "ProductsList");
 			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		else

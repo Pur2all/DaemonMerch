@@ -26,7 +26,7 @@ public class RetrieveProducts extends HttpServlet
 		try
 		{
 			String orderString=request.getParameter("orderString");
-			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(orderString, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
+			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(orderString, Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
 			request.setAttribute("products", products);
 			request.setAttribute("mainPage", "Products");

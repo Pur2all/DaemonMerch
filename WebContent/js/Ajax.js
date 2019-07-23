@@ -6,20 +6,9 @@ function addToCart(element)
     "data":element,
     "success":function(data)
     {
-      $(".index-header").append("<div> " + $.parseJSON(element).name + " added to cart </div>");
-    }
-  });
-}
-
-function insertProduct(element)
-{
-  $.ajax({
-    "type":"GET",
-    "url":"admin/InsertProduct",
-    "data":element,
-    "success":function(data)
-    {
-      $(".index-header").append("<div> " + $.parseJSON(element).name + " insert in products </div>");
+      var informationDiv="<div> " + element.name + " added to cart </div>"
+      $(".index-header").append(informationDiv);
+      $(".index-header").remove(informationDiv);
     }
   });
 }
@@ -36,7 +25,7 @@ function retrieveArtists()
       {
         var option=new Option(val.name, val.id);
         $(option).html(val.name);
-        $("#artists").append(option)
+        $("#artists").append(option);
       });
     }
   });

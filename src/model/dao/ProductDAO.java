@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import model.bean.Image;
 import model.bean.Product;
 
 public class ProductDAO implements DAO<Product>
@@ -29,7 +30,7 @@ public class ProductDAO implements DAO<Product>
 
 		Collection<Product> products=new LinkedList<Product>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE Nome LIKE ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE Nome LIKE ?";
 
 		if (productName!=null && !productName.equals(""))
 		{
@@ -40,11 +41,14 @@ public class ProductDAO implements DAO<Product>
 				preparedStatement.setString(1, "%" + productName + "%");
 
 				ResultSet rs=preparedStatement.executeQuery();
-
-				while (rs.next())
+				int start=0, end=0;
+				while(rs.next())
 				{
+					System.out.println("Start: " + start);
+					start=rs.getRow();
+					
 					Product productFromTable=new Product();
-
+					
 					productFromTable.setId(rs.getString("ID"));
 					productFromTable.setName(rs.getString("Nome"));
 					productFromTable.setPrice(rs.getFloat("Prezzo"));
@@ -52,7 +56,22 @@ public class ProductDAO implements DAO<Product>
 					productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 					productFromTable.setTag(rs.getString("Tag"));
 					productFromTable.setArtistId(rs.getString("ID_Artista"));
-
+					
+					while(rs.next() && rs.getString("ID").equals(productFromTable.getId()));
+					end=rs.getRow();
+					Image[] productFromTableImages=new Image[end-start];
+					int i=0;
+					System.out.println("End: " + end);
+					rs.absolute(start);
+					System.out.println("CurrentRow: " + rs.getRow());
+					while(start<end)
+					{
+						productFromTableImages[i]=new Image();
+						productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+						productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+					}
+					productFromTable.setImages(productFromTableImages);
+					
 					products.add(productFromTable);
 				}
 			}
@@ -90,7 +109,7 @@ public class ProductDAO implements DAO<Product>
 
 		Product productFromTable=new Product();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE ID = ?";
 
 		try
 		{
@@ -110,6 +129,18 @@ public class ProductDAO implements DAO<Product>
 				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
+				
+				rs.last();
+				Image[] productFromTableImages=new Image[rs.getRow()];
+				int i=0;
+				rs.beforeFirst();
+				while(rs.next())
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+				}
+				productFromTable.setImages(productFromTableImages);
 			}
 		}
 		finally
@@ -214,7 +245,8 @@ public class ProductDAO implements DAO<Product>
 			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, rs.getInt("ID"), TypeOfImage.PRODUCT);
 			
 			for(int i=0; i<product.getImages().length; i++)
-				imageDAO.doSave(product.getImages()[i]);
+				if(product.getImages()[i]!=null)
+					imageDAO.doSave(product.getImages()[i]);
 		}
 		finally
 		{
