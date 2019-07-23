@@ -25,7 +25,7 @@ public class ImageGetter
 		for(Part part: request.getParts())
 		{
 			Image image=new Image();
-			fileName=extractFileName(part);	
+			fileName=extractFileName(part)==null ? extractFileName(part) : extractFileName(part) + Math.random();	
 			System.out.println("filename: " + fileName);
 			if(fileName!=null && !fileName.equals("")) 
 			{

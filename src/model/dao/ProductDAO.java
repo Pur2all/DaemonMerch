@@ -44,8 +44,8 @@ public class ProductDAO implements DAO<Product>
 				int start=0, end=0;
 				while(rs.next())
 				{
-					System.out.println("Start: " + start);
 					start=rs.getRow();
+					System.out.println("Start: " + start);
 					
 					Product productFromTable=new Product();
 					
@@ -58,21 +58,30 @@ public class ProductDAO implements DAO<Product>
 					productFromTable.setArtistId(rs.getString("ID_Artista"));
 					
 					while(rs.next() && rs.getString("ID").equals(productFromTable.getId()));
-					end=rs.getRow();
+					if(rs.getRow()==0)
+					{
+						rs.last();
+						end=rs.getRow()+1;
+					}
+					else
+						end=rs.getRow();
+					System.out.println("End: " + end);
 					Image[] productFromTableImages=new Image[end-start];
 					int i=0;
-					System.out.println("End: " + end);
 					rs.absolute(start);
 					System.out.println("CurrentRow: " + rs.getRow());
-					while(start<end)
+					while(start++<end)
 					{
 						productFromTableImages[i]=new Image();
 						productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
 						productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+						rs.next();
 					}
 					productFromTable.setImages(productFromTableImages);
 					
 					products.add(productFromTable);
+					if(rs.getRow()!=0)
+						rs.previous();
 				}
 			}
 			finally
