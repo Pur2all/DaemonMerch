@@ -2,7 +2,6 @@ package control.servlet.dbutils.retrieve;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,7 +9,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import model.bean.Artist;
 import model.dao.ArtistDAO;
 import model.dao.DBConnectionPool;
 

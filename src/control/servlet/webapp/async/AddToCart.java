@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.bean.Cart;
 import model.bean.Product;
 
@@ -21,7 +23,7 @@ public class AddToCart extends HttpServlet
 
 		if((cart=(Cart) request.getSession(false).getAttribute("cart"))==null)
 			cart=new Cart();
-		cart.addProduct((Product) request.getAttribute("product"));
+		cart.addProduct(new Gson().fromJson((String) request.getAttribute("product"), Product.class));
 		request.getSession(false).setAttribute("cart", cart);
 		response.setContentType("plain/text");
 		response.getWriter().write(1);

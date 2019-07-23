@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
     import="model.bean.*"
@@ -22,7 +23,7 @@
 		<div class="grid-container">
 
 			<ul class="product-list">
-				
+
 				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
 
 				<c:forEach items="${products}" var="currentProduct">
@@ -34,13 +35,13 @@
 						</a>
 							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
 							<h4 class="price"> <c:out value="${currentProduct.price}"> </c:out></h4>
-
-							<button class="button">Add to Cart</button>
+							
+							<button class="button" onclick="addToCart(<% new Gson().toJson(pageContext.getAttribute("currentProduct")); %>)">Add to Cart</button>
 					</li>
-				</c:forEach>		
-			
+				</c:forEach>
+
 			</ul>
-		
+
 		</div>
 
 	</body>

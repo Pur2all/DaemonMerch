@@ -11,9 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 
+import model.bean.Artist;
+import model.bean.Image;
 import model.bean.Product;
+import model.dao.ArtistDAO;
 import model.dao.DBConnectionPool;
 import model.dao.ProductDAO;
+import utils.ImageGetter;
 
 @WebServlet("/admin/InsertProduct")
 public class InsertProduct extends HttpServlet
@@ -27,14 +31,25 @@ public class InsertProduct extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("product")==null)
+		Image[] image=ImageGetter.getImage(request);
+
+		Product product=new Product();
+
+		product.setImages(image);
+		product.setDescription(request.getParameter("description"));
+		product.setName(request.getParameter("name"));
+		product.setPrice(Float.parseFloat(request.getParameter("price")));
+		product.setRemaining(Integer.parseInt(request.getParameter("reamining")));
+		product.setTag(request.getParameter("tag"));
+		product.setArtistId(request.getParameter("artistId"));
+
+		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+
+		if(request.getParameter("name")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			Product product=new Gson().fromJson((String) request.getAttribute("product"), Product.class);
-
-			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
 			try
 			{
 				response.setContentType("text/plain");
@@ -44,8 +59,6 @@ public class InsertProduct extends HttpServlet
 			{
 				sqlException.printStackTrace();
 			}
-
-			getServletContext().getRequestDispatcher("servlet/auth/InsertImage").forward(request, response);
 		}
 	}
 }

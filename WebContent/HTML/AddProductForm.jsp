@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
     import="model.bean.*"%>
@@ -7,9 +8,11 @@
 		<meta charset="ISO-8859-1">
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
+	 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="./js/Ajax.js"></script>
 	</head>
 
-	<body>
+	<body onload="retrieveArtists()">
 
 		<h2>Add Product</h2>
 
@@ -20,7 +23,8 @@
 					<input type="text" value="" placeholder="Product Name" name="name"/>
 				</div>
 				<div class="right">
-					<input type="text" value="" placeholder="Artist" name="artist"/>
+					<select name="artist" id="artists">
+					</select>
 				</div>
 			</div>
 
@@ -28,7 +32,7 @@
 
 			<div class="group">
 				<div class="left">
-				<select name="genre">
+				<select name="tag">
 					<option value="thrash">Thrash Metal</option>
 					<option value="death">Death Metal</option>
 					<option value="black">Black Metal</option>
@@ -43,11 +47,11 @@
 
 
 			<div>
-				<textarea placeholder="Description" name="message" tabindex="5" rows="10"></textarea>
+				<textarea placeholder="Description" name="description" tabindex="5" rows="10"></textarea>
 			</div>
 			
 			<div>
-				<input type="file" accept="image/*" name="artist-picture" multiple/>
+				<input type="file" accept="image/*" name="productImage" multiple/>
 			</div>
 			
 			<div>
