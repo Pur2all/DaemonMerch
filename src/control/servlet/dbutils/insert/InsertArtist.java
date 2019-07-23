@@ -54,8 +54,8 @@ public class InsertArtist extends HttpServlet
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(artistDAO.doSave(artist) ? 1 : 0);
+				request.setAttribute("success", (artistDAO.doSave(artist) ? 1 : 0));
+				request.getRequestDispatcher(request.getContextPath() + "/AddArtistForm").forward(request, response);
 			}
 			catch(SQLException sqlException)
 			{

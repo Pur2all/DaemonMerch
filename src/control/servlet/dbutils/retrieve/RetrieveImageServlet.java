@@ -35,15 +35,18 @@ public class RetrieveImageServlet extends HttpServlet
         				request.getHeader("Referer").contains("http://localhost:8080/DaemonMerch/Product") ? TypeOfImage.PRODUCT : TypeOfImage.ARTIST))
         				.doRetrieveByKey(imageName);
         			
-            image.setImageName(imageName);
-
-            if(image.getImage().length==0)
-            	response.sendError(HttpServletResponse.SC_NOT_FOUND);
-            else
+            if(image!=null)
             {
-            	response.setContentType(getServletContext().getMimeType(imageName));
-                response.setContentLength((int) image.getImage().length);
-                response.getOutputStream().write(image.getImage());
+            	image.setImageName(imageName);
+
+                if(image.getImage().length==0)
+                	response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                else
+                {
+                	response.setContentType(getServletContext().getMimeType(imageName));
+                    response.setContentLength((int) image.getImage().length);
+                    response.getOutputStream().write(image.getImage());
+                }
             }
         }
         catch(SQLException sqlException)

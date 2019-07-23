@@ -8,6 +8,7 @@
 		<meta charset="ISO-8859-1">
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
+		<link rel="stylesheet" type="text/css" href="../Css/AddArtistProductForm.css">
 	 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="./js/Ajax.js"></script>
 	</head>
@@ -15,7 +16,8 @@
 	<body onload="retrieveArtists()">
 
 		<h2>Add Product</h2>
-
+		<%if(request.getAttribute("success")!=null)
+			out.print((int) request.getAttribute("success"));%>
 		<form method="post" action="admin/InsertProduct" enctype="multipart/form-data">
 
 			<div class="group">

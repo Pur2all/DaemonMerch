@@ -7,6 +7,7 @@
 		<meta charset="ISO-8859-1">
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
+		<link rel="stylesheet" type="text/css" href="../Css/AddArtistProductForm.css">
 	</head>
 
 	<body>
