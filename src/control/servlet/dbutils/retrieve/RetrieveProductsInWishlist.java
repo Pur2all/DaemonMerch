@@ -26,8 +26,7 @@ public class RetrieveProductsInWishlist extends HttpServlet
 
 		try
 		{
-			LinkedList<WishlistProduct> wishlistProducts=(LinkedList<WishlistProduct>) wishlistDAO.doRetrieveByUserID(Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()),
-				(int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
+			LinkedList<WishlistProduct> wishlistProducts=(LinkedList<WishlistProduct>) wishlistDAO.doRetrieveByUserID(Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId()));
 
 			request.setAttribute("wishlistProducts", wishlistProducts);
 			request.setAttribute("mainPage", "WishlistProducts");

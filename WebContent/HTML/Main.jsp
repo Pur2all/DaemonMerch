@@ -13,7 +13,6 @@
 		<meta charset="ISO-8859-1">
 		<title>DaemonMerch</title>
 		<link rel="stylesheet" type="text/css" href="./Css/Main.css">
-		<link rel="stylesheet" type="text/css" href="../Css/Main.css">
 	</head>
 
 	<body>

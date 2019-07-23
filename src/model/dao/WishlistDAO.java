@@ -22,14 +22,14 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
-	public Collection<WishlistProduct> doRetrieveByUserID(int userID, int pageInit, int pageEnd) throws SQLException
+	public Collection<WishlistProduct> doRetrieveByUserID(int userID) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		Collection<WishlistProduct> products=new LinkedList<WishlistProduct>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN PRODOTTO WHERE ID_User = ? LIMIT " + pageInit + ", " + pageEnd;
+		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN PRODOTTO WHERE ID_User = ? ";
 
 		try
 		{

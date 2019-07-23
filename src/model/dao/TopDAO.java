@@ -79,7 +79,7 @@ public class TopDAO implements DAO<Top>
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
 
-		selectSQL+="LIMIT " + pageInit + ", " + pageEnd;
+		selectSQL+=" LIMIT " + pageInit + ", " + pageEnd;
 		try
 		{
 			connection=dbConnectionPool.getConnection();

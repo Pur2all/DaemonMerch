@@ -13,7 +13,7 @@
 		<script src="./js/Ajax.js"></script>
 		<script src="./js/scriptJS.js"></script>
 	</head>
-	
+
 	<body>
 		<div class="header-grid" >
 			<logo class="logo-item">
@@ -21,7 +21,7 @@
 					<img src="/DaemonMerch/images/logo.png" class="logo-image" width="200">
 				</a>
 			</logo>
-	
+
 			<div class="wrap-item">
 				<form action="SearchProduct" method="get">
 					<div class="searchbar-item">
@@ -34,50 +34,50 @@
 		     	 	</div>
 				</form>
 			</div>
-	
+
 			<div class="services-icons">
 				<span id="account" class="service-flex-item">
 					<a href="/DaemonMerch/Profile" title="Account" class="services-link"> <img src="/DaemonMerch/images/account.png" alt="Account" class="services-image"> </a>
 				</span>
-	
+
 				<span id="wishlist" class="service-flex-item">
 					<a href="/DaemonMerch/Wishlist" title="Wishlist" class="services-link"> <img src="/DaemonMerch/images/wishlist.png" alt="Wishlist" class="services-image"> </a>
 				</span>
-	
+
 				<span id="cart" class="service-flex-item">
 					<a href="/DaemonMerch/Cart" title="Cart" class="services-link"> <img src="/DaemonMerch/images/cart.png" alt="Cart" class="services-image"> </a>
 				</span>
-	
+
 				<span id="faq" class="service-flex-item">
 					<a href="/DaemonMerch/Faq" title="FAQ" class="services-link"> <img src="/DaemonMerch/images/faq.png" alt="FAQ" class="services-image"> </a>
 				</span>
 			</div>
-	
+
 			<div class="navbar">
 				<nav role="navigation">
 					<ul>
 						<div>
 							<li><a class="animated" href="Artists">Band List</a></li>
-							<li><a class="animated" href="ProductsList">Top</a></li>
-							<li><a class="animated" href="#">Patch</a></li>
-							<li><a class="animated" href="#">Other</a></li>
+							<li><a class="animated" href="Tops?pageInit=0&pageEnd=15">Top</a></li>
+							<li><a class="animated" href="Patches?pageInit=0&pageEnd=15">Patch</a></li>
+							<li><a class="animated" href="Products?pageInit=0&pageEnd=15">Other</a></li>
 						</div>
 						<%
 							if(request.getSession(false) == null || request.getSession(false).getAttribute("userInfo") == null) {
 						%>
 						<li><a class="animated" href="LoginForm">LOGIN</a></li>
 						<%
-						 	  } 
+						 	  }
 							  else {
 						%>
 						<li><a class="animated" href="auth/Logout">LOGOUT</a></li>
-						<% 
+						<%
 							}
 						%>
-						
+
 					</ul>
 				</nav>
-	
+
 			</div>
 		</div>
 	</body>

@@ -29,7 +29,7 @@ public class RetrieveProducts extends HttpServlet
 			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(orderString, Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
 			request.setAttribute("products", products);
-			request.setAttribute("mainPage", "Products");
+			request.setAttribute("mainPage", "ProductsList");
 			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}
 		catch (SQLException sqlException)

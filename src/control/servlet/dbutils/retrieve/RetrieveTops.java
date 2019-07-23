@@ -26,7 +26,7 @@ public class RetrieveTops extends HttpServlet
 		try
 		{
 			String orderString=request.getParameter("orderString");
-			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(orderString, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
+			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(orderString, Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
 			request.setAttribute("tops", tops);
 			request.setAttribute("mainPage", "Tops");

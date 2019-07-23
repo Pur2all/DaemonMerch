@@ -77,7 +77,7 @@ public class PatchDAO implements DAO<Patch>
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
 
-		selectSQL+="LIMIT " + pageInit + ", " + pageEnd;
+		selectSQL+=" LIMIT " + pageInit + ", " + pageEnd;
 		try
 		{
 			connection=dbConnectionPool.getConnection();

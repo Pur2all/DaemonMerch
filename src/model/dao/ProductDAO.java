@@ -175,7 +175,7 @@ public class ProductDAO implements DAO<Product>
 
 		Collection<Product> products=new LinkedList<Product>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME;
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto";
 
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
@@ -187,11 +187,14 @@ public class ProductDAO implements DAO<Product>
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-
-			while (rs.next())
+			int start=0, end=0;
+			while(rs.next())
 			{
+				start=rs.getRow();
+				System.out.println("Start: " + start);
+				
 				Product productFromTable=new Product();
-
+				
 				productFromTable.setId(rs.getString("ID"));
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
@@ -199,8 +202,32 @@ public class ProductDAO implements DAO<Product>
 				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
-
+				
+				while(rs.next() && rs.getString("ID").equals(productFromTable.getId()));
+				if(rs.getRow()==0)
+				{
+					rs.last();
+					end=rs.getRow()+1;
+				}
+				else
+					end=rs.getRow();
+				System.out.println("End: " + end);
+				Image[] productFromTableImages=new Image[end-start];
+				int i=0;
+				rs.absolute(start);
+				System.out.println("CurrentRow: " + rs.getRow());
+				while(start++<end)
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+					rs.next();
+				}
+				productFromTable.setImages(productFromTableImages);
+				
 				products.add(productFromTable);
+				if(rs.getRow()!=0)
+					rs.previous();
 			}
 		}
 		finally
