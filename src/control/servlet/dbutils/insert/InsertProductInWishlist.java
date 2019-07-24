@@ -38,7 +38,7 @@ public class InsertProductInWishlist extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(productDAO.doSave(product) ? 1 : 0);
+				response.getWriter().write(productDAO.doSave(product)!=null ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{

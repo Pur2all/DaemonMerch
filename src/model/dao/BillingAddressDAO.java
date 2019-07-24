@@ -120,7 +120,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 		return billingAddresses;
 	}
 
-	public boolean doSave(BillingAddress billingAddress) throws SQLException
+	public BillingAddress doSave(BillingAddress billingAddress) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -156,7 +156,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			}
 		}
 
-		return rowsAffected>0;
+		return billingAddress;
 	}
 
 	public boolean doUpdate(BillingAddress billingAddress) throws SQLException

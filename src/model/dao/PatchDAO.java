@@ -118,26 +118,26 @@ public class PatchDAO implements DAO<Patch>
 		return patches;
 	}
 
-	public boolean doSave(Patch patch) throws SQLException
+	public Patch doSave(Patch patch) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
-		productDAO.doSave(patch);
+		int id=Integer.parseInt(productDAO.doSave(patch).getId());
 
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (Misure, Tipo, Tessuto) VALUES (?, ?, ?)";
-		int rowsAffected;
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (ID, Misure, Tipo, Tessuto) VALUES (?, ?, ?, ?)";
 
 		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, patch.getMeasures());
-			preparedStatement.setString(2, patch.getPatchType().name());
-			preparedStatement.setString(3, patch.getMaterial());
+			preparedStatement.setInt(1, id);
+			preparedStatement.setString(2, patch.getMeasures());
+			preparedStatement.setString(3, patch.getPatchType().name());
+			preparedStatement.setString(4, patch.getMaterial());
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 		}
@@ -153,8 +153,12 @@ public class PatchDAO implements DAO<Patch>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-
-		return rowsAffected>0;
+		
+		Patch newPatch=new Patch();
+		
+		newPatch.setId(String.valueOf(id));
+		
+		return newPatch;
 	}
 
 	public boolean doUpdate(Patch patch) throws SQLException

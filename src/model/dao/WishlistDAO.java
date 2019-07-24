@@ -168,13 +168,12 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		return products;
 	}
 
-	public boolean doSave(WishlistProduct product) throws SQLException
+	public WishlistProduct doSave(WishlistProduct product) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (ID_Utente, ID_Prodotto, DataAggiunzione, Quantita) VALUES (?, ?, ?, ?)";
-		int rowsAffected;
 
 		try
 		{
@@ -185,7 +184,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			preparedStatement.setString(3, product.getDateOfAddition());
 			preparedStatement.setInt(4, product.getQuantity());
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 		}
@@ -202,7 +201,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			}
 		}
 
-		return rowsAffected>0;
+		return product;
 	}
 
 	public boolean doUpdate(WishlistProduct product) throws SQLException

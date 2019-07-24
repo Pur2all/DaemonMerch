@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
+import model.bean.Image;
 import model.bean.Top;
 import model.dao.DBConnectionPool;
 import model.dao.TopDAO;
+import utils.ImageGetter;
 
 @WebServlet("/admin/InsertTop")
 @MultipartConfig(fileSizeThreshold=1024 * 1024 * 2,	// 2MB after which the file will be temporarily stored on disk
@@ -31,25 +31,31 @@ public class InsertTop extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("top")==null)
-			response.sendRedirect(request.getContextPath() + "/ErrorPage");
-		else
+		Image[] image=ImageGetter.getImage(request);
+
+		Top product=new Top();
+
+		product.setImages(image);
+		product.setDescription(request.getParameter("description"));
+		product.setName(request.getParameter("name"));
+		product.setPrice(Float.parseFloat(request.getParameter("price")));
+		product.setRemaining(Integer.parseInt(request.getParameter("remaining")));
+		product.setTag(request.getParameter("tag"));
+		product.setArtistId(request.getParameter("artistId"));
+		product.setCategory(model.bean.Category.valueOf(request.getParameter("category")));
+		product.setPrintType(model.bean.PrintType.valueOf(request.getParameter("printType")));
+		product.setSize(model.bean.Size.valueOf(request.getParameter("size")));
+
+		TopDAO patchDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+		try
 		{
-			Top product=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
-
-			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
-			try
-			{
-				response.setContentType("text/plain");
-				response.getWriter().write(topDAO.doSave(product) ? 1 : 0);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
-
-			getServletContext().getRequestDispatcher("servlet/auth/InsertImage").forward(request, response);
+			request.setAttribute("success", (patchDAO.doSave(product)!=null ? 1 : 0));
+			getServletContext().getRequestDispatcher("/DaemonMerch/AddProductForm").forward(request, response);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

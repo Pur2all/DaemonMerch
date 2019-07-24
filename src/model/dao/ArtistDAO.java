@@ -178,13 +178,12 @@ public class ArtistDAO implements DAO<Artist>
 		return artists;
 	}
 
-	public synchronized boolean doSave(Artist artist) throws SQLException
+	public synchronized Artist doSave(Artist artist) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Logo) VALUES (?, ?)";
-		int rowsAffected;
 
 		try
 		{
@@ -193,7 +192,7 @@ public class ArtistDAO implements DAO<Artist>
 			preparedStatement.setString(1, artist.getName());
 			preparedStatement.setBytes(2, artist.getLogo().getImage());
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 			
@@ -226,7 +225,7 @@ public class ArtistDAO implements DAO<Artist>
 			}
 		}
 
-		return rowsAffected>0;
+		return artist;
 	}
 
 	public boolean doUpdate(Artist artist) throws SQLException

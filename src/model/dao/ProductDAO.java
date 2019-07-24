@@ -246,13 +246,13 @@ public class ProductDAO implements DAO<Product>
 		return products;
 	}
 
-	public boolean doSave(Product product) throws SQLException
+	public Product doSave(Product product) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Prezzo, Descrizione, QuantitaRimanente, Tag, ID_Artista) VALUES (?, ?, ?, ?, ?, ?)";
-		int rowsAffected;
+		int id;
 
 		try
 		{
@@ -265,7 +265,7 @@ public class ProductDAO implements DAO<Product>
 			preparedStatement.setString(5, product.getTag());
 			preparedStatement.setString(6, product.getArtistId());
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 			
@@ -277,6 +277,7 @@ public class ProductDAO implements DAO<Product>
 			
 			rs.last();
 			
+			id=rs.getInt("ID");
 			System.out.println(rs.getInt("ID"));
 			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, rs.getInt("ID"), TypeOfImage.PRODUCT);
 			
@@ -296,8 +297,12 @@ public class ProductDAO implements DAO<Product>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-
-		return rowsAffected>0;
+		
+		Product insertedProduct=new Product();
+		
+		insertedProduct.setId(String.valueOf(id));
+		
+		return insertedProduct;
 	}
 
 	public boolean doUpdate(Product product) throws SQLException

@@ -120,26 +120,26 @@ public class TopDAO implements DAO<Top>
 		return tops;
 	}
 
-	public boolean doSave(Top top) throws SQLException
+	public Top doSave(Top top) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
-		productDAO.doSave(top);
+		int id=Integer.parseInt(productDAO.doSave(top).getId());
 
-		String insertSQL="INSERT INTO " + TABLE_NAME + " (Taglia, Categoria, TipoStampa) VALUES (?, ?, ?)";
-		int rowsAffected;
+		String insertSQL="INSERT INTO " + TABLE_NAME + " (ID, Taglia, Categoria, TipoStampa) VALUES (?, ?, ?, ?)";
 
 		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, top.getSize().name());
-			preparedStatement.setString(2, top.getCategory().name());
-			preparedStatement.setString(3, top.getPrintType().name());
+			preparedStatement.setInt(1, id);
+			preparedStatement.setString(2, top.getSize().name());
+			preparedStatement.setString(3, top.getCategory().name());
+			preparedStatement.setString(4, top.getPrintType().name());
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 		}
@@ -155,8 +155,12 @@ public class TopDAO implements DAO<Top>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
+		
+		Top newTop=new Top();
+		
+		newTop.setId(String.valueOf(id));
 
-		return rowsAffected>0;
+		return newTop;
 	}
 
 	public boolean doUpdate(Top top) throws SQLException

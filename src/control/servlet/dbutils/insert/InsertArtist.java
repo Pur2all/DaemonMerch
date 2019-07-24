@@ -33,7 +33,7 @@ public class InsertArtist extends HttpServlet
 	{
 		Image[] image=ImageGetter.getImage(request);
 		Image[] images=new Image[image.length-1];
-		
+
 		for(int i=0; i<images.length; i++)
 			images[i]=image[i+1];
 
@@ -54,7 +54,7 @@ public class InsertArtist extends HttpServlet
 
 			try
 			{
-				request.setAttribute("success", (artistDAO.doSave(artist) ? 1 : 0));
+				request.setAttribute("success", (artistDAO.doSave(artist)!=null ? 1 : 0));
 				getServletContext().getRequestDispatcher("/AddArtistForm").forward(request, response);
 			}
 			catch(SQLException sqlException)

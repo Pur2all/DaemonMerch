@@ -10,7 +10,7 @@ public interface DAO<T>
 
 	public Collection<T> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException;
 
-	public boolean doSave(T object) throws SQLException;
+	public T doSave(T object) throws SQLException;
 
 	public boolean doUpdate(T object) throws SQLException;
 

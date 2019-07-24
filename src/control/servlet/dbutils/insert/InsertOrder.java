@@ -41,7 +41,7 @@ public class InsertOrder extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(orderDAO.doSave(order) ? 1 : 0);
+				response.getWriter().write(orderDAO.doSave(order)!=null ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{

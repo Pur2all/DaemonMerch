@@ -202,13 +202,12 @@ public class ImageDAO implements DAO<Image>
 		return images;
 	}
 
-	public boolean doSave(Image image) throws SQLException
+	public Image doSave(Image image) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Foto, NomeFoto, ID_Prodotto, ID_Artista) VALUES (?, ?, ?, ?)";
-		int rowsAffected;
 
 		try
 		{
@@ -227,7 +226,7 @@ public class ImageDAO implements DAO<Image>
 				preparedStatement.setInt(4, id);
 			}
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 		}
@@ -244,7 +243,7 @@ public class ImageDAO implements DAO<Image>
 			}
 		}
 
-		return rowsAffected>0;
+		return image;
 	}
 
 	public boolean doUpdate(Image image) throws SQLException

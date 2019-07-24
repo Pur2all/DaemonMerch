@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
 
 import model.bean.Cart;
 import model.bean.Product;
@@ -24,22 +25,24 @@ public class AddToCart extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		Cart cart=null;
+		Product product=null;
 
 		if((cart=(Cart) request.getSession(false).getAttribute("cart"))==null)
 			cart=new Cart();
 		try
 		{
-			cart.addProduct((Product) (new ProductDAO((DBConnectionPool) getServletContext()
+			cart.addProduct((product=((Product) (new ProductDAO((DBConnectionPool) getServletContext()
 				.getAttribute("DriverManager"))
-				.doRetrieveByKey(Integer.parseInt(request.getParameter("productId")))));
+				.doRetrieveByKey(Integer.parseInt(request.getParameter("productId")))))));
 		}
 		catch(SQLException sqlException)
 		{
 			sqlException.printStackTrace();
 		}
+		
 		request.getSession(false).setAttribute("cart", cart);
-		response.setContentType("plain/text");
-		response.getWriter().write(1);
+		response.setContentType("application/json");
+		response.getWriter().write(new Gson().toJson(product));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

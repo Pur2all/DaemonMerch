@@ -42,7 +42,7 @@
 								<%}
 							else
 								{%>
-									<button class="button" onclick="window.location.replace('/DaemonMerch/LoginForm')">Add to Cart</button>
+									<button class="button" onclick="window.location.href='/DaemonMerch/LoginForm'">Add to Cart</button>
 								<% } %>
 					</li>
 				</c:forEach>

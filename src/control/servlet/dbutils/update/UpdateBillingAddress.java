@@ -38,7 +38,7 @@ public class UpdateBillingAddress extends HttpServlet
 		{
 			response.setContentType("text/plain");
 			billingAddressDAO.doDelete(oldBillingAddress);
-			response.getWriter().write(billingAddressDAO.doSave(newBillingAddress) ? 1 : 0);
+			response.getWriter().write(billingAddressDAO.doSave(newBillingAddress)!=null ? 1 : 0);
 		}
 		catch(SQLException sqlException)
 		{

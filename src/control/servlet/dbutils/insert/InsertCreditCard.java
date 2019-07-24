@@ -40,7 +40,7 @@ public class InsertCreditCard extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(creditCardDAO.doSave(creditCard) ? 1 : 0);
+				response.getWriter().write(creditCardDAO.doSave(creditCard)!=null ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{

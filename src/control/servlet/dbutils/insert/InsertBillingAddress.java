@@ -41,7 +41,7 @@ public class InsertBillingAddress extends HttpServlet
 			try
 			{
 				response.setContentType("text/plain");
-				response.getWriter().write(billingAddressDAO.doSave(billingAddress) ? 1 : 0);
+				response.getWriter().write(billingAddressDAO.doSave(billingAddress)!=null ? 1 : 0);
 			}
 			catch(SQLException sqlException)
 			{

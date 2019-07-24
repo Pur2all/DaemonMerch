@@ -43,7 +43,7 @@ public class Registration extends HttpServlet
 
 			try
 			{
-				if(userDAO.doSave(user))
+				if(userDAO.doSave(user)!=null)
 				{
 					request.setAttribute("username", user.getUsername());
 					request.setAttribute("password", user.getPassword());

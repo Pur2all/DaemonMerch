@@ -27,12 +27,13 @@ public class CheckUsername extends HttpServlet
 		try
 		{
 			boolean isAlreadyPresent=false;
-			for(User u: userDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd")))
+			for(User u: userDAO.doRetrieveAll())
 				if(u.getUsername().equals(username))
 				{
 					isAlreadyPresent=true;
 					break;
 				}
+			response.setContentType("text/plain");
 			response.getWriter().write(isAlreadyPresent ? 1 : 0);
 		}
 		catch (SQLException sqlException)

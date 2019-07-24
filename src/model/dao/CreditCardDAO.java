@@ -111,13 +111,12 @@ public class CreditCardDAO implements DAO<CreditCard>
 		return users;
 	}
 
-	public boolean doSave(CreditCard creditCard) throws SQLException
+	public CreditCard doSave(CreditCard creditCard) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (CVV, DataScadenza, Numero) VALUES (?, ?, ?)";
-		int rowsAffected;
 
 		try
 		{
@@ -127,7 +126,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			preparedStatement.setString(2, creditCard.getExpireDate());
 			preparedStatement.setString(3, creditCard.getNumber());
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 			saveUserCreditCardRelation(creditCard);
@@ -145,7 +144,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			}
 		}
 
-		return rowsAffected>0;
+		return creditCard;
 	}
 
 	public boolean doUpdate(CreditCard creditCard) throws SQLException

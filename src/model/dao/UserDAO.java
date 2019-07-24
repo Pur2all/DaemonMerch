@@ -23,6 +23,52 @@ public class UserDAO implements DAO<User>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Collection<User> doRetrieveAll() throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<User> users=new LinkedList<User>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME;
+
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+
+			ResultSet rs=preparedStatement.executeQuery();
+
+			while (rs.next())
+			{
+				User userFromTable=new User();
+
+				userFromTable.setId(rs.getString("ID"));
+				userFromTable.setName(rs.getString("Nome"));
+				userFromTable.setSurname(rs.getString("Cognome"));
+				userFromTable.setUserType(UserType.valueOf(rs.getString("Tipo")));
+				userFromTable.setBirthday(rs.getString("DataDiNascita"));
+				userFromTable.setUsername(rs.getString("Username"));
+				userFromTable.setPassword(rs.getString("Password"));
+				users.add(userFromTable);
+			}
+		}
+		finally
+		{
+			try
+			{
+				if (preparedStatement!=null)
+					preparedStatement.close();
+			}
+			finally
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return users;
+	}
+
 	public User searchForUsernameAndPassword(String username, String password) throws SQLException
 	{
 		Connection connection=null;
@@ -165,13 +211,12 @@ public class UserDAO implements DAO<User>
 		return users;
 	}
 
-	public boolean doSave(User user) throws SQLException
+	public User doSave(User user) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Nome, Cognome, Tipo, DataDiNascita, Username, Password) VALUES (?, ?, ?, ?, ?, ?)";
-		int rowsAffected;
 
 		try
 		{
@@ -184,7 +229,7 @@ public class UserDAO implements DAO<User>
 			preparedStatement.setString(5, user.getUsername());
 			preparedStatement.setString(6, user.getPassword());
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 		}
@@ -201,7 +246,7 @@ public class UserDAO implements DAO<User>
 			}
 		}
 
-		return rowsAffected>0;
+		return user;
 	}
 
 	public boolean doUpdate(User user) throws SQLException

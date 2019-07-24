@@ -222,13 +222,12 @@ public class OrderDAO implements DAO<Order>
 		return orders;
 	}
 
-	public boolean doSave(Order order) throws SQLException
+	public Order doSave(Order order) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Data, Totale, StatoOrdine, ID_Utente, Stato, Via, Paese, Provincia, NumeroCivico) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		int rowsAffected;
 
 		try
 		{
@@ -244,7 +243,7 @@ public class OrderDAO implements DAO<Order>
 			preparedStatement.setString(8, order.getBillingAddress().getDistrict());
 			preparedStatement.setInt(9, Integer.parseInt(order.getBillingAddress().getHouseNumber()));
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 		}
@@ -261,7 +260,9 @@ public class OrderDAO implements DAO<Order>
 			}
 		}
 
-		return rowsAffected>0;
+		Order newOrder=new Order();
+		
+		return newOrder;
 	}
 
 	public boolean doUpdate(Order order) throws SQLException

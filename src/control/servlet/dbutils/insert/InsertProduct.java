@@ -39,18 +39,16 @@ public class InsertProduct extends HttpServlet
 		product.setDescription(request.getParameter("description"));
 		product.setName(request.getParameter("name"));
 		product.setPrice(Float.parseFloat(request.getParameter("price")));
-		product.setRemaining(1);
-		//product.setRemaining(Integer.parseInt(request.getParameter("remaining")));
+		product.setRemaining(Integer.parseInt(request.getParameter("remaining")));
 		product.setTag(request.getParameter("tag"));
 		product.setArtistId(request.getParameter("artistId"));
 
 		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
-
 		try
 		{
-			request.setAttribute("success", (productDAO.doSave(product) ? 1 : 0));
-			getServletContext().getRequestDispatcher("/AddProductForm").forward(request, response);
+			request.setAttribute("success", (productDAO.doSave(product)!=null ? 1 : 0));
+			getServletContext().getRequestDispatcher("/DaemonMerch/AddProductForm").forward(request, response);
 		}
 		catch(SQLException sqlException)
 		{
