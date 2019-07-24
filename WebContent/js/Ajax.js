@@ -34,19 +34,18 @@ function retrieveArtists()
 //// TODO: Metti apposto sta roba e scopri come si legge lato server, aggiungi pure ID
 function updateUserAsync(user)
 {
+  console.log("Ue fra", user);
   $.ajax({
     "type":"POST",
     "url":"auth/UpdateUser",
-    "data":user,
-    "contentType":"application/json; charset=utf-8",
-    "dataType": "json",
+    "data":{user:user},
     "success":function(data)
     {
       window.location.reload();
     },
     "error":function(error)
     {
-      console.log(error);
+      console.log("Error", error);
     }
   });
 }

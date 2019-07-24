@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 import model.bean.User;
 import model.dao.DBConnectionPool;
@@ -28,10 +28,10 @@ public class UpdateUser extends HttpServlet
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		//TODO vedi come si legge sta roba
-		User user=new Gson().fromJson(request.getParameter("user"), User.class);
+		User user=(new GsonBuilder().create()).fromJson(request.getParameter("user"), User.class);
 
 		UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		System.out.println(user);
+		System.out.println("User: " + user);
 		try
 		{
 			response.setContentType("text/plain");

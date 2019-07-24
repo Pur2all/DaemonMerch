@@ -28,19 +28,19 @@ addProductForm = function(){
 };
 
 selectUpdate = function() {
-	
+
 	$('div.right > select.product-type').on('change', function() {
-		
+
 		if(this.value == "shirt") {
 			$('#shirt-specific').slideDown();
 			$('#patch-specific').slideUp();
 		};
-		
+
 		if(this.value == "other") {
 			$('#shirt-specific').slideUp();
 			$('#patch-specific').slideUp();
 		};
-		
+
 		if(this.value == "patch") {
 			$('#patch-specific').slideDown();
 			$('#shirt-specific').slideUp();
@@ -65,7 +65,9 @@ function updateUser()
 		surname:$("#newSurname").val(),
 		birthday:$("#newBirthday").val(),
 		username:$("#newUsername").val(),
-		password:$("#newPassword").val()
+		password:$("#newPassword").val(),
+		type:"REGISTERED_USER",
+		id:$("#id").val()
 	};
 
 	return updateUserAsync(JSON.stringify(user));

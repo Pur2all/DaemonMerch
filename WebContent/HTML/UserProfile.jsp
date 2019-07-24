@@ -49,7 +49,7 @@
 				<div class="right"><input name="password" type="text" id="newPassword" value="<%out.print(user.getPassword());%>"></div>
 				<div class="left">New Username:</div>
 				<div class="right"><input name="username" type="text" id="newUsername" value="<%out.print(user.getUsername());%>"></div>
-
+        		<input type="hidden" id="id" value="<%out.print(user.getId());%>">
 			</form>
 		</div>
 
