@@ -91,7 +91,8 @@ public class ArtistDAO implements DAO<Artist>
 			if(rs.next())
 			{
 				artistFromTable.setName(rs.getString("Nome"));
-
+				artistFromTable.setId(rs.getInt("ID"));
+				
 				Image newImage=new Image();
 				newImage.setImage(rs.getBytes("Logo"));
 				newImage.setImageName(rs.getString("Nome"));
