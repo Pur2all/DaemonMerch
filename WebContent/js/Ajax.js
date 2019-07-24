@@ -1,3 +1,4 @@
+//Function for add a product to cart
 function addToCart(id)
 {
   $.ajax({
@@ -14,6 +15,7 @@ function addToCart(id)
   });
 }
 
+//Function to retrieve artists async
 function retrieveArtists()
 {
   $.ajax({
@@ -64,6 +66,51 @@ function checkUsername(username)
         // TODO: Animare il campo di input per l'username rendendolo rosso e dicendo che l'utente è già preso
       else
         // TODO: Animarlo come sopra ma col verde dicendo che è ok l'username
+    }
+  });
+}
+
+//Function to add a product to wishlist
+function addToWishlist(id)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"auth/AddToWishlist",
+    "data":{productId:id},
+    "success":function(data)
+    {
+      // TODO: Animare sta roba
+      var informationDiv="<div> " + data.name + " added to wishlist </div>"
+      $(".index-header").append(informationDiv);
+      $(".index-header").remove(informationDiv);
+    }
+  });
+}
+
+
+//Function to retrieve credit cards async
+function retrieveCreditCardsAsync(id)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"auth/CreditCards",
+    "success":function(data)
+    {
+      visualizeCreditCards(data); // TODO: implementare la funzione per visualizzarli in js
+    }
+  });
+}
+
+
+//Function to retrieve credit cards async
+function retrieveBillingAddressesAsync(id)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"auth/BillingAddressesAsync",
+    "success":function(data)
+    {
+      visualizeBillingAddresses(data); // TODO: implementare la funzione per visualizzarli in js
     }
   });
 }

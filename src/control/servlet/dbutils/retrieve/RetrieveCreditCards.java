@@ -1,5 +1,7 @@
 package control.servlet.dbutils.retrieve;
 
+import com.google.gson.Gson;
+
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -27,12 +29,10 @@ public class RetrieveCreditCards extends HttpServlet
 
 		try
 		{
-			LinkedList<CreditCard> creditCards=(LinkedList<CreditCard>) creditCardDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
+			LinkedList<CreditCard> creditCards=(LinkedList<CreditCard>) creditCardDAO.doRetrieveAll();
 
-			request.setAttribute("creditCards", creditCards);
-			request.setAttribute("mainPage", "CreditCards");
-
-			getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(creditCards));
 		}
 		catch (SQLException sqlException)
 		{

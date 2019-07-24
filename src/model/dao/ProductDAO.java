@@ -46,9 +46,9 @@ public class ProductDAO implements DAO<Product>
 				{
 					start=rs.getRow();
 					System.out.println("Start: " + start);
-					
+
 					Product productFromTable=new Product();
-					
+
 					productFromTable.setId(rs.getString("ID"));
 					productFromTable.setName(rs.getString("Nome"));
 					productFromTable.setPrice(rs.getFloat("Prezzo"));
@@ -56,7 +56,7 @@ public class ProductDAO implements DAO<Product>
 					productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 					productFromTable.setTag(rs.getString("Tag"));
 					productFromTable.setArtistId(rs.getString("ID_Artista"));
-					
+
 					while(rs.next() && rs.getString("ID").equals(productFromTable.getId()));
 					if(rs.getRow()==0)
 					{
@@ -78,7 +78,7 @@ public class ProductDAO implements DAO<Product>
 						rs.next();
 					}
 					productFromTable.setImages(productFromTableImages);
-					
+
 					products.add(productFromTable);
 					if(rs.getRow()!=0)
 						rs.previous();
@@ -138,7 +138,7 @@ public class ProductDAO implements DAO<Product>
 				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
-				
+
 				rs.last();
 				Image[] productFromTableImages=new Image[rs.getRow()];
 				int i=0;
@@ -192,9 +192,9 @@ public class ProductDAO implements DAO<Product>
 			{
 				start=rs.getRow();
 				System.out.println("Start: " + start);
-				
+
 				Product productFromTable=new Product();
-				
+
 				productFromTable.setId(rs.getString("ID"));
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
@@ -202,7 +202,7 @@ public class ProductDAO implements DAO<Product>
 				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
-				
+
 				while(rs.next() && rs.getString("ID").equals(productFromTable.getId()));
 				if(rs.getRow()==0)
 				{
@@ -224,7 +224,7 @@ public class ProductDAO implements DAO<Product>
 					rs.next();
 				}
 				productFromTable.setImages(productFromTableImages);
-				
+
 				products.add(productFromTable);
 				if(rs.getRow()!=0)
 					rs.previous();
@@ -268,19 +268,20 @@ public class ProductDAO implements DAO<Product>
 			preparedStatement.executeUpdate();
 
 			connection.commit();
-			
+
 			String selectSQL="SELECT * FROM " + TABLE_NAME;
-			
+
+			preparedStatement.close();
 			preparedStatement=connection.prepareStatement(selectSQL);
-			
+
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			rs.last();
-			
+
 			id=rs.getInt("ID");
 			System.out.println(rs.getInt("ID"));
 			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, rs.getInt("ID"), TypeOfImage.PRODUCT);
-			
+
 			for(int i=0; i<product.getImages().length; i++)
 				if(product.getImages()[i]!=null)
 					imageDAO.doSave(product.getImages()[i]);
@@ -297,11 +298,11 @@ public class ProductDAO implements DAO<Product>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		Product insertedProduct=new Product();
-		
+
 		insertedProduct.setId(String.valueOf(id));
-		
+
 		return insertedProduct;
 	}
 

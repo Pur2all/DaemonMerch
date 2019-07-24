@@ -39,7 +39,7 @@ public class AddToCart extends HttpServlet
 		{
 			sqlException.printStackTrace();
 		}
-		
+
 		request.getSession(false).setAttribute("cart", cart);
 		response.setContentType("application/json");
 		response.getWriter().write(new Gson().toJson(product));

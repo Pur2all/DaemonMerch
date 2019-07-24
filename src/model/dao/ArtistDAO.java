@@ -92,7 +92,7 @@ public class ArtistDAO implements DAO<Artist>
 			{
 				artistFromTable.setName(rs.getString("Nome"));
 				artistFromTable.setId(rs.getInt("ID"));
-				
+
 				Image newImage=new Image();
 				newImage.setImage(rs.getBytes("Logo"));
 				newImage.setImageName(rs.getString("Nome"));
@@ -195,22 +195,23 @@ public class ArtistDAO implements DAO<Artist>
 			preparedStatement.executeUpdate();
 
 			connection.commit();
-			
+
 			String selectSQL="SELECT * FROM " + TABLE_NAME;
-			
+
+			preparedStatement.close();
 			preparedStatement=connection.prepareStatement(selectSQL);
-			
+
 			ResultSet rs=preparedStatement.executeQuery();
-			
+
 			rs.last();
-			
+
 			System.out.println(rs.getInt("ID"));
 			ImageDAO imageDAO=new ImageDAO(dbConnectionPool, rs.getInt("ID"), TypeOfImage.ARTIST);
-			
+
 			for(int i=0; i<artist.getImages().length; i++)
 				if(artist.getImages()[i]!=null)
 					imageDAO.doSave(artist.getImages()[i]);
-				
+
 		}
 		finally
 		{

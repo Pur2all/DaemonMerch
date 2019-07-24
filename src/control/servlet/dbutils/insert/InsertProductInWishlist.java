@@ -1,5 +1,9 @@
 package control.servlet.dbutils.insert;
 
+import com.google.gson.Gson;
+
+import model.dao.ProductDAO;
+
 import java.io.IOException;
 import java.sql.SQLException;
 
@@ -9,13 +13,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
-
 import model.bean.WishlistProduct;
 import model.dao.DBConnectionPool;
 import model.dao.WishlistDAO;
 
-@WebServlet("/auth/InsertProductInWishlist")
+@WebServlet("/auth/AddToWishlist")
 public class InsertProductInWishlist extends HttpServlet
 {
 	private static final long serialVersionUID = 8699191442651130979L;
@@ -27,18 +29,21 @@ public class InsertProductInWishlist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("wishlistProduct")==null)
+		if(request.getParameter("productId")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			WishlistProduct product=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);
-
-			WishlistDAO productDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(productDAO.doSave(product)!=null ? 1 : 0);
+				WishlistProduct product=((WishlistProduct) (new ProductDAO((DBConnectionPool) getServletContext()
+					.getAttribute("DriverManager"))
+					.doRetrieveByKey(Integer.parseInt(request.getParameter("productId")))));
+
+				WishlistDAO productDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+				response.setContentType("application/json");
+				productDAO.doSave(product);
+				response.getWriter().write(new Gson().toJson(product));
 			}
 			catch(SQLException sqlException)
 			{

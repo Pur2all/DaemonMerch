@@ -1,5 +1,6 @@
 package control.servlet.dbutils.retrieve;
 
+import com.google.gson.Gson;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.LinkedList;
@@ -27,12 +28,10 @@ public class RetrieveBillingAddresses extends HttpServlet
 
 		try
 		{
-			LinkedList<BillingAddress> billingAddresses=(LinkedList<BillingAddress>) billingAddressDAO.doRetrieveAll(null, (int) request.getAttribute("pageInit"), (int) request.getAttribute("pageEnd"));
+			LinkedList<BillingAddress> billingAddresses=(LinkedList<BillingAddress>) billingAddressDAO.doRetrieveAll();
 
-			request.setAttribute("billingAddresses", billingAddresses);
-			request.setAttribute("mainPage", "BillingAddresses");
-
-			getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(billingAddresses));
 		}
 		catch (SQLException sqlException)
 		{

@@ -24,6 +24,51 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Collection<BillingAddress> doRetrieveAll() throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<BillingAddress> billingAddresses=new LinkedList<BillingAddress>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN Ha WHERE ID = ?";
+
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, userID);
+
+			ResultSet rs=preparedStatement.executeQuery();
+
+			while (rs.next())
+			{
+				BillingAddress billingAddressFromTable=new BillingAddress();
+
+				billingAddressFromTable.setState(rs.getString("State"));
+				billingAddressFromTable.setStreet(rs.getString("Via"));
+				billingAddressFromTable.setCity(rs.getString("Paese"));
+				billingAddressFromTable.setDistrict(rs.getString("Provincia"));
+				billingAddressFromTable.setHouseNumber(String.valueOf(rs.getInt("NumeroCivico")));
+				billingAddresses.add(billingAddressFromTable);
+			}
+		}
+		finally
+		{
+			try
+			{
+				if (preparedStatement!=null)
+					preparedStatement.close();
+			}
+			finally
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return billingAddresses;
+	}
+
 	public BillingAddress doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;

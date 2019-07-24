@@ -24,6 +24,49 @@ public class CreditCardDAO implements DAO<CreditCard>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Collection<CreditCard> doRetrieveAll() throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<CreditCard> creditCards=new LinkedList<CreditCard>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN PagaCon WHERE ID = ?";
+
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+			preparedStatement.setInt(1, userID);
+
+			ResultSet rs=preparedStatement.executeQuery();
+
+			while (rs.next())
+			{
+				CreditCard creditCardFromTable=new CreditCard();
+
+				creditCardFromTable.setCVV(rs.getString("CVV"));
+				creditCardFromTable.setExpireDate(rs.getString("DataScadenza"));
+				creditCardFromTable.setNumber(rs.getString("Numero"));
+				creditCards.add(creditCardFromTable);
+			}
+		}
+		finally
+		{
+			try
+			{
+				if(preparedStatement!=null)
+					preparedStatement.close();
+			}
+			finally
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+
+		return creditCards;
+	}
+
 	public CreditCard doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
