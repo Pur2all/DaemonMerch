@@ -6,6 +6,7 @@ function addToCart(id)
     "data":{productId:id},
     "success":function(data)
     {
+      // TODO: Animare sta roba
       var informationDiv="<div> " + data.name + " added to cart </div>"
       $(".index-header").append(informationDiv);
       $(".index-header").remove(informationDiv);
@@ -31,9 +32,9 @@ function retrieveArtists()
   });
 }
 
+//Function for update user async
 function updateUserAsync(user)
 {
-  console.log("Ue fra", user);
   $.ajax({
     "type":"POST",
     "url":"auth/UpdateUser",
@@ -46,6 +47,23 @@ function updateUserAsync(user)
     "error":function(error)
     {
       console.log("Error", error);
+    }
+  });
+}
+
+//Function for check if a username is already in use
+function checkUsername(username)
+{
+  $.ajax({
+    "url":"CheckUsername",
+    "type":"GET",
+    "data":{username:username},
+    "success":function(data)
+    {
+      if(data==true)
+        // TODO: Animare il campo di input per l'username rendendolo rosso e dicendo che l'utente è già preso
+      else
+        // TODO: Animarlo come sopra ma col verde dicendo che è ok l'username
     }
   });
 }

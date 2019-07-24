@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.UserDAO;
@@ -24,17 +26,18 @@ public class CheckUsername extends HttpServlet
 
 		UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
+		System.out.println("Username in CheckUsername= " + username);
 		try
 		{
 			boolean isAlreadyPresent=false;
 			for(User u: userDAO.doRetrieveAll())
-				if(u.getUsername().equals(username))
+				if(u.getUsername().equalsIgnoreCase(username))
 				{
 					isAlreadyPresent=true;
 					break;
 				}
-			response.setContentType("text/plain");
-			response.getWriter().write(isAlreadyPresent ? 1 : 0);
+			response.setContentType("application/json");
+			response.getWriter().write(isAlreadyPresent ? new Gson().toJson(true) : new Gson().toJson(false));
 		}
 		catch (SQLException sqlException)
 		{

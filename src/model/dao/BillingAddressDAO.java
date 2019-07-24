@@ -126,7 +126,6 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 		PreparedStatement preparedStatement=null;
 
 		String insertSQL="INSERT INTO " + TABLE_NAME + " (Stato, Via, Paese, Provincia, NumeroCivico) VALUES (?, ?, ?, ?, ?)";
-		int rowsAffected;
 
 		try
 		{
@@ -138,7 +137,7 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			preparedStatement.setString(4, billingAddress.getDistrict());
 			preparedStatement.setInt(5, Integer.valueOf(billingAddress.getHouseNumber()));
 
-			rowsAffected=preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
 
 			connection.commit();
 			saveUserBillingAddressRelation(billingAddress);
