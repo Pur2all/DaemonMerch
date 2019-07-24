@@ -25,7 +25,7 @@
 	input[type=button], input[type=submit] {
 		cursor: pointer;
 		margin: 0;
-		padding: .5em 2em;
+		padding: .5em 2.5em;
 		margin-top: .3em;
 		background: #16aa56;
 		border: none;
@@ -33,6 +33,10 @@
 		border-radius: 3px;
 	}
 
+	div.input-button {
+		text-align: center;
+	}	
+	
 	.group:after {
 		content: "";
 		display: table;
@@ -58,7 +62,7 @@
 	}
 
 	div.group:nth-child(2) > div:nth-child(1) > select:nth-child(1) {
-		width: 113%;
+		width: 230%;
 		padding: .5em 1em;
 	  	font-family: sans-serif;
 	}
@@ -92,6 +96,10 @@
 	
 	div.centered-button > input {
 		width: 25%;
+	}
+
+	.center > select:nth-child(1) {
+		width: 230%;
 	}
 
 }

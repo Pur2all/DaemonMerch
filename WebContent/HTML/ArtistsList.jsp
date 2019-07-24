@@ -18,12 +18,12 @@
 		<h1>Artisti </h1>
 		<%LinkedList<Artist> artists = (LinkedList<Artist>) request.getAttribute("artists"); %>
 		<%char letter = 'a';%>
-		
+
 			<div class="artistsList">		
 			<c:forEach items="${artists}" var="currentArtist">
 				<div class="artist">	
 					<div> <a href="currentArtist?name=${currentArtist.name}&id=${currentArtist.id}"> <img src="Images/${currentArtist.logo.imageName}"> </a> </div>
-					<div> <a class="artist-name" href="Artist?name=${currentArtist.name}&id=${currentArtist.id}"> <c:out value="${currentArtist.name}">No name</c:out> </a> </div>
+					<div> <a href="currentArtist?name=${currentArtist.name}&id=${currentArtist.id}"  class="artist-name"> <c:out value="${currentArtist.name}">No name</c:out> </a> </div>
 				</div>
 		
 				<!-- 
