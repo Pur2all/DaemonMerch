@@ -24,6 +24,19 @@
 		width: 70%;
 	}
 	
+	.sc-user-profile input.left, .sc-user-profile #creditCards {
+		width: 50%;
+		font-weight: normal;
+	}
+	
+	.billingAddressForm, .creditCardForm {
+		display: none;
+	}
+
+	.sc-user-profile input.right, .sc-user-profile #billingAddress {
+		width: 50%;
+	}
+	
 	.sc-user-profile .username {
 		margin: auto;
 		margin-top: -4.40em;

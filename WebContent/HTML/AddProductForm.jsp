@@ -9,8 +9,8 @@
 		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
 	 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		<script src="./js/Ajax.js"></script>
 		<script src="./js/scriptJS.js"></script>
+		<script src="./js/Ajax.js"></script>
 	</head>
 
 	<body onload="addProductDynamic()">
@@ -70,17 +70,13 @@
 					</div>
 		
 					<div class="right">
-						<input type="text" value="" name="texture" placeholder="Patch Texture">
+						<input type="text" value="" name="material" placeholder="Patch Texture">
 					</div>
 				</div>
 
 				<div class="group">
-					<div class="left">
-						<input type="number" step="0.01" min="0.01" value="" placeholder="Width" name="width"/>
-					</div>
-		
-					<div class="right">
-						<input type="number" step="0.01" min="0.01" value="" placeholder="Height" name="height"/>
+					<div class="center">
+						<input type="text" placeholder="Patch Measures" name="measures">
 					</div>
 				</div>
 			</div>
@@ -100,7 +96,7 @@
 					</div>
 		
 					<div class="right">
-						<select name="shirtPrint" class="select">
+						<select name="printType" class="select">
 							<option value="backpatch">Front</option>
 							<option value="backshape">Back</option>
 							<option value="patch">Front and Back</option>
@@ -110,7 +106,7 @@
 
 				<div class="group">
 					<div class="center">
-						<select name="shirtType" class="select">
+						<select name="category" class="select">
 							<option value="shirt">T-Shirt</option>
 							<option value="longsleeve">Longsleeve</option>
 							<option value="hoodie">Hoodie</option>

@@ -50,11 +50,41 @@ selectUpdate = function() {
 };
 
 
+userProfileScript = function() {
+	editProfile();
+	dynamicForm();	
+}
+
 editProfile = function(){
 	$('.edit-button').click(function(){
 		$('div.edit').slideToggle(250);
 		$('div.profile').slideToggle(250);
 	});
+}
+
+dynamicForm = function() {
+	$('input#creditCards').click(function(){
+		$('.billingAddressForm').slideUp();
+		$('.creditCardForm').slideDown();
+	});
+	
+	$('input#billingAddress').click(function(){
+		$('.billingAddressForm').slideDown();
+		$('.creditCardForm').slideUp();
+	});
+	
+	$('input.confirmButton').click(function(){
+		$('.billingAddressForm').slideUp();
+		$('.creditCardForm').slideUp();
+	});
+	
+	$('input.cancelButton').click(function(){
+		$('.billingAddressForm').slideUp();
+		$('.creditCardForm').slideUp();
+	});
+	
+	
+	
 }
 
 

@@ -22,8 +22,8 @@
 			<div class="artistsList">		
 			<c:forEach items="${artists}" var="currentArtist">
 				<div class="artist">	
-					<div> <a href="currentArtist?name=${currentArtist.name}&id=${currentArtist.id}"> <img src="Images/${currentArtist.logo.imageName}"> </a> </div>
-					<div> <a href="currentArtist?name=${currentArtist.name}&id=${currentArtist.id}"  class="artist-name"> <c:out value="${currentArtist.name}">No name</c:out> </a> </div>
+					<div> <a href="Artist?name=${currentArtist.name}&id=${currentArtist.id}"> <img src="Images/${currentArtist.logo.imageName}"> </a> </div>
+					<div> <a href="Artist?name=${currentArtist.name}&id=${currentArtist.id}"  class="artist-name"> <c:out value="${currentArtist.name}">No name</c:out> </a> </div>
 				</div>
 		
 				<!-- 
