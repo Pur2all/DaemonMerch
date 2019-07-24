@@ -35,8 +35,15 @@
 						</a>
 							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
 							<h4 class="price"> <c:out value="${currentProduct.price}"> </c:out></h4>
-
-							<button class="button" onclick="addToCart(<% new Gson().toJson(pageContext.getAttribute("currentProduct")); %>)">Add to Cart</button>
+							
+							<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
+								{%>
+									<button class="button" onclick="addToCart(${currentProduct.id})">Add to Cart</button>
+								<%}
+							else
+								{%>
+									<button class="button" onclick="window.location.replace('/DaemonMerch/LoginForm')">Add to Cart</button>
+								<% } %>
 					</li>
 				</c:forEach>
 

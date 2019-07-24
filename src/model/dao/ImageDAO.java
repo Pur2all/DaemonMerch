@@ -8,8 +8,6 @@ import java.sql.Types;
 import java.util.Collection;
 import java.util.LinkedList;
 
-import com.sun.org.apache.bcel.internal.generic.Type;
-
 import model.bean.Image;
 
 public class ImageDAO implements DAO<Image>
@@ -73,7 +71,7 @@ public class ImageDAO implements DAO<Image>
 
 		return images;
 	}
-	
+
 	public Image doRetrieveByKeyInArtist(String key) throws SQLException
 	{
 		Connection connection=null;

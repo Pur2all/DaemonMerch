@@ -1,12 +1,12 @@
-function addToCart(element)
+function addToCart(id)
 {
   $.ajax({
     "type":"GET",
     "url":"auth/AddToCart",
-    "data":element,
+    "data":{productId:id},
     "success":function(data)
     {
-      var informationDiv="<div> " + element.name + " added to cart </div>"
+      var informationDiv="<div> " + data.name + " added to cart </div>"
       $(".index-header").append(informationDiv);
       $(".index-header").remove(informationDiv);
     }
@@ -31,7 +31,6 @@ function retrieveArtists()
   });
 }
 
-//// TODO: Metti apposto sta roba e scopri come si legge lato server, aggiungi pure ID
 function updateUserAsync(user)
 {
   console.log("Ue fra", user);
@@ -41,7 +40,8 @@ function updateUserAsync(user)
     "data":{user:user},
     "success":function(data)
     {
-      window.location.reload();
+      // TODO: Anzichè fare questo cambia i valori nel form normale
+      //window.location.reload();
     },
     "error":function(error)
     {

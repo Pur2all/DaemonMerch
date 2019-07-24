@@ -1,5 +1,10 @@
 package control.servlet.webapp.async;
 
+import java.sql.SQLException;
+
+import model.dao.ProductDAO;
+import model.dao.DBConnectionPool;
+
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -7,7 +12,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.google.gson.Gson;
 
 import model.bean.Cart;
 import model.bean.Product;
@@ -23,7 +27,16 @@ public class AddToCart extends HttpServlet
 
 		if((cart=(Cart) request.getSession(false).getAttribute("cart"))==null)
 			cart=new Cart();
-		cart.addProduct(new Gson().fromJson((String) request.getAttribute("product"), Product.class));
+		try
+		{
+			cart.addProduct((Product) (new ProductDAO((DBConnectionPool) getServletContext()
+				.getAttribute("DriverManager"))
+				.doRetrieveByKey(Integer.parseInt(request.getParameter("productId")))));
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
+		}
 		request.getSession(false).setAttribute("cart", cart);
 		response.setContentType("plain/text");
 		response.getWriter().write(1);

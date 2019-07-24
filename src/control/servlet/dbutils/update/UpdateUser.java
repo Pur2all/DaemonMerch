@@ -16,7 +16,7 @@ import model.dao.DBConnectionPool;
 import model.dao.UserDAO;
 
 @WebServlet("/auth/UpdateUser")
-public class UpdateUser extends HttpServlet 
+public class UpdateUser extends HttpServlet
 {
 	private static final long serialVersionUID = 8328471423165150859L;
 
@@ -27,7 +27,6 @@ public class UpdateUser extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		//TODO vedi come si legge sta roba
 		User user=(new GsonBuilder().create()).fromJson(request.getParameter("user"), User.class);
 
 		UserDAO userDAO=new UserDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
