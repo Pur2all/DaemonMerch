@@ -28,13 +28,13 @@
 
 				<div class="errorMessage">
 				<%if((Boolean)request.getAttribute("loginError")!=null) {
-					out.println("Login error message");
+					out.println("Wrong usernsame or password");
 				} %>
 				</div>
 
 				<div class="errorMessage">
 				<%if((Boolean)request.getAttribute("profileError")!=null) {
-					out.println("ProfileError message");
+					out.println("Login fisrt to access your profile");
 				} %>
 				</div>
 

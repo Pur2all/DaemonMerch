@@ -67,23 +67,21 @@ dynamicForm = function() {
 		$('.billingAddressForm').slideUp();
 		$('.creditCardForm').slideDown();
 	});
-	
+
 	$('input#billingAddress').click(function(){
 		$('.billingAddressForm').slideDown();
 		$('.creditCardForm').slideUp();
 	});
-	
+
 	$('input.confirmButton').click(function(){
 		$('.billingAddressForm').slideUp();
 		$('.creditCardForm').slideUp();
 	});
-	
+
 	$('input.cancelButton').click(function(){
 		$('.billingAddressForm').slideUp();
 		$('.creditCardForm').slideUp();
 	});
-	
-	
 	
 }
 

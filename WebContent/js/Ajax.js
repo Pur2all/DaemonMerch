@@ -62,10 +62,10 @@ function checkUsername(username)
     "data":{username:username},
     "success":function(data)
     {
-      if(data==true)
+/*      if(data==true)
         // TODO: Animare il campo di input per l'username rendendolo rosso e dicendo che l'utente è già preso
       else
-        // TODO: Animarlo come sopra ma col verde dicendo che è ok l'username
+*/        // TODO: Animarlo come sopra ma col verde dicendo che è ok l'username
     }
   });
 }

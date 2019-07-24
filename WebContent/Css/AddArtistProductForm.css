@@ -106,4 +106,12 @@
 		width: 230%;
 	}
 
+	#patch-specific {
+		display: none;
+	}
+	
+	#shirt-specific {
+		display: none;
+	}
+
 }

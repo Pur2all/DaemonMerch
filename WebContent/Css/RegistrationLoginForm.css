@@ -36,8 +36,9 @@
 	
 	div .errorMessage {
 		color: red;
-		left: 75%;
+		left: 50%;
 		top: 102%;
+		text-align: center;
 	}
 	
 	input {

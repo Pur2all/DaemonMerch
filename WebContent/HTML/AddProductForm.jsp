@@ -53,7 +53,7 @@
 					<select name="productType" class="select product-type">
 						<option value="patch">Patch</option>
 						<option value="shirt">Shirt</option>
-						<option value="other">Other</option>
+						<option value="other" selected="selected">Other</option>
 					</select>
 				</div>
 			</div>
