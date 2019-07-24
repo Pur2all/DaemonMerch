@@ -15,13 +15,11 @@
 		<h4>
 			Pagina artista incredibile
 		</h4>
-		
 			<%Artist artist = (Artist)request.getAttribute("artist");%>
 			<%Image[] images = artist.getImages();%>
 
 			<div> <img src="Images/${artist.images[0].imageName}?id=${artist.id}"> </div>
-			<div> <c:out value="${artist.name}">No name</c:out> </div>
-			
+			<div> <c:out value="${artist.name}">No name</c:out> </div>			
 			<div id="slideshowContainer">
 				<div id="slideshow"> 
 					<img class="first" src="http://placehold.it/680x390&text=[slide 1]" />

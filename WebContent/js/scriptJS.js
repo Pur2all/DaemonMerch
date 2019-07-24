@@ -17,6 +17,39 @@ loginForm = function(){
 };
 
 
+addProductDynamic = function(){
+	addProductForm();
+	retrieveArtists();
+	selectUpdate();
+};
+
+addProductForm = function(){
+	$('#shirt-specific').hide();
+};
+
+selectUpdate = function() {
+	
+	$('div.right > select.product-type').on('change', function() {
+		
+		if(this.value == "shirt") {
+			$('#shirt-specific').slideDown();
+			$('#patch-specific').slideUp();
+		};
+		
+		if(this.value == "other") {
+			$('#shirt-specific').slideUp();
+			$('#patch-specific').slideUp();
+		};
+		
+		if(this.value == "patch") {
+			$('#patch-specific').slideDown();
+			$('#shirt-specific').slideUp();
+		};
+
+	});
+};
+
+
 editProfile = function(){
 	$('.edit-button').click(function(){
 		$('div.edit').slideToggle(250);

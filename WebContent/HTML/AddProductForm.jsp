@@ -10,9 +10,10 @@
 		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
 	 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="./js/Ajax.js"></script>
+		<script src="./js/scriptJS.js"></script>
 	</head>
 
-	<body onload="retrieveArtists()">
+	<body onload="addProductDynamic()">
 
 		<h2>Add Product</h2>
 		<%if(request.getAttribute("success")!=null)
@@ -34,11 +35,7 @@
 					<input type="number" step="1" min="0" value="" placeholder="Items in stock" name="remaining"/>
 				</div>
 				<div class="right">
-				<select name="type" class="select">
-					<option value="patch">Patch</option>
-					<option value="shirt">Shirt</option>
-					<option value="other">Other</option>
-				</select>
+					<input type="number" step="0.01" min="0" value="" placeholder="Price" name="price"/>
 				</div>
 			</div>
 
@@ -53,7 +50,72 @@
 				</div>
 
 				<div class="right">
-					<input type="number" step="0.01" min="0" value="" placeholder="Price" name="price"/>
+					<select name="productType" class="select product-type">
+						<option value="patch">Patch</option>
+						<option value="shirt">Shirt</option>
+						<option value="other">Other</option>
+					</select>
+				</div>
+			</div>
+
+		
+			<div id="patch-specific">
+				<div class="group">
+					<div class="left">
+						<select name="patchType" class="select">
+							<option value="backpatch">Backpatch</option>
+							<option value="backshape">Backshape</option>
+							<option value="patch">Patch</option>
+						</select>
+					</div>
+		
+					<div class="right">
+						<input type="text" value="" name="texture" placeholder="Patch Texture">
+					</div>
+				</div>
+
+				<div class="group">
+					<div class="left">
+						<input type="number" step="0.01" min="0.01" value="" placeholder="Width" name="width"/>
+					</div>
+		
+					<div class="right">
+						<input type="number" step="0.01" min="0.01" value="" placeholder="Height" name="height"/>
+					</div>
+				</div>
+			</div>
+
+		
+			<div id="shirt-specific">
+				<div class="group">
+					<div class="left">
+						<select name="size" class="select">
+							<option value="xs">XS</option>
+							<option value="s">S</option>
+							<option value="m">M</option>
+							<option value="l">L</option>
+							<option value="xl">XL</option>
+							<option value="xxl">XXL</option>
+						</select>
+					</div>
+		
+					<div class="right">
+						<select name="shirtPrint" class="select">
+							<option value="backpatch">Front</option>
+							<option value="backshape">Back</option>
+							<option value="patch">Front and Back</option>
+						</select>
+					</div>
+				</div>
+
+				<div class="group">
+					<div class="center">
+						<select name="shirtType" class="select">
+							<option value="shirt">T-Shirt</option>
+							<option value="longsleeve">Longsleeve</option>
+							<option value="hoodie">Hoodie</option>
+						</select>
+					</div>
 				</div>
 			</div>
 
@@ -66,7 +128,7 @@
 				<input type="file" accept="image/*" name="productImage" multiple/>
 			</div>
 
-			<div>
+			<div class="input-button">
 				<input type="submit" value="Submit">
 			</div>
 
