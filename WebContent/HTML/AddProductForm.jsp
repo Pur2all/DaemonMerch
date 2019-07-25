@@ -16,9 +16,10 @@
 	<body onload="addProductDynamic()">
 
 		<h2>Add Product</h2>
-		<!--TODO: Metti apposto sperando che il Francesco del futuro si capiscsa da solo -->
-		<%if(request.getAttribute("success")!=null)
-			out.print((int) request.getAttribute("success"));%>
+
+		<!-- TODO: Animare sta roba -->
+		<%if(request.getHeader("Referer").contains("DaemonMerch/AddProductForm"))
+			out.print("Added with success");%>
 		<form method="post" action="admin/InsertProduct" enctype="multipart/form-data" id="insertForm">
 
 			<div class="group">
@@ -88,20 +89,20 @@
 				<div class="group">
 					<div class="left">
 						<select name="size" class="select">
-							<option value="xs">XS</option>
-							<option value="s">S</option>
-							<option value="m">M</option>
-							<option value="l">L</option>
-							<option value="xl">XL</option>
-							<option value="xxl">XXL</option>
+							<option value="XS">XS</option>
+							<option value="S">S</option>
+							<option value="M">M</option>
+							<option value="L">L</option>
+							<option value="XL">XL</option>
+							<option value="XXL">XXL</option>
 						</select>
 					</div>
 
 					<div class="right">
 						<select name="printType" class="select">
-							<option value="backpatch">Front</option>
-							<option value="backshape">Back</option>
-							<option value="patch">Front and Back</option>
+							<option value="FRONT">Front</option>
+							<option value="BACK">Back</option>
+							<option value="BACKFRONT">Front and Back</option>
 						</select>
 					</div>
 				</div>
@@ -109,9 +110,9 @@
 				<div class="group">
 					<div class="center">
 						<select name="category" class="select">
-							<option value="shirt">T-Shirt</option>
-							<option value="longsleeve">Longsleeve</option>
-							<option value="hoodie">Hoodie</option>
+							<option value="TSHIRT">T-Shirt</option>
+							<option value="LONGSLEEVE">Longsleeve</option>
+							<option value="HOODIE">Hoodie</option>
 						</select>
 					</div>
 				</div>

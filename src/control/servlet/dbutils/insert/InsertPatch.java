@@ -2,7 +2,6 @@ package control.servlet.dbutils.insert;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;

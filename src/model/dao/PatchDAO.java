@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import model.bean.Image;
 import model.bean.Patch;
 import model.bean.PatchType;
-import model.bean.Product;
 
 public class PatchDAO implements DAO<Patch>
 {
@@ -67,7 +66,6 @@ public class PatchDAO implements DAO<Patch>
 		return patchFromTable;
 	}
 
-	//TODO metti sta roba anche negli altri metodi di retrieve, idem nel TopDAO
 	public Collection<Patch> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
@@ -184,11 +182,11 @@ public class PatchDAO implements DAO<Patch>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		Patch newPatch=new Patch();
-		
+
 		newPatch.setId(String.valueOf(id));
-		
+
 		return newPatch;
 	}
 

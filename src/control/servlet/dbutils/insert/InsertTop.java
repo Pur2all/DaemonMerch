@@ -41,7 +41,7 @@ public class InsertTop extends HttpServlet
 		product.setPrice(Float.parseFloat(request.getParameter("price")));
 		product.setRemaining(Integer.parseInt(request.getParameter("remaining")));
 		product.setTag(request.getParameter("tag"));
-		product.setArtistId(request.getParameter("artistId"));
+		product.setArtistId(request.getParameter("artistId").equals("") ? null : request.getParameter("artistId"));
 		product.setCategory(model.bean.Category.valueOf(request.getParameter("category")));
 		product.setPrintType(model.bean.PrintType.valueOf(request.getParameter("printType")));
 		product.setSize(model.bean.Size.valueOf(request.getParameter("size")));

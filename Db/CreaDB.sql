@@ -92,7 +92,7 @@ CREATE TABLE Patch(
 CREATE TABLE Top(
 	ID INT NOT NULL,
     Taglia ENUM('XS', 'S', 'M', 'L', 'XL', 'XXL'),
-    Categoria ENUM('HOODIE', 'LONGSLEEVE', 'T-SHIRT'),
+    Categoria ENUM('HOODIE', 'LONGSLEEVE', 'TSHIRT'),
     TipoStampa ENUM('BACK', 'FRONT', 'BACKFRONT'),
     PRIMARY KEY (ID),
     FOREIGN KEY (ID) REFERENCES Prodotto(ID)

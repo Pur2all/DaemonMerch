@@ -41,7 +41,7 @@ public class InsertProduct extends HttpServlet
 		product.setPrice(Float.parseFloat(request.getParameter("price")));
 		product.setRemaining(Integer.parseInt(request.getParameter("remaining")));
 		product.setTag(request.getParameter("tag"));
-		product.setArtistId(request.getParameter("artistId"));
+		product.setArtistId(request.getParameter("artistId").equals("") ? null : request.getParameter("artistId"));
 
 		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 

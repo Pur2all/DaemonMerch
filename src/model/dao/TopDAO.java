@@ -8,6 +8,7 @@ import java.util.Collection;
 import java.util.LinkedList;
 
 import model.bean.Category;
+import model.bean.Image;
 import model.bean.PrintType;
 import model.bean.Size;
 import model.bean.Top;
@@ -74,7 +75,7 @@ public class TopDAO implements DAO<Top>
 
 		Collection<Top> tops=new LinkedList<Top>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto";
 
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
@@ -86,9 +87,12 @@ public class TopDAO implements DAO<Top>
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-
-			while (rs.next())
+			int start=0, end=0;
+			while(rs.next())
 			{
+				start=rs.getRow();
+				System.out.println("Start: " + start);
+
 				Top topFromTable=new Top();
 
 				topFromTable.setId(rs.getString("ID"));
@@ -98,10 +102,35 @@ public class TopDAO implements DAO<Top>
 				topFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				topFromTable.setTag(rs.getString("Tag"));
 				topFromTable.setArtistId(rs.getString("ID_Artista"));
-				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
 				topFromTable.setCategory(Category.valueOf(rs.getString("Categoria")));
 				topFromTable.setPrintType(PrintType.valueOf(rs.getString("TipoStampa")));
+				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
+
+				while(rs.next() && rs.getString("ID").equals(topFromTable.getId()));
+				if(rs.getRow()==0)
+				{
+					rs.last();
+					end=rs.getRow()+1;
+				}
+				else
+					end=rs.getRow();
+				System.out.println("End: " + end);
+				Image[] productFromTableImages=new Image[end-start];
+				int i=0;
+				rs.absolute(start);
+				System.out.println("CurrentRow: " + rs.getRow());
+				while(start++<end)
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+					rs.next();
+				}
+				topFromTable.setImages(productFromTableImages);
+
 				tops.add(topFromTable);
+				if(rs.getRow()!=0)
+					rs.previous();
 			}
 		}
 		finally
@@ -155,9 +184,9 @@ public class TopDAO implements DAO<Top>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		Top newTop=new Top();
-		
+
 		newTop.setId(String.valueOf(id));
 
 		return newTop;
