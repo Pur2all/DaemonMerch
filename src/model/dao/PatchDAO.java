@@ -7,8 +7,10 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import model.bean.Image;
 import model.bean.Patch;
 import model.bean.PatchType;
+import model.bean.Product;
 
 public class PatchDAO implements DAO<Patch>
 {
@@ -65,6 +67,7 @@ public class PatchDAO implements DAO<Patch>
 		return patchFromTable;
 	}
 
+	//TODO metti sta roba anche negli altri metodi di retrieve, idem nel TopDAO
 	public Collection<Patch> doRetrieveAll(String order, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
@@ -72,7 +75,7 @@ public class PatchDAO implements DAO<Patch>
 
 		Collection<Patch> patches=new LinkedList<Patch>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto";
 
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;
@@ -84,9 +87,12 @@ public class PatchDAO implements DAO<Patch>
 			preparedStatement=connection.prepareStatement(selectSQL);
 
 			ResultSet rs=preparedStatement.executeQuery();
-
-			while (rs.next())
+			int start=0, end=0;
+			while(rs.next())
 			{
+				start=rs.getRow();
+				System.out.println("Start: " + start);
+
 				Patch patchFromTable=new Patch();
 
 				patchFromTable.setId(rs.getString("ID"));
@@ -99,7 +105,32 @@ public class PatchDAO implements DAO<Patch>
 				patchFromTable.setMeasures(rs.getString("Misure"));
 				patchFromTable.setPatchType(PatchType.valueOf(rs.getString("Tipo")));
 				patchFromTable.setMaterial(rs.getString("Tessuto"));
+
+				while(rs.next() && rs.getString("ID").equals(patchFromTable.getId()));
+				if(rs.getRow()==0)
+				{
+					rs.last();
+					end=rs.getRow()+1;
+				}
+				else
+					end=rs.getRow();
+				System.out.println("End: " + end);
+				Image[] productFromTableImages=new Image[end-start];
+				int i=0;
+				rs.absolute(start);
+				System.out.println("CurrentRow: " + rs.getRow());
+				while(start++<end)
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+					rs.next();
+				}
+				patchFromTable.setImages(productFromTableImages);
+
 				patches.add(patchFromTable);
+				if(rs.getRow()!=0)
+					rs.previous();
 			}
 		}
 		finally

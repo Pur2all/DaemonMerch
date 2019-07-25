@@ -32,7 +32,7 @@ public class RetrieveImageServlet extends HttpServlet
         		image=(new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), -1, null)).doRetrieveByKeyInArtist(imageName);
         	else
         		image=(new ImageDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), Integer.parseInt(request.getParameter("id")),
-        				request.getHeader("Referer").contains("http://localhost:8080/DaemonMerch/Product") ||  request.getHeader("Referer").contains("http://localhost:8080/DaemonMerch/auth/Cart") ? TypeOfImage.PRODUCT : TypeOfImage.ARTIST))
+        				request.getHeader("Referer").contains("http://localhost:8080/DaemonMerch/Artist") ? TypeOfImage.ARTIST : TypeOfImage.PRODUCT))
         				.doRetrieveByKey(imageName);
         			
             if(image!=null)

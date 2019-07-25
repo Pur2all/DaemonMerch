@@ -19,7 +19,7 @@
 		<!--TODO: Metti apposto sperando che il Francesco del futuro si capiscsa da solo -->
 		<%if(request.getAttribute("success")!=null)
 			out.print((int) request.getAttribute("success"));%>
-		<form method="post" action="admin/InsertProduct" enctype="multipart/form-data">
+		<form method="post" action="admin/InsertProduct" enctype="multipart/form-data" id="insertForm">
 
 			<div class="group">
 				<div class="left">

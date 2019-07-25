@@ -2,6 +2,7 @@ package control.servlet.dbutils.insert;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.sql.Types;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.MultipartConfig;
@@ -42,7 +43,7 @@ public class InsertPatch extends HttpServlet
 		product.setPrice(Float.parseFloat(request.getParameter("price")));
 		product.setRemaining(Integer.parseInt(request.getParameter("remaining")));
 		product.setTag(request.getParameter("tag"));
-		product.setArtistId(request.getParameter("artistId"));
+		product.setArtistId(request.getParameter("artistId").equals("") ? null : request.getParameter("artistId"));
 		product.setPatchType(PatchType.valueOf(request.getParameter("patchType")));
 		product.setMeasures(request.getParameter("measures"));
 		product.setMaterial(request.getParameter("material"));

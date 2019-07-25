@@ -263,7 +263,7 @@ public class ProductDAO implements DAO<Product>
 			preparedStatement.setString(3, product.getDescription());
 			preparedStatement.setInt(4, product.getRemaining());
 			preparedStatement.setString(5, product.getTag());
-			preparedStatement.setString(6, product.getArtistId());
+			preparedStatement.setString(6, product.getArtistId()==null ? null : product.getArtistId());
 
 			preparedStatement.executeUpdate();
 
