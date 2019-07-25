@@ -45,7 +45,7 @@
 				</span>
 
 				<span id="cart" class="service-flex-item">
-					<a href="/DaemonMerch/Cart" title="Cart" class="services-link"> <img src="/DaemonMerch/images/cart.png" alt="Cart" class="services-image"> </a>
+					<a href="/DaemonMerch/ShoppingCart" title="Cart" class="services-link"> <img src="/DaemonMerch/images/cart.png" alt="Cart" class="services-image"> </a>
 				</span>
 
 				<span id="faq" class="service-flex-item">

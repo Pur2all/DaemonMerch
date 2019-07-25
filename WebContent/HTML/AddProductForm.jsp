@@ -16,6 +16,7 @@
 	<body onload="addProductDynamic()">
 
 		<h2>Add Product</h2>
+		<!--TODO: Metti apposto sperando che il Francesco del futuro si capiscsa da solo -->
 		<%if(request.getAttribute("success")!=null)
 			out.print((int) request.getAttribute("success"));%>
 		<form method="post" action="admin/InsertProduct" enctype="multipart/form-data">
@@ -26,6 +27,7 @@
 				</div>
 				<div class="right">
 					<select name="artistId" id="artists" class="select">
+					<option value="" style="color: gray;">-- select an artist --</option>
 					</select>
 				</div>
 			</div>

@@ -10,8 +10,9 @@
 	</head>
 
 	<body>
-
+		
 		<h2>Add Artist</h2>
+		<!--TODO: Metti apposto sperando che il Francesco del futuro si capiscsa da solo -->
 		<%if(request.getAttribute("success")!=null)
 			out.print((int) request.getAttribute("success"));%>
 		<form method="post" action="admin/InsertArtist" enctype="multipart/form-data">
