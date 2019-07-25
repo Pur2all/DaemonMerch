@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import model.bean.WishlistProduct;
+import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.WishlistDAO;
 
@@ -27,9 +28,11 @@ public class UpdateProductInWishlist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		int userId=Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId());
+
 		WishlistProduct wishlistProduct=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);
 
-		WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+		WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userId);
 
 		try
 		{

@@ -14,15 +14,17 @@ public class WishlistDAO implements DAO<WishlistProduct>
 	private static final String TABLE_NAME="VorrebbeAcquistare";
 
 	private DBConnectionPool dbConnectionPool;
+	private int userId;
 
-	public WishlistDAO(DBConnectionPool aDBConnectionPool)
+	public WishlistDAO(DBConnectionPool aDBConnectionPool, int anUserId)
 	{
+		userId=anUserId;
 		dbConnectionPool=aDBConnectionPool;
 
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
-	public Collection<WishlistProduct> doRetrieveByUserID(int userID) throws SQLException
+	public Collection<WishlistProduct> doRetrieveByUserID() throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
@@ -35,7 +37,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, userID);
+			preparedStatement.setInt(1, userId);
 
 			ResultSet rs=preparedStatement.executeQuery();
 
@@ -78,7 +80,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 
 		WishlistProduct productFromTable=new WishlistProduct();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN PRODOTTO WHERE ID_Prodotto = ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN PRODOTTO WHERE ID_Prodotto = ? AND ID_Utente = ?";
 
 		try
 		{
@@ -86,6 +88,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setInt(1, id);
+			preparedStatement.setInt(2, userId);
 
 			ResultSet rs=preparedStatement.executeQuery();
 
@@ -97,7 +100,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				productFromTable.setDescription(rs.getString("Descrizione"));
 				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
-				productFromTable.setArtistId(rs.getString("ID_Artista"));
+				productFromTable.setUserID(rs.getInt("ID_Utente"));
 				productFromTable.setDateOfAddition("DataAggiunzione");
 			}
 		}
@@ -147,7 +150,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				productFromTable.setDescription(rs.getString("Descrizione"));
 				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
-				productFromTable.setArtistId(rs.getString("ID_Artista"));
+				productFromTable.setUserID(rs.getInt("ID_Utente"));
 				productFromTable.setDateOfAddition("DataAggiunzione");
 				products.add(productFromTable);
 			}
@@ -252,13 +255,14 @@ public class WishlistDAO implements DAO<WishlistProduct>
 
 		int result=0;
 
-		String deleteSQL="DELETE FROM " + TABLE_NAME + " WHERE ID_Prodotto = ?";
+		String deleteSQL="DELETE FROM " + TABLE_NAME + " WHERE ID_Prodotto = ? AND ID_Utente = ?";
 
 		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(deleteSQL);
 			preparedStatement.setInt(1, Integer.parseInt(product.getId()));
+			preparedStatement.setInt(2, product.getUserID());
 
 			result=preparedStatement.executeUpdate();
 		}

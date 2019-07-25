@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 
 import model.bean.WishlistProduct;
+import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.WishlistDAO;
 
@@ -27,18 +28,20 @@ public class DeleteProductInWishlist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("wishlistProduct")==null)
+		if(request.getParameter("wishlistProduct")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			WishlistProduct wishlistProduct=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);
+			int userId=Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId());
 
-			WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+			WishlistProduct wishlistProduct=new Gson().fromJson((String) request.getParameter("wishlistProduct"), WishlistProduct.class);
+
+			WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userId);
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(wishlistDAO.doDelete(wishlistProduct) ? 1 : 0);
+				response.setContentType("application/json");
+				response.getWriter().write(new Gson().toJson(wishlistDAO.doDelete(wishlistProduct)));
 			}
 			catch(SQLException sqlException)
 			{

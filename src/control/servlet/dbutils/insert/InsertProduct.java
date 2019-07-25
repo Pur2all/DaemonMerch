@@ -47,8 +47,8 @@ public class InsertProduct extends HttpServlet
 
 		try
 		{
-			request.setAttribute("success", (productDAO.doSave(product)!=null ? 1 : 0));
-			getServletContext().getRequestDispatcher(request.getContextPath() + "/AddProductForm").forward(request, response);
+			if(productDAO.doSave(product)!=null)
+				response.sendRedirect(request.getContextPath() + "/AddProductForm");
 		}
 		catch(SQLException sqlException)
 		{

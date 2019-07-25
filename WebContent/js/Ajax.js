@@ -62,7 +62,7 @@ function checkUsername(username)
     "data":{username:username},
     "success":function(data)
     {
-/*      if(data==true)
+/*      if(data)
         // TODO: Animare il campo di input per l'username rendendolo rosso e dicendo che l'utente è già preso
       else
 */        // TODO: Animarlo come sopra ma col verde dicendo che è ok l'username
@@ -111,6 +111,24 @@ function retrieveBillingAddressesAsync(id)
     "success":function(data)
     {
       visualizeBillingAddresses(data); // TODO: implementare la funzione per visualizzarli in js
+    }
+  });
+}
+
+
+//Function to delete a product from the wishlist
+function deleteProductFromWishlist(wishlistProduct)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"auth/DeleteProductInWishlist",
+    "data":{wishlistProduct:wishlistProduct},
+    "success":function(data)
+    {
+      if(data)
+        addToCart(wishlistProduct.id);
+      else
+        console.log("No");
     }
   });
 }

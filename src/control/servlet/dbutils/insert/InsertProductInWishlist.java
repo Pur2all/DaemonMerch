@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.bean.WishlistProduct;
+import model.bean.User;
 import model.dao.DBConnectionPool;
 import model.dao.WishlistDAO;
 
@@ -35,11 +36,13 @@ public class InsertProductInWishlist extends HttpServlet
 		{
 			try
 			{
+				int userId=Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId());
+
 				WishlistProduct product=((WishlistProduct) (new ProductDAO((DBConnectionPool) getServletContext()
 					.getAttribute("DriverManager"))
 					.doRetrieveByKey(Integer.parseInt(request.getParameter("productId")))));
 
-				WishlistDAO productDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+				WishlistDAO productDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userId);
 
 				response.setContentType("application/json");
 				productDAO.doSave(product);

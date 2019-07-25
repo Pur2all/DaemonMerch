@@ -2,7 +2,7 @@
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>DaemonMerch</display-name>
 
-  
+
   <welcome-file-list>
     <welcome-file>/Home</welcome-file>
   </welcome-file-list>
@@ -139,11 +139,11 @@
 
   <!-- wishlist page jsp -->
   <servlet>
-    <servlet-name>Wishlist</servlet-name>
+    <servlet-name>WishlistPage</servlet-name>
     <jsp-file>/HTML/Wishlist.jsp</jsp-file>
   </servlet>
   <servlet-mapping>
-    <servlet-name>Wishlist</servlet-name>
+    <servlet-name>WishlistPage</servlet-name>
     <url-pattern>/Wishlist</url-pattern>
   </servlet-mapping>
 

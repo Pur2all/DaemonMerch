@@ -50,8 +50,8 @@ public class InsertTop extends HttpServlet
 
 		try
 		{
-			request.setAttribute("success", (patchDAO.doSave(product)!=null ? 1 : 0));
-			getServletContext().getRequestDispatcher(request.getContextPath() + "/AddProductForm").forward(request, response);
+			if(patchDAO.doSave(product)!=null)
+				response.sendRedirect(request.getContextPath() + "/AddProductForm");
 		}
 		catch(SQLException sqlException)
 		{
