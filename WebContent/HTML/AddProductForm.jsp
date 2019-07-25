@@ -58,17 +58,17 @@
 				</div>
 			</div>
 
-		
+
 			<div id="patch-specific">
 				<div class="group">
 					<div class="left">
 						<select name="patchType" class="select">
-							<option value="backpatch">Backpatch</option>
-							<option value="backshape">Backshape</option>
-							<option value="patch">Patch</option>
+              <option value="BACKPATCH">Backpatch</option>
+							<option value="BACKSHAPE">Backshape</option>
+							<option value="PATCH">Patch</option>
 						</select>
 					</div>
-		
+
 					<div class="right">
 						<input type="text" value="" name="material" placeholder="Patch Texture">
 					</div>
@@ -81,7 +81,7 @@
 				</div>
 			</div>
 
-		
+
 			<div id="shirt-specific">
 				<div class="group">
 					<div class="left">
@@ -94,7 +94,7 @@
 							<option value="xxl">XXL</option>
 						</select>
 					</div>
-		
+
 					<div class="right">
 						<select name="printType" class="select">
 							<option value="backpatch">Front</option>

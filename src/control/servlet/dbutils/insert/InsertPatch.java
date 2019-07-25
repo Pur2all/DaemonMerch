@@ -32,36 +32,32 @@ public class InsertPatch extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("patch")==null)
-			response.sendRedirect(request.getContextPath() + "/ErrorPage");
-		else
+		Image[] image=ImageGetter.getImage(request);
+
+		Patch product=new Patch();
+
+		product.setImages(image);
+		product.setDescription(request.getParameter("description"));
+		product.setName(request.getParameter("name"));
+		product.setPrice(Float.parseFloat(request.getParameter("price")));
+		product.setRemaining(Integer.parseInt(request.getParameter("remaining")));
+		product.setTag(request.getParameter("tag"));
+		product.setArtistId(request.getParameter("artistId"));
+		product.setPatchType(PatchType.valueOf(request.getParameter("patchType")));
+		product.setMeasures(request.getParameter("measures"));
+		product.setMaterial(request.getParameter("material"));
+
+		PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+
+		try
 		{
-			Image[] image=ImageGetter.getImage(request);
-
-			Patch product=new Patch();
-
-			product.setImages(image);
-			product.setDescription(request.getParameter("description"));
-			product.setName(request.getParameter("name"));
-			product.setPrice(Float.parseFloat(request.getParameter("price")));
-			product.setRemaining(Integer.parseInt(request.getParameter("remaining")));
-			product.setTag(request.getParameter("tag"));
-			product.setArtistId(request.getParameter("artistId"));
-			product.setPatchType(PatchType.valueOf(request.getParameter("patchType")));
-			product.setMeasures(request.getParameter("measures"));
-			product.setMaterial(request.getParameter("material"));
-
-			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
-			try
-			{
-				request.setAttribute("success", (patchDAO.doSave(product)!=null ? 1 : 0));
-				getServletContext().getRequestDispatcher("/DaemonMerch/AddProductForm").forward(request, response);
-			}
-			catch(SQLException sqlException)
-			{
-				sqlException.printStackTrace();
-			}
+			request.setAttribute("success", (patchDAO.doSave(product)!=null ? 1 : 0));
+			//TODO vedere perchè non riporta alla pagina per mettere il prodotto
+			getServletContext().getRequestDispatcher("/AddProductForm").forward(request, response);
+		}
+		catch(SQLException sqlException)
+		{
+			sqlException.printStackTrace();
 		}
 	}
 }

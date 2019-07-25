@@ -32,16 +32,19 @@ selectUpdate = function() {
 	$('div.right > select.product-type').on('change', function() {
 
 		if(this.value == "shirt") {
+			$('#insertForm').attr('action', 'admin/InsertTop');
 			$('#shirt-specific').slideDown();
 			$('#patch-specific').slideUp();
 		};
 
 		if(this.value == "other") {
+			$('#insertForm').attr('action', 'admin/InsertProduct');
 			$('#shirt-specific').slideUp();
 			$('#patch-specific').slideUp();
 		};
 
 		if(this.value == "patch") {
+			$('#insertForm').attr('action', 'admin/InsertPatch');
 			$('#patch-specific').slideDown();
 			$('#shirt-specific').slideUp();
 		};
@@ -52,7 +55,7 @@ selectUpdate = function() {
 
 userProfileScript = function() {
 	editProfile();
-	dynamicForm();	
+	dynamicForm();
 }
 
 editProfile = function(){
@@ -82,7 +85,7 @@ dynamicForm = function() {
 		$('.billingAddressForm').slideUp();
 		$('.creditCardForm').slideUp();
 	});
-	
+
 }
 
 
