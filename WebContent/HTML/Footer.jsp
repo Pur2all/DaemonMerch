@@ -4,7 +4,7 @@
 <!DOCTYPE HTML>
 <html>
 	<head>
-		<link rel="stylesheet" type="text/css" href="./Css/Footer.css">
+		<link rel="stylesheet" type="text/css" href="/DaemonMerch/Css/Footer.css">
 	</head>
 	
 	<body>

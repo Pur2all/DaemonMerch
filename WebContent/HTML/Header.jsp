@@ -7,7 +7,7 @@
 <html>
 	<head>
 		<base href="./" target="_self">
-		<link rel="stylesheet" type="text/css" href="./Css/Header.css">
+		<link rel="stylesheet" type="text/css" href="/DaemonMerch/Css/Header.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="./js/Ajax.js"></script>
@@ -45,7 +45,7 @@
 				</span>
 
 				<span id="cart" class="service-flex-item">
-					<a href="/DaemonMerch/ShoppingCart" title="Cart" class="services-link"> <img src="/DaemonMerch/images/cart.png" alt="Cart" class="services-image"> </a>
+					<a href="/DaemonMerch/auth/Cart" title="Cart" class="services-link"> <img src="/DaemonMerch/images/cart.png" alt="Cart" class="services-image"> </a>
 				</span>
 
 				<span id="faq" class="service-flex-item">
