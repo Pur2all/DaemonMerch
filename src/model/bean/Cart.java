@@ -26,8 +26,8 @@ public class Cart
 		return productList.get(index).clone();
 	}
 	
-	public void removeProduct(int index)
+	public Product removeProduct(int index)
 	{
-		productList.remove(index);
+		return productList.remove(index);
 	}
 }

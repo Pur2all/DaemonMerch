@@ -7,7 +7,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+
 import model.bean.Cart;
+import model.bean.Product;
 
 @WebServlet("/auth/RemoveFromCart")
 public class RemoveFromCart extends HttpServlet
@@ -18,10 +21,10 @@ public class RemoveFromCart extends HttpServlet
 	{
 		Cart cart=(Cart) request.getSession(false).getAttribute("cart");
 
-		cart.removeProduct((int) request.getAttribute("index"));
+		Product removedProduct=cart.removeProduct(Integer.parseInt(request.getParameter("index")));
 		request.getSession(false).setAttribute("cart", cart);
-		response.setContentType("plain/text");
-		response.getWriter().write(1);
+		response.setContentType("application/json");
+		response.getWriter().write(new Gson().toJson(removedProduct));
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

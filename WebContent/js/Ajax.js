@@ -132,3 +132,21 @@ function deleteProductFromWishlist(wishlistProduct)
     }
   });
 }
+
+
+//Function to delete a product from the cart
+function deleteProductFromCart(index)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"auth/RemoveFromCart",
+    "data":{index:index},
+    "success":function(data)
+    {
+      // TODO: Animare sta roba
+      var informationDiv="<div> " + data.name + " removed from cart </div>"
+      $(".index-header").append(informationDiv);
+      $(".index-header").remove(informationDiv);
+    }
+  });
+}
