@@ -21,7 +21,7 @@
 
 		<div class="grid-container">
 
-			<ul class="wishllist">
+			<ul class="wishlist">
 				
 				<%LinkedList<Product> cart = (LinkedList<Product>)request.getAttribute("cart"); %>
 

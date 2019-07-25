@@ -1,6 +1,6 @@
 <%@page import="com.google.gson.Gson"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"
+    pageEncoding="UTF-8"
     import="model.bean.*"
     import="java.util.LinkedList"
     %>
@@ -18,7 +18,6 @@
 
 	<body>
 
-		<h2 id="heading">Prodotti incredibili impressionanti!</h2>
 
 		<div class="grid-container">
 
@@ -28,13 +27,14 @@
 
 				<c:forEach items="${products}" var="currentProduct">
 					<li class="product">
+
 						<a>
 							<div>
-								<img src="Images/${currentProduct.images[0].imageName}?id=${currentProduct.id}">
+								<img class="image" src="Images/${currentProduct.images[0].imageName}?id=${currentProduct.id}">
 							</div>
 						</a>
 							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
-							<h4 class="price"> <c:out value="${currentProduct.price}"> </c:out></h4>
+							<h4 class="price"> <c:out value="${currentProduct.price}0 EUR"> </c:out></h4>
 							
 							<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
 								{%>
@@ -43,6 +43,15 @@
 							else
 								{%>
 									<button class="button" onclick="window.location.href='/DaemonMerch/LoginForm'">Add to Cart</button>
+								<% } %>
+								
+							<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
+								{%>
+									<button class="wishlist-button" onclick="addToWishlist(${currentProduct.id})">33</button>
+								<%}
+							else
+								{%>
+									<button class="wishlist-button" onclick="window.location.href='/DaemonMerch/LoginForm'">33</button>
 								<% } %>
 					</li>
 				</c:forEach>
