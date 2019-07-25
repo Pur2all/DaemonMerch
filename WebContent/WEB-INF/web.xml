@@ -1,15 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" id="WebApp_ID" version="4.0">
   <display-name>DaemonMerch</display-name>
+
+  
   <welcome-file-list>
     <welcome-file>/Home</welcome-file>
   </welcome-file-list>
+
+
   <listener>
     <listener-class>control.servlet.webapp.ContextListener</listener-class>
   </listener>
+
+  <!-- error page jsp -->
   <error-page>
     <location>/HTML/ErrorPage.jsp</location>
   </error-page>
+
+  <!-- login page jsp -->
   <servlet>
     <servlet-name>LoginForm</servlet-name>
     <jsp-file>/HTML/LoginForm.jsp</jsp-file>
@@ -18,6 +26,8 @@
     <servlet-name>LoginForm</servlet-name>
     <url-pattern>/LoginForm</url-pattern>
   </servlet-mapping>
+
+  <!-- index page jsp -->
   <servlet>
     <servlet-name>Index</servlet-name>
     <jsp-file>/HTML/Index.jsp</jsp-file>
@@ -26,6 +36,8 @@
     <servlet-name>Index</servlet-name>
     <url-pattern>/Index</url-pattern>
   </servlet-mapping>
+
+  <!-- faq page jsp -->
   <servlet>
     <servlet-name>Faq</servlet-name>
     <jsp-file>/HTML/Faq.jsp</jsp-file>
@@ -34,6 +46,8 @@
     <servlet-name>Faq</servlet-name>
     <url-pattern>/Faq</url-pattern>
   </servlet-mapping>
+
+  <!-- registration page jsp -->
   <servlet>
     <servlet-name>Registration</servlet-name>
     <jsp-file>/HTML/RegistrationForm.jsp</jsp-file>
@@ -42,6 +56,8 @@
     <servlet-name>Registration</servlet-name>
     <url-pattern>/RegistrationForm</url-pattern>
   </servlet-mapping>
+
+  <!-- user profile page jsp -->
   <servlet>
     <servlet-name>UserProfile</servlet-name>
     <jsp-file>/HTML/UserProfile.jsp</jsp-file>
@@ -50,6 +66,8 @@
     <servlet-name>UserProfile</servlet-name>
     <url-pattern>/UserProfile</url-pattern>
   </servlet-mapping>
+
+  <!-- admin area jsp -->
   <servlet>
     <servlet-name>AdminArea</servlet-name>
     <jsp-file>/HTML/AdminArea.jsp</jsp-file>
@@ -58,6 +76,8 @@
     <servlet-name>AdminArea</servlet-name>
     <url-pattern>/AdminArea</url-pattern>
   </servlet-mapping>
+
+  <!-- add product form jsp -->
   <servlet>
     <servlet-name>AddProductForm</servlet-name>
     <jsp-file>/HTML/AddProductForm.jsp</jsp-file>
@@ -66,6 +86,8 @@
     <servlet-name>AddProductForm</servlet-name>
     <url-pattern>/AddProductForm</url-pattern>
   </servlet-mapping>
+
+  <!-- add artist form jsp -->
   <servlet>
     <servlet-name>AddArtistForm</servlet-name>
     <jsp-file>/HTML/AddArtistForm.jsp</jsp-file>
@@ -74,6 +96,8 @@
     <servlet-name>AddArtistForm</servlet-name>
     <url-pattern>/AddArtistForm</url-pattern>
   </servlet-mapping>
+
+  <!-- product page jsp -->
   <servlet>
     <servlet-name>ProductPage</servlet-name>
     <jsp-file>/HTML/ProductPage.jsp</jsp-file>
@@ -82,6 +106,8 @@
     <servlet-name>ProductPage</servlet-name>
     <url-pattern>/ProductPage</url-pattern>
   </servlet-mapping>
+
+  <!-- main page jsp -->
   <servlet>
     <servlet-name>Main</servlet-name>
     <jsp-file>/HTML/Main.jsp</jsp-file>
@@ -90,6 +116,8 @@
     <servlet-name>Main</servlet-name>
     <url-pattern>/Main</url-pattern>
   </servlet-mapping>
+
+  <!-- artist list page jsp -->
   <servlet>
     <servlet-name>ArtistsList</servlet-name>
     <jsp-file>/HTML/ArtistsList.jsp</jsp-file>
@@ -98,6 +126,8 @@
     <servlet-name>ArtistsList</servlet-name>
     <url-pattern>/ArtistsPage</url-pattern>
   </servlet-mapping>
+
+  <!-- product list page jsp -->
   <servlet>
     <servlet-name>ProductsList</servlet-name>
     <jsp-file>/HTML/ProductsList.jsp</jsp-file>
@@ -106,6 +136,8 @@
     <servlet-name>ProductsList</servlet-name>
     <url-pattern>/ProductsList</url-pattern>
   </servlet-mapping>
+
+  <!-- wishlist page jsp -->
   <servlet>
     <servlet-name>Wishlist</servlet-name>
     <jsp-file>/HTML/Wishlist.jsp</jsp-file>
@@ -114,6 +146,8 @@
     <servlet-name>Wishlist</servlet-name>
     <url-pattern>/Wishlist</url-pattern>
   </servlet-mapping>
+
+  <!-- shopping cart page jsp -->
   <servlet>
     <servlet-name>ShoppingCart</servlet-name>
     <jsp-file>/HTML/ShoppingCart.jsp</jsp-file>
@@ -122,6 +156,8 @@
     <servlet-name>ShoppingCart</servlet-name>
     <url-pattern>/ShoppingCart</url-pattern>
   </servlet-mapping>
+
+  <!-- artist page jsp -->
   <servlet>
     <servlet-name>ArtistPage</servlet-name>
     <jsp-file>/HTML/ArtistPage.jsp</jsp-file>
@@ -130,4 +166,27 @@
     <servlet-name>ArtistPage</servlet-name>
     <url-pattern>/ArtistPage</url-pattern>
   </servlet-mapping>
+
+  <!-- Security -->
+  <filter>
+  	<filter-name>httpHeaderSecurity</filter-name>
+  	<filter-class>org.apache.catalina.filters.HttpHeaderSecurityFilter</filter-class>
+  	<init-param>
+  		<param-name>xssProtectionEnabled</param-name>
+  		<param-value>true</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>antiClickJackingEnabled</param-name>
+  		<param-value>true</param-value>
+  	</init-param>
+  	<init-param>
+  		<param-name>antiClickJackingOption</param-name>
+  		<param-value>DENY</param-value>
+  	</init-param>
+  </filter>
+  <filter-mapping>
+  	<filter-name>httpHeaderSecurity</filter-name>
+  	<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
 </web-app>

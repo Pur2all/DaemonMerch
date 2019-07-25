@@ -25,7 +25,7 @@
 					<input type="text" value="" placeholder="Product Name" name="name"/>
 				</div>
 				<div class="right">
-					<select name="artist" id="artists" class="select">
+					<select name="artistId" id="artists" class="select">
 					</select>
 				</div>
 			</div>

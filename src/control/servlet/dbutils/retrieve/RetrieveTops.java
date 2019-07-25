@@ -28,8 +28,8 @@ public class RetrieveTops extends HttpServlet
 			String orderString=request.getParameter("orderString");
 			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(orderString, Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
-			request.setAttribute("tops", tops);
-			request.setAttribute("mainPage", "Tops");
+			request.setAttribute("products", tops);
+			request.setAttribute("mainPage", "ProductsList");
 
 			getServletContext().getRequestDispatcher("/Index").forward(request, response);
 		}

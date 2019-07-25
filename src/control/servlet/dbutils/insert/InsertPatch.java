@@ -52,8 +52,8 @@ public class InsertPatch extends HttpServlet
 		try
 		{
 			request.setAttribute("success", (patchDAO.doSave(product)!=null ? 1 : 0));
-			//TODO vedere perchè non riporta alla pagina per mettere il prodotto
-			getServletContext().getRequestDispatcher("/AddProductForm").forward(request, response);
+			//TODO vedere perchï¿½ non riporta alla pagina per mettere il prodotto
+			getServletContext().getRequestDispatcher(request.getContextPath() + "/AddProductForm").forward(request, response);
 		}
 		catch(SQLException sqlException)
 		{

@@ -28,7 +28,7 @@ public class RetrievePatches extends HttpServlet
 			String orderString=request.getParameter("orderString");
 			LinkedList<Patch> patches=(LinkedList<Patch>) patchDAO.doRetrieveAll(orderString, Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
 
-			request.setAttribute("patches", patches);
+			request.setAttribute("products", patches);
 			request.setAttribute("mainPage", "ProductsList");
 
 			getServletContext().getRequestDispatcher("/Index").forward(request, response);

@@ -48,7 +48,7 @@ public class InsertProduct extends HttpServlet
 		try
 		{
 			request.setAttribute("success", (productDAO.doSave(product)!=null ? 1 : 0));
-			getServletContext().getRequestDispatcher("/DaemonMerch/AddProductForm").forward(request, response);
+			getServletContext().getRequestDispatcher(request.getContextPath() + "/AddProductForm").forward(request, response);
 		}
 		catch(SQLException sqlException)
 		{
