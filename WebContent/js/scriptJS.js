@@ -163,9 +163,15 @@ function validateRegistrationForm()
 
 	$("#regPassword").on('input', function()
 	{
-		if(!$("#regPassword").val().match(/^[A-Za-z0-9_-@]{5,10}$/))
+		if(!$("#regPassword").val().match(/^[A-Za-z0-9_@!?]{5,10}$/))
 			$("#regPassword").css('border', '1px solid red');
 		else
 			$("#regPassword").css('border', '1px solid green');
+	});
+
+	$("#submitButton").on('click', function(event)
+	{
+		console.log($("#registrationForm").children());
+		event.preventDefault();
 	});
 }
