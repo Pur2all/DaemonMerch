@@ -55,7 +55,7 @@ public class InsertArtist extends HttpServlet
 			try
 			{
 				if(artistDAO.doSave(artist)!=null)
-					response.sendRedirect(request.getContextPath() + "/AddArtistForm");
+					response.sendRedirect(request.getContextPath() + "/AdminArea");
 			}
 			catch(SQLException sqlException)
 			{

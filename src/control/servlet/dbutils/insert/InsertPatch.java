@@ -52,7 +52,7 @@ public class InsertPatch extends HttpServlet
 		try
 		{
 			if(patchDAO.doSave(product)!=null)
-				response.sendRedirect(request.getContextPath() + "/AddProductForm");
+				response.sendRedirect(request.getContextPath() + "/AdminArea");
 		}
 		catch(SQLException sqlException)
 		{

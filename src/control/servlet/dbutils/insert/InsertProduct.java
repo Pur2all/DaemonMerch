@@ -48,7 +48,7 @@ public class InsertProduct extends HttpServlet
 		try
 		{
 			if(productDAO.doSave(product)!=null)
-				response.sendRedirect(request.getContextPath() + "/AddProductForm");
+				response.sendRedirect(request.getContextPath() + "/AdminArea");
 		}
 		catch(SQLException sqlException)
 		{
