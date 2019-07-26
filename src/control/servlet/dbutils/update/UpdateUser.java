@@ -33,9 +33,9 @@ public class UpdateUser extends HttpServlet
 		System.out.println("User: " + user);
 		try
 		{
-			response.setContentType("text/plain");
+			response.setContentType("applaication/json");
 			boolean updateMake=userDAO.doUpdate(user);
-			response.getWriter().write(updateMake ? 1 : 0);
+			response.getWriter().write(updateMake ? request.getParameter("user") : "{user:'false'}");
 			if(updateMake)
 				request.getSession(false).setAttribute("userInfo", user);
 		}

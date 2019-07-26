@@ -12,7 +12,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>DaemonMerch</title>
-		<link rel="stylesheet" type="text/css" href="./Css/WishlistCart.css">
+		<link rel="stylesheet" type="text/css" href="/DaemonMerch/Css/WishlistCart.css">
 	</head>
 
 	<body>

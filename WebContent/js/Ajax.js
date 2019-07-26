@@ -43,8 +43,10 @@ function updateUserAsync(user)
     "data":{user:user},
     "success":function(data)
     {
-      // TODO: Anzichè fare questo cambia i valori nel form normale
-      //window.location.reload();
+      if(data.user!='false')
+        updateInfo(data);
+      else
+        alert("Cannot do that");
     },
     "error":function(error)
     {
@@ -62,11 +64,11 @@ function checkUsername(username)
     "data":{username:username},
     "success":function(data)
     {
-/*      if(data)
-        // TODO: Animare il campo di input per l'username rendendolo rosso e dicendo che l'utente è già preso
+      if(data)
+        $("#regUsername").css('border', '1px solid red');
       else
-*/        // TODO: Animarlo come sopra ma col verde dicendo che è ok l'username
-    }
+        $("#regUsername").css('border', '1px solid green');
+      }
   });
 }
 

@@ -44,11 +44,11 @@
 		<div class='registrationForm'>
 			<h2>Sign up</h2>
 			<form action="Registration" method="post">
-				<input name='name' placeholder='First Name' type='text'>
-				<input name='surname' placeholder='Last Name' type='text'>
-				<input name="birthday" type="date" placeholder='Birth Date'>
-				<input name='username' placeholder='Username' type='text' oninput="checkUsername(this.value)">
-				<input id='pw' name='password' placeholder='Password' type='password'>
+				<input name='name' placeholder='First Name' type='text' id="regName">
+				<input name='surname' placeholder='Last Name' type='text' id="regSurname">
+				<input name="birthday" type="date" placeholder='Birth Date' id="regBirthday">
+				<input name='username' placeholder='Username' type='text' id="regUsername">
+				<input name='password' placeholder='Password' type='password' id="regPassword">
 				<div class='agree'>
 					<input id='agree' name='agree' type='checkbox'>
 					<label for='agree'></label>Accept terms and conditions

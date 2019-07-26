@@ -1,4 +1,5 @@
 loginForm = function(){
+	validateRegistrationForm();
 	$('.registrationForm').hide();
 	$('.toggle-button').click(function(){
 
@@ -127,4 +128,44 @@ function updateUser()
 	};
 
 	return updateUserAsync(JSON.stringify(user));
+}
+
+//Function to update the user info in UserProfile
+function updateInfo(user)
+{
+	$("#username").html(user.username);
+	$("#firstname").html(user.name);
+	$("#surname").html(user.surname);
+	$("birthday").html(user.birthday)
+}
+
+//Function to validate the registration form
+function validateRegistrationForm()
+{
+	$("#regName").on('input', function()
+	{
+		if(!$("#regName").val().match(/^[A-Za-z]{3,10}$/))
+			$("#regName").css('border', '1px solid red');
+		else
+			$("#regName").css('border', '1px solid green');
+	});
+
+	$("#regUsername").on('input', function()
+	{
+		if(!$("#regUsername").val().match(/^[^_][A-Za-z0-9_]{5,10}$/))
+			$("#regUsername").css('border', '1px solid red');
+		else
+			{
+				$("#regUsername").css('border', '1px solid green');
+				checkUsername($("#regUsername").val());
+			}
+	});
+
+	$("#regPassword").on('input', function()
+	{
+		if(!$("#regPassword").val().match(/^[A-Za-z0-9_-@]{5,10}$/))
+			$("#regPassword").css('border', '1px solid red');
+		else
+			$("#regPassword").css('border', '1px solid green');
+	});
 }
