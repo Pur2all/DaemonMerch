@@ -18,7 +18,7 @@
 			<%Image[] images = artist.getImages();%>
 			<%int l = images.length - 1;%>
 
-			<div> <c:out value="${artist.name}">No name</c:out> </div>			
+			<div class="name"> <c:out value="${artist.name}">No name</c:out> </div>			
 
 			<div class="slideshow-container">
 				<%for(int i = 0; i < images.length; i++) { %>

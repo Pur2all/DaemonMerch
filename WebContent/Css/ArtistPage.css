@@ -3,4 +3,10 @@
 	body {
 		background: #2E3740;
 	}
+	
+	.container {
+		display: grid;
+		grid-template-columns: 30% 60%;
+		grid-template-rows: 5% 30% 65%;
+	}
 }

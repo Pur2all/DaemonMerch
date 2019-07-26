@@ -31,7 +31,7 @@ addProductForm = function(){
 selectUpdate = function() {
 
 	$('.product-type').on('change', function() {
-
+		
 		if(this.value == "shirt") {
 			$('#insertForm').attr('action', 'admin/InsertTop');
 			$('#shirt-specific').slideDown();
@@ -58,6 +58,9 @@ userProfileScript = function() {
 	editProfile();
 	dynamicForm();
 	dynamicFormAdmin();
+	addProductForm();
+	retrieveArtists();
+	selectUpdate();
 }
 
 editProfile = function(){
@@ -111,9 +114,13 @@ dynamicFormAdmin = function() {
 		$('div#productForm').slideUp();
 		$('div#artistForm').slideUp();
 	});
+	
+	$('input#cancel-button').click(function(){
+		$('div#productForm').slideUp();
+		$('div#artistForm').slideUp();
+	});
 
 }
-
 
 function updateUser()
 {
