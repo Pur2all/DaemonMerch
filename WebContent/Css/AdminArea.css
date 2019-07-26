@@ -7,23 +7,48 @@
 	.grid-container {
 		display: grid;
 		grid-template-columns: 50% 50%;
-		grid-template-rows: repeat(5, 1fr);
 		width: 50%;
 		margin: auto;
 		margin-top: 2%;
 		background: white;
-		padding: 1%;
-		border-radius: .5em;
+		padding-top: .25%;
+		border-top-left-radius: .5em;
+		border-top-right-radius: .5em;
 	}
 	
 	div.data {
-		grid-columns: 1 / span 2;
-		grid-rows: 2 / span 1;
+		text-align: center;
+		width: 100%;
+		background: #16aa56;
+	}
+	
+	.data {
+		grid-column: 1 / span 2;
+		grid-row: 2 / span 1;
+		justify-self: center;
+		margin-bottom: 2%;
+	}
+	
+	div.leftA {
+		margin-bottom: 2%;
+		margin-left: 10%;
+	}
+	
+	div.rightA {
+		margin-bottom: 2%;
+		margin-left: 10%;
 	}
 	
 	.avatar {
-		width: 50%;
+		width: 38%;
 		border-radius: 100%;
+		margin: 2%;
+		margin-left: 15%;
+	}
+	
+	.username {
+		margin-top: 19%;
+		margin-right: 15%;
 	}
 	
 	

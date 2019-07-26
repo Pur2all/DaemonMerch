@@ -24,16 +24,23 @@
 			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
 			<div class="username"><%out.println(user.getUsername());%> (Admin)</div>
 			<div class="data"> Profiles Details</div>
-			<div class="left">First Name</div>
-			<div class="right"><%out.println(user.getName());%></div>
-			<div class="left">Last Name</div>
-			<div class="right"><%out.println(user.getSurname());%></div>
-			<div class="left">Birth Date</div>
-			<div class="right"><%out.println(user.getBirthday());%></div>
+			<div class="leftA">First Name</div>
+			<div class="rightA"><%out.println(user.getName());%></div>
+			<div class="leftA">Last Name</div>
+			<div class="rightA"><%out.println(user.getSurname());%></div>
+			<div class="leftA">Birth Date</div>
+			<div class="rightA"><%out.println(user.getBirthday());%></div>
 			
-			<input type="button" class="left" value="Add Credit Card" id="productAdd">			
-			<input type="button" class="right" value="Add Billing Address" id="artistAdd">
+			<input type="button" class="left" value="Add New Product" id="productAdd">			
+			<input type="button" class="right" value="Add New Artist" id="artistAdd">
 				
+			<div id="artistForm" style="display: none;">		
+				<%@ include file="./AddArtistForm.jsp" %>
+			</div>
+			<div id="productForm" style="display: none;">
+				<%@ include file="./AddProductForm.jsp" %>
+			</div>
+
 		</div>
 			
 	</body>

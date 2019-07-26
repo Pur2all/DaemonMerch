@@ -6,10 +6,46 @@
 		background: #2E3740;
 	}
 	
+	form {
+		display: grid;
+		grid-template-columns: 50% 50%;
+		width: 200%;
+		margin: 0 auto;
+		padding-top: 2%;
+		align-content: center;
+	}
+	
+	div.centered {
+		grid-column: 1 / span 2;
+		align-self: center;
+	}
+	
+	div.group.centered {
+		width: 90%;
+		justify-self: center;
+	}
+	
+	.username {
+		color: graytext;
+		font-weight: bolder;
+	}
+
 	textarea, input:not([type=button]):not([type=submit]) {
-		width: 100%;
+		width: 90%;
 		padding: .5em 1em;
 	  font-family: sans-serif;
+	}
+
+	#cancel-button, #submit-button {
+		width: 50%;
+	}
+	
+	#cancel-button1, #submit-button1 {
+		width: 100%;
+	}
+	
+	#cancel-button, #cancel-button1 {
+		background: red;
 	}
 
 	input[type=button], input[type=submit] {
@@ -33,43 +69,13 @@
 		clear: both;
 	}
 
-	.left {
-		float: left;
-	}
-
-	.right {
-		float: right;
-	}
-
-	form {
-	  width: 30em;
-	  margin: 0 auto;
-	  padding-top: 3%;
-	}
-
 	form div.group > div {
 		width: 46%;
 		margin: 0 0 .5em;
 	}
-
-	div.group:nth-child(2) > div:nth-child(1) > select:nth-child(1) {
-		width: 230%;
-		padding: .5em 1em;
-	  	font-family: sans-serif;
-	}
-	
-	div.group:nth-child(2) > div:nth-child(2) > input:nth-child(1) {
-		width: 100%;
-		padding: .5em 1em;
-	  	font-family: sans-serif;
-	}
-	
-	#patch-specific > div:nth-child(2) > div:nth-child(1) > input:nth-child(1) {
-		width: 218%;
-	}
 	
 	.select {
-		width: 113%;
+		width: 99.6%;
 		padding: .5em 1em;
 	  	font-family: sans-serif;
 	}
@@ -78,12 +84,27 @@
 		padding-bottom: 5%;
 		padding-top: 5%;
 		text-align: center;
-		color: white;
+		color: black;
 		width: 100%;
 		padding: .5em 1em;
 	  	font-family: sans-serif;
 	}
 	
+	div.left {
+		margin: 0px;
+		text-align: center;
+		margin-bottom: 1%;
+	}
+	
+	div.right {
+		margin: 0px;
+		text-align: center;
+		margin-bottom: 1%;
+	}
+	
+	div input[type="file"] {
+		margin-left: 10%;
+	}
 	
 	div.centered-button {
 		text-align: center; 
@@ -94,7 +115,11 @@
 	}
 
 	.center > select:nth-child(1) {
-		width: 230%;
+		width: 99.6%;
+	}
+	
+	#patch-specific > div:nth-child(2) > input:nth-child(1), #patch-specific > div:nth-child(3) > input:nth-child(1) {
+		width: 81%;
 	}
 	
 	div.group div.text {
@@ -110,5 +135,23 @@
 	#shirt-specific {
 		display: none;
 	}
+	
+	#imageInput {
+		grid-column: 1 / span 2;
+	}
 
+	.spec {
+		width: 90%;
+		justify-content: center;
+	}
+
+	#insertForm {
+		justify-items: center;
+	}
+	
+	#insertForm > div:nth-child(9) {
+		margin-left: 4%;
+		width: 97.5%;
+	}
+	
 }

@@ -30,12 +30,12 @@ addProductForm = function(){
 
 selectUpdate = function() {
 
-	$('div.right > select.product-type').on('change', function() {
-
+	$('.product-type').on('change', function() {
+		
 		if(this.value == "shirt") {
 			$('#insertForm').attr('action', 'admin/InsertTop');
 			$('#shirt-specific').slideDown();
-			$('#patch-specific').slideUp();
+			$('#patch-specific').hide();
 		};
 
 		if(this.value == "other") {
@@ -47,7 +47,7 @@ selectUpdate = function() {
 		if(this.value == "patch") {
 			$('#insertForm').attr('action', 'admin/InsertPatch');
 			$('#patch-specific').slideDown();
-			$('#shirt-specific').slideUp();
+			$('#shirt-specific').hide();
 		};
 
 	});
@@ -107,7 +107,7 @@ dynamicFormAdmin = function() {
 		$('div#artistForm').slideUp();
 	});
 
-	$('input#cancel-button').click(function(){
+	$('input#cancel-button1').click(function(){
 		$('div#productForm').slideUp();
 		$('div#artistForm').slideUp();
 	});
