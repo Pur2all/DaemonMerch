@@ -42,7 +42,7 @@
 				<div class="left">Street Address:</div>
 				<div class="right"><input name="street" type="text" id="street" value=""></div>
 				<div class="left">ZIP Code:</div>
-				<div class="right"><input name="zipCode" type="text" id="zipCODE" value=""></div>
+				<div class="right"><input name="zipCode" type="text" id="ZIPcode" value=""></div>
 				<input type="submit" value="Confirm" class="left confirmButton">
 				<input type="button" value="Cancel" class="right cancelButton">
 			</form>

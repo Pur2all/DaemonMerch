@@ -57,20 +57,20 @@
 				<nav role="navigation">
 					<ul>
 						<div>
-							<li><a class="animated" href="Artists">Band List</a></li>
-							<li><a class="animated" href="Tops?pageInit=0&pageEnd=15">Top</a></li>
-							<li><a class="animated" href="Patches?pageInit=0&pageEnd=15">Patch</a></li>
-							<li><a class="animated" href="Products?pageInit=0&pageEnd=15">Other</a></li>
+							<li><a class="animated" href="/DaemonMerch/Artists">Band List</a></li>
+							<li><a class="animated" href="/DaemonMerch/Tops?pageInit=0&pageEnd=15">Top</a></li>
+							<li><a class="animated" href="/DaemonMerch/Patches?pageInit=0&pageEnd=15">Patch</a></li>
+							<li><a class="animated" href="/DaemonMerch/Products?pageInit=0&pageEnd=15">Other</a></li>
 						</div>
 						<%
 							if(request.getSession(false) == null || request.getSession(false).getAttribute("userInfo") == null) {
 						%>
-						<li><a class="animated" href="LoginForm">LOGIN</a></li>
+						<li><a class="animated" href="/DaemonMerch/LoginForm">LOGIN</a></li>
 						<%
 						 	  }
 							  else {
 						%>
-						<li><a class="animated" href="auth/Logout">LOGOUT</a></li>
+						<li><a class="animated" href="/DaemonMerch/auth/Logout">LOGOUT</a></li>
 						<%
 							}
 						%>

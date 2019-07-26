@@ -127,10 +127,13 @@
 				<input type="file" accept="image/*" name="productImage" multiple/>
 			</div>
 
-			<div class="input-button">
-				<input type="submit" value="Submit">
+			<div class="left">
+				<input id="cancel-button" type="button" value="Cancel">
 			</div>
-
+			
+			<div class="right">
+				<input id="submit-button" type="submit" value="Submit">
+			</div>
 		</form>
 
 	</body>

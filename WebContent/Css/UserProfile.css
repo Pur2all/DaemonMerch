@@ -20,6 +20,7 @@
 	}
 	
 	.sc-user-profile .right {
+		float: inherit;
 		padding: 0 5px 10px;
 		width: 70%;
 	}
@@ -87,5 +88,5 @@
 	div.edit {
 		display: none;
 	}
-
+	
 }

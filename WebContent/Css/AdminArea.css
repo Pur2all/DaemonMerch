@@ -1,0 +1,30 @@
+@media screen and (orientation: landscape) {
+	
+	body {
+		background: #2E3740;
+	}
+	
+	.grid-container {
+		display: grid;
+		grid-template-columns: 50% 50%;
+		grid-template-rows: repeat(5, 1fr);
+		width: 50%;
+		margin: auto;
+		margin-top: 2%;
+		background: white;
+		padding: 1%;
+		border-radius: .5em;
+	}
+	
+	div.data {
+		grid-columns: 1 / span 2;
+		grid-rows: 2 / span 1;
+	}
+	
+	.avatar {
+		width: 50%;
+		border-radius: 100%;
+	}
+	
+	
+}

@@ -56,6 +56,7 @@ selectUpdate = function() {
 userProfileScript = function() {
 	editProfile();
 	dynamicForm();
+	dynamicFormAdmin();
 }
 
 editProfile = function(){
@@ -84,6 +85,30 @@ dynamicForm = function() {
 	$('input.cancelButton').click(function(){
 		$('.billingAddressForm').slideUp();
 		$('.creditCardForm').slideUp();
+	});
+
+}
+
+
+dynamicFormAdmin = function() {
+	$('input#artistAdd').click(function(){
+		$('div#productForm').slideUp();
+		$('div#artistForm').slideDown();
+	});
+
+	$('input#productAdd').click(function(){
+		$('div#productForm').slideDown();
+		$('div#artistForm').slideUp();
+	});
+
+	$('input#submit-button').click(function(){
+		$('div#productForm').slideUp();
+		$('div#artistForm').slideUp();
+	});
+
+	$('input#cancel-button').click(function(){
+		$('div#productForm').slideUp();
+		$('div#artistForm').slideUp();
 	});
 
 }

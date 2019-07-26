@@ -40,10 +40,13 @@
 				</div>
 			</div>
 
-			<div class="centered-button">
-				<input type="submit" value="Submit">
+			<div class="left">
+				<input id="cancel-button" type="button" value="Cancel">
 			</div>
-
+			
+			<div class="right">
+				<input id="submit-button" type="submit" value="Submit">
+			</div>
 		</form>
 
 

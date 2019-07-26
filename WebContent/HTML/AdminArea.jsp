@@ -11,19 +11,19 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>Insert title here</title>
-		<link rel="stylesheet" type="text/css" href="./Css/UserProfile.css">
+		<link rel="stylesheet" type="text/css" href="./Css/AdminArea.css">
+		<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+		<script src="./js/scriptJS.js"></script>
+		<script src="./js/Ajax.js"></script>
 	</head>
 
-	<body>
+	<body onload="userProfileScript()">
 
 		<% User user = (User)request.getSession(false).getAttribute("userInfo"); %>
-		<div class="sc-user-profile">
+		<div class="grid-container">
 			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
-			<a href="#"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>
 			<div class="username"><%out.println(user.getUsername());%> (Admin)</div>
-			<div class="data">
-				<span class="entypo-heart"> Profiles Details</span>
-			</div>
+			<div class="data"> Profiles Details</div>
 			<div class="left">First Name</div>
 			<div class="right"><%out.println(user.getName());%></div>
 			<div class="left">Last Name</div>
@@ -31,17 +31,8 @@
 			<div class="left">Birth Date</div>
 			<div class="right"><%out.println(user.getBirthday());%></div>
 			
-			<form action="./AddProductForm">
-				<div class="admin-button">
-					<button class="add-product">Add Product</button>
-				</div>
-			</form>
-				
-			<form action="./AddArtistForm">			
-				<div class="admin-button add-artist">
-					<button class="add-artist">Add Artist</button>
-				</div>
-			</form>
+			<input type="button" class="left" value="Add Credit Card" id="productAdd">			
+			<input type="button" class="right" value="Add Billing Address" id="artistAdd">
 				
 		</div>
 			

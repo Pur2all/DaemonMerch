@@ -46,7 +46,7 @@
 
 			<div class="total">
 				<h3>totaleeee</h3>
-				<button>Checkout</button>
+				<button onclick="window.location.href='auth/Checkout'">Checkout</button>
 			</div>
 
 		</div>
