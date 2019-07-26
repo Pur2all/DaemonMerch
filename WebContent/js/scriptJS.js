@@ -31,7 +31,7 @@ addProductForm = function(){
 selectUpdate = function() {
 
 	$('.product-type').on('change', function() {
-		
+
 		if(this.value == "shirt") {
 			$('#insertForm').attr('action', 'admin/InsertTop');
 			$('#shirt-specific').slideDown();
@@ -168,10 +168,21 @@ function validateRegistrationForm()
 		else
 			$("#regPassword").css('border', '1px solid green');
 	});
+}
 
-	$("#submitButton").on('click', function(event)
+//Function for check if some input is null
+function checkForm()
+{
+	var value=true;
+
+	$("#registrationForm").children().each(function(index, el)
 	{
-		console.log($("#registrationForm").children());
-		event.preventDefault();
+		if((el.nodeName=="INPUT" && el.value=="") || el.getAttribute('style')=='border: 1px solid red;')
+		{
+			value=false;
+			return;
+		}
 	});
+
+	return value;
 }

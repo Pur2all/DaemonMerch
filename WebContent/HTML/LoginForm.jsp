@@ -53,7 +53,7 @@
 					<input id='agree' name='agree' type='checkbox'>
 					<label for='agree'></label>Accept terms and conditions
 				</div>
-				<input class='animated' type='submit' value='Submit' id="submitButton">
+				<input class='animated' type='submit' value='Submit' id="submitButton" onclick="return checkForm()">
 			</form>
 		</div>
 
