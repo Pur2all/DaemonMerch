@@ -10,8 +10,8 @@
 		<link rel="stylesheet" type="text/css" href="/DaemonMerch/Css/Header.css">
 		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 	 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
-		<script src="./js/Ajax.js"></script>
-		<script src="./js/scriptJS.js"></script>
+		<script src="/DaemonMerch/js/Ajax.js"></script>
+		<script src="/DaemonMerch/js/scriptJS.js"></script>
 	</head>
 
 	<body>
@@ -23,7 +23,7 @@
 			</logo>
 
 			<div class="wrap-item">
-				<form action="SearchProduct" method="get">
+				<form action="/DaemonMerch/SearchProduct" method="get">
 					<div class="searchbar-item">
 						<input type="hidden" name="pageInit" value='0'>
 						<input type="hidden" name="pageEnd" value='15'>
