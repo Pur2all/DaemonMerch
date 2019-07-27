@@ -32,7 +32,7 @@ public class RetrieveOrders extends HttpServlet
 			request.setAttribute("orders", order);
 			request.setAttribute("mainPage", "Orders");
 
-			getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

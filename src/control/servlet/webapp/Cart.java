@@ -15,7 +15,7 @@ public class Cart extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
 	{
 		request.setAttribute("mainPage", "ShoppingCart");
-		getServletContext().getRequestDispatcher("/Index").forward(request, response);
+		getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 

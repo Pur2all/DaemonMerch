@@ -45,8 +45,7 @@ public class InsertProductInWishlist extends HttpServlet
 				WishlistDAO productDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userId);
 
 				response.setContentType("application/json");
-				productDAO.doSave(product);
-				response.getWriter().write(new Gson().toJson(product));
+				response.getWriter().write(new Gson().toJson(productDAO.doSave(product)));
 			}
 			catch(SQLException sqlException)
 			{

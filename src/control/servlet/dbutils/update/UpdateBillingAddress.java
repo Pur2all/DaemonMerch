@@ -28,17 +28,17 @@ public class UpdateBillingAddress extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		BillingAddress oldBillingAddress=new Gson().fromJson((String) request.getAttribute("oldBillingAddress"), BillingAddress.class);
-		BillingAddress newBillingAddress=new Gson().fromJson((String) request.getAttribute("newBillingAddress"), BillingAddress.class);
+		BillingAddress oldBillingAddress=new Gson().fromJson(request.getParameter("oldBillingAddress"), BillingAddress.class);
+		BillingAddress newBillingAddress=new Gson().fromJson(request.getParameter("newBillingAddress"), BillingAddress.class);
 
 		BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
+				Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId()));
 
 		try
 		{
-			response.setContentType("text/plain");
+			response.setContentType("application/json");
 			billingAddressDAO.doDelete(oldBillingAddress);
-			response.getWriter().write(billingAddressDAO.doSave(newBillingAddress)!=null ? 1 : 0);
+			response.getWriter().write(new Gson().toJson(billingAddressDAO.doSave(newBillingAddress)));
 		}
 		catch(SQLException sqlException)
 		{

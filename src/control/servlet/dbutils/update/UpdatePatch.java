@@ -27,14 +27,14 @@ public class UpdatePatch extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		Patch patch=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
+		Patch patch=new Gson().fromJson(request.getParameter("patch"), Patch.class);
 
 		PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
-			response.setContentType("text/plain");
-			response.getWriter().write(patchDAO.doUpdate(patch) ? 1 : 0);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(patchDAO.doUpdate(patch)));
 		}
 		catch(SQLException sqlException)
 		{

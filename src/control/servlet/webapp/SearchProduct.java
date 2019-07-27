@@ -36,7 +36,7 @@ public class SearchProduct extends HttpServlet
 			}
 
 			request.setAttribute("mainPage", "ProductsList");
-			getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 		}
 		else
 		{

@@ -31,7 +31,7 @@ public class RetrievePatches extends HttpServlet
 			request.setAttribute("products", patches);
 			request.setAttribute("mainPage", "ProductsList");
 
-			getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

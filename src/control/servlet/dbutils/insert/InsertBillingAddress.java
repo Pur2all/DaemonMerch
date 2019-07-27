@@ -29,19 +29,19 @@ public class InsertBillingAddress extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("billingAddress")==null)
+		if(request.getParameter("billingAddress")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			BillingAddress billingAddress=new Gson().fromJson((String) request.getAttribute("billingAddress"), BillingAddress.class);
+			BillingAddress billingAddress=new Gson().fromJson(request.getParameter("billingAddress"), BillingAddress.class);
 
 			BillingAddressDAO billingAddressDAO=new BillingAddressDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
+					Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId()));
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(billingAddressDAO.doSave(billingAddress)!=null ? 1 : 0);
+				response.setContentType("application/json");
+				response.getWriter().write(new Gson().toJson(billingAddressDAO.doSave(billingAddress)));
 			}
 			catch(SQLException sqlException)
 			{

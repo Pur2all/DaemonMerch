@@ -20,7 +20,7 @@ public class Profile extends HttpServlet
 	{
 		if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
 			if(((User) request.getSession(false).getAttribute("userInfo")).getUserType()==UserType.ADMIN)
-				response.sendRedirect(request.getContextPath() + "/AdminArea");
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/AdminArea"));
 			else
 			{
 				request.setAttribute("mainPage", "UserProfile");

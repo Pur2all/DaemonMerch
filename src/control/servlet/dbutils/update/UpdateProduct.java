@@ -27,14 +27,14 @@ public class UpdateProduct extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		Product product=new Gson().fromJson((String) request.getAttribute("product"), Product.class);
+		Product product=new Gson().fromJson(request.getParameter("product"), Product.class);
 
 		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
-			response.setContentType("text/plain");
-			response.getWriter().write(productDAO.doUpdate(product) ? 1 : 0);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(productDAO.doUpdate(product)));
 		}
 		catch(SQLException sqlException)
 		{

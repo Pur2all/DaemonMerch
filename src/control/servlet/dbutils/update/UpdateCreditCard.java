@@ -28,15 +28,15 @@ public class UpdateCreditCard extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
+		CreditCard creditCard=new Gson().fromJson(request.getParameter("credtiCard"), CreditCard.class);
 
 		CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
+				Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId()));
 
 		try
 		{
-			response.setContentType("text/plain");
-			response.getWriter().write(creditCardDAO.doUpdate(creditCard) ? 1 : 0);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(creditCardDAO.doUpdate(creditCard)));
 		}
 		catch(SQLException sqlException)
 		{

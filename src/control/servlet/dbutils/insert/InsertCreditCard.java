@@ -28,19 +28,20 @@ public class InsertCreditCard extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("creditCard")==null)
+		if(request.getParameter("creditCard")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			CreditCard creditCard=new Gson().fromJson((String) request.getAttribute("credtiCard"), CreditCard.class);
-			int userID=Integer.parseInt(((User)request.getSession().getAttribute("userInfo")).getId());
+			CreditCard creditCard=new Gson().fromJson(request.getParameter("credtiCard"), CreditCard.class);
+			
+			int userID=Integer.parseInt(((User)request.getSession(false).getAttribute("userInfo")).getId());
 
 			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(creditCardDAO.doSave(creditCard)!=null ? 1 : 0);
+				response.setContentType("application/json");
+				response.getWriter().write(new Gson().toJson(creditCardDAO.doSave(creditCard)));
 			}
 			catch(SQLException sqlException)
 			{

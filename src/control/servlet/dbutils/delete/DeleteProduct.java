@@ -27,18 +27,18 @@ public class DeleteProduct extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("product")==null)
+		if(request.getParameter("product")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			Product product=new Gson().fromJson((String) request.getAttribute("product"), Product.class);
+			Product product=new Gson().fromJson( request.getParameter("product"), Product.class);
 
 			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(productDAO.doDelete(product) ? 1 : 0);
+				response.setContentType("application/json");
+				response.getWriter().write(new Gson().toJson(productDAO.doDelete(product)));
 			}
 			catch(SQLException sqlException)
 			{

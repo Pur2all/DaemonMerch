@@ -31,7 +31,7 @@ public class RetrieveProducts extends HttpServlet
 			System.out.println("products: " + products);
 			request.setAttribute("products", products);
 			request.setAttribute("mainPage", "ProductsList");
-			getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

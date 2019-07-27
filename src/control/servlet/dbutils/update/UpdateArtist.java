@@ -27,14 +27,14 @@ public class UpdateArtist extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		Artist artist=new Gson().fromJson((String) request.getAttribute("artist"), Artist.class);
+		Artist artist=new Gson().fromJson(request.getParameter("artist"), Artist.class);
 
 		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
-			response.setContentType("text/plain");
-			response.getWriter().write(artistDAO.doUpdate(artist) ? 1 : 0);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(artistDAO.doUpdate(artist)));
 		}
 		catch(SQLException sqlException)
 		{

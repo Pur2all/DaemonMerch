@@ -52,7 +52,7 @@ public class Product extends HttpServlet
 		}
 		
 		request.setAttribute("mainPage", "ProductPage");
-		getServletContext().getRequestDispatcher("/Index").forward(request, response);
+		getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

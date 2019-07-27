@@ -27,14 +27,14 @@ public class UpdateTop extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		Top top=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
+		Top top=new Gson().fromJson(request.getParameter("top"), Top.class);
 
 		TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 		try
 		{
-			response.setContentType("text/plain");
-			response.getWriter().write(topDAO.doUpdate(top) ? 1 : 0);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(topDAO.doUpdate(top)));
 		}
 		catch(SQLException sqlException)
 		{

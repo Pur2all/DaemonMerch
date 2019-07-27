@@ -37,7 +37,7 @@ public class CheckUsername extends HttpServlet
 					break;
 				}
 			response.setContentType("application/json");
-			response.getWriter().write(isAlreadyPresent ? new Gson().toJson(true) : new Gson().toJson(false));
+			response.getWriter().write(new Gson().toJson(isAlreadyPresent));
 		}
 		catch (SQLException sqlException)
 		{

@@ -28,19 +28,19 @@ public class DeleteOrder extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("order")==null || request.getSession().getAttribute("userInfo")==null)
+		if(request.getParameter("order")==null || request.getSession().getAttribute("userInfo")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
+			Order order=new Gson().fromJson(request.getParameter("order"), Order.class);
 
 			OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 					Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(orderDAO.doDelete(order) ? 1 : 0);
+				response.setContentType("application/json");
+				response.getWriter().write(new Gson().toJson(orderDAO.doDelete(order)));
 			}
 			catch(SQLException sqlException)
 			{

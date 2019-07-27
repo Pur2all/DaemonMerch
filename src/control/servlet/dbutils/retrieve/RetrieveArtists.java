@@ -32,7 +32,7 @@ public class RetrieveArtists extends HttpServlet
 		}
 
 		request.setAttribute("mainPage", "ArtistsPage");
-		getServletContext().getRequestDispatcher("/Index").forward(request, response);
+		getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

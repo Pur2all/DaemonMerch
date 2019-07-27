@@ -28,15 +28,15 @@ public class UpdateOrder extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
+		Order order=new Gson().fromJson(request.getParameter("order"), Order.class);
 
 		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
-				Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId()));
+				Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId()));
 
 		try
 		{
-			response.setContentType("text/plain");
-			response.getWriter().write(orderDAO.doUpdate(order) ? 1 : 0);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(orderDAO.doUpdate(order)));
 		}
 		catch(SQLException sqlException)
 		{

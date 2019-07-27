@@ -30,14 +30,14 @@ public class UpdateProductInWishlist extends HttpServlet
 	{
 		int userId=Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId());
 
-		WishlistProduct wishlistProduct=new Gson().fromJson((String) request.getAttribute("wishlistProduct"), WishlistProduct.class);
+		WishlistProduct wishlistProduct=new Gson().fromJson(request.getParameter("wishlistProduct"), WishlistProduct.class);
 
 		WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userId);
 
 		try
 		{
-			response.setContentType("text/plain");
-			response.getWriter().write(wishlistDAO.doUpdate(wishlistProduct) ? 1 : 0);
+			response.setContentType("application/json");
+			response.getWriter().write(new Gson().toJson(wishlistDAO.doUpdate(wishlistProduct)));
 		}
 		catch(SQLException sqlException)
 		{

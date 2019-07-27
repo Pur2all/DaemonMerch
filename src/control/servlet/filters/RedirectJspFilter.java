@@ -16,6 +16,6 @@ public class RedirectJspFilter implements Filter
 {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException
 	{
-		((HttpServletResponse) response).sendRedirect(((HttpServletRequest) request).getContextPath() + "/Home");
+		((HttpServletResponse) response).sendRedirect(((HttpServletResponse) response).encodeRedirectURL(((HttpServletRequest) request).getContextPath() + "/Home"));
 	}
 }

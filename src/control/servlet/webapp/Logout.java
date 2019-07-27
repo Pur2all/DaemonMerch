@@ -14,6 +14,7 @@ public class Logout extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
+		request.getSession(false).removeAttribute("cart");
 		request.getSession(false).removeAttribute("userInfo");
 		request.getSession(false).invalidate();
 		response.sendRedirect(request.getContextPath() + "/Home");

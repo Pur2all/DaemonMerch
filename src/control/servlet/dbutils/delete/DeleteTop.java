@@ -27,18 +27,18 @@ public class DeleteTop extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("top")==null)
+		if(request.getParameter("top")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			Top top=new Gson().fromJson((String) request.getAttribute("top"), Top.class);
+			Top top=new Gson().fromJson(request.getParameter("top"), Top.class);
 
 			TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(topDAO.doDelete(top) ? 1 : 0);
+				response.setContentType("application/json");
+				response.getWriter().write(new Gson().toJson(topDAO.doDelete(top)));
 			}
 			catch(SQLException sqlException)
 			{

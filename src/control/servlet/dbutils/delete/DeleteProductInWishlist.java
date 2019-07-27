@@ -34,7 +34,7 @@ public class DeleteProductInWishlist extends HttpServlet
 		{
 			int userId=Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId());
 
-			WishlistProduct wishlistProduct=new Gson().fromJson((String) request.getParameter("wishlistProduct"), WishlistProduct.class);
+			WishlistProduct wishlistProduct=new Gson().fromJson(request.getParameter("wishlistProduct"), WishlistProduct.class);
 
 			WishlistDAO wishlistDAO=new WishlistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userId);
 

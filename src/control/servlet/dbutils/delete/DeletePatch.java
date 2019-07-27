@@ -27,18 +27,18 @@ public class DeletePatch extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("patch")==null)
+		if(request.getParameter("patch")==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			Patch patch=new Gson().fromJson((String) request.getAttribute("patch"), Patch.class);
+			Patch patch=new Gson().fromJson(request.getParameter("patch"), Patch.class);
 
 			PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(patchDAO.doDelete(patch) ? 1 : 0);
+				response.setContentType("application/json");
+				response.getWriter().write(new Gson().toJson(patchDAO.doDelete(patch)));
 			}
 			catch(SQLException sqlException)
 			{

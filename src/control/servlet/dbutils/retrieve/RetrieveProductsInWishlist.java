@@ -33,7 +33,7 @@ public class RetrieveProductsInWishlist extends HttpServlet
 			request.setAttribute("wishlistProducts", wishlistProducts);
 			request.setAttribute("mainPage", "WishlistProducts");
 
-			getServletContext().getRequestDispatcher("/Index").forward(request, response);
+			getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 		}
 		catch (SQLException sqlException)
 		{

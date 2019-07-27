@@ -18,20 +18,20 @@ public class RetrieveAllOrders extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-    OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), -1);
-
-	  try
-    {
-      request.setAttribute("orders", orderDAO.doRetrieveForAllUsers(Integer.parseInt(request.getParameter("pageInit")),
-        Integer.parseInt(request.getParameter("pageEnd"))));
-    }
-    catch(SQLException sqlException)
-    {
-      sqlException.printStackTrace();
-    }
-
-    request.setAttribute("mainPage", "OrdersHistory");
-    request.getRequestDispatcher("/Index").forward(request, response);
+	    OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), -1);
+	
+		try
+	    {
+	      request.setAttribute("orders", orderDAO.doRetrieveForAllUsers(Integer.parseInt(request.getParameter("pageInit")),
+	        Integer.parseInt(request.getParameter("pageEnd"))));
+	    }
+	    catch(SQLException sqlException)
+	    {
+	      sqlException.printStackTrace();
+	    }
+	
+	    request.setAttribute("mainPage", "OrdersHistory");
+	    request.getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException

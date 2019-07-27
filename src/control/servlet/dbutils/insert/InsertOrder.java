@@ -28,27 +28,26 @@ public class InsertOrder extends HttpServlet
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		if(request.getAttribute("order")==null || ((User) request.getSession().getAttribute("userInfo")).getId()==null)
+		if(request.getParameter("order")==null || ((User) request.getSession(false).getAttribute("userInfo")).getId()==null)
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			int userID=Integer.parseInt(((User) request.getSession().getAttribute("userInfo")).getId());
+			int userID=Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId());
 
-			Order order=new Gson().fromJson((String) request.getAttribute("order"), Order.class);
+			Order order=new Gson().fromJson(request.getParameter("order"), Order.class);
 
 			OrderDAO orderDAO =new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);
 
 			try
 			{
-				response.setContentType("text/plain");
-				response.getWriter().write(orderDAO.doSave(order)!=null ? 1 : 0);
+				orderDAO.doSave(order);
 			}
 			catch(SQLException sqlException)
 			{
 				sqlException.printStackTrace();
 			}
 
-			getServletContext().getRequestDispatcher("/auth/RetrieveOrders");
+			getServletContext().getRequestDispatcher(response.encodeURL("auth/RetrieveOrders"));
 		}
 	}
 }
