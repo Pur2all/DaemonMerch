@@ -22,11 +22,12 @@ public class RetrievePatches extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
+		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+16;
+		
 		try
 		{
 			String orderString=request.getParameter("orderString");
-			LinkedList<Patch> patches=(LinkedList<Patch>) patchDAO.doRetrieveAll(orderString, Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			LinkedList<Patch> patches=(LinkedList<Patch>) patchDAO.doRetrieveAll(orderString, init, end);
 
 			request.setAttribute("products", patches);
 			request.setAttribute("mainPage", "ProductsList");

@@ -167,6 +167,16 @@
     <url-pattern>/ArtistPage</url-pattern>
   </servlet-mapping>
 
+  <!-- orders history page jsp -->
+  <servlet>
+    <servlet-name>OrdersHistory</servlet-name>
+    <jsp-file>/HTML/OrdersHistory.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrdersHistory</servlet-name>
+    <url-pattern>/OrdersHistory</url-pattern>
+  </servlet-mapping>
+
   <!-- Security -->
   <filter>
   	<filter-name>httpHeaderSecurity</filter-name>

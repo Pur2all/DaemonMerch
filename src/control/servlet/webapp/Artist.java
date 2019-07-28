@@ -22,11 +22,12 @@ public class Artist extends HttpServlet
 	{		
 		ArtistDAO artistDAO=new ArtistDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 		ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+16;
+		
 		try
 		{
 			request.setAttribute("artist", artistDAO.doRetrieveByKey(Integer.parseInt(request.getParameter("id"))));
-			request.setAttribute("products", productDAO.doRetrieveByArtistID(Integer.parseInt(request.getParameter("id")), 
-					Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd"))));
+			request.setAttribute("products", productDAO.doRetrieveByArtistID(Integer.parseInt(request.getParameter("id")), init, end));
 		}
 		catch(SQLException sqlException)
 		{

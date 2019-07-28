@@ -1,4 +1,4 @@
-package control.servlet.webapp;
+package control.servlet.webapp.async;
 
 import java.io.IOException;
 import java.sql.SQLException;

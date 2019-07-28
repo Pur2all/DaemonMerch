@@ -15,6 +15,7 @@ function addToCart(id)
   });
 }
 
+
 //Function to retrieve artists async
 function retrieveArtists()
 {
@@ -34,6 +35,7 @@ function retrieveArtists()
   });
 }
 
+
 //Function for update user async
 function updateUserAsync(user)
 {
@@ -44,16 +46,18 @@ function updateUserAsync(user)
     "success":function(data)
     {
       if(data.user!='false')
-        updateInfo(data);
+        updateUserInfo(data);
       else
-        alert("Cannot do that");
+        alert("Error");
     },
     "error":function(error)
     {
       console.log("Error", error);
+      alert("Error")
     }
   });
 }
+
 
 //Function for check if a username is already in use
 function checkUsername(username)
@@ -71,6 +75,7 @@ function checkUsername(username)
       }
   });
 }
+
 
 //Function to add a product to wishlist
 function addToWishlist(id)
@@ -104,7 +109,7 @@ function retrieveCreditCardsAsync(id)
 }
 
 
-//Function to retrieve credit cards async
+//Function to retrieve billing addresses async
 function retrieveBillingAddressesAsync(id)
 {
   $.ajax({
@@ -149,6 +154,121 @@ function deleteProductFromCart(index)
       var informationDiv="<div> " + data.name + " removed from cart </div>"
       $(".index-header").append(informationDiv);
       $(".index-header").remove(informationDiv);
+    }
+  });
+}
+
+
+//Function to update a product async
+function updateProductAsync(product)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"admin/UpdateProduct",
+    "data":{product:product},
+    "success":function(data)
+    {
+      if(data)
+        updateProductInfo(product);
+        else
+          alert("Error");
+      },
+    "error":function(error)
+    {
+      console.log("Error", error);
+      alert("Error")
+    }
+  });
+}
+
+
+//Function to update a patch async
+function updatePatchAsync(patch)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"admin/UpdatePatch",
+    "data":{patch:patch},
+    "success":function(data)
+    {
+      if(data)
+        updatePatchInfo(patch);
+      else
+        alert("Error");
+    },
+    "error":function(error)
+    {
+      console.log("Error", error);
+      alert("Error");
+    }
+  });
+}
+
+
+//Function to update a top async
+function updateTopAsync(top)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"admin/UpdateTop",
+    "data":{top:top},
+    "success":function(data)
+    {
+      if(data)
+        updateTopInfo(patch);
+      else
+        alert("Error");
+    },
+    "error":function(error)
+    {
+      console.log("Error", error);
+      alert("Error");
+    }
+  });
+}
+
+
+//Function to delete an artist async
+function deleteArtist(id)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"admin/DeleteArtist",
+    "data":{id:id},
+    "success":function(data)
+    {
+      if(data)
+        window.location.replace("/DaemonMerch/Artists");
+      else
+        alert("Error");
+    },
+    "error":function(error)
+    {
+      console.log("Error", error);
+      alert("Error");
+    }
+  });
+}
+
+
+//Function to delete a product async
+function deleteArtist(id)
+{
+  $.ajax({
+    "type":"GET",
+    "url":"admin/DeleteProduct",
+    "data":{id:id},
+    "success":function(data)
+    {
+      if(data)
+        window.location.replace("/DaemonMerch/Products&page=1");
+      else
+        alert("Error");
+    },
+    "error":function(error)
+    {
+      console.log("Error", error);
+      alert("Error");
     }
   });
 }

@@ -20,6 +20,7 @@ public class SearchProduct extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		String productName=request.getParameter("q");
+		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+16;
 
 		if(productName!=null && !productName.equals(""))
 		{
@@ -27,8 +28,7 @@ public class SearchProduct extends HttpServlet
 
 			try
 			{
-				request.setAttribute("products", productDAO.doRetrieveByName(productName,
-					Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd"))));
+				request.setAttribute("products", productDAO.doRetrieveByName(productName, init, end));
 			}
 			catch (SQLException sqlException)
 			{

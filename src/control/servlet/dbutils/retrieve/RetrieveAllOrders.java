@@ -19,11 +19,11 @@ public class RetrieveAllOrders extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 	    OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), -1);
-	
+	    int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+16;
+	    
 		try
 	    {
-	      request.setAttribute("orders", orderDAO.doRetrieveForAllUsers(Integer.parseInt(request.getParameter("pageInit")),
-	        Integer.parseInt(request.getParameter("pageEnd"))));
+	      request.setAttribute("orders", orderDAO.doRetrieveForAllUsers(init, end));
 	    }
 	    catch(SQLException sqlException)
 	    {

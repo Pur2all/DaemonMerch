@@ -22,11 +22,12 @@ public class RetrieveTops extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
+		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+16;
+		
 		try
 		{
 			String orderString=request.getParameter("orderString");
-			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(orderString, Integer.parseInt(request.getParameter("pageInit")), Integer.parseInt(request.getParameter("pageEnd")));
+			LinkedList<Top> tops=(LinkedList<Top>) topDAO.doRetrieveAll(orderString, init, end);
 
 			request.setAttribute("products", tops);
 			request.setAttribute("mainPage", "ProductsList");
