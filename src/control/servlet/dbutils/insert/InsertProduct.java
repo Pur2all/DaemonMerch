@@ -48,7 +48,7 @@ public class InsertProduct extends HttpServlet
 		try
 		{
 			if(productDAO.doSave(product)!=null)
-				response.encodeRedirectURL(request.getContextPath() + "/AdminArea");
+				response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/AdminArea"));
 		}
 		catch(SQLException sqlException)
 		{

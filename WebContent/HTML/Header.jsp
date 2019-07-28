@@ -25,8 +25,7 @@
 			<div class="wrap-item">
 				<form action="/DaemonMerch/SearchProduct" method="get">
 					<div class="searchbar-item">
-						<input type="hidden" name="pageInit" value='0'>
-						<input type="hidden" name="pageEnd" value='15'>
+						<input type="hidden" name="page" value='1'>
 						<input type="text" class="searchTerm" placeholder="Search..." name="q">
 						<button type="submit" class="searchButton">
 		     	 		<i class="fa fa-search"></i>
@@ -58,9 +57,9 @@
 					<ul>
 						<div>
 							<li><a class="animated" href="/DaemonMerch/Artists">Band List</a></li>
-							<li><a class="animated" href="/DaemonMerch/Tops?pageInit=0&pageEnd=15">Top</a></li>
-							<li><a class="animated" href="/DaemonMerch/Patches?pageInit=0&pageEnd=15">Patch</a></li>
-							<li><a class="animated" href="/DaemonMerch/Products?pageInit=0&pageEnd=15">Other</a></li>
+							<li><a class="animated" href="/DaemonMerch/Tops?page=1">Top</a></li>
+							<li><a class="animated" href="/DaemonMerch/Patches?page=1">Patch</a></li>
+							<li><a class="animated" href="/DaemonMerch/Products?page=1">Other</a></li>
 						</div>
 						<%
 							if(request.getSession(false) == null || request.getSession(false).getAttribute("userInfo") == null) {
