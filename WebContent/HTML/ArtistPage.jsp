@@ -16,17 +16,20 @@
 
 	<body onload="slideshowFunct()">
 
-		<div class="container">
+		<div class="artistContainer">
 			<%Artist artist = (Artist)request.getAttribute("artist");%>
 			<%Image[] images = artist.getImages();%>
 			<%int l = images.length - 1;%>
 
-			<div class="name"> <c:out value="${artist.name}">No name</c:out> </div>
+			<div class="artistName"> <c:out value="${artist.name}">No name</c:out> </div>
 
 			<div class="slideshow-container">
 				<%for(int i = 0; i < images.length; i++) { %>
 					<img src="Images/<%=images[i].getImageName()%>?id=<%=artist.getId()%>" />
 				<% } %>
+			</div>
+			<div class="artistProducts">
+				<%@ include file="./ProductsList.jsp" %>
 			</div>
 		</div>
 

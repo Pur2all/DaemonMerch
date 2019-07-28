@@ -1,11 +1,3 @@
-removeFromCart = function(i, total, price) {
-	$('#product' + i).slideToggle(250, function(){
-		$('#product' + i).remove();
-	});
-	
-	$('#totalPrice').text("Total: " + (total - price).toFixed() + "0 EUR");
-}
-
 loginForm = function(){
 	validateRegistrationForm();
 	$('.registrationForm').hide();
@@ -66,7 +58,7 @@ removeFromCart = function(i, total, price) {
 		$('#product' + i).remove();
 	});
 	
-	$('#totalPrice').text("Total: " + (total - price).toFixed() + "0 EUR");
+	$('#totalPrice').text("Total: " + (total - price).toFixed(1) + "0 EUR");
 }
 
 userProfileScript = function() {
