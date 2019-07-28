@@ -27,10 +27,10 @@
 			<% }
 
 			else {%>
-	
+
 				<ul class="list-of-products">
-							
-	
+
+
 					<%for(int i = 0; i < cart.getNumberOfProduct(); i++) { %>
 						<li class="product">
 							<%Product currentProduct = (Product) cart.getProduct(i);%>
@@ -46,8 +46,8 @@
 						</li>
 
 						</ul>
-			
-						<div class="total">
+
+						<div class="total" id="total">
 							<h3>totaleeee</h3>
 							<button onclick="window.location.href='auth/Checkout'">Checkout</button>
 						</div>

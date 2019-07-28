@@ -290,3 +290,24 @@ function checkForm()
 
 	return value;
 }
+
+
+//Function to change currency
+function changeCurrency(price)
+{
+	if($("#selectCurrency").val()=="USD")
+		$(price).html($(price).val()*euroToDollar() + " USD");
+	else
+		$(price).html($(price).val()*dollarToEuro() + " EUR");
+}
+
+
+//Function to change currency in cart
+function changeCurrencyInCart()
+{
+	$(".price").each(function(index, el)
+	{
+		$(el).html(changeCurrency(el));
+	});
+	$("#total").html(changeCurrency("#total"));
+}

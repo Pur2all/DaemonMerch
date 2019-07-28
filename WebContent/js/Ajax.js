@@ -272,3 +272,49 @@ function deleteArtist(id)
     }
   });
 }
+
+
+//Function to know currency value of EUR to USD
+function euroToDollar()
+{
+  var currencyValue;
+
+  $.ajax({
+    "type":"GET",
+    "url":"https://api.exchangeratesapi.io/latest?base=EUR&symbols=USD",
+    "success":function(data)
+    {
+      currencyValue=data.rates[0];
+    },
+    "error":function(error)
+    {
+      console.log("Error", error);
+      alert("Error in currency exchange");
+    }
+  });
+
+  return currencyValue;
+}
+
+
+//Function to know currency value of USD to EUR
+function dollarToEuro()
+{
+  var currencyValue;
+
+  $.ajax({
+    "type":"GET",
+    "url":"https://api.exchangeratesapi.io/latest?base=USD&symbols=EUR",
+    "success":function(data)
+    {
+      currencyValue=data.rates[0];
+    },
+    "error":function(error)
+    {
+      console.log("Error", error);
+      alert("Error in currency exchange");
+    }
+  });
+
+  return currencyValue;
+}
