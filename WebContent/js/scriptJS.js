@@ -1,3 +1,11 @@
+removeFromCart = function(i, total, price) {
+	$('#product' + i).slideToggle(250, function(){
+		$('#product' + i).remove();
+	});
+	
+	$('#totalPrice').text("Total: " + (total - price).toFixed() + "0 EUR");
+}
+
 loginForm = function(){
 	validateRegistrationForm();
 	$('.registrationForm').hide();
@@ -31,7 +39,7 @@ addProductForm = function(){
 selectUpdate = function() {
 
 	$('.product-type').on('change', function() {
-
+		
 		if(this.value == "shirt") {
 			$('#insertForm').attr('action', 'admin/InsertTop');
 			$('#shirt-specific').slideDown();
@@ -53,6 +61,13 @@ selectUpdate = function() {
 	});
 };
 
+removeFromCart = function(i, total, price) {
+	$('#product' + i).slideToggle(250, function(){
+		$('#product' + i).remove();
+	});
+	
+	$('#totalPrice').text("Total: " + (total - price).toFixed() + "0 EUR");
+}
 
 userProfileScript = function() {
 	editProfile();
@@ -114,7 +129,7 @@ dynamicFormAdmin = function() {
 		$('div#productForm').slideUp();
 		$('div#artistForm').slideUp();
 	});
-
+	
 	$('input#cancel-button').click(function(){
 		$('div#productForm').slideUp();
 		$('div#artistForm').slideUp();
@@ -123,7 +138,15 @@ dynamicFormAdmin = function() {
 }
 
 
-//Function to update user info
+carouselSlick = function() {
+	$('.slideshow-container').slick({
+		infinite: true,
+		slidesToShow: 3,
+		slidesToScroll: 3
+      });
+}
+
+
 function updateUser()
 {
 	var user={
@@ -139,109 +162,14 @@ function updateUser()
 	return updateUserAsync(JSON.stringify(user));
 }
 
-
 //Function to update the user info in UserProfile
-function updateUserInfo(user)
+function updateInfo(user)
 {
 	$("#username").html(user.username);
 	$("#firstname").html(user.name);
 	$("#surname").html(user.surname);
-	$("birthday").html(user.birthday);
+	$("birthday").html(user.birthday)
 }
-
-
-//Function to update product
-function updateProduct()
-{
-	var product={
-		name:$("#newName").val(),
-		description:$("#newDescription").val(),
-		remaining:$("#newRemaining").val(),
-		price:$("#newPrice").val(),
-		tag:$("#newTag").val(),
-		id:$("#id").val()
-	};
-
-	return updateProductAsync(JSON.stringify(product));
-}
-
-
-//Function to update the product info in ProductPage
-function updateProductInfo(product)
-{
-	$("#name").html(product.name);
-	$("#description").html(product.description);
-	$("#remaining").html(product.remaining);
-	$("#price").html(product.price);
-	$("#tag").html(product.tag);
-}
-
-
-//Function to update patch
-function updatePatch()
-{
-	var patch={
-		name:$("#newName").val(),
-		description:$("#newDescription").val(),
-		remaining:$("#newRemaining").val(),
-		price:$("#newPrice").val(),
-		tag:$("#newTag").val(),
-		id:$("#id").val(),
-		measures:$("#newMeasures").val(),
-		type:$("#newPatchType").val(),
-		material:$("#newMaterial").val()
-	};
-
-	return updatePatchAsync(JSON.stringify(patch));
-}
-
-
-//Function to update the patch info in ProductPage
-function updatePatchInfo(patch)
-{
-	$("#name").html(patch.name);
-	$("#description").html(patch.description);
-	$("#remaining").html(patch.remaining);
-	$("#price").html(patch.price);
-	$("#tag").html(patch.tag);
-	$("#measures").html(patch.measures);
-	$("#patchType").html(patch.type);
-	$("#material").html(patch.material);
-}
-
-
-//Function to update top
-function updateTop()
-{
-	var top={
-		name:$("#newName").val(),
-		description:$("#newDescription").val(),
-		remaining:$("#newRemaining").val(),
-		price:$("#newPrice").val(),
-		tag:$("#newTag").val(),
-		id:$("#id").val(),
-		size:$("#newSize").val(),
-		type:$("#newPrintType").val(),
-		category:$("#newCategory").val()
-	};
-
-	return updateTopAsync(JSON.stringify(top));
-}
-
-
-//Function to update the top info in ProductPage
-function updateTopInfo(top)
-{
-	$("#name").html(top.name);
-	$("#description").html(top.description);
-	$("#remaining").html(top.remaining);
-	$("#price").html(top.price);
-	$("#tag").html(top.tag);
-	$("#size").html(top.size);
-	$("#printType").html(top.type);
-	$("#category").html(top.category);
-}
-
 
 //Function to validate the registration form
 function validateRegistrationForm()
@@ -290,7 +218,6 @@ function checkForm()
 
 	return value;
 }
-
 
 //Function to change currency
 function changeCurrency(price)

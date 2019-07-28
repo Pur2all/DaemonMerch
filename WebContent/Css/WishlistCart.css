@@ -2,6 +2,7 @@
 	
 	body {
 		background: white;
+		text-align: center;
 	}
 	
 	li {
@@ -9,6 +10,7 @@
 	}
 	
 	.grid-container {
+		width: 95%;
 		display: grid;
 		grid-template-columns: 100%;
 		grid-template-rows:	90% 10%;
@@ -21,7 +23,17 @@
 	}
 	
 	.total button {
+		border: 1px black solid;
+		border-radius: .5em;
+		background: #1ECD6C;
 		height: 100%;
+		width: 35%;
+		transition: background 0.3s ease-in-out;
+	}
+		
+	.total button:hover {
+		cursor: pointer;
+		background: #16aa56;
 	}
 	
 	.total {
@@ -30,6 +42,9 @@
 		display: grid;
 		grid-template-columns: 50% 50%;
 		grid-rows: 2 / span 1;
+		width: 90%;
+		justify-self: center;
+		justify-items: center;
 	}
 
 	.product {
@@ -49,12 +64,21 @@
 		margin: 0 auto;
 		width: 70%;
 		border-bottom: 2px solid gray;
-		margin-top: 2%;
 	}
 	
 	.product .button {
+		border: hidden;
+		background: transparent;
 		grid-column: 1 / span 1;
-		width: 20%;
+		align-self: center;
+		justify-self: center;
+		width: 30%;
+		height: 15%;
+		transition: background 0.3s ease-in-out;
+	}
+
+	.product .button:hover {
+		background: gray;
 	}
 
 	.product .image {
