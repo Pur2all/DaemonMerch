@@ -17,8 +17,6 @@
 
 	<body>
 
-		<h2>Banner incredibili impressionanti!</h2>
-
 		<div class="grid-container">
 
 			<a href="#">

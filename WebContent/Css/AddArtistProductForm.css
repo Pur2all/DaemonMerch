@@ -1,6 +1,6 @@
 @charset "ISO-8859-1";
 
-@media screen and (orientation: landscape) {
+@media screen {
 
 	body {
 		background: #2E3740;
@@ -158,4 +158,10 @@
 		width: 97.5%;
 	}
 	
+}
+
+@media screen and (max-width: 1000px) {
+	form {
+		width: 190%;
+	}
 }

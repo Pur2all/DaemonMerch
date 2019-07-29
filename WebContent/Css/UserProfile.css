@@ -1,4 +1,4 @@
-@media screen and (orientation: landscape) {
+@media screen {
 	
 	body {
 		background: #2E3740;
@@ -7,6 +7,7 @@
 	.sc-user-profile {
 		margin: auto;
 		margin-top: 3%;
+		margin-bottom: 3%;
 		width: 50%;
 		background: #fff;
 		border-radius: .3em;
@@ -89,4 +90,38 @@
 		display: none;
 	}
 	
+}
+
+@media screen and (max-width: 1000px) {
+	.sc-user-profile {
+		width: 60%;
+	}
+}
+
+@media screen and (max-width: 750px) {
+	.sc-user-profile {
+		width: 70%;
+	}
+}
+
+@media screen and (max-width: 600px) {
+	.sc-user-profile {
+		width: 85%;
+		margin-top: 15%;
+	}
+	
+	.edit .left {
+		width: 50%;
+	}
+}
+
+@media screen and (max-width: 400px) {
+	.sc-user-profile {
+		width: 100%;
+		margin-top: 7.5%;
+	}
+	
+	.edit .left {
+		width: 50%;
+	}
 }

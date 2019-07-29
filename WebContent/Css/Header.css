@@ -1,6 +1,6 @@
 @import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
-@media screen and (orientation: landscape)
+@media screen
 {	
 	.header-grid {
 		width: 100%;
@@ -20,7 +20,8 @@
 	}
 	
 	.logo-image {
-		width: 70%;
+		height: 70%;
+		padding: 2%;
 	}
 	
 	.wrap-item {
@@ -157,4 +158,18 @@
 	}
 	/*NAVBAR END*/
 		
+}
+
+
+@media screen and (max-width: 1110px)
+{	
+	.services-icons {
+		display: grid;
+		grid-template-rows: 50% 50%;
+		grid-template-columns: 50% 50%;
+	}
+	
+	div.navbar {
+		margin-bottom: 15%;
+	}
 }
