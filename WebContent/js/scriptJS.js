@@ -17,12 +17,11 @@ loginForm = function(){
 	});
 };
 
-addedToCart = function() {
-	$('.addToCartButton').on('click', function() {
-		$('.addedToCart').slideDown(700, function() {
-			setTimeout(function() { $('.addedToCart').slideUp(700) }, 1750);
-		})
-	});
+addedToCart = function(name) {
+	$('.checkMessage').html(name + " added to cart!");
+	$('.addedToCart').slideDown(700, function() {
+		setTimeout(function() { $('.addedToCart').slideUp(700) }, 1750);
+	})
 };
 
 addProductDynamic = function(){

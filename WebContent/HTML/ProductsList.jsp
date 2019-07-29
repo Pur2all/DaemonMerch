@@ -16,7 +16,7 @@
 		<link rel="stylesheet" type="text/css" href="./Css/ProductsList.css">
 	</head>
 
-	<body onload="addedToCart()">
+	<body>
 
 
 		<div class="grid-container">

@@ -31,6 +31,11 @@
 		     	 		<i class="fa fa-search"></i>
 		     	 		</button>
 		     	 	</div>
+		     	 	<select name="productType" class="product-type">
+						<option value="other">Other</option>
+						<option value="patch">Patch</option>
+						<option value="shirt">Shirt</option>
+					</select>
 				</form>
 			</div>
 
@@ -60,6 +65,14 @@
 							<li><a class="animated" href="/DaemonMerch/Tops?page=1">Top</a></li>
 							<li><a class="animated" href="/DaemonMerch/Patches?page=1">Patch</a></li>
 							<li><a class="animated" href="/DaemonMerch/Products?page=1">Other</a></li>
+							<li><a class="animated">Genre</a>
+								<ul class="dropdown">
+									<li><a href="/DaemonMerch/Products?tag=thrash">Thrash Metal</a></li>
+									<li><a href="/DaemonMerch/Products?tag=death">Death Metal</a></li>
+									<li><a href="/DaemonMerch/Products?tag=black">Black Metal</a></li>
+									<li><a href="/DaemonMerch/Products?tag=hc">Hardcore Punk</a></li>
+								</ul>
+							</li>
 						</div>
 						<%
 							if(request.getSession(false) == null || request.getSession(false).getAttribute("userInfo") == null) {
