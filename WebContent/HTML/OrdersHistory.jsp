@@ -19,7 +19,7 @@
 
 	<body>
 		<% LinkedList<Order> orders = (LinkedList<Order>) request.getAttribute("orders"); %>
-		<c:forEach items="orders" var="currentOrder" begin="1" end="<%orders.size();%>">
+		<c:forEach items="orders" var="currentOrder" begin="1" end="<%=orders.size()%>">
 			<p>Order ID: <c:out value="${currentOrder.id}"></c:out> </p>
 			<p>Oder made by user <c:out value="${currentOrder.userID}"></c:out> on date <c:out value="${currentOrder.date}"></c:out></p>
 			<p>State: <c:out value="${currentOrder.state}"></c:out> </p>
