@@ -291,11 +291,10 @@ public class PatchDAO implements DAO<Patch>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
-		Patch patchFromTable=(Patch) productDAO.doRetrieveByKey(key);
-
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
-
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE ID = ?";
+		
+		Patch patchFromTable=new Patch();
+		
 		try
 		{
 			int code=(int) key;
@@ -305,11 +304,30 @@ public class PatchDAO implements DAO<Patch>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while (rs.next())
+			while(rs.next())
 			{
+				patchFromTable.setId(rs.getString("ID"));
+				patchFromTable.setName(rs.getString("Nome"));
+				patchFromTable.setPrice(rs.getFloat("Prezzo"));
+				patchFromTable.setDescription(rs.getString("Descrizione"));
+				patchFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
+				patchFromTable.setTag(rs.getString("Tag"));
+				patchFromTable.setArtistId(rs.getString("ID_Artista"));
 				patchFromTable.setMeasures(rs.getString("Misure"));
 				patchFromTable.setPatchType(PatchType.valueOf(rs.getString("Tipo")));
 				patchFromTable.setMaterial(rs.getString("Tessuto"));
+
+				rs.last();
+				Image[] productFromTableImages=new Image[rs.getRow()];
+				int i=0;
+				rs.beforeFirst();
+				while(rs.next())
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+				}
+				patchFromTable.setImages(productFromTableImages);
 			}
 		}
 		finally
@@ -324,7 +342,7 @@ public class PatchDAO implements DAO<Patch>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-
+		
 		return patchFromTable;
 	}
 

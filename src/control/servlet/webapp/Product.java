@@ -37,14 +37,14 @@ public class Product extends HttpServlet
 			case "top":
 				dao=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 			break;
-			case "other":
+			case "product":
 				dao=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 			break;
 		}
 		
 		try
 		{
-			dao.doRetrieveByKey(id);
+			request.setAttribute("product", dao.doRetrieveByKey(id));
 		} 
 		catch(SQLException sqlException)
 		{

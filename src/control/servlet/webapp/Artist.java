@@ -3,7 +3,6 @@ package control.servlet.webapp;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Collection;
-import java.util.LinkedList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

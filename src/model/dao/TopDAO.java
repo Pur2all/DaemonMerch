@@ -103,6 +103,7 @@ public class TopDAO implements DAO<Top>
 				}
 			}
 
+			System.out.println("products: " + products);
 			return products;
 		}
 		else
@@ -292,11 +293,10 @@ public class TopDAO implements DAO<Top>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
-		ProductDAO productDAO=new ProductDAO(dbConnectionPool);
-		Top topFromTable=(Top) productDAO.doRetrieveByKey(key);
-
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " WHERE ID = ?";
-
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE ID = ?";
+		
+		Top topFromTable=new Top();
+		
 		try
 		{
 			int code=(int) key;
@@ -306,11 +306,30 @@ public class TopDAO implements DAO<Top>
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while (rs.next())
+			while(rs.next())
 			{
-				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
+				topFromTable.setId(rs.getString("ID"));
+				topFromTable.setName(rs.getString("Nome"));
+				topFromTable.setPrice(rs.getFloat("Prezzo"));
+				topFromTable.setDescription(rs.getString("Descrizione"));
+				topFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
+				topFromTable.setTag(rs.getString("Tag"));
+				topFromTable.setArtistId(rs.getString("ID_Artista"));
 				topFromTable.setCategory(Category.valueOf(rs.getString("Categoria")));
 				topFromTable.setPrintType(PrintType.valueOf(rs.getString("TipoStampa")));
+				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
+
+				rs.last();
+				Image[] productFromTableImages=new Image[rs.getRow()];
+				int i=0;
+				rs.beforeFirst();
+				while(rs.next())
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+				}
+				topFromTable.setImages(productFromTableImages);
 			}
 		}
 		finally
@@ -325,7 +344,7 @@ public class TopDAO implements DAO<Top>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-
+		
 		return topFromTable;
 	}
 
