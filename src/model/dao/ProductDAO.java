@@ -23,6 +23,81 @@ public class ProductDAO implements DAO<Product>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Collection<Product> doRetrieveByTag(String tag) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+	
+		Collection<Product> products=new LinkedList<Product>();
+	
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE Tag=? AND ID NOT IN (SELECT ID FROM Patch UNION SELECT ID FROM Top)";
+	
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, tag);
+	
+			ResultSet rs=preparedStatement.executeQuery();
+			int start=0, end=0;
+			while(rs.next())
+			{
+				start=rs.getRow();
+				System.out.println("Start: " + start);
+	
+				Product productFromTable=new Product();
+	
+				productFromTable.setId(rs.getString("ID"));
+				productFromTable.setName(rs.getString("Nome"));
+				productFromTable.setPrice(rs.getFloat("Prezzo"));
+				productFromTable.setDescription(rs.getString("Descrizione"));
+				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
+				productFromTable.setTag(rs.getString("Tag"));
+				productFromTable.setArtistId(rs.getString("ID_Artista"));
+	
+				while(rs.next() && rs.getString("ID").equals(productFromTable.getId()));
+				if(rs.getRow()==0)
+				{
+					rs.last();
+					end=rs.getRow()+1;
+				}
+				else
+					end=rs.getRow();
+				System.out.println("End: " + end);
+				Image[] productFromTableImages=new Image[end-start];
+				int i=0;
+				rs.absolute(start);
+				System.out.println("CurrentRow: " + rs.getRow());
+				while(start++<end)
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+					rs.next();
+				}
+				productFromTable.setImages(productFromTableImages);
+	
+				products.add(productFromTable);
+				if(rs.getRow()!=0)
+					rs.previous();
+			}
+		}
+		finally
+		{
+			try
+			{
+				if (preparedStatement!=null)
+					preparedStatement.close();
+			}
+			finally
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+	
+		return products;
+	}
+	
 	public Collection<Product> doRetrieveByArtistID(int artistId, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
@@ -30,7 +105,7 @@ public class ProductDAO implements DAO<Product>
 
 		Collection<Product> products=new LinkedList<Product>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE Prodotto.ID_Artista=?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE Prodotto.ID_Artista=? AND ID NOT IN (SELECT ID FROM Patch UNION SELECT ID FROM Top)";
 
 		if(artistId>0)
 		{
@@ -108,6 +183,7 @@ public class ProductDAO implements DAO<Product>
 			{
 				e.printStackTrace();
 			}
+		
 		return null;
 	}
 
@@ -118,7 +194,7 @@ public class ProductDAO implements DAO<Product>
 
 		Collection<Product> products=new LinkedList<Product>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE Nome LIKE ?";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE Nome LIKE ? AND ID NOT IN (SELECT ID FROM Patch UNION SELECT ID FROM Top)";
 
 		if (productName!=null && !productName.equals(""))
 		{
@@ -263,7 +339,7 @@ public class ProductDAO implements DAO<Product>
 
 		Collection<Product> products=new LinkedList<Product>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE ID NOT IN (SELECT ID FROM Patch UNION SELECT ID FROM Top)";
 
 		if (order!=null && !order.equals(""))
 			selectSQL+=" ORDER BY " + order;

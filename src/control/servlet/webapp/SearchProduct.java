@@ -10,7 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import model.dao.DBConnectionPool;
+import model.dao.PatchDAO;
 import model.dao.ProductDAO;
+import model.dao.TopDAO;
 
 @WebServlet("/SearchProduct")
 public class SearchProduct extends HttpServlet
@@ -19,16 +21,28 @@ public class SearchProduct extends HttpServlet
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
-		String productName=request.getParameter("q");
+		String productName=request.getParameter("q"), productType=request.getParameter("productType");
 		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+16;
 
-		if(productName!=null && !productName.equals(""))
-		{
-			ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-
+		if(productName!=null && !productName.equals("") && productType!=null && !productType.equals(""))
+		{		
 			try
-			{
-				request.setAttribute("products", productDAO.doRetrieveByName(productName, init, end));
+			{				
+				switch(productType)
+				{
+					case "patch":
+						PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+						request.setAttribute("prdoucts", patchDAO.doRetrieveByName(productName, init, end));
+					break;
+					case "shirt":
+						TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+						request.setAttribute("prdoucts", topDAO.doRetrieveByName(productName, init, end));
+					break;
+					case "other":
+						ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
+						request.setAttribute("prdoucts", productDAO.doRetrieveByName(productName, init, end));
+					break;
+				}
 			}
 			catch (SQLException sqlException)
 			{

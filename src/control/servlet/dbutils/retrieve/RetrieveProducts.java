@@ -29,7 +29,6 @@ public class RetrieveProducts extends HttpServlet
 			String orderString=request.getParameter("orderString");
 			LinkedList<Product> products=(LinkedList<Product>) productDAO.doRetrieveAll(orderString, init, end);
 
-			System.out.println("products: " + products);
 			request.setAttribute("products", products);
 			request.setAttribute("mainPage", "ProductsList");
 			getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);

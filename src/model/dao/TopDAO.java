@@ -26,6 +26,267 @@ public class TopDAO implements DAO<Top>
 		System.out.println("DBConnectionPool " + this.getClass().getSimpleName() + " creation..");
 	}
 
+	public Collection<Top> doRetrieveByName(String productName, int pageInit, int pageEnd) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<Top> products=new LinkedList<Top>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto";
+
+		if (productName!=null && !productName.equals(""))
+		{
+			try
+			{
+				connection=dbConnectionPool.getConnection();
+				preparedStatement=connection.prepareStatement(selectSQL);
+				preparedStatement.setString(1, "%" + productName + "%");
+
+				ResultSet rs=preparedStatement.executeQuery();
+				int start=0, end=0;
+				while(rs.next())
+				{
+					start=rs.getRow();
+					System.out.println("Start: " + start);
+
+					Top topFromTable=new Top();
+
+					topFromTable.setId(rs.getString("ID"));
+					topFromTable.setName(rs.getString("Nome"));
+					topFromTable.setPrice(rs.getFloat("Prezzo"));
+					topFromTable.setDescription(rs.getString("Descrizione"));
+					topFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
+					topFromTable.setTag(rs.getString("Tag"));
+					topFromTable.setArtistId(rs.getString("ID_Artista"));
+					topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
+					topFromTable.setCategory(Category.valueOf(rs.getString("Categoria")));
+					topFromTable.setPrintType(PrintType.valueOf(rs.getString("TipoStampa")));
+
+					while(rs.next() && rs.getString("ID").equals(topFromTable.getId()));
+					if(rs.getRow()==0)
+					{
+						rs.last();
+						end=rs.getRow()+1;
+					}
+					else
+						end=rs.getRow();
+					System.out.println("End: " + end);
+					Image[] productFromTableImages=new Image[end-start];
+					int i=0;
+					rs.absolute(start);
+					System.out.println("CurrentRow: " + rs.getRow());
+					while(start++<end)
+					{
+						productFromTableImages[i]=new Image();
+						productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+						productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+						rs.next();
+					}
+					topFromTable.setImages(productFromTableImages);
+
+					products.add(topFromTable);
+					if(rs.getRow()!=0)
+						rs.previous();
+				}
+			}
+			finally
+			{
+				try
+				{
+					if (preparedStatement!=null)
+						preparedStatement.close();
+				}
+				finally
+				{
+					dbConnectionPool.releaseConnection(connection);
+				}
+			}
+
+			return products;
+		}
+		else
+			try
+			{
+				throw new Exception();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		return null;
+	}
+	
+	public Collection<Top> doRetrieveByArtistID(int artistId, int pageInit, int pageEnd) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+
+		Collection<Top> products=new LinkedList<Top>();
+
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto";
+
+		if(artistId>0)
+		{
+			try
+			{
+				connection=dbConnectionPool.getConnection();
+				preparedStatement=connection.prepareStatement(selectSQL);
+				preparedStatement.setInt(1, artistId);
+
+				ResultSet rs=preparedStatement.executeQuery();
+				int start=0, end=0;
+				while(rs.next())
+				{
+					start=rs.getRow();
+					System.out.println("Start: " + start);
+
+					Top topFromTable=new Top();
+
+					topFromTable.setId(rs.getString("ID"));
+					topFromTable.setName(rs.getString("Nome"));
+					topFromTable.setPrice(rs.getFloat("Prezzo"));
+					topFromTable.setDescription(rs.getString("Descrizione"));
+					topFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
+					topFromTable.setTag(rs.getString("Tag"));
+					topFromTable.setArtistId(rs.getString("ID_Artista"));
+					topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
+					topFromTable.setCategory(Category.valueOf(rs.getString("Categoria")));
+					topFromTable.setPrintType(PrintType.valueOf(rs.getString("TipoStampa")));
+
+					while(rs.next() && rs.getString("ID").equals(topFromTable.getId()));
+					if(rs.getRow()==0)
+					{
+						rs.last();
+						end=rs.getRow()+1;
+					}
+					else
+						end=rs.getRow();
+					System.out.println("End: " + end);
+					Image[] productFromTableImages=new Image[end-start];
+					int i=0;
+					rs.absolute(start);
+					System.out.println("CurrentRow: " + rs.getRow());
+					while(start++<end)
+					{
+						productFromTableImages[i]=new Image();
+						productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+						productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+						rs.next();
+					}
+					topFromTable.setImages(productFromTableImages);
+
+					products.add(topFromTable);
+					if(rs.getRow()!=0)
+						rs.previous();
+				}
+			}
+			finally
+			{
+				try
+				{
+					if (preparedStatement!=null)
+						preparedStatement.close();
+				}
+				finally
+				{
+					dbConnectionPool.releaseConnection(connection);
+				}
+			}
+
+			return products;
+		}
+		else
+			try
+			{
+				throw new Exception();
+			}
+			catch (Exception e)
+			{
+				e.printStackTrace();
+			}
+		
+		return null;
+	}
+	
+	public Collection<Top> doRetrieveByTag(String tag) throws SQLException
+	{
+		Connection connection=null;
+		PreparedStatement preparedStatement=null;
+	
+		Collection<Top> products=new LinkedList<Top>();
+	
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto";
+	
+		try
+		{
+			connection=dbConnectionPool.getConnection();
+			preparedStatement=connection.prepareStatement(selectSQL);
+			preparedStatement.setString(1, tag);
+	
+			ResultSet rs=preparedStatement.executeQuery();
+			int start=0, end=0;
+			while(rs.next())
+			{
+				start=rs.getRow();
+				System.out.println("Start: " + start);
+	
+				Top topFromTable=new Top();
+	
+				topFromTable.setId(rs.getString("ID"));
+				topFromTable.setName(rs.getString("Nome"));
+				topFromTable.setPrice(rs.getFloat("Prezzo"));
+				topFromTable.setDescription(rs.getString("Descrizione"));
+				topFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
+				topFromTable.setTag(rs.getString("Tag"));
+				topFromTable.setArtistId(rs.getString("ID_Artista"));
+				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
+				topFromTable.setCategory(Category.valueOf(rs.getString("Categoria")));
+				topFromTable.setPrintType(PrintType.valueOf(rs.getString("TipoStampa")));
+	
+				while(rs.next() && rs.getString("ID").equals(topFromTable.getId()));
+				if(rs.getRow()==0)
+				{
+					rs.last();
+					end=rs.getRow()+1;
+				}
+				else
+					end=rs.getRow();
+				System.out.println("End: " + end);
+				Image[] productFromTableImages=new Image[end-start];
+				int i=0;
+				rs.absolute(start);
+				System.out.println("CurrentRow: " + rs.getRow());
+				while(start++<end)
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+					rs.next();
+				}
+				topFromTable.setImages(productFromTableImages);
+	
+				products.add(topFromTable);
+				if(rs.getRow()!=0)
+					rs.previous();
+			}
+		}
+		finally
+		{
+			try
+			{
+				if (preparedStatement!=null)
+					preparedStatement.close();
+			}
+			finally
+			{
+				dbConnectionPool.releaseConnection(connection);
+			}
+		}
+	
+		return products;
+	}
+	
 	public Top doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
