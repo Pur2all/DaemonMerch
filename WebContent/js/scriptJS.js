@@ -37,7 +37,7 @@ addProductForm = function(){
 selectUpdate = function() {
 
 	$('.product-type').on('change', function() {
-		
+
 		if(this.value == "shirt") {
 			$('#insertForm').attr('action', 'admin/InsertTop');
 			$('#shirt-specific').slideDown();
@@ -63,7 +63,7 @@ removeFromCart = function(i, total, price) {
 	$('#product' + i).slideToggle(250, function(){
 		$('#product' + i).remove();
 	});
-	
+
 	$('#totalPrice').text("Total: " + (total - price).toFixed(1) + "0 EUR");
 }
 
@@ -127,7 +127,7 @@ dynamicFormAdmin = function() {
 		$('div#productForm').slideUp();
 		$('div#artistForm').slideUp();
 	});
-	
+
 	$('input#cancel-button').click(function(){
 		$('div#productForm').slideUp();
 		$('div#artistForm').slideUp();
@@ -221,9 +221,9 @@ function checkForm()
 function changeCurrency(price)
 {
 	if($("#selectCurrency").val()=="USD")
-		$(price).html($(price).val()*euroToDollar() + " USD");
+		$(price).html($(price).val()*changeAsync("EUR", "USD") + " USD");
 	else
-		$(price).html($(price).val()*dollarToEuro() + " EUR");
+		$(price).html($(price).val()*changeAsync("USD", "EUR") + " EUR");
 }
 
 
