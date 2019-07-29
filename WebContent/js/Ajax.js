@@ -33,42 +33,6 @@ function retrieveArtists()
 }
 
 
-//Function to retrieve credit cards async
-function retrieveCreditCards()
-{
-  $.ajax({
-    "type":"GET",
-    "url":"/auth/CreditCards",
-    "success":function(data)
-    {
-      var arrayOfCreditCards=data;
-      $.each(arrayOfCreditCards, function(index, val)
-      {
-        // TODO: vedere che fare
-      });
-    }
-  });
-}
-
-
-//Function to retrieve billing addresses async
-function retrieveBillingAddresses()
-{
-  $.ajax({
-    "type":"GET",
-    "url":"/auth/BillingAddresses",
-    "success":function(data)
-    {
-      var arrayOfBillingAddresses=data;
-      $.each(arrayOfBillingAddresses, function(index, val)
-      {
-        //TODO vedere che fare
-      });
-    }
-  });
-}
-
-
 //Function for update user async
 function updateUserAsync(user)
 {
@@ -345,8 +309,6 @@ function addCreditCard()
       alert("Inserted");
     }
   });
-
-  event.preventDefault();
 }
 
 
