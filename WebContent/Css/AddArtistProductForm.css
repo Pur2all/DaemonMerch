@@ -25,11 +25,6 @@
 		justify-self: center;
 	}
 	
-	.username {
-		color: graytext;
-		font-weight: bolder;
-	}
-
 	textarea, input:not([type=button]):not([type=submit]) {
 		width: 90%;
 		padding: .5em 1em;
@@ -45,7 +40,12 @@
 	}
 	
 	#cancel-button, #cancel-button1 {
-		background: red;
+		background: #ff0000;
+		transition: background 0.3s ease-in-out;
+	}
+	
+		#cancel-button:hover, #cancel-button1:hover {
+		background: #cc0000;
 	}
 
 	input[type=button], input[type=submit] {
@@ -56,7 +56,11 @@
 		background: #16aa56;
 		border: none;
 		color: #fff;
-		border-radius: 3px;
+	}
+
+	input[type=button]:hover, input[type=submit]:hover {
+		background: #00a808;
+		transition: background 0.3s ease-in-out;
 	}
 
 	div.input-button {

@@ -16,29 +16,34 @@
 		<link rel="stylesheet" type="text/css" href="./Css/ProductsList.css">
 	</head>
 
-	<body>
+	<body onload="addedToCart()">
 
 
 		<div class="grid-container">
 
+		<div class="addedToCart" style="display: none;">
+			<h5 class="checkMessage">Product added to cart!</h5>
+			<img class="checkIcon" alt="" src="http://www.pngmart.com/files/3/Green-Tick-Transparent-PNG.png">
+		</div>
+
 			<ul class="product-list">
 
 				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
-
+					
 				<c:forEach items="${products}" var="currentProduct">
 					<li class="product">
-
-						<a>
+						<a href="Product?id=${currentProduct.id}&type=<%=pageContext.getAttribute("currentProduct").getClass().getSimpleName().toLowerCase()%>">
 							<div>
 								<img class="image" src="Images/${currentProduct.images[0].imageName}?id=${currentProduct.id}">
 							</div>
 						</a>
+						
 							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
 							<h4 class="price"> <c:out value="${currentProduct.price}0 EUR"> </c:out></h4>
 							
 							<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
 								{%>
-									<button class="button" onclick="addToCart(${currentProduct.id})">Add to Cart</button>
+									<button class="button addToCartButton" onclick="addToCart(${currentProduct.id})">Add to Cart</button>
 								<%}
 							else
 								{%>
