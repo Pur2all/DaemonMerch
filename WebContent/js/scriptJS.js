@@ -145,6 +145,19 @@ carouselSlick = function() {
 }
 
 
+//Function to change action of searchbar
+function updateSearchbarAction()
+{
+	if($(".product-type").val()=="other")
+		$("#searchbarForm").attr("action", "/DaemonMerch/SearchProduct?productType=other");
+	if($(".product-type").val()=="top")
+		$("#searchbarForm").attr("action", "/DaemonMerch/SearchProduct?productType=top");
+	if($(".product-type").val()=="patch")
+		$("#searchbarForm").attr("action", "/DaemonMerch/SearchProduct?productType=patch");
+}
+
+
+
 function updateUser()
 {
 	var user={

@@ -34,7 +34,7 @@ public class SearchProduct extends HttpServlet
 						PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 						request.setAttribute("prdoucts", patchDAO.doRetrieveByName(productName, init, end));
 					break;
-					case "shirt":
+					case "top":
 						TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
 						request.setAttribute("prdoucts", topDAO.doRetrieveByName(productName, init, end));
 					break;

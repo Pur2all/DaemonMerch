@@ -23,7 +23,7 @@
 			</logo>
 
 			<div class="wrap-item">
-				<form action="/DaemonMerch/SearchProduct" method="get">
+				<form action="/DaemonMerch/SearchProduct?productType=other" method="get" id="searchbarForm">
 					<div class="searchbar-item">
 						<input type="hidden" name="page" value='1'>
 						<input type="text" class="searchTerm" placeholder="Search..." name="q">
@@ -31,10 +31,10 @@
 		     	 		<i class="fa fa-search"></i>
 		     	 		</button>
 		     	 	</div>
-		     	 	<select name="productType" class="product-type">
+		     	 	<select name="productType" class="product-type" onchange="updateSearchbarAction()">
 						<option value="other">Other</option>
 						<option value="patch">Patch</option>
-						<option value="shirt">Shirt</option>
+						<option value="top">Shirt</option>
 					</select>
 				</form>
 			</div>
