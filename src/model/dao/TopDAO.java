@@ -33,7 +33,7 @@ public class TopDAO implements DAO<Top>
 
 		Collection<Top> products=new LinkedList<Top>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE Nome LIKE ?";
 
 		if (productName!=null && !productName.equals(""))
 		{
@@ -124,7 +124,7 @@ public class TopDAO implements DAO<Top>
 
 		Collection<Top> products=new LinkedList<Top>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE Prodotto.ID_Artista=?";
 
 		if(artistId>0)
 		{
