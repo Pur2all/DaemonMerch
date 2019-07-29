@@ -249,3 +249,14 @@ function changeCurrencyInCart()
 	});
 	$("#total").html(changeCurrency("#total"));
 }
+
+
+//Function to change page
+function changePage()
+{
+	var url=window.location.href;
+	var page=url.substring(url.indexOf("page")+5, url.indexOf("page")+6);
+	var newUrl=url.replace(/page=[^0][0-9]{1,2}/, parseInt(page)+1);
+
+	window.location.replace(newUrl);
+}

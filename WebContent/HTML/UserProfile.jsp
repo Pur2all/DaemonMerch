@@ -45,7 +45,7 @@
 				<div class="right"><input name="district" type="text" id="district" value=""></div>
         <div class="left">House Number:</div>
 				<div class="right"><input name="houseNumber" type="text" id="houseNumber" value=""></div>
-				<input type="button" value="Confirm" class="left confirmButton" onclick="addBillingAddress()">
+				<input type="button" value="Confirm" class="left confirmButton" onclick="addUpdateDeleteBillingAddress('add')">
 				<input type="button" value="Cancel" class="right cancelButton">
 			</form>
 
@@ -56,7 +56,7 @@
 				<div class="right"><input name="cardCVV" type="text" id="cardCVV" value=""></div>
 				<div class="left">Expiration Date:</div>
 				<div class="right"><input name="cardDate" type="text" id="cardDate" value=""></div>
-				<input type="button" value="Confirm" class="left confirmButton" onclick="addCreditCard()">
+				<input type="button" value="Confirm" class="left confirmButton" onclick="addUpdateDeleteCreditCard('add')">
 				<input type="button" value="Cancel" class="right cancelButton">
 			</form>
 

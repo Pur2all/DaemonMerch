@@ -291,8 +291,8 @@ function changeAsync(base, symbol)
 }
 
 
-//Function to add credit card
-function addCreditCard()
+//Function to add/update/delete credit card
+function addUpdateDeleteCreditCard(operation)
 {
   var creditCard={
     number:$("#cardNumber").val(),
@@ -300,20 +300,22 @@ function addCreditCard()
     cvv:$("#cardCVV").val()
   };
 
+  var url=operation=="add" ? "auth/InsertCreditCard" : operation=="delete" ? "auth/DeleteCreditCard" : "auth/UpdateCreditCard";
+
   $.ajax({
     "type":"GET",
-    "url":"auth/InsertCreditCard",
+    "url":url,
     "data":{creditCard:JSON.stringify(creditCard)},
     "success":function(data)
     {
-      alert("Inserted");
+      alert("Done"); // TODO: magari da rendere più carino anzichè sparare un alert in faccia
     }
   });
 }
 
 
 //Function to add billing address
-function addBillingAddress()
+function addUpdateDeleteBillingAddress(operation)
 {
   var billingAddress={
     state:$("#state").val(),
@@ -323,13 +325,15 @@ function addBillingAddress()
     houseNumber:$("#houseNumber").val()
   };
 
+  var url=operation=="add" ? "auth/InsertBillingAddress" : operation=="delete" ? "auth/DeleteBillingAddress" : "auth/UpdateBillingAddress";
+
   $.ajax({
     "type":"GET",
-    "url":"auth/InsertBillingAddress",
+    "url":url,
     "data":{billingAddress:JSON.stringify(billingAddress)},
     "success":function(data)
     {
-      alert("Inserted");
+      alert("Done"); // TODO: magari da rendere più carino anzichè sparare un alert in faccia
     }
   });
 }
