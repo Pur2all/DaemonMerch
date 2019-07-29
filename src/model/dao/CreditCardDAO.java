@@ -45,7 +45,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			{
 				CreditCard creditCardFromTable=new CreditCard();
 
-				creditCardFromTable.setCVV(rs.getString("CVV"));
+				creditCardFromTable.setCvv(rs.getString("CVV"));
 				creditCardFromTable.setExpireDate(rs.getString("DataScadenza"));
 				creditCardFromTable.setNumber(rs.getString("Numero"));
 				creditCards.add(creditCardFromTable);
@@ -88,7 +88,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 
 			while(rs.next())
 			{
-				creditCardFromTable.setCVV(rs.getString("CVV"));
+				creditCardFromTable.setCvv(rs.getString("CVV"));
 				creditCardFromTable.setExpireDate(rs.getString("DataScadenza"));
 				creditCardFromTable.setNumber(number);
 			}
@@ -132,7 +132,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			{
 				CreditCard creditCardFromTable=new CreditCard();
 
-				creditCardFromTable.setCVV(rs.getString("CVV"));
+				creditCardFromTable.setCvv(rs.getString("CVV"));
 				creditCardFromTable.setExpireDate(rs.getString("DataScadenza"));
 				creditCardFromTable.setNumber(rs.getString("Numero"));
 				users.add(creditCardFromTable);
@@ -165,7 +165,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
-			preparedStatement.setString(1, creditCard.getCVV());
+			preparedStatement.setString(1, creditCard.getCvv());
 			preparedStatement.setString(2, creditCard.getExpireDate());
 			preparedStatement.setString(3, creditCard.getNumber());
 
@@ -205,7 +205,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(updateSQL);
 
-			preparedStatement.setString(1, creditCard.getCVV());
+			preparedStatement.setString(1, creditCard.getCvv());
 			preparedStatement.setString(2, creditCard.getExpireDate());
 			preparedStatement.setString(3, creditCard.getNumber());
 			preparedStatement.setString(4, creditCard.getNumber());
@@ -276,7 +276,7 @@ public class CreditCardDAO implements DAO<CreditCard>
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(insertSQL);
 			preparedStatement.setInt(1, userID);
-			preparedStatement.setString(4, creditCard.getNumber());
+			preparedStatement.setString(2, creditCard.getNumber());
 
 			preparedStatement.executeUpdate();
 

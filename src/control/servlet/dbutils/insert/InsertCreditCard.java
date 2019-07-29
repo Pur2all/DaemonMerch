@@ -32,8 +32,8 @@ public class InsertCreditCard extends HttpServlet
 			response.sendRedirect(request.getContextPath() + "/ErrorPage");
 		else
 		{
-			CreditCard creditCard=new Gson().fromJson(request.getParameter("credtiCard"), CreditCard.class);
-			
+			CreditCard creditCard=new Gson().fromJson(request.getParameter("creditCard"), CreditCard.class);
+			System.out.println(creditCard);
 			int userID=Integer.parseInt(((User)request.getSession(false).getAttribute("userInfo")).getId());
 
 			CreditCardDAO creditCardDAO=new CreditCardDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"), userID);

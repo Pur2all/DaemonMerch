@@ -33,6 +33,42 @@ function retrieveArtists()
 }
 
 
+//Function to retrieve credit cards async
+function retrieveCreditCards()
+{
+  $.ajax({
+    "type":"GET",
+    "url":"/auth/CreditCards",
+    "success":function(data)
+    {
+      var arrayOfCreditCards=data;
+      $.each(arrayOfCreditCards, function(index, val)
+      {
+        // TODO: vedere che fare
+      });
+    }
+  });
+}
+
+
+//Function to retrieve billing addresses async
+function retrieveBillingAddresses()
+{
+  $.ajax({
+    "type":"GET",
+    "url":"/auth/BillingAddresses",
+    "success":function(data)
+    {
+      var arrayOfBillingAddresses=data;
+      $.each(arrayOfBillingAddresses, function(index, val)
+      {
+        //TODO vedere che fare
+      });
+    }
+  });
+}
+
+
 //Function for update user async
 function updateUserAsync(user)
 {
@@ -139,18 +175,15 @@ function deleteProductFromWishlist(wishlistProduct)
 
 
 //Function to delete a product from the cart
-function deleteProductFromCart(index)
+function deleteProductFromCart(index, total, price)
 {
   $.ajax({
     "type":"GET",
-    "url":"auth/RemoveFromCart",
+    "url":"/DaemonMerch/auth/RemoveFromCart",
     "data":{index:index},
     "success":function(data)
     {
-      // TODO: Animare sta roba
-      var informationDiv="<div> " + data.name + " removed from cart </div>"
-      $(".index-header").append(informationDiv);
-      $(".index-header").remove(informationDiv);
+      removeFromCart(index, total, price);
     }
   });
 }
@@ -291,4 +324,50 @@ function changeAsync(base, symbol)
   });
 
   return currencyValue;
+}
+
+
+//Function to add credit card
+function addCreditCard()
+{
+  var creditCard={
+    number:$("#cardNumber").val(),
+    expireDate:$("#cardDate").val(),
+    cvv:$("#cardCVV").val()
+  };
+
+  $.ajax({
+    "type":"GET",
+    "url":"auth/InsertCreditCard",
+    "data":{creditCard:JSON.stringify(creditCard)},
+    "success":function(data)
+    {
+      alert("Inserted");
+    }
+  });
+
+  event.preventDefault();
+}
+
+
+//Function to add billing address
+function addBillingAddress()
+{
+  var billingAddress={
+    state:$("#state").val(),
+    city:$("#city").val(),
+    street:$("#street").val(),
+    district:$("#district").val(),
+    houseNumber:$("#houseNumber").val()
+  };
+
+  $.ajax({
+    "type":"GET",
+    "url":"auth/InsertBillingAddress",
+    "data":{billingAddress:JSON.stringify(billingAddress)},
+    "success":function(data)
+    {
+      alert("Inserted");
+    }
+  });
 }

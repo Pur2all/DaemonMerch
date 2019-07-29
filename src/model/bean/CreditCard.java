@@ -2,15 +2,15 @@ package model.bean;
 
 public class CreditCard implements Cloneable
 {
-	private String CVV, expireDate, number;
+	private String cvv, expireDate, number;
 	
 	public CreditCard()
 	{
 	}
 	
-	public String getCVV()
+	public String getCvv()
 	{
-		return CVV;
+		return cvv;
 	}
 	
 	public String getExpireDate()
@@ -23,9 +23,9 @@ public class CreditCard implements Cloneable
 		return number;
 	}
 	
-	public void setCVV(String aCVV)
+	public void setCvv(String aCVV)
 	{
-		CVV=aCVV;
+		cvv=aCVV;
 	}
 	
 	public void setExpireDate(String anExpireDate)
@@ -40,7 +40,7 @@ public class CreditCard implements Cloneable
 	
 	public String toString()
 	{
-		return getClass().getName() + "[CVV= " + CVV + ", expireDate= " + expireDate + ", number= " + number + "]";
+		return getClass().getName() + "[CVV= " + cvv + ", expireDate= " + expireDate + ", number= " + number + "]";
 	}
 	
 	public boolean equals(Object obj)
@@ -52,7 +52,7 @@ public class CreditCard implements Cloneable
 		
 		CreditCard otherCreditCard=(CreditCard) obj;
 		
-		return CVV.equals(otherCreditCard.CVV) && expireDate.equals(otherCreditCard.expireDate) && number.equals(otherCreditCard.number);
+		return cvv.equals(otherCreditCard.cvv) && expireDate.equals(otherCreditCard.expireDate) && number.equals(otherCreditCard.number);
 	}
 	
 	public CreditCard clone()

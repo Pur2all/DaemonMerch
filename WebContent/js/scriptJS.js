@@ -174,7 +174,7 @@ function updateUser()
 }
 
 //Function to update the user info in UserProfile
-function updateInfo(user)
+function updateUserInfo(user)
 {
 	$("#username").html(user.username);
 	$("#firstname").html(user.name);

@@ -34,27 +34,29 @@
 			<input type="button" class="left" value="Add Credit Card" id="creditCards">
 			<input type="button" class="right" value="Add Billing Address" id="billingAddress">
 
-			<form action="" class="billingAddressForm" method="post">
+			<form class="billingAddressForm" method="post">
 				<div class="left">State:</div>
 				<div class="right"><input name="state" type="text" id="state" value=""></div>
-				<div class="left">Country:</div>
-				<div class="right"><input name="country" type="text" id="country" value=""></div>
+				<div class="left">City:</div>
+				<div class="right"><input name="city" type="text" id="city" value=""></div>
 				<div class="left">Street Address:</div>
 				<div class="right"><input name="street" type="text" id="street" value=""></div>
-				<div class="left">ZIP Code:</div>
-				<div class="right"><input name="zipCode" type="text" id="ZIPcode" value=""></div>
-				<input type="submit" value="Confirm" class="left confirmButton">
+				<div class="left">District:</div>
+				<div class="right"><input name="district" type="text" id="district" value=""></div>
+        <div class="left">House Number:</div>
+				<div class="right"><input name="houseNumber" type="text" id="houseNumber" value=""></div>
+				<input type="button" value="Confirm" class="left confirmButton" onclick="addBillingAddress()">
 				<input type="button" value="Cancel" class="right cancelButton">
 			</form>
 
-			<form action="" class="creditCardForm" method="post">
+			<form class="creditCardForm" method="post">
 				<div class="left">Card Number:</div>
 				<div class="right"><input name="cardNumber" type="text" id="cardNumber" value=""></div>
-				<div class="left">Card PIN:</div>
-				<div class="right"><input name="cardPIN" type="text" id="cardPIN" value=""></div>
+				<div class="left">Card CVV:</div>
+				<div class="right"><input name="cardCVV" type="text" id="cardCVV" value=""></div>
 				<div class="left">Expiration Date:</div>
 				<div class="right"><input name="cardDate" type="text" id="cardDate" value=""></div>
-				<input type="submit" value="Confirm" class="left confirmButton">
+				<input type="button" value="Confirm" class="left confirmButton" onclick="addCreditCard()">
 				<input type="button" value="Cancel" class="right cancelButton">
 			</form>
 
