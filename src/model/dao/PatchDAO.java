@@ -215,7 +215,7 @@ public class PatchDAO implements DAO<Patch>
 	
 		Collection<Patch> products=new LinkedList<Patch>();
 	
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE Tag= ?";
 	
 		try
 		{

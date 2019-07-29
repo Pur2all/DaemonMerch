@@ -67,10 +67,10 @@
 							<li><a class="animated" href="/DaemonMerch/Products?page=1">Other</a></li>
 							<li><a class="animated">Genre</a>
 								<ul class="dropdown">
-									<li><a href="/DaemonMerch/Products?tag=thrash">Thrash Metal</a></li>
-									<li><a href="/DaemonMerch/Products?tag=death">Death Metal</a></li>
-									<li><a href="/DaemonMerch/Products?tag=black">Black Metal</a></li>
-									<li><a href="/DaemonMerch/Products?tag=hc">Hardcore Punk</a></li>
+									<li><a href="/DaemonMerch/ProductsByTag?tag=thrash">Thrash Metal</a></li>
+									<li><a href="/DaemonMerch/ProductsByTag?tag=death">Death Metal</a></li>
+									<li><a href="/DaemonMerch/ProductsByTag?tag=black">Black Metal</a></li>
+									<li><a href="/DaemonMerch/ProductsByTag?tag=hc">Hardcore Punk</a></li>
 								</ul>
 							</li>
 						</div>

@@ -16,7 +16,7 @@ import model.dao.PatchDAO;
 import model.dao.ProductDAO;
 import model.dao.TopDAO;
 
-@WebServlet("/RetrieveByTag")
+@WebServlet("/ProductsByTag")
 public class RetrieveByTag extends HttpServlet 
 {
 	private static final long serialVersionUID = 6272576421525703570L;
