@@ -47,8 +47,10 @@
 	}
 	
 	.username {
-		margin-top: 19%;
-		margin-right: 15%;
+		margin: auto;
+		color: #5e5e5e;
+		font-weight: bolder;
+		font-size: x-large;
 	}
 	
 	

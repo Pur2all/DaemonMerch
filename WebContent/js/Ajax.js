@@ -7,10 +7,7 @@ function addToCart(id)
     "data":{productId:id},
     "success":function(data)
     {
-      // TODO: Animare sta roba
-      var informationDiv="<div> " + data.name + " added to cart </div>"
-      $(".index-header").append(informationDiv);
-      $(".index-header").remove(informationDiv);
+      	addedToCart(data.name);
     }
   });
 }

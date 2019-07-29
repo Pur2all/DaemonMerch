@@ -69,5 +69,27 @@
 		grid-column: 3 / span 1;
 	}
 
+	.addedToCart {
+		width: 25%;
+		grid-template-rows: 35% 65%;
+		position: fixed;
+		text-align: center; 
+		background: white;
+		border-bottom-left-radius: 1em;
+		border-bottom-right-radius: 1em;
+		top: 0px;
+		right: 2%;
+	}
+	
+	.checkMessage {
+		padding-top: 5%;
+		font-size: large;
+	}
+	
+	.checkIcon {
+		width: 30%;
+		padding-top: 5%;
+		padding-bottom: 5%;
+	}
 	
 }

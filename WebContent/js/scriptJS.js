@@ -1,11 +1,3 @@
-removeFromCart = function(i, total, price) {
-	$('#product' + i).slideToggle(250, function(){
-		$('#product' + i).remove();
-	});
-	
-	$('#totalPrice').text("Total: " + (total - price).toFixed() + "0 EUR");
-}
-
 loginForm = function(){
 	validateRegistrationForm();
 	$('.registrationForm').hide();
@@ -25,6 +17,12 @@ loginForm = function(){
 	});
 };
 
+addedToCart = function(name) {
+	$('.checkMessage').html(name + " added to cart!");
+	$('.addedToCart').slideDown(700, function() {
+		setTimeout(function() { $('.addedToCart').slideUp(700) }, 1750);
+	})
+};
 
 addProductDynamic = function(){
 	addProductForm();
@@ -66,7 +64,7 @@ removeFromCart = function(i, total, price) {
 		$('#product' + i).remove();
 	});
 	
-	$('#totalPrice').text("Total: " + (total - price).toFixed() + "0 EUR");
+	$('#totalPrice').text("Total: " + (total - price).toFixed(1) + "0 EUR");
 }
 
 userProfileScript = function() {
