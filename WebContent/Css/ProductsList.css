@@ -1,6 +1,6 @@
 @charset "ISO-8859-1";
 
-@media screen and (orientation: landscape) {
+@media screen {
 	
 	body {
 		background: #2E3740;
@@ -14,7 +14,6 @@
 	.product-list {
 		display: grid;
 		grid-template-columns: repeat(4, 25%);
-		gird-template-rows: repeat(4, 25%);
 	}
 	
 	.product {
@@ -90,6 +89,33 @@
 		width: 30%;
 		padding-top: 5%;
 		padding-bottom: 5%;
+	}	
+}
+
+@media screen and (max-width: 1350px) {
+	.product-list {
+		display: grid;
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (max-width: 1035px) {
+	.product-list {
+		display: grid;
+		grid-template-columns: repeat(2, 1fr);
+	}
+	.addedToCart {
+		width: 35%;
 	}
 	
+}
+
+@media screen and (max-width: 685px) {
+	.product-list {
+		display: grid;
+		grid-template-columns: repeat(1, 1fr);
+	}
+	.addedToCart {
+		width: 45%;
+	}
 }
