@@ -32,15 +32,15 @@ public class SearchProduct extends HttpServlet
 				{
 					case "patch":
 						PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-						request.setAttribute("prdoucts", patchDAO.doRetrieveByName(productName, init, end));
+						request.setAttribute("products", patchDAO.doRetrieveByName(productName, init, end));
 					break;
 					case "top":
 						TopDAO topDAO=new TopDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-						request.setAttribute("prdoucts", topDAO.doRetrieveByName(productName, init, end));
+						request.setAttribute("products", topDAO.doRetrieveByName(productName, init, end));
 					break;
 					case "other":
 						ProductDAO productDAO=new ProductDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-						request.setAttribute("prdoucts", productDAO.doRetrieveByName(productName, init, end));
+						request.setAttribute("products", productDAO.doRetrieveByName(productName, init, end));
 					break;
 				}
 			}
