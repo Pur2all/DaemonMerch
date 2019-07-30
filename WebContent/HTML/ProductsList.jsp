@@ -22,6 +22,12 @@
 
 	<body onload="addPrevRow()">
 
+    <div class="selector" oninput="changeCurrencyInCart()">
+      <select id="selectCurrency">
+        <option value="EUR"> EUR </option>
+        <option value="USD"> USD </option>
+      </select>
+    </div>
 
 		<div class="grid-container">
 
@@ -30,20 +36,11 @@
 			<img class="checkIcon" alt="" src="http://www.pngmart.com/files/3/Green-Tick-Transparent-PNG.png">
 		</div>
 
-<<<<<<< HEAD
-    <div class="selector" oninput="changeCurrencyInCart()">
-      <select id="selectCurrency">
-        <option value="EUR"> EUR </option>
-        <option value="USD"> USD </option>
-      </select>
-    </div>
-=======
 		<div class="addedToWishlist" style="display: none;">
 			<h5 class="checkMessage">Product added to wishlist!</h5>
 			<img class="checkIcon" alt="" src="https://www.graphiclibrary.com/wp-content/uploads/2019/03/big-bold-red-heart_8-1.png">
 		</div>
 
->>>>>>> b78247d44ddb5f8e3e2f8c647fe45fe703f9157f
 			<ul class="product-list">
 
 				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
