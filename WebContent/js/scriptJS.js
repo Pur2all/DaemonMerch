@@ -262,7 +262,8 @@ function changeCurrencyInCart()
 		console.log("Price in prima funzione:" + price);
 		changeCurrency(price, el);
 	});
-	$("#total").html(changeCurrency("#total"));
+	total=$("#totalPrice").html().match(/[0-9.]+/);
+	changeCurrency(total, $("#totalPrice"));
 }
 
 

@@ -19,7 +19,12 @@
 
 	<body>
 
-
+    <div class="selector" oninput="changeCurrencyInCart()">
+      <select id="selectCurrency">
+        <option value="EUR"> EUR </option>
+        <option value="USD"> USD </option>
+      </select>
+    </div>
 		<div class="grid-container">
 
 			<%Cart cart = (Cart)request.getSession(false).getAttribute("cart"); %>
