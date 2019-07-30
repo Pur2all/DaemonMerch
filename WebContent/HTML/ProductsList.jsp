@@ -16,10 +16,10 @@
 		<link rel="stylesheet" type="text/css" href="./Css/ProductsList.css">
 		<script src="/DaemonMerch/js/scriptJS.js"></script>
 	    <script src="/DaemonMerch/js/Ajax.js"></script>
-		
+
 	</head>
 
-	<body>
+	<body onload="addPrevRow()">
 
 
 		<div class="grid-container">
@@ -32,7 +32,7 @@
 			<ul class="product-list">
 
 				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
-					
+
 				<c:forEach items="${products}" var="currentProduct">
 					<li class="product">
 						<a href="Product?id=${currentProduct.id}&type=<%=pageContext.getAttribute("currentProduct").getClass().getSimpleName().toLowerCase()%>">
@@ -40,10 +40,10 @@
 								<img class="image" src="Images/${currentProduct.images[0].imageName}?id=${currentProduct.id}">
 							</div>
 						</a>
-						
+
 							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
 							<h4 class="price"> <c:out value="${currentProduct.price}0 EUR"> </c:out></h4>
-							
+
 							<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
 								{%>
 									<button class="button addToCartButton" onclick="addToCart(${currentProduct.id})">Add to Cart</button>
@@ -52,7 +52,7 @@
 								{%>
 									<button class="button" onclick="window.location.href='/DaemonMerch/LoginForm'">Add to Cart</button>
 								<% } %>
-								
+
 							<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
 								{%>
 									<button class="wishlist-button" onclick="addToWishlist(${currentProduct.id})">33</button>
@@ -67,6 +67,13 @@
 			</ul>
 
 		</div>
+
+	<div class="rows">
+    <%if(products.size()==17)
+    {%>
+	      <button id="next" onclick="changePage(1)"> -> </button>
+    <%}%>
+    </div>
 
 	</body>
 </html>

@@ -6,7 +6,6 @@
 <html>
 	<head>
 		<meta charset="ISO-8859-1">
-		<title>Insert title here</title>
 		<link rel="stylesheet" type="text/css" href="./Css/AddArtistProductForm.css">
 	 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="./js/scriptJS.js"></script>
@@ -35,7 +34,7 @@
 				<div class="right spec">
 					<input type="number" step="0.01" min="0" value="" placeholder="Price" name="price"/>
 				</div>
-					
+
 				<div class="left spec">
 					<select name="productType" class="select product-type" onchange="selectUpdate()">
 						<option value="other">Other</option>
@@ -113,7 +112,7 @@
 			<div class="left">
 				<input id="cancel-button1" type="button" value="Cancel">
 			</div>
-			
+
 			<div class="right">
 				<input id="submit-button1" type="submit" value="Submit">
 			</div>

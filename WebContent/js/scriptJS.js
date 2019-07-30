@@ -252,11 +252,27 @@ function changeCurrencyInCart()
 
 
 //Function to change page
-function changePage()
+function changePage(prevOrNext)
 {
 	var url=window.location.href;
 	var page=url.substring(url.indexOf("page")+5, url.indexOf("page")+6);
-	var newUrl=url.replace(/page=[^0][0-9]{1,2}/, parseInt(page)+1);
+	var newUrl=url.replace(/page=[^0][0-9]{0,1}/, "page=" + (parseInt(page)+prevOrNext));
 
+	event.preventDefault();
 	window.location.replace(newUrl);
+}
+
+
+//Function to add prev row
+function addPrevRow()
+{
+	var url=window.location.href;
+	var page=url.substring(url.indexOf("page")+5, url.indexOf("page")+6);
+
+	if(parseInt(page)>1)
+	{
+	    var prevRow="<button id='next' onclick='changePage(-1)'> <- </button>";
+
+			$(".rows").append(prevRow);
+	}
 }

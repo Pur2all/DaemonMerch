@@ -6,6 +6,7 @@
 <html>
 	<head>
 		<base href="./" target="_self">
+    <title> Login/Registration </title>
 		<link rel="stylesheet" type="text/css" href="./Css/RegistrationLoginForm.css">
 	 	<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 		<script src="./js/scriptJS.js"></script>
