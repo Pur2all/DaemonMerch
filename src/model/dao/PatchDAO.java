@@ -10,7 +10,6 @@ import java.util.LinkedList;
 import model.bean.Image;
 import model.bean.Patch;
 import model.bean.PatchType;
-import model.bean.Product;
 
 public class PatchDAO implements DAO<Patch>
 {

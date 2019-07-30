@@ -22,6 +22,6 @@ public class AuthFilter implements Filter
 		if(servletRequest.getSession(false)!=null && servletRequest.getSession(false).getAttribute("userInfo")!=null)
 			chain.doFilter(request, response);
 		else
-			servletResponse.sendRedirect(servletRequest.getContextPath() + "/ErrorPage");
+			servletResponse.sendRedirect(servletRequest.getContextPath() + "/LoginForm");
 	}
 }
