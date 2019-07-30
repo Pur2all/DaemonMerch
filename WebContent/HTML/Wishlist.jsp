@@ -20,7 +20,7 @@
 
 		<div class="grid-container">
 
-			<%LinkedList<WishlistProduct> wishlist = (LinkedList<WishlistProduct>)request.getSession(false).getAttribute("wishlist"); %>
+			<%LinkedList<WishlistProduct> wishlist = (LinkedList<WishlistProduct>)request.getAttribute("wishlistProducts"); %>
 			<%float total = 0; %>
 
 			<%if(wishlist == null) { %>

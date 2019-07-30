@@ -31,7 +31,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 
 		Collection<WishlistProduct> products=new LinkedList<WishlistProduct>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + "INNER JOIN PRODOTTO WHERE ID_User = ? ";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto WHERE ID_Utente = ? ";
 
 		try
 		{
