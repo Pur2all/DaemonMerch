@@ -6,7 +6,7 @@
 	<base href="./" target="_self">
 	<link rel="stylesheet" type="text/css" href="./Css/ErrorPage.css">
 </head>
-		
+
 	<body>
 		<div class="container">
 			<h2 class="errorMessage">
@@ -15,8 +15,8 @@
 				}%>
 				Sorry, there was an error loading your page!
 			</h2>
-			
-			<a class="link" href="./Home">Go to home</a>
+
+			<a class="link" href="/DaemonMerch/Home">Go to home</a>
 		</div>
 
 	</body>

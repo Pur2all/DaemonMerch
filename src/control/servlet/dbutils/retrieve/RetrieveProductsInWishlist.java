@@ -33,6 +33,8 @@ public class RetrieveProductsInWishlist extends HttpServlet
 			request.setAttribute("wishlistProducts", wishlistProducts);
 			request.setAttribute("mainPage", "Wishlist");
 
+			for(WishlistProduct wp: wishlistProducts)
+				System.out.println(wp);
 			getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 		}
 		catch (SQLException sqlException)

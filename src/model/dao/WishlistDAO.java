@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.util.Collection;
 import java.util.LinkedList;
 
+import model.bean.Image;
 import model.bean.WishlistProduct;
 
 public class WishlistDAO implements DAO<WishlistProduct>
@@ -31,7 +32,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 
 		Collection<WishlistProduct> products=new LinkedList<WishlistProduct>();
 
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto WHERE ID_Utente = ? ";
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto ON Prodotto.ID=VorrebbeAcquistare.ID_Prodotto INNER JOIN Foto ON Prodotto.ID=Foto.ID_Prodotto WHERE ID_Utente = ? ";
 
 		try
 		{
@@ -40,9 +41,12 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			preparedStatement.setInt(1, userId);
 
 			ResultSet rs=preparedStatement.executeQuery();
-
-			while (rs.next())
+			int start=0, end=0;
+			while(rs.next())
 			{
+				start=rs.getRow();
+				System.out.println("Start: " + start);
+
 				WishlistProduct productFromTable=new WishlistProduct();
 
 				productFromTable.setId(rs.getString("ID"));
@@ -54,22 +58,39 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
 				productFromTable.setDateOfAddition("DataAggiunzione");
 				productFromTable.setQuantity(rs.getInt("Quantita"));
-				products.add(productFromTable);
-			}
-		}
-		finally
-		{
-			try
-			{
-				if (preparedStatement!=null)
-					preparedStatement.close();
-			}
-			finally
-			{
-				dbConnectionPool.releaseConnection(connection);
-			}
-		}
 
+				while(rs.next() && rs.getString("ID").equals(productFromTable.getId()));
+				if(rs.getRow()==0)
+				{
+					rs.last();
+					end=rs.getRow()+1;
+				}
+				else
+					end=rs.getRow();
+				System.out.println("End: " + end);
+				Image[] productFromTableImages=new Image[end-start];
+				int i=0;
+				rs.absolute(start);
+				System.out.println("CurrentRow: " + rs.getRow());
+				while(start++<end)
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+					rs.next();
+				}
+				productFromTable.setImages(productFromTableImages);
+
+				products.add(productFromTable);
+				if(rs.getRow()!=0)
+					rs.previous();
+			}
+		}
+		catch(SQLException exception)
+		{
+			exception.printStackTrace();
+		}
+		
 		return products;
 	}
 
@@ -78,21 +99,20 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
+		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto ON ID=ID_Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE ID_Prodotto = ? AND ID_Utente = ?";
+		
 		WishlistProduct productFromTable=new WishlistProduct();
-
-		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN PRODOTTO WHERE ID_Prodotto = ? AND ID_Utente = ?";
-
+		
 		try
 		{
-			int id=(int) key;
+			int code=(int) key;
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
-			preparedStatement.setInt(1, id);
-			preparedStatement.setInt(2, userId);
+			preparedStatement.setInt(1, code);
 
 			ResultSet rs=preparedStatement.executeQuery();
 
-			while (rs.next())
+			while(rs.next())
 			{
 				productFromTable.setId(rs.getString("ID"));
 				productFromTable.setName(rs.getString("Nome"));
@@ -100,8 +120,21 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				productFromTable.setDescription(rs.getString("Descrizione"));
 				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
-				productFromTable.setUserID(rs.getInt("ID_Utente"));
+				productFromTable.setArtistId(rs.getString("ID_Artista"));
 				productFromTable.setDateOfAddition("DataAggiunzione");
+				productFromTable.setQuantity(rs.getInt("Quantita"));
+
+				rs.last();
+				Image[] productFromTableImages=new Image[rs.getRow()];
+				int i=0;
+				rs.beforeFirst();
+				while(rs.next())
+				{
+					productFromTableImages[i]=new Image();
+					productFromTableImages[i].setImageName(rs.getString("NomeFoto"));
+					productFromTableImages[i++].setImage(rs.getBytes("Foto"));
+				}
+				productFromTable.setImages(productFromTableImages);
 			}
 		}
 		finally
@@ -116,7 +149,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-
+		
 		return productFromTable;
 	}
 
