@@ -51,6 +51,17 @@
 						<button class="wishlist-button button" onclick="window.location.href='/DaemonMerch/LoginForm'">33</button>
 					<% } %>
 
+				<%if(product.getClass().getSimpleName().equals("Top")) {%>
+					<h5 class="info topPrint"><%out.print("Print type: " + ((Top)product).getPrintType());%></h5>
+					<h5 class="info topSize"><%out.print("Size: " + ((Top)product).getSize());%></h5>
+					<h5 class="info topCategory"><%out.print("Category: " + ((Top)product).getCategory());%></h5>
+				<% } %>
+				
+				<%if(product.getClass().getSimpleName().equals("Patch")) {%>
+					<h5 class="info patchType"><%out.print("Patch type: " + ((Patch)product).getPatchType());%></h5>
+					<h5 class="info patchMaterial"><%out.print("Material: " + ((Patch)product).getMaterial());%></h5>
+					<h5 class="info patchSize"><%out.print("Measures: " + ((Patch)product).getMeasures());%></h5>				
+				<% } %>
 				
 				<c:if test="${userRole == UserType.ADMIN}">	
 					<a href="#"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>

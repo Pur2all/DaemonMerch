@@ -2,7 +2,7 @@
 	
 	.productContainer {
 		display: grid;
-		grid-template-rows: repeat(3, 1fr);
+		grid-template-rows: repeat(4, 1fr);
 		grid-template-columns: 30% 50% 20%;
 		margin: 3%;
 		padding-top: 2%;
@@ -83,6 +83,13 @@
 		padding-bottom: 5%;
 	}	
 	
+	.info {
+		grid-row: 4 / span 1;
+		justify-self: center;
+		font-weight: normal;
+		font-size: large;
+		padding-top: 2%;
+	}
 	
 }
 

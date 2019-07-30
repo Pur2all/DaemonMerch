@@ -67,6 +67,12 @@ removeFromCart = function(i, total, price) {
 	$('#totalPrice').text("Total: " + (total - price).toFixed(1) + "0 EUR");
 }
 
+removeFromWishlist = function(i) {
+	$('#product' + i).slideToggle(250, function(){
+		$('#product' + i).remove();
+	});
+}
+
 userProfileScript = function() {
 	editProfile();
 	dynamicForm();
