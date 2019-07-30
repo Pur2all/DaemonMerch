@@ -9,6 +9,7 @@
 
 <html>
     <head>
+   		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     	<link rel="stylesheet" type="text/css" href="./Css/ProductPage.css">
     	<script src="/DaemonMerch/js/scriptJS.js"></script>
 	    <script src="/DaemonMerch/js/Ajax.js"></script>
@@ -44,11 +45,11 @@
 					
 				<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
 					{%>
-						<button class="wishlist-button button" onclick="addToWishlist(${product.id})">33</button>
+						<button class="wishlist-button button" onclick="addToWishlist(${product.id})"><i class="fa fa-heart"></i></button>
 					<%}
 				else
 					{%>
-						<button class="wishlist-button button" onclick="window.location.href='/DaemonMerch/LoginForm'">33</button>
+						<button class="wishlist-button button" onclick="window.location.href='/DaemonMerch/LoginForm'"><i class="fa fa-heart"></i></button>
 					<% } %>
 
 				<%if(product.getClass().getSimpleName().equals("Top")) {%>

@@ -22,7 +22,7 @@
 		grid-template-columns: 40% 40% 20%;
 		margin: 2.5%;
 		margin-top: 5%;
-		background: #cfcfcf;
+		background: white;
 		border-radius: .2em;
 	}
 	
@@ -59,6 +59,24 @@
 	}
 	
 	button.button {
+		justify-self: center;
+		align-self: center;
+		height: 100%;
+		width: 100%;
+		align-items: center;
+		color: black;
+		background: #1FCE6D;
+		border: none;
+	}
+	
+	button.button:hover {
+		cursor: pointer;
+		background: #16aa56;
+		transition: background 0.3s ease-in-out;
+	}
+	
+	
+	button.addToCartButton {
 		grid-row: 3 / 3;
 		grid-column: 2 / span 1;		
 	}
@@ -66,9 +84,10 @@
 	button.wishlist-button {
 		grid-row: 3 / 3;
 		grid-column: 3 / span 1;
+		font-size: large;
 	}
 
-	.addedToCart {
+	.addedToCart, .addedToWishlist {
 		width: 25%;
 		grid-template-rows: 35% 65%;
 		position: fixed;

@@ -18,9 +18,16 @@ loginForm = function(){
 };
 
 addedToCart = function(name) {
-	$('.checkMessage').html(name + " added to cart!");
+	$('.addedToCart .checkMessage').html(name + " added to cart!");
 	$('.addedToCart').slideDown(700, function() {
 		setTimeout(function() { $('.addedToCart').slideUp(700) }, 1750);
+	})
+};
+
+addedToWishlist = function(name) {
+	$('.addedToWishlist .checkMessage').html(name + " added to wishlist!");
+	$('.addedToWishlist').slideDown(700, function() {
+		setTimeout(function() { $('.addedToWishlist').slideUp(700) }, 1750);
 	})
 };
 
