@@ -25,7 +25,7 @@
 			<%Cart cart = (Cart)request.getSession(false).getAttribute("cart"); %>
 			<%float total = 0; %>
 
-			<%if(cart == null) { %>
+			<%if(cart.getNumberOfProduct() == 0) { %>
 				<div class="empty">The cart is empty, add something!</div>
 			<% }
 

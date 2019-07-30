@@ -13,6 +13,7 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>DaemonMerch</title>
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 		<link rel="stylesheet" type="text/css" href="./Css/ProductsList.css">
 		<script src="/DaemonMerch/js/scriptJS.js"></script>
 	    <script src="/DaemonMerch/js/Ajax.js"></script>
@@ -29,12 +30,20 @@
 			<img class="checkIcon" alt="" src="http://www.pngmart.com/files/3/Green-Tick-Transparent-PNG.png">
 		</div>
 
+<<<<<<< HEAD
     <div class="selector" oninput="changeCurrencyInCart()">
       <select id="selectCurrency">
         <option value="EUR"> EUR </option>
         <option value="USD"> USD </option>
       </select>
     </div>
+=======
+		<div class="addedToWishlist" style="display: none;">
+			<h5 class="checkMessage">Product added to wishlist!</h5>
+			<img class="checkIcon" alt="" src="https://www.graphiclibrary.com/wp-content/uploads/2019/03/big-bold-red-heart_8-1.png">
+		</div>
+
+>>>>>>> b78247d44ddb5f8e3e2f8c647fe45fe703f9157f
 			<ul class="product-list">
 
 				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
@@ -56,16 +65,16 @@
 								<%}
 							else
 								{%>
-									<button class="button" onclick="window.location.href='/DaemonMerch/LoginForm'">Add to Cart</button>
+									<button class="button addToCartButton" onclick="window.location.href='/DaemonMerch/LoginForm'">Add to Cart</button>
 								<% } %>
 
 							<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
 								{%>
-									<button class="wishlist-button" onclick="addToWishlist(${currentProduct.id})">33</button>
+									<button class="button wishlist-button" onclick="addToWishlist(${currentProduct.id})"><i class="fa fa-heart"></i></button>
 								<%}
 							else
 								{%>
-									<button class="wishlist-button" onclick="window.location.href='/DaemonMerch/LoginForm'">33</button>
+									<button class=" button wishlist-button" onclick="window.location.href='/DaemonMerch/LoginForm'"><i class="fa fa-heart"></i></button>
 								<% } %>
 					</li>
 				</c:forEach>
