@@ -298,6 +298,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			preparedStatement.setInt(2, product.getUserID());
 
 			result=preparedStatement.executeUpdate();
+			connection.commit();
 		}
 		finally
 		{

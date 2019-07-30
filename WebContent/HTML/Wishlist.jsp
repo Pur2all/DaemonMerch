@@ -1,3 +1,4 @@
+<%@page import="com.google.gson.Gson"%>
 <%@ page language="java" contentType="text/html; charset=ISO-8859-1"
     pageEncoding="ISO-8859-1"
     import="model.bean.*"
@@ -23,7 +24,7 @@
 			<%LinkedList<WishlistProduct> wishlist = (LinkedList<WishlistProduct>)request.getAttribute("wishlistProducts"); %>
 			<%float total = 0; %>
 
-			<%if(wishlist == null) { %>
+			<%if(wishlist == null || wishlist.size()==0) { %>
 				<div class="empty">The wishlist is empty, add something!</div>
 			<% }
 
@@ -37,7 +38,7 @@
 						<li class="product" id="product<%out.print(i);%>">
 							<%WishlistProduct currentProduct = (WishlistProduct) wishlist.get(i);%>
 							<%Image[] images = currentProduct.getImages(); %>
-							<button class="button" onclick="deleteProductFromCart(<%=i%>, <%=total%>, <%=currentProduct.getPrice()%>)">X</button>
+							<button class="button" onclick="deleteProductFromWishlist(<%= currentProduct.getId()%>, <%=i%>);">X</button>
 							<a>
 								<div>
 									<img class="image" src="/DaemonMerch/Images/<%=images[0].getImageName()%>?id=<%=currentProduct.getId()%>">
@@ -45,7 +46,7 @@
 							</a>
 								<h3 class="name"> <%out.println(currentProduct.getName());%> </h3>
 								<h4 class="price"> <%out.println(currentProduct.getPrice() + "0 EUR");%> </h4>
-								<button class="button addW" onclick="deleteProductFromCart(<%=i%>, <%=total%>, <%=currentProduct.getPrice()%>)">Add To Cart</button>					
+								<button class="button addW" onclick="deleteProductFromWishlist(<%= currentProduct.getId()%>, <%=i%>); addToCart(<%= currentProduct.getId()%>);">Add To Cart</button>
 						</li>
 
 						</ul>

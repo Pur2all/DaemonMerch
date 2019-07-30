@@ -14,7 +14,7 @@
 		<title>DaemonMerch</title>
 		<link rel="stylesheet" type="text/css" href="/DaemonMerch/Css/WishlistCart.css">
 		<script src="/DaemonMerch/js/scriptJS.js"></script>
-	    <script src="/DaemonMerch/js/Ajax.js"></script>
+	  <script src="/DaemonMerch/js/Ajax.js"></script>
 	</head>
 
 	<body>
@@ -30,7 +30,8 @@
 			<%Cart cart = (Cart)request.getSession(false).getAttribute("cart"); %>
 			<%float total = 0; %>
 
-			<%if(cart.getNumberOfProduct() == 0) { %>
+      <!-- TODO: Funzione js che quando è 0 stampa di nuobo qyesto -->
+			<%if(cart==null || cart.getNumberOfProduct() == 0) { %>
 				<div class="empty">The cart is empty, add something!</div>
 			<% }
 

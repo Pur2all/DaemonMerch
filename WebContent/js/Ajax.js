@@ -3,7 +3,7 @@ function addToCart(id)
 {
   $.ajax({
     "type":"GET",
-    "url":"auth/AddToCart",
+    "url":"/DaemonMerch/auth/AddToCart",
     "data":{productId:id},
     "success":function(data)
     {
@@ -118,16 +118,20 @@ function retrieveBillingAddressesAsync(id)
 
 
 //Function to delete a product from the wishlist
-function deleteProductFromWishlist(wishlistProduct)
+function deleteProductFromWishlist(wishlistProductId, index)
 {
+  var wishlistProduct={
+    id:wishlistProductId
+  }
+
   $.ajax({
     "type":"GET",
-    "url":"auth/DeleteProductInWishlist",
-    "data":{wishlistProduct:wishlistProduct},
+    "url":"/DaemonMerch/auth/DeleteProductInWishlist",
+    "data":{wishlistProduct:JSON.stringify(wishlistProduct)},
     "success":function(data)
     {
       if(data)
-        addToCart(wishlistProduct.id);
+        removeFromWishlist(index);
       else
         console.log("No");
     }
