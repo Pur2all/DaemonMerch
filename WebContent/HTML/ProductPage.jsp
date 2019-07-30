@@ -10,24 +10,54 @@
 <html>
     <head>
     	<link rel="stylesheet" type="text/css" href="./Css/ProductPage.css">
+    	<script src="/DaemonMerch/js/scriptJS.js"></script>
+	    <script src="/DaemonMerch/js/Ajax.js"></script>
     </head>
 
 	<body>
-
-		<div class="sc-user-profile">
-			<%Product product = (Product)request.getAttribute("product"); %>
-			<%UserType userRole = ((User)request.getSession(false).getAttribute("userInfo")).getUserType();%>
-			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />
-		
-		<c:if test="${userRole == UserType.ADMIN}">	
-			<a href="#"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>
-		</c:if>
-
-		<div class="name">NOMe</div>
-		<div class="description">DDDDDDDDDDDDDAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAu</div>
-		<div class="price">19.99</div>
-
+	
+		<div class="addedToCart" style="display: none;">
+			<h5 class="checkMessage">Product added to cart!</h5>
+			<img class="checkIcon" alt="" src="http://www.pngmart.com/files/3/Green-Tick-Transparent-PNG.png">
 		</div>
+	
 
+		<%if(request.getSession(false) == null) {%>
+
+		<%} else { %>	
+			<div class="container">
+				<%Product product = (Product)request.getAttribute("product"); %>
+				<img class="image" src="Images/${product.images[0].imageName}?id=${product.id}">
+										
+				<h3 class="name"> <%out.print(product.getName() + " (" + product.getClass().getSimpleName() + ")"); %></h3>
+				<h4 class="price"> <c:out value="${product.price}0 EUR"> </c:out></h4>
+				<h6 class="description"> <c:out value="${product.description}"> </c:out></h6>
+				
+				<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
+					{%>
+						<button class="button addToCartButton" onclick="addToCart(${product.id})">Add to Cart</button>
+					<%}
+				else
+					{%>
+						<button class="button" onclick="window.location.href='/DaemonMerch/LoginForm'">Add to Cart</button>
+					<% } %>
+					
+				<%if(request.getSession(false)!=null && request.getSession(false).getAttribute("userInfo")!=null)
+					{%>
+						<button class="wishlist-button button" onclick="addToWishlist(${product.id})">33</button>
+					<%}
+				else
+					{%>
+						<button class="wishlist-button button" onclick="window.location.href='/DaemonMerch/LoginForm'">33</button>
+					<% } %>
+
+				
+				<c:if test="${userRole == UserType.ADMIN}">	
+					<a href="#"><img class="edit-icon" alt="icon" src="http://simpleicon.com/wp-content/uploads/pencil.png" /></a>
+				</c:if>
+	
+			</div>
+		<% } %>
+			
 	</body>
 </html>

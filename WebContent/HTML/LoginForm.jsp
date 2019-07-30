@@ -15,6 +15,7 @@
 
 	<body onload="loginForm()">
 
+		<a href="./Home"><img class="logo" alt="" src="/DaemonMerch/images/logo.png"></a>
 
 		<a class='toggle-button'>Don't have an account?</a>
 

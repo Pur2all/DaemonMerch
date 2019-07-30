@@ -14,6 +14,9 @@
 		<meta charset="ISO-8859-1">
 		<title>DaemonMerch</title>
 		<link rel="stylesheet" type="text/css" href="./Css/ProductsList.css">
+		<script src="/DaemonMerch/js/scriptJS.js"></script>
+	    <script src="/DaemonMerch/js/Ajax.js"></script>
+		
 	</head>
 
 	<body>

@@ -177,6 +177,16 @@
     <url-pattern>/OrdersHistory</url-pattern>
   </servlet-mapping>
 
+  <!-- checkout page jsp -->
+  <servlet>
+    <servlet-name>Checkout</servlet-name>
+    <jsp-file>/HTML/Checkout.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Checkout</servlet-name>
+    <url-pattern>/Checkout</url-pattern>
+  </servlet-mapping>
+
   <!-- Security -->
   <filter>
   	<filter-name>httpHeaderSecurity</filter-name>

@@ -1,11 +1,43 @@
 @charset "ISO-8859-1";
 
-@media screen and (orientation: landscape) {
+@media screen  {
 	
 	.errorMessage {
 		color: red;
 		text-align: center;
+		padding: 5%;
 	}
 	
+	body {
+		background: #2E3740;
+	}
+	
+	.container {
+		text-align: center;
+		display: block;
+		position: relative;
+		width:80%;
+		margin:100px auto;
+	}
+
+	
+	.link {
+		position: relative;
+		display: inline-block;
+		width: 158px;
+		padding: 5px;
+		margin: 0 auto;
+		background: #16aa56;
+		border-radius: .2em;
+		text-decoration: none;
+		color: black;
+		font-size: large;
+		text-align: center;
+	}
+	
+	.link:hover {
+		background: #00a808;
+		transition: background 0.3s ease-in-out;
+	}
 	
 }

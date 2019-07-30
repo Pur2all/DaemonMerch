@@ -12,36 +12,46 @@
 	<head>
 		<meta charset="ISO-8859-1">
 		<title>DaemonMerch</title>
-		<link rel="stylesheet" type="text/css" href="./Css/Wishlist.css">
+		<link rel="stylesheet" type="text/css" href="./Css/WishlistCart.css">
 	</head>
 
 	<body>
 
-		<h2 id="heading">Lista dei fottuti desideri!</h2>
 
 		<div class="grid-container">
 
-			<ul class="wishllist">
-				
-				<%LinkedList<Product> wishlist = (LinkedList<Product>)request.getAttribute("wishlist"); %>
+			<%LinkedList<WishlistProduct> wishlist = (LinkedList<WishlistProduct>)request.getSession(false).getAttribute("wishlist"); %>
+			<%float total = 0; %>
 
-				<c:forEach items="${wishlist}" var="currentProduct">
+			<%if(wishlist == null) { %>
+				<div class="empty">The wishlist is empty, add something!</div>
+			<% }
 
-					<li class="product">
-						<a>
-							<div>
-								<img src="Images/${currentProduct.images[0].imageName}">
-							</div>
-						</a>
-							<h3 class="name"> <c:out value="${currentProduct.name}"> </c:out></h3>
-							<h4 class="price"> <c:out value="${currentProduct.price}"> </c:out></h4>					
-							<button class="button">Remove</button>
-					</li>
-					
-				</c:forEach>		
-			
-			</ul>
-		
+			else {%>
+
+				<ul class="list-of-products">
+
+
+					<%for(int i = 0; i < wishlist.size(); i++) { %>
+					<%total += wishlist.get(i).getPrice();%>
+						<li class="product" id="product<%out.print(i);%>">
+							<%WishlistProduct currentProduct = (WishlistProduct) wishlist.get(i);%>
+							<%Image[] images = currentProduct.getImages(); %>
+							<button class="button" onclick="deleteProductFromCart(<%=i%>, <%=total%>, <%=currentProduct.getPrice()%>)">X</button>
+							<a>
+								<div>
+									<img class="image" src="/DaemonMerch/Images/<%=images[0].getImageName()%>?id=<%=currentProduct.getId()%>">
+								</div>
+							</a>
+								<h3 class="name"> <%out.println(currentProduct.getName());%> </h3>
+								<h4 class="price"> <%out.println(currentProduct.getPrice() + "0 EUR");%> </h4>
+						</li>
+
+						</ul>
+
+				<% } %>
+			<% } %>
+
 		</div>
 
 	</body>

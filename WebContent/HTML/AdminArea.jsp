@@ -19,6 +19,8 @@
 
 	<body onload="userProfileScript()">
 
+		<a href="./Home"><img class="logo" alt="" src="/DaemonMerch/images/logo.png"></a>
+
 		<% User user = (User)request.getSession(false).getAttribute("userInfo"); %>
 		<div class="grid-container">
 			<img class="avatar" src="http://newleafci.com/wp-content/uploads/2018/08/team-member-1.jpg" alt="Ash" />

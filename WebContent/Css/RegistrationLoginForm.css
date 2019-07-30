@@ -6,6 +6,13 @@
 		padding: 0;
 	}
 	
+	.logo {
+		width: 8%;
+		position: fixed;
+		top: 1%;
+		left: 1%;
+	}
+	
 	body {
 		background: #2E3740;
 		color: #435160;
@@ -134,6 +141,24 @@
 	
 }
 
-@media screen and (max-width: 390) {
+@media screen and (max-width: 700px) {
 	
+	.logo {
+		width: 12%;
+	}
+}
+
+@media screen and (max-width: 500px) {
+	
+	.logo {
+		width: 15%;
+	}
+
+}
+
+@media screen and (max-width: 300px) {
+	
+	.logo {
+		width: 18%;
+	}
 }

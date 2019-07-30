@@ -8,12 +8,15 @@
 </head>
 		
 	<body>
-
-		<h2 class="errorMessage">
-			<%if(request.getAttribute("errorMessage") != null) {
-				out.println("errorMessage");
-			}%>
-			dio be
-		</h2>
+		<div class="container">
+			<h2 class="errorMessage">
+				<%if(request.getAttribute("errorMessage") != null) {
+					out.println("errorMessage");
+				}%>
+				Sorry, there was an error loading your page!
+			</h2>
+			
+			<a class="link" href="./Home">Go to home</a>
+		</div>
 
 	</body>

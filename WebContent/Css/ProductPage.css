@@ -1,0 +1,87 @@
+@media screen {
+	
+	.container {
+		display: grid;
+		grid-template-rows: repeat(3, 1fr);
+		grid-template-columns: 30% 70%;
+		margin: 3%;
+		padding-top: 2%;
+	}
+	
+	.image {
+		grid-row: 1 / span 3;
+		grid-column: 1 / span 1;
+		width: 80%;
+	}
+	
+	h3.name {
+		color: black;
+		grid-row: 1 / span 1;
+		grid-column: 2 / span 1;
+		align-self: center;
+		border-bottom: 1px black solid;
+		padding-bottom: 5%
+	}
+	
+	h4.price {
+		color: black;
+		grid-row: 3 / span 1;
+		grid-column: 2 / span 1;	
+		align-self: center;
+		border-bottom: 1px black solid;
+		padding-bottom: 5%
+	}
+	
+	h6.description {
+		font-weight: normal;
+		font-size: 90%;
+		color: black;
+		grid-row: 2 / span 1;
+		grid-column: 2 / span 1;
+		align-self: center;
+		border-bottom: 1px black solid;
+		padding-bottom: 5%
+	}
+	
+	button.button {
+		justify-self: center;
+		align-self: center;
+		height: 40%;
+		width: 20%;
+		align-items: center;
+		color: black;
+		background: #1FCE6D;
+		border: 1px black solid;
+	}
+	
+	button.button:hover {
+		cursor: pointer;
+		background: #16aa56;
+		transition: background 0.3s ease-in-out;
+	}
+	
+	.addedToCart {
+		width: 25%;
+		grid-template-rows: 35% 65%;
+		position: fixed;
+		text-align: center; 
+		background: white;
+		border-bottom-left-radius: 1em;
+		border-bottom-right-radius: 1em;
+		top: 0px;
+		right: 2%;
+	}
+	
+	.checkMessage {
+		padding-top: 5%;
+		font-size: large;
+	}
+	
+	.checkIcon {
+		width: 30%;
+		padding-top: 5%;
+		padding-bottom: 5%;
+	}	
+	
+	
+}

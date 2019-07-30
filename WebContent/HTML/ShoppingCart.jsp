@@ -14,7 +14,7 @@
 		<title>DaemonMerch</title>
 		<link rel="stylesheet" type="text/css" href="/DaemonMerch/Css/WishlistCart.css">
 		<script src="/DaemonMerch/js/scriptJS.js"></script>
-    <script src="/DaemonMerch/js/Ajax.js"></script>
+	    <script src="/DaemonMerch/js/Ajax.js"></script>
 	</head>
 
 	<body>

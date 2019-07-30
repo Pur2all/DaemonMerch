@@ -4,6 +4,13 @@
 		background: #2E3740;
 	}
 	
+	.logo {
+		width: 8%;
+		position: fixed;
+		top: 1%;
+		left: 1%;
+	}
+	
 	.grid-container {
 		display: grid;
 		grid-template-columns: 50% 50%;
@@ -72,6 +79,11 @@
 	.grid-container {
 		width: 85%;
 		padding: .2em;
+		margin-top: 13%;
+	}
+	
+	.logo {
+		width: 12%;
 	}
 }
 
@@ -80,6 +92,11 @@
 		width: 95%;
 		padding: 0px;
 		margin: 0px;
+		margin-top: 16%;
+	}
+	
+	.logo {
+		width: 15%;
 	}
 }
 
@@ -88,5 +105,10 @@
 		width: 100%;
 		padding: 0px;
 		margin: 0px;
+		margin-top: 20%;
+	}
+	
+	.logo {
+		width: 18%;
 	}
 }
