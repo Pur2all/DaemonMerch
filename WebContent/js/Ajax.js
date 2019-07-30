@@ -278,7 +278,7 @@ function changeAsync(base, symbol, price, el)
       currencyValue= symbol=="EUR" ? data.rates.EUR : data.rates.USD;
       console.log("price " + price);
       console.log("currency " + currencyValue.toFixed(2));
-      $(el).html((price*currencyValue.toFixed(2)).toFixed(2) + (symbol=="EUR" ? " EUR" : " USD"));
+      $(el).html((price*currencyValue).toFixed(2) + (symbol=="EUR" ? " EUR" : " USD"));
     },
     "error":function(error)
     {
