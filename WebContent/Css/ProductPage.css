@@ -126,7 +126,7 @@
 	
 	.productContainer {
 		display: grid;
-		grid-template-rows: repeat(5, 20%);
+		grid-template-rows: repeat(8, 12.5%);
 		grid-template-columns: 50% 50%;
 		margin: 3%;
 		padding-top: 0%;
@@ -140,13 +140,13 @@
 	}
 	
 	.addToCartButton {
-		grid-row: 5 / span 1;
+		grid-row: 8 / span 1;
 		grid-column: 1 / span 1;
 		width: 80%;
 	}
 	
 	.wishlist-button {
-		grid-row: 5 / span 1;
+		grid-row: 8 / span 1;
 		grid-column: 2 / span 1;
 		width: 80%;
 	}
@@ -178,6 +178,21 @@
 		align-self: center;
 		border-bottom: 1px black solid;
 		padding-bottom: 5%
+	}
+	
+	.topPrint, .patchType {
+		grid-row: 5 / span 1;
+		grid-column: 1 / span 2;
+	}
+	
+	.topSize, .patchMaterial {
+		grid-row: 6 / span 1;
+		grid-column: 1 / span 2;
+	}
+	
+	.topCategory, .patchSize {
+		grid-row: 7 / span 1;
+		grid-column: 1 / span 2;
 	}
 	
 }
