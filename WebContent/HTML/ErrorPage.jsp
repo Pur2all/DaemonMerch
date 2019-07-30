@@ -4,7 +4,7 @@
 
 <head>
 	<base href="./" target="_self">
-	<link rel="stylesheet" type="text/css" href="./Css/ErrorPage.css">
+	<link rel="stylesheet" type="text/css" href="/DaemonMerch/Css/ErrorPage.css">
 </head>
 		
 	<body>

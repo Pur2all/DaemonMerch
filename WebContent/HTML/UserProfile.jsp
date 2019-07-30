@@ -83,8 +83,8 @@
 				<div class="right"><input name="username" type="text" id="newUsername" value="<%out.print(user.getUsername());%>"></div>
         		<input type="hidden" id="id" value="<%out.print(user.getId());%>">
 
-				<input type="button" class="left" value="Credit Cards List" id="creditCards">
-				<input type="button" class="right" value="Billing Addresses" id="billingAddress">
+				<input type="button" class="left" value="Credit Cards List" id="viewCreditCards">
+				<input type="button" class="right" value="Billing Addresses" id="viewBillingAddress">
 			</form>
 		</div>
 

@@ -44,7 +44,7 @@
 		transition: background 0.3s ease-in-out;
 	}
 	
-		#cancel-button:hover, #cancel-button1:hover {
+	#cancel-button:hover, #cancel-button1:hover {
 		background: #cc0000;
 	}
 

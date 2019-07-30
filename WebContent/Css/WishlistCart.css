@@ -97,3 +97,20 @@
 	}
 
 }
+
+@media screen and (max-width: 500px) {
+	.product .name {
+		font-size: small;
+	}
+	
+	#totalPrice {
+		font-size: small;
+	}
+	
+	.total button {
+		width: 50%;
+		height: 100%;
+	}
+	
+	
+}

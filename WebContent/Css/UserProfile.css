@@ -10,7 +10,8 @@
 		margin-bottom: 3%;
 		width: 50%;
 		background: #fff;
-		border-radius: .3em;
+		border-top-left-radius: .3em;
+		border-top-right-radius: .3em;
 	}
 	
 	.sc-user-profile .left {
@@ -88,6 +89,9 @@
 	
 	div.edit {
 		display: none;
+	}
+	
+	input[type=button] {
 	}
 	
 }

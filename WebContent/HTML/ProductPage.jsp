@@ -25,7 +25,7 @@
 		<%if(request.getSession(false) == null) {%>
 
 		<%} else { %>	
-			<div class="container">
+			<div class="productContainer">
 				<%Product product = (Product)request.getAttribute("product"); %>
 				<img class="image" src="Images/${product.images[0].imageName}?id=${product.id}">
 										
