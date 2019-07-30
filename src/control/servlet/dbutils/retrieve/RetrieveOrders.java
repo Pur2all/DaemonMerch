@@ -24,7 +24,7 @@ public class RetrieveOrders extends HttpServlet
 	{
 		OrderDAO orderDAO=new OrderDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"),
 				Integer.parseInt(((User) request.getSession(false).getAttribute("userInfo")).getId()));
-		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+16;
+		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+17;
 
 		try
 		{

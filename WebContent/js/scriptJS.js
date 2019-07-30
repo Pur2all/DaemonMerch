@@ -231,12 +231,12 @@ function checkForm()
 }
 
 //Function to change currency
-function changeCurrency(price)
+function changeCurrency(price, el)
 {
 	if($("#selectCurrency").val()=="USD")
-		$(price).html($(price).val()*changeAsync("EUR", "USD") + " USD");
+		changeAsync("EUR", "USD", price, el);
 	else
-		$(price).html($(price).val()*changeAsync("USD", "EUR") + " EUR");
+		changeAsync("USD", "EUR", price, el);
 }
 
 
@@ -245,7 +245,9 @@ function changeCurrencyInCart()
 {
 	$(".price").each(function(index, el)
 	{
-		$(el).html(changeCurrency(el));
+		price=$(el).html().match(/[0-9.]+/);
+		console.log("Price in prima funzione:" + price);
+		changeCurrency(price, el);
 	});
 	$("#total").html(changeCurrency("#total"));
 }

@@ -164,8 +164,8 @@ function updateProductAsync(product)
     {
       if(data)
         updateProductInfo(product);
-        else
-          alert("Error");
+      else
+        alert("Error");
       },
     "error":function(error)
     {
@@ -269,7 +269,7 @@ function deleteProduct(id)
 
 
 //Function to know currency value of base to symbol
-function changeAsync(base, symbol)
+function changeAsync(base, symbol, price, el)
 {
   var currencyValue;
 
@@ -278,7 +278,10 @@ function changeAsync(base, symbol)
     "url":"https://api.exchangeratesapi.io/latest?base=" + base + "&symbols=" + symbol,
     "success":function(data)
     {
-      currencyValue=data.rates[0];
+      currencyValue= symbol=="EUR" ? data.rates.EUR : data.rates.USD;
+      console.log("price " + price);
+      console.log("currency " + currencyValue.toFixed(2));
+      $(el).html((price*currencyValue.toFixed(2)).toFixed(2) + (symbol=="EUR" ? " EUR" : " USD"));
     },
     "error":function(error)
     {
@@ -286,8 +289,6 @@ function changeAsync(base, symbol)
       alert("Error in currency exchange");
     }
   });
-
-  return currencyValue;
 }
 
 

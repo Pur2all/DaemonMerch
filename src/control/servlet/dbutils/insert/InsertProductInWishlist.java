@@ -49,6 +49,7 @@ public class InsertProductInWishlist extends HttpServlet
 
 				WishlistProduct wishlistProduct=new WishlistProduct();
 				
+				wishlistProduct.setName(product.getName());
 				wishlistProduct.setUserID(userId);
 				wishlistProduct.setId(product.getId());
 				GregorianCalendar date=new GregorianCalendar();

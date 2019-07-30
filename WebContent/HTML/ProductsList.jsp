@@ -29,6 +29,12 @@
 			<img class="checkIcon" alt="" src="http://www.pngmart.com/files/3/Green-Tick-Transparent-PNG.png">
 		</div>
 
+    <div class="selector" oninput="changeCurrencyInCart()">
+      <select id="selectCurrency">
+        <option value="EUR"> EUR </option>
+        <option value="USD"> USD </option>
+      </select>
+    </div>
 			<ul class="product-list">
 
 				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
@@ -69,10 +75,10 @@
 		</div>
 
 	<div class="rows">
-	    <%if(products.size()==17)
-	    {%>
-		      <button id="next" onclick="changePage(1)"> -> </button>
-	    <%}%>
+    <%if(products.size()==17)
+    {%>
+	      <button id="next" onclick="changePage(1)"> -> </button>
+    <%}%>
     </div>
 
 	</body>

@@ -22,7 +22,7 @@ public class RetrievePatches extends HttpServlet
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException
 	{
 		PatchDAO patchDAO=new PatchDAO((DBConnectionPool) getServletContext().getAttribute("DriverManager"));
-		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+16;
+		int init=(Integer.parseInt(request.getParameter("page"))-1)*16, end=init+17;
 		
 		try
 		{
