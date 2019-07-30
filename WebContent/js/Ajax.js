@@ -246,7 +246,7 @@ function deleteArtist(id)
 
 
 //Function to delete a product async
-function deleteArtist(id)
+function deleteProduct(id)
 {
   $.ajax({
     "type":"GET",

@@ -45,7 +45,7 @@
 				</span>
 
 				<span id="wishlist" class="service-flex-item">
-					<a href="/DaemonMerch/Wishlist" title="Wishlist" class="services-link"> <img src="/DaemonMerch/images/wishlist.png" alt="Wishlist" class="services-image"> </a>
+					<a href="/DaemonMerch/auth/Wishlist" title="Wishlist" class="services-link"> <img src="/DaemonMerch/images/wishlist.png" alt="Wishlist" class="services-image"> </a>
 				</span>
 
 				<span id="cart" class="service-flex-item">
