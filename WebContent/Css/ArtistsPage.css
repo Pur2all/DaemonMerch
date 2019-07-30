@@ -1,6 +1,6 @@
 @charset "ISO-8859-1";
 
-@media screen and (orientation: landscape) {
+@media screen {
 	
 	body {
 		background: #2E3740;
@@ -40,5 +40,21 @@
 	div a.artist-name:hover {
 		text-decoration: underline;
 	}
+	
+}
+
+@media screen and (max-width: 920px) {
+	.artistsList  {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media screen and (max-width: 550px) {
+	.artistsList  {
+		grid-template-columns: repeat(2, 1fr);
+	}	
+}
+
+@media screen and (max-width: 920px) {
 	
 }

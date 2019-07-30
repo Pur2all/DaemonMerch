@@ -15,7 +15,6 @@
 
 	<body>
 
-		<h1>Artisti </h1>
 		<%LinkedList<Artist> artists = (LinkedList<Artist>) request.getAttribute("artists"); %>
 		<%char letter = 'a';%>
 

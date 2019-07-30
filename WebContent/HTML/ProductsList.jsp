@@ -69,10 +69,10 @@
 		</div>
 
 	<div class="rows">
-    <%if(products.size()==17)
-    {%>
-	      <button id="next" onclick="changePage(1)"> -> </button>
-    <%}%>
+	    <%if(products.size()==17)
+	    {%>
+		      <button id="next" onclick="changePage(1)"> -> </button>
+	    <%}%>
     </div>
 
 	</body>

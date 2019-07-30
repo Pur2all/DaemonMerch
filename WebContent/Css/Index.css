@@ -40,9 +40,30 @@
 
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
 	.index-main {
-		min-height: 1em;
+		min-height: 40em;
+	}
+		
+}
+
+@media screen and (max-width: 800px) {
+	.index-main {
+		min-height: 30em;
+	}
+		
+}
+
+@media screen and (max-width: 600px) {
+	.index-main {
+		min-height: 20em;
+	}
+		
+}
+
+@media screen and (max-width: 400px) {
+	.index-main {
+		min-height: 10em;
 	}
 		
 }

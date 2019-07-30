@@ -10,7 +10,7 @@
 	}
 	
 	.grid-container {
-		width: 95%;
+		width: 100%;
 		display: grid;
 		grid-template-columns: 100%;
 		grid-template-rows:	90% 10%;
@@ -50,7 +50,7 @@
 	.product {
 		display: grid;
 		grid-template-columns: 10% 30% 40% 20%;
-		grid-template-rows:	100%;
+		grid-template-rows:	50% 50%;
 		padding-bottom: 1%;
 		margin-top: 1%;
 		margin-left: 1%;
@@ -70,6 +70,7 @@
 		border: hidden;
 		background: transparent;
 		grid-column: 1 / span 1;
+		grid-row: 1 / span 2;
 		align-self: center;
 		justify-self: center;
 		width: 30%;
@@ -83,28 +84,48 @@
 
 	.product .image {
 		grid-column: 2 / span 1;
+		grid-row: 1 / span 2;		
 		width: 55%;
 	}
 
 	.product .name {
 		grid-column: 3 / span 1;
+		grid-row: 1 / span 2;
 		width: 90%;
 	}
 
 	.product .price {
 		grid-column: 4 / span 1;
+		grid-row: 1 / span 2;
 		width: 90%;
+	}
+
+	button.button.addW {
+		grid-column: 4 / span 1;
+		grid-row:  / span 1;
+		height: 15%;
+		width: 60%;
+		background: #1FCE6D;
+	}
+	
+	button.button.addW:hover {
+		background: #16aa56;
+		transition: background 0.3s ease-in-out;
 	}
 
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 396px) {
 	.product .name {
 		font-size: small;
 	}
+
+	.product .price {
+		font-size: x-small;
+	}
 	
 	#totalPrice {
-		font-size: small;
+		font-size: xx-small;
 	}
 	
 	.total button {
@@ -112,5 +133,28 @@
 		height: 100%;
 	}
 	
+	button.button.addW {
+		height: 60%;
+		width: 90%;
+		margin-top: 20%;
+		padding-bottom: 45%;
+	}
+}
+
+@media screen and (max-width: 770px) {
+	button.button.addW {
+		height: 25%;
+		width: 75%;
+		font-size: small;
+	}
+}
+
+@media screen and (max-width: 610px) {
 	
+	button.button.addW {
+		height: 25%;
+		width: 75%;
+		margin-top: 15%;
+		font-size: x-small;
+	}
 }

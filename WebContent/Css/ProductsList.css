@@ -90,6 +90,22 @@
 		padding-top: 5%;
 		padding-bottom: 5%;
 	}	
+	
+	#next {
+		margin-left: 42%;
+		width: 8%;
+		height: 200%
+		font-size: large;
+		border: none;
+		background: white;
+		color: black;
+	}
+	
+	#next:hover {
+		background: gray;
+	}
+	
+
 }
 
 @media screen and (max-width: 1350px) {

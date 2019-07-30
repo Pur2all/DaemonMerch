@@ -45,6 +45,7 @@
 							</a>
 								<h3 class="name"> <%out.println(currentProduct.getName());%> </h3>
 								<h4 class="price"> <%out.println(currentProduct.getPrice() + "0 EUR");%> </h4>
+								<button class="button addW" onclick="deleteProductFromCart(<%=i%>, <%=total%>, <%=currentProduct.getPrice()%>)">Add To Cart</button>					
 						</li>
 
 						</ul>
