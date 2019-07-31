@@ -11,6 +11,16 @@
 		list-style-type: none;
 	}
 
+	.selector {
+		padding: .6em 1em;
+	}
+	
+	#selectCurrency {
+		width: 6%;
+		height: 20%;
+		text-align: center;
+	}	
+
 	.product-list {
 		display: grid;
 		grid-template-columns: repeat(4, 25%);
@@ -111,13 +121,17 @@
 	}	
 	
 	#next {
-		margin-left: 42%;
+		margin-left: 45%;
 		width: 8%;
-		height: 200%
+		height: 100%
 		font-size: large;
 		border: none;
 		background: white;
 		color: black;
+		padding-bottom: .5%;
+		padding-top: .5%;
+		margin-bottom: 2%;
+		margin-top: 1%;
 	}
 	
 	#next:hover {

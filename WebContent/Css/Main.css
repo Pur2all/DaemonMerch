@@ -25,5 +25,14 @@
 	a > img {
 		width: 100%;
 	}
+
+	.banner {;
+		transition: 0.5s;
+	}
+	
+	
+	.banner:hover {;
+		filter: grayscale(100%) blur(1px);
+	}
 	
 }

@@ -14,52 +14,36 @@
 
 			<div class="first-category">
 
-				<img class="icon" alt="" src="http://placehold.it/500x500&text=[C]">
+				<img class="icon" alt="" src="/DaemonMerch/images/contact.png">
 
 		  		<div>
-		  			roba fottuta bellissima eccetera
+		  			Phone: +39 666 666 6666
 		  		</div>
 		  		
 		  		<div>
-		  			roba fottuta bellissima eccetera
+		  			Email: daemonmerch@fakemail.com
 		  		</div>
 
 		  		<div>
-		  			roba fottuta bellissima eccetera
-		  		</div>
-		  		
-		  		<div>
-		  			roba fottuta bellissima eccetera
+		  			For buisness inquiries: daemonbiz@alsofake.com
 		  		</div>
 			</div>
 	
 
 			<div class="second-category">
 
-				<img class="icon" alt="" src="http://placehold.it/500x500&text=[D]">
+				<img class="icon" alt="" src="/DaemonMerch/images/address.png">
 
 				<div>
-		  			si va a letto POLIZIAAAAAA
+		  			Headquarters: Demon Street, 66, TX
 				</div>
 				
 		  		<div>
-		  			roba fottuta bellissima eccetera
+		  			Physical shop: Castellammare di Stabia, SA, 57
 		  		</div>
 		  		
 		  		<div>
-		  			roba fottuta bellissima eccetera
-		  		</div>
-		  		
-		  		<div>
-		  			roba fottuta bellissima eccetera
-		  		</div>
-		  		
-		  		<div>
-		  			roba fottuta bellissima eccetera
-		  		</div>
-		  		
-		  		<div>
-		  			roba fottuta bellissima eccetera
+		  			Not satified with your product? Return it at: Gary Holt, 10 Main St PMB 234, TX
 		  		</div>
 
 			</div>
@@ -67,18 +51,18 @@
 
 			<div class="third-category">
 
-				<img class="icon" alt="" src="http://placehold.it/500x500&text=[Q]">
+				<img class="icon" alt="" src="/DaemonMerch/images/delivery.png">
 
 				<div>
-		  			tutti i bambini con i chiodini
+		  			FREE Worldwide Shipping!
 		  		</div>
 		  		
 		  		<div>
-		  			roba fottuta bellissima eccetera
+		  			Guaranteed delivery in 7-15 buisness days
 		  		</div>
 		  		
 		  		<div>
-		  			roba fottuta bellissima eccetera
+		  			If your product arrives damaged, we don't care!
 		  		</div>
 
 			</div>

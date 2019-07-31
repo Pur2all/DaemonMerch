@@ -45,7 +45,7 @@
 
 				<%LinkedList<Product> products = (LinkedList<Product>)request.getAttribute("products"); %>
 
-				<c:forEach items="${products}" var="currentProduct">
+				<c:forEach items="${products}" var="currentProduct" end="15">
 					<li class="product">
 						<a href="Product?id=${currentProduct.id}&type=<%=pageContext.getAttribute("currentProduct").getClass().getSimpleName().toLowerCase()%>">
 							<div>

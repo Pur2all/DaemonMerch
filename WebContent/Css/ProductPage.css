@@ -3,7 +3,7 @@
 	
 	.productContainer {
 		display: grid;
-		grid-template-rows: repeat(4, 1fr);
+		grid-template-rows: 25% 25% 25% 25%;
 		grid-template-columns: 30% 50% 20%;
 		margin: 3%;
 		padding-top: 2%;
@@ -13,6 +13,12 @@
 		grid-row: 1 / span 3;
 		grid-column: 1 / span 1;
 		width: 80%;
+		transition: width 2s, height 4s;
+	}
+
+	.image:hover {
+		width: 130%;
+		z-index: 99;
 	}
 	
 	h3.name {

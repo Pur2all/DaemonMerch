@@ -19,16 +19,16 @@
 
 		<div class="grid-container">
 
-			<a href="#">
-				<img alt="error" src="/DaemonMerch/images/banner1.png">
+			<a href="/DaemonMerch/Tops?page=1">
+				<img class="banner" alt="error" src="/DaemonMerch/images/banner1.png">
 			</a>
 			
-			<a href="#">
-				<img alt="error" src="/DaemonMerch/images/banner2.png">
+			<a href="/DaemonMerch/Patches?page=1">
+				<img class="banner" alt="error" src="/DaemonMerch/images/banner2.png">
 			</a>
 			
-			<a href="#">
-				<img alt="error" src="/DaemonMerch/images/banner3.png">
+			<a href="/DaemonMerch/Products?page=1">
+				<img class="banner" alt="error" src="/DaemonMerch/images/banner3.png">
 			</a>
 
 		</div>

@@ -9,6 +9,16 @@
 		list-style: none;
 	}
 	
+	.selector {
+		padding: .6em 1em;
+	}
+	
+	#selectCurrency {
+		width: 6%;
+		height: 20%;
+		text-align: center;
+	}		
+	
 	.grid-container {
 		width: 100%;
 		display: grid;

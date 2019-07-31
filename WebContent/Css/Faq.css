@@ -1,6 +1,10 @@
 @charset "utf-8";
 
-@media screen and (orientation: landscape) {
+@media screen {
+	
+	body {
+		background: #2E3740;
+	}
 	
 	div.cat-name {
 		display: table;
@@ -11,11 +15,12 @@
 	}
 	
 	div.separator {
-		border-bottom: dotted thick;
+		border-bottom: 1px white solid;
 	}
 	
 	div.category-faq {
-		border: 10px hidden #7aff8e;
+		color: white;
+		border: 10px hidden #1FCE6D;
 		padding-top: 13px;
 		padding-left: 13px;
 		padding-right: 13px;
@@ -29,9 +34,9 @@
 	}
 
 	dt	{ 
-		border: 8px solid #00c906; 
+		border: 8px solid #1FCE6D; 
 		padding: 10px; 
-		background: white; 
+		background: transparent; 
 		border-radius: 10px;
 		position: relative; 
 		font-size: 1.5em;
@@ -39,8 +44,9 @@
 	}
 					
 	dd.answer	{ 
+		color: white;
 		padding-bottom: 15px;
-		background: white; 
+		background: transparent; 
 		position: relative; 
 		width: 90%; 
 		margin: 0 auto;
@@ -48,9 +54,9 @@
 
 	dd.answer div	{
 		padding: 10px;
-		border-left: 8px solid #111111;
-        border-right: 8px solid #111111; 
-        border-bottom: 8px solid #111111;
+		border-left: 8px solid #16aa56;
+        border-right: 8px solid #16aa56; 
+        border-bottom: 8px solid #16aa56;
         border-bottom-left-radius: 10px;
         border-bottom-right-radius: 10px;
     }
