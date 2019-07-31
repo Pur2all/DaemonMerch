@@ -66,10 +66,15 @@ function checkUsername(username)
     "success":function(data)
     {
       if(data)
+      {
         $("#regUsername").css('border', '1px solid red');
+        alert("Username already taken");
+      }
       else
+      {
         $("#regUsername").css('border', '1px solid green');
       }
+    }
   });
 }
 
