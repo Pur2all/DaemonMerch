@@ -39,7 +39,7 @@ public class ProcessOrder extends HttpServlet
 			}
 		}
 		request.setAttribute("mainPage", "OrderProcessed");
-		getServletContext().getRequestDispatcher(response.encodeURL(request.getContextPath() + "/Index")).forward(request, response);
+		getServletContext().getRequestDispatcher(response.encodeURL("/Index")).forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException 
