@@ -27,26 +27,26 @@ public class ProductDAO implements DAO<Product>
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-	
+
 		Collection<Product> products=new LinkedList<Product>();
-	
+
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Foto ON ID=ID_Prodotto WHERE Tag=? AND ID NOT IN (SELECT ID FROM Patch UNION SELECT ID FROM Top)";
-	
+
 		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, tag);
-	
+
 			ResultSet rs=preparedStatement.executeQuery();
 			int start=0, end=0;
 			while(rs.next())
 			{
 				start=rs.getRow();
 				System.out.println("Start: " + start);
-	
+
 				Product productFromTable=new Product();
-	
+
 				productFromTable.setId(rs.getString("ID"));
 				productFromTable.setName(rs.getString("Nome"));
 				productFromTable.setPrice(rs.getFloat("Prezzo"));
@@ -54,7 +54,7 @@ public class ProductDAO implements DAO<Product>
 				productFromTable.setRemaining(rs.getInt("QuantitaRimanente"));
 				productFromTable.setTag(rs.getString("Tag"));
 				productFromTable.setArtistId(rs.getString("ID_Artista"));
-	
+
 				while(rs.next() && rs.getString("ID").equals(productFromTable.getId()));
 				if(rs.getRow()==0)
 				{
@@ -76,7 +76,7 @@ public class ProductDAO implements DAO<Product>
 					rs.next();
 				}
 				productFromTable.setImages(productFromTableImages);
-	
+
 				products.add(productFromTable);
 				if(rs.getRow()!=0)
 					rs.previous();
@@ -94,10 +94,10 @@ public class ProductDAO implements DAO<Product>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-	
+
 		return products;
 	}
-	
+
 	public Collection<Product> doRetrieveByArtistID(int artistId, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
@@ -183,7 +183,7 @@ public class ProductDAO implements DAO<Product>
 			{
 				e.printStackTrace();
 			}
-		
+
 		return null;
 	}
 
@@ -431,8 +431,6 @@ public class ProductDAO implements DAO<Product>
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-
 			String selectSQL="SELECT * FROM " + TABLE_NAME;
 
 			preparedStatement.close();
@@ -495,8 +493,6 @@ public class ProductDAO implements DAO<Product>
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{

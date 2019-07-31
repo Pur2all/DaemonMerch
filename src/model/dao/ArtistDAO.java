@@ -194,8 +194,6 @@ public class ArtistDAO implements DAO<Artist>
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
-
 			String selectSQL="SELECT * FROM " + TABLE_NAME;
 
 			preparedStatement.close();
@@ -250,8 +248,6 @@ public class ArtistDAO implements DAO<Artist>
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{

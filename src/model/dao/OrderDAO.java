@@ -244,8 +244,6 @@ public class OrderDAO implements DAO<Order>
 			preparedStatement.setInt(9, Integer.parseInt(order.getBillingAddress().getHouseNumber()));
 
 			preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
@@ -261,7 +259,7 @@ public class OrderDAO implements DAO<Order>
 		}
 
 		Order newOrder=new Order();
-		
+
 		return newOrder;
 	}
 
@@ -287,8 +285,6 @@ public class OrderDAO implements DAO<Order>
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{

@@ -171,7 +171,6 @@ public class CreditCardDAO implements DAO<CreditCard>
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
 			saveUserCreditCardRelation(creditCard);
 		}
 		finally
@@ -212,8 +211,6 @@ public class CreditCardDAO implements DAO<CreditCard>
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
@@ -279,8 +276,6 @@ public class CreditCardDAO implements DAO<CreditCard>
 			preparedStatement.setString(2, creditCard.getNumber());
 
 			preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{

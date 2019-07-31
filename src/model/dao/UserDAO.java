@@ -230,8 +230,6 @@ public class UserDAO implements DAO<User>
 			preparedStatement.setString(6, user.getPassword());
 
 			preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
@@ -274,8 +272,6 @@ public class UserDAO implements DAO<User>
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{

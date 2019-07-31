@@ -117,7 +117,7 @@ public class TopDAO implements DAO<Top>
 			}
 		return null;
 	}
-	
+
 	public Collection<Top> doRetrieveByArtistID(int artistId, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
@@ -206,34 +206,34 @@ public class TopDAO implements DAO<Top>
 			{
 				e.printStackTrace();
 			}
-		
+
 		return null;
 	}
-	
+
 	public Collection<Top> doRetrieveByTag(String tag) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-	
+
 		Collection<Top> products=new LinkedList<Top>();
-	
+
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE Tag= ?";
-	
+
 		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, tag);
-	
+
 			ResultSet rs=preparedStatement.executeQuery();
 			int start=0, end=0;
 			while(rs.next())
 			{
 				start=rs.getRow();
 				System.out.println("Start: " + start);
-	
+
 				Top topFromTable=new Top();
-	
+
 				topFromTable.setId(rs.getString("ID"));
 				topFromTable.setName(rs.getString("Nome"));
 				topFromTable.setPrice(rs.getFloat("Prezzo"));
@@ -244,7 +244,7 @@ public class TopDAO implements DAO<Top>
 				topFromTable.setSize(Size.valueOf(rs.getString("Taglia")));
 				topFromTable.setCategory(Category.valueOf(rs.getString("Categoria")));
 				topFromTable.setPrintType(PrintType.valueOf(rs.getString("TipoStampa")));
-	
+
 				while(rs.next() && rs.getString("ID").equals(topFromTable.getId()));
 				if(rs.getRow()==0)
 				{
@@ -266,7 +266,7 @@ public class TopDAO implements DAO<Top>
 					rs.next();
 				}
 				topFromTable.setImages(productFromTableImages);
-	
+
 				products.add(topFromTable);
 				if(rs.getRow()!=0)
 					rs.previous();
@@ -284,19 +284,19 @@ public class TopDAO implements DAO<Top>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-	
+
 		return products;
 	}
-	
+
 	public Top doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE ID = ?";
-		
+
 		Top topFromTable=new Top();
-		
+
 		try
 		{
 			int code=(int) key;
@@ -344,7 +344,7 @@ public class TopDAO implements DAO<Top>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return topFromTable;
 	}
 
@@ -449,8 +449,6 @@ public class TopDAO implements DAO<Top>
 			preparedStatement.setString(4, top.getPrintType().name());
 
 			preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
@@ -496,8 +494,6 @@ public class TopDAO implements DAO<Top>
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{

@@ -114,7 +114,7 @@ public class PatchDAO implements DAO<Patch>
 			}
 		return null;
 	}
-	
+
 	public Collection<Patch> doRetrieveByArtistID(int artistId, int pageInit, int pageEnd) throws SQLException
 	{
 		Connection connection=null;
@@ -203,34 +203,34 @@ public class PatchDAO implements DAO<Patch>
 			{
 				e.printStackTrace();
 			}
-		
+
 		return null;
 	}
-	
+
 	public Collection<Patch> doRetrieveByTag(String tag) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
-	
+
 		Collection<Patch> products=new LinkedList<Patch>();
-	
+
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE Tag= ?";
-	
+
 		try
 		{
 			connection=dbConnectionPool.getConnection();
 			preparedStatement=connection.prepareStatement(selectSQL);
 			preparedStatement.setString(1, tag);
-	
+
 			ResultSet rs=preparedStatement.executeQuery();
 			int start=0, end=0;
 			while(rs.next())
 			{
 				start=rs.getRow();
 				System.out.println("Start: " + start);
-	
+
 				Patch patchFromTable=new Patch();
-	
+
 				patchFromTable.setId(rs.getString("ID"));
 				patchFromTable.setName(rs.getString("Nome"));
 				patchFromTable.setPrice(rs.getFloat("Prezzo"));
@@ -241,7 +241,7 @@ public class PatchDAO implements DAO<Patch>
 				patchFromTable.setMeasures(rs.getString("Misure"));
 				patchFromTable.setPatchType(PatchType.valueOf(rs.getString("Tipo")));
 				patchFromTable.setMaterial(rs.getString("Tessuto"));
-	
+
 				while(rs.next() && rs.getString("ID").equals(patchFromTable.getId()));
 				if(rs.getRow()==0)
 				{
@@ -263,7 +263,7 @@ public class PatchDAO implements DAO<Patch>
 					rs.next();
 				}
 				patchFromTable.setImages(productFromTableImages);
-	
+
 				products.add(patchFromTable);
 				if(rs.getRow()!=0)
 					rs.previous();
@@ -281,19 +281,19 @@ public class PatchDAO implements DAO<Patch>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-	
+
 		return products;
 	}
-	
+
 	public Patch doRetrieveByKey(Object key) throws SQLException
 	{
 		Connection connection=null;
 		PreparedStatement preparedStatement=null;
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " NATURAL JOIN Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE ID = ?";
-		
+
 		Patch patchFromTable=new Patch();
-		
+
 		try
 		{
 			int code=(int) key;
@@ -341,7 +341,7 @@ public class PatchDAO implements DAO<Patch>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return patchFromTable;
 	}
 
@@ -446,8 +446,6 @@ public class PatchDAO implements DAO<Patch>
 			preparedStatement.setString(4, patch.getMaterial());
 
 			preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
@@ -492,8 +490,6 @@ public class PatchDAO implements DAO<Patch>
 			preparedStatement.setString(4, patch.getId());
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{

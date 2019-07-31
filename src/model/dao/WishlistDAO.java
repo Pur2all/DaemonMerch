@@ -90,7 +90,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		{
 			exception.printStackTrace();
 		}
-		
+
 		return products;
 	}
 
@@ -100,9 +100,9 @@ public class WishlistDAO implements DAO<WishlistProduct>
 		PreparedStatement preparedStatement=null;
 
 		String selectSQL="SELECT * FROM " + TABLE_NAME + " INNER JOIN Prodotto ON ID=ID_Prodotto INNER JOIN Foto ON ID=ID_Prodotto WHERE ID_Prodotto = ? AND ID_Utente = ?";
-		
+
 		WishlistProduct productFromTable=new WishlistProduct();
-		
+
 		try
 		{
 			int code=(int) key;
@@ -149,7 +149,7 @@ public class WishlistDAO implements DAO<WishlistProduct>
 				dbConnectionPool.releaseConnection(connection);
 			}
 		}
-		
+
 		return productFromTable;
 	}
 
@@ -221,8 +221,6 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			preparedStatement.setInt(4, product.getQuantity());
 
 			preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
@@ -262,8 +260,6 @@ public class WishlistDAO implements DAO<WishlistProduct>
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
@@ -298,7 +294,6 @@ public class WishlistDAO implements DAO<WishlistProduct>
 			preparedStatement.setInt(2, product.getUserID());
 
 			result=preparedStatement.executeUpdate();
-			connection.commit();
 		}
 		finally
 		{

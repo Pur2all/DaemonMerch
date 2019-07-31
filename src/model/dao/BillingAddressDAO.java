@@ -184,7 +184,6 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 
 			preparedStatement.executeUpdate();
 
-			connection.commit();
 			saveUserBillingAddressRelation(billingAddress);
 		}
 		finally
@@ -265,8 +264,6 @@ public class BillingAddressDAO implements DAO<BillingAddress>
 			preparedStatement.setString(6, aBillingAddress.getHouseNumber());
 
 			preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{

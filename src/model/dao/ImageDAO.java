@@ -227,8 +227,6 @@ public class ImageDAO implements DAO<Image>
 			}
 
 			preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
@@ -265,8 +263,6 @@ public class ImageDAO implements DAO<Image>
 
 			System.out.println("doUpdate: "+ preparedStatement.toString());
 			rowsAffected=preparedStatement.executeUpdate();
-
-			connection.commit();
 		}
 		finally
 		{
