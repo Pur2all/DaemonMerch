@@ -167,6 +167,16 @@
     <url-pattern>/ArtistPage</url-pattern>
   </servlet-mapping>
 
+  <!-- order processed page jsp -->
+  <servlet>
+    <servlet-name>OrderProcessed</servlet-name>
+    <jsp-file>/HTML/OrderProcessed.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>OrderProcessed</servlet-name>
+    <url-pattern>/OrderProcessed</url-pattern>
+  </servlet-mapping>
+
   <!-- orders history page jsp -->
   <servlet>
     <servlet-name>OrdersHistory</servlet-name>

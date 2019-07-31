@@ -19,7 +19,54 @@
 
 	<body>
 
-		<h1></h1>
+		
+    <div class="selector" oninput="changeCurrencyInCart()">
+      <select id="selectCurrency">
+        <option value="EUR"> EUR </option>
+        <option value="USD"> USD </option>
+      </select>
+    </div>
+		<div class="grid-container">
+
+			<%Cart cart = (Cart)request.getSession(false).getAttribute("cart"); %>
+			<%float total = 0; %>
+
+      <!-- TODO: Funzione js che quando è 0 stampa di nuobo qyesto -->
+			<%if(cart==null || cart.getNumberOfProduct() == 0) { %>
+				<div class="empty">The cart is empty, add something!</div>
+			<% }
+
+			else {%>
+
+				<ul class="list-of-products">
+
+
+					<%for(int i = 0; i < cart.getNumberOfProduct(); i++) { %>
+					<%total += cart.getProduct(i).getPrice();%>
+						<li class="product" id="product<%out.print(i);%>">
+							<%Product currentProduct = (Product) cart.getProduct(i);%>
+							<%Image[] images = currentProduct.getImages(); %>
+							<a>
+								<div>
+									<img class="image" src="/DaemonMerch/Images/<%=images[0].getImageName()%>?id=<%=currentProduct.getId()%>">
+								</div>
+							</a>
+								<h3 class="name"> <%out.println(currentProduct.getName());%> </h3>
+								<h4 class="price"> <%out.println(currentProduct.getPrice() + "0 EUR");%> </h4>
+						</li>
+
+						</ul>
+
+				<% } %>
+					<div class="total" id="total">
+						<h3 id="totalPrice"><%out.println("Total: " + total + "0 EUR");%></h3>
+						<button onclick="window.location.replace('/DaemonMerch/auth/ProcessOrder')">Place order</button>
+					</div>
+
+			<% } %>
+
+		</div>
+		
 
 	</body>
 </html>
